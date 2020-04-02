@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:tyawan"
+    },
+    {
+      "item": "japanese_food_mod:soy"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:miso_soup",
+    "count": 1
+  }
+}
