@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "age=0": {"model": "japanese_food_mod:block/soy_age_0model"}
+  }
+}

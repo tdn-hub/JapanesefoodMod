@@ -58,14 +58,13 @@ public class JapaneseFoodMod {
             event.getRegistry().registerAll(
                     ItemList.TYAWAN,
                     ItemList.SOY,
-                    ItemList.SOY_BLOCK,
                     ItemList.MISO_SOUP);
         }
 
         @SubscribeEvent
         public static void registerBlocks(final RegistryEvent.Register<Block> blockRegisterEvent){
             // register a new block here
-            blockRegisterEvent.getRegistry().registerAll(BlockList.SOY_BLOCK);
+            blockRegisterEvent.getRegistry().registerAll(BlockList.SOY);
         }
     }
 }
