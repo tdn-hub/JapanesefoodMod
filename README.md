@@ -1,1 +1,1 @@
-# mc-modding
+# JapaneseFood MOD
