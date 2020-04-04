@@ -17,8 +17,8 @@ public class ItemList{
     public static final Item TYAWAN = new Item(new Item.Properties().group(ItemGroup_Japanese))
             .setRegistryName(new ResourceLocation(JapaneseFoodMod.MOD_ID, "tyawan"));
 
-    public static final Item SOY = new BlockItem(BlockList.SOY, new Item.Properties().group((ItemGroup_Japanese)))
-            .setRegistryName(JapaneseFoodMod.MOD_ID, "soy");
+    public static final Item SOY_SEEDS = new BlockItem(BlockList.SOY, new Item.Properties().group((ItemGroup_Japanese)))
+            .setRegistryName(JapaneseFoodMod.MOD_ID, "soy_seeds");
 
     public static final Item MISO_SOUP = new MisoSoupItem();
 
