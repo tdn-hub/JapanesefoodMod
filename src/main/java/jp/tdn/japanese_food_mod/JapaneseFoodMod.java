@@ -3,6 +3,7 @@ package jp.tdn.japanese_food_mod;
 import jp.tdn.japanese_food_mod.items.MisoSoupItem;
 import jp.tdn.japanese_food_mod.lists.BlockList;
 import jp.tdn.japanese_food_mod.lists.ItemList;
+import jp.tdn.japanese_food_mod.world.OreGeneration;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.item.Item;
@@ -39,8 +40,7 @@ public class JapaneseFoodMod {
     }
 
     private void setup(final FMLCommonSetupEvent event){
-        // some pre-init code
-        LOGGER.info("Hello from pre-init");
+        OreGeneration.setupOreGeneration();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event){
@@ -58,13 +58,18 @@ public class JapaneseFoodMod {
             event.getRegistry().registerAll(
                     ItemList.TYAWAN,
                     ItemList.SOY_SEEDS,
+                    ItemList.SALT,
+                    ItemList.ROCK_SALT,
+                    ItemList.ROCK_SALT_BLOCK,
                     ItemList.MISO_SOUP);
         }
 
         @SubscribeEvent
         public static void registerBlocks(final RegistryEvent.Register<Block> blockRegisterEvent){
             // register a new block here
-            blockRegisterEvent.getRegistry().registerAll(BlockList.SOY);
+            blockRegisterEvent.getRegistry().registerAll(
+                    BlockList.SOY,
+                    BlockList.ROCK_SALT_BLOCK);
         }
     }
 }

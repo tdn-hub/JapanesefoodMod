@@ -2,5 +2,8 @@
   "itemGroup.japanese_food_mod": "Japanese Food MOD",
   "item.japanese_food_mod.tyawan": "Tyawan",
   "block.japanese_food_mod.soy": "Soy",
+  "item.japanese_food_mod.salt": "Salt",
+  "item.japanese_food_mod.rock_salt": "Rock Salt",
+  "block.japanese_food_mod.rock_salt_block": "Rock Salt Block",
   "item.japanese_food_mod.miso_soup": "Miso Soup"
 }

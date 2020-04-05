@@ -1,0 +1,4 @@
+{
+  "parent": "block/cube_all",
+  "textures": {"all": "japanese_food_mod:blocks/rock_salt_block"}
+}

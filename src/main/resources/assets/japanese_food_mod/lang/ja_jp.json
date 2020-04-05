@@ -2,5 +2,8 @@
   "itemGroup.japanese_food_mod": "日本食MOD",
   "item.japanese_food_mod.tyawan": "茶わん",
   "block.japanese_food_mod.soy": "大豆",
+  "item.japanese_food_mod.salt": "塩",
+  "item.japanese_food_mod.rock_salt": "岩塩",
+  "block.japanese_food_mod.rock_salt_block": "岩塩ブロック",
   "item.japanese_food_mod.miso_soup": "味噌汁"
 }
