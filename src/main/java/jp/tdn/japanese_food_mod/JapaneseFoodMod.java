@@ -57,6 +57,7 @@ public class JapaneseFoodMod {
 
             event.getRegistry().registerAll(
                     ItemList.TYAWAN,
+                    ItemList.POT,
                     ItemList.SOY_SEEDS,
                     ItemList.SALT,
                     ItemList.ROCK_SALT,
