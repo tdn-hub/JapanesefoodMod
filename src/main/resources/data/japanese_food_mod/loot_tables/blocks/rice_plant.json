@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "japanese_food_mod:soy_beans"
+          "name": "japanese_food_mod:rice_seedling"
         },
         {
           "type": "minecraft:alternatives",
@@ -16,13 +16,13 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "japanese_food_mod:soy",
+                  "block": "japanese_food_mod:rice_plant",
                   "properties": {
-                    "age": "6"
+                    "age": "7"
                   }
                 }
               ],
-              "name": "japanese_food_mod:soy_beans"
+              "name": "japanese_food_mod:rice"
             }
           ]
         }

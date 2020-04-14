@@ -5,13 +5,13 @@ import jp.tdn.japanese_food_mod.lists.BlockList;
 import jp.tdn.japanese_food_mod.lists.ItemList;
 import jp.tdn.japanese_food_mod.world.OreGeneration;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.GrassBlock;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootEntry;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,6 +20,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.ResultSet;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(JapaneseFoodMod.MOD_ID)
@@ -58,10 +60,13 @@ public class JapaneseFoodMod {
             event.getRegistry().registerAll(
                     ItemList.TYAWAN,
                     ItemList.POT,
-                    ItemList.SOY_SEEDS,
+                    ItemList.SOY_BEANS,
                     ItemList.SALT,
                     ItemList.ROCK_SALT,
                     ItemList.ROCK_SALT_BLOCK,
+                    ItemList.BOILED_SOY_BEANS,
+                    ItemList.RICE,
+                    ItemList.RICE_SEEDLING,
                     ItemList.MISO_SOUP);
         }
 
@@ -70,6 +75,7 @@ public class JapaneseFoodMod {
             // register a new block here
             blockRegisterEvent.getRegistry().registerAll(
                     BlockList.SOY,
+                    BlockList.RICE_PLANT,
                     BlockList.ROCK_SALT_BLOCK);
         }
     }

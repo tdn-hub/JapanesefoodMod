@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "japanese_food_mod:blocks/rice_plant_age_4"
+  }
+}

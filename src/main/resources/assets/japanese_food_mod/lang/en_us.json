@@ -1,9 +1,13 @@
 {
   "itemGroup.japanese_food_mod": "Japanese Food MOD",
   "item.japanese_food_mod.tyawan": "Tyawan",
+  "item.japanese_food_mod.pot": "Pot",
   "block.japanese_food_mod.soy": "Soy",
   "item.japanese_food_mod.salt": "Salt",
   "item.japanese_food_mod.rock_salt": "Rock Salt",
   "block.japanese_food_mod.rock_salt_block": "Rock Salt Block",
-  "item.japanese_food_mod.miso_soup": "Miso Soup"
+  "item.japanese_food_mod.boiled_soy_beans": "Boiled Soy Beans",
+  "item.japanese_food_mod.miso_soup": "Miso Soup",
+  "block.japanese_food_mod.rice_plant": "Rice Seedling",
+  "item.japanese_food_mod.rice": "Rice"
 }

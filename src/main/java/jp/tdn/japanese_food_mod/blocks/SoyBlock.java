@@ -23,19 +23,14 @@ public class SoyBlock extends CropsBlock{
 
     @Override
     protected IItemProvider getSeedsItem(){
-        return ItemList.SOY_SEEDS;
-    }
-
-    @Override
-    public int getMaxAge(){
-        return 6;
+        return ItemList.SOY_BEANS;
     }
 
     @Override
     public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if(!world.isRemote){
             if(this.isMaxAge(state)){
-                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemList.SOY_SEEDS,1)));
+                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemList.SOY_BEANS,1)));
                 world.setBlockState(pos, this.withAge(0));
                 return true;
             }

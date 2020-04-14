@@ -6,6 +6,7 @@
     "age=3": {"model": "japanese_food_mod:block/soy_age_3_model"},
     "age=4": {"model": "japanese_food_mod:block/soy_age_4_model"},
     "age=5": {"model": "japanese_food_mod:block/soy_age_5_model"},
-    "age=6": {"model": "japanese_food_mod:block/soy_age_6_model"}
+    "age=6": {"model": "japanese_food_mod:block/soy_age_5_model"},
+    "age=7": {"model": "japanese_food_mod:block/soy_age_6_model"}
   }
 }
