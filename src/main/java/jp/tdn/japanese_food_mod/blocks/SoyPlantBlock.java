@@ -1,7 +1,7 @@
 package jp.tdn.japanese_food_mod.blocks;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import jp.tdn.japanese_food_mod.lists.ItemList;
+import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,22 +15,24 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
-public class SoyBlock extends CropsBlock{
-    public SoyBlock(){
+import javax.annotation.Nonnull;
+
+public class SoyPlantBlock extends CropsBlock{
+    public SoyPlantBlock(){
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0f).sound(SoundType.CROP));
-        this.setRegistryName(JapaneseFoodMod.MOD_ID, "soy");
     }
 
     @Override
+    @Nonnull
     protected IItemProvider getSeedsItem(){
-        return ItemList.SOY_BEANS;
+        return JPItems.SOY_BEANS;
     }
 
     @Override
     public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if(!world.isRemote){
             if(this.isMaxAge(state)){
-                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemList.SOY_BEANS,1)));
+                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(JPItems.SOY_BEANS,1)));
                 world.setBlockState(pos, this.withAge(0));
                 return true;
             }

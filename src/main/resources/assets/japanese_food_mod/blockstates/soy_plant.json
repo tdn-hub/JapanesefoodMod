@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "age=0": {"model": "japanese_food_mod:block/soy_plant_age_0_model"},
+    "age=1": {"model": "japanese_food_mod:block/soy_plant_age_1_model"},
+    "age=2": {"model": "japanese_food_mod:block/soy_plant_age_2_model"},
+    "age=3": {"model": "japanese_food_mod:block/soy_plant_age_3_model"},
+    "age=4": {"model": "japanese_food_mod:block/soy_plant_age_4_model"},
+    "age=5": {"model": "japanese_food_mod:block/soy_plant_age_5_model"},
+    "age=6": {"model": "japanese_food_mod:block/soy_plant_age_5_model"},
+    "age=7": {"model": "japanese_food_mod:block/soy_plant_age_6_model"}
+  }
+}

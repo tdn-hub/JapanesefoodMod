@@ -9,6 +9,5 @@ import net.minecraftforge.common.ToolType;
 public class RockSaltBlock extends Block {
     public RockSaltBlock(){
         super(Properties.create(Material.ROCK, MaterialColor.PINK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.5f));
-        this.setRegistryName(JapaneseFoodMod.MOD_ID, "rock_salt_block");
     }
 }

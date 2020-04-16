@@ -1,8 +1,10 @@
 package jp.tdn.japanese_food_mod;
 
-import jp.tdn.japanese_food_mod.lists.ItemList;
+import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class JapaneseFoodItemGroup extends ItemGroup{
     public JapaneseFoodItemGroup(){
@@ -10,7 +12,8 @@ public class JapaneseFoodItemGroup extends ItemGroup{
     }
 
     @Override
+    @Nonnull
     public ItemStack createIcon(){
-        return new ItemStack(ItemList.TYAWAN);
+        return new ItemStack(JPItems.TYAWAN);
     }
 }

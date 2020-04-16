@@ -16,7 +16,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "japanese_food_mod:soy",
+                  "block": "japanese_food_mod:soy_plant",
                   "properties": {
                     "age": "6"
                   }

@@ -1,7 +1,7 @@
 package jp.tdn.japanese_food_mod.world;
 
 import jp.tdn.japanese_food_mod.config.OregenConfig;
-import jp.tdn.japanese_food_mod.lists.BlockList;
+import jp.tdn.japanese_food_mod.init.JPBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
@@ -21,7 +21,7 @@ public class OreGeneration {
         if(OregenConfig.generate_overworld.get()){
             for(Biome biome : ForgeRegistries.BIOMES){
                 // rock_salt
-                addOreGen(20, 0, 0, 128, biome, BlockList.ROCK_SALT_BLOCK.getDefaultState(), OregenConfig.rock_salt_chance.get());
+                addOreGen(20, 0, 0, 128, biome, JPBlocks.ROCK_SALT_BLOCK.getDefaultState(), OregenConfig.rock_salt_chance.get());
             }
         }
     }
