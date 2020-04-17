@@ -1,6 +1,5 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;

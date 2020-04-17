@@ -1,6 +1,5 @@
 package jp.tdn.japanese_food_mod.items;
 
-import jp.tdn.japanese_food_mod.JapaneseFoodItemGroup;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

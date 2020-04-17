@@ -5,8 +5,12 @@ import jp.tdn.japanese_food_mod.JapaneseFoodItemGroup;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.items.CockWareItem;
 import jp.tdn.japanese_food_mod.items.MisoSoupItem;
+import jp.tdn.japanese_food_mod.items.RiceSeedlingItem;
 import jp.tdn.japanese_food_mod.items.SimpleItem;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Food;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,7 +38,7 @@ public class JPItems {
     // Block Items
     public static  final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
     public static  final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");
-    public static  final Item RICE_SEEDLING = register(new BlockItem(JPBlocks.RICE_PLANT, new Item.Properties().group(ItemGroup_Japanese)),"rice_seedling");
+    public static  final Item RICE_SEEDLING = register(new RiceSeedlingItem(JPBlocks.RICE_PLANT, new Item.Properties().group(ItemGroup_Japanese)),"rice_seedling");
 
     public static Item register(@Nonnull Item item, @Nonnull String name){
         item.setRegistryName(modId, name);

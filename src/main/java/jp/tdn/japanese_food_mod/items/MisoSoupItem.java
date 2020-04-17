@@ -1,9 +1,11 @@
 package jp.tdn.japanese_food_mod.items;
 
-import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.Food;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.SoupItem;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
