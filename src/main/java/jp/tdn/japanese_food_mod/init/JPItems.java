@@ -3,7 +3,9 @@ package jp.tdn.japanese_food_mod.init;
 import com.google.common.collect.Lists;
 import jp.tdn.japanese_food_mod.JapaneseFoodItemGroup;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
+import jp.tdn.japanese_food_mod.items.CockWareItem;
 import jp.tdn.japanese_food_mod.items.MisoSoupItem;
+import jp.tdn.japanese_food_mod.items.SimpleItem;
 import net.minecraft.item.*;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,10 +21,10 @@ public class JPItems {
     public static final List<Item> itemlist = Lists.newArrayList();
 
     // Misc
-    public static  final Item TYAWAN = register(new Item((new Item.Properties().group(ItemGroup_Japanese))), "tyawan");
-    public static  final Item POT = register(new Item((new Item.Properties().group(ItemGroup_Japanese).maxStackSize(1))), "pot");
-    public static  final Item SALT = register(new Item(new Item.Properties().group(ItemGroup_Japanese)), "salt");
-    public static  final Item ROCK_SALT = register(new Item(new Item.Properties().group(ItemGroup_Japanese)), "rock_salt");
+    public static  final Item TYAWAN = register(new SimpleItem(), "tyawan");
+    public static  final Item POT = register(new CockWareItem(), "pot");
+    public static  final Item SALT = register(new SimpleItem(), "salt");
+    public static  final Item ROCK_SALT = register(new SimpleItem(), "rock_salt");
 
     // Food
     public static  final Item BOILED_SOY_BEANS = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "boiled_soy_beans");

@@ -6,12 +6,18 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -29,7 +35,8 @@ public class RicePlantBlock extends CropsBlock{
 
     @Override
     protected boolean isValidGround(BlockState block, IBlockReader reader, BlockPos pos){
-        return block.getBlock() == Blocks.FARMLAND;
+        IFluidState fluidState = reader.getFluidState(pos);
+        return fluidState.getFluid() == Fluids.WATER;
     }
 
     @Override
@@ -43,21 +50,4 @@ public class RicePlantBlock extends CropsBlock{
         }
         return false;
     }
-
-    /*
-    //Plant in the water.
-    @Override
-    public IFluidState getFluidState(BlockState p_204507_1_) {
-        return Fluids.WATER.getStillFluidState(false);
-    }
-
-    @Override
-    public boolean canContainFluid(IBlockReader iBlockReader, BlockPos blockPos, BlockState blockState, Fluid fluid) {
-        return false;
-    }
-
-    @Override
-    public boolean receiveFluid(IWorld p_204509_1_, BlockPos p_204509_2_, BlockState p_204509_3_, IFluidState p_204509_4_) {
-        return false;
-    }*/
 }
