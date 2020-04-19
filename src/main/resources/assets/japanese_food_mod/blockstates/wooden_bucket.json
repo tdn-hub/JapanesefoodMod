@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "level=0": {"model": "japanese_food_mod:block/wooden_bucket"},
+    "level=1": {"model": "japanese_food_mod:block/wooden_bucket_level_1"},
+    "level=2": {"model": "japanese_food_mod:block/wooden_bucket_level_2"},
+    "level=3": {"model": "japanese_food_mod:block/wooden_bucket_level_3"}
+  }
+}

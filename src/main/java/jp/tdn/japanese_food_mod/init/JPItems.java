@@ -25,20 +25,21 @@ public class JPItems {
     public static final List<Item> itemlist = Lists.newArrayList();
 
     // Misc
-    public static  final Item TYAWAN = register(new SimpleItem(), "tyawan");
-    public static  final Item POT = register(new CockWareItem(), "pot");
-    public static  final Item SALT = register(new SimpleItem(), "salt");
-    public static  final Item ROCK_SALT = register(new SimpleItem(), "rock_salt");
+    public static final Item TYAWAN = register(new SimpleItem(), "tyawan");
+    public static final Item POT = register(new CockWareItem(), "pot");
+    public static final Item SALT = register(new SimpleItem(), "salt");
+    public static final Item ROCK_SALT = register(new SimpleItem(), "rock_salt");
 
     // Food
-    public static  final Item BOILED_SOY_BEANS = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "boiled_soy_beans");
-    public static  final Item MISO_SOUP = register(new MisoSoupItem(), "miso_soup");
-    public static  final Item RICE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "rice");
+    public static final Item BOILED_SOY_BEANS = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "boiled_soy_beans");
+    public static final Item MISO_SOUP = register(new MisoSoupItem(), "miso_soup");
+    public static final Item RICE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "rice");
 
     // Block Items
-    public static  final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
-    public static  final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");
-    public static  final Item RICE_SEEDLING = register(new RiceSeedlingItem(JPBlocks.RICE_PLANT, new Item.Properties().group(ItemGroup_Japanese)),"rice_seedling");
+    public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
+    public static final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");
+    public static final Item RICE_SEEDLING = register(new RiceSeedlingItem(JPBlocks.RICE_PLANT, new Item.Properties().group(ItemGroup_Japanese)),"rice_seedling");
+    public static final Item WOODEN_BUCKET = register(new BlockItem(JPBlocks.WOODEN_BUCKET, new Item.Properties().group(ItemGroup_Japanese)), "wooden_bucket");
 
     public static Item register(@Nonnull Item item, @Nonnull String name){
         item.setRegistryName(modId, name);
