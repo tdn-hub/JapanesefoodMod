@@ -2,10 +2,7 @@ package jp.tdn.japanese_food_mod.init;
 
 import com.google.common.collect.Lists;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import jp.tdn.japanese_food_mod.blocks.RicePlantBlock;
-import jp.tdn.japanese_food_mod.blocks.RockSaltBlock;
-import jp.tdn.japanese_food_mod.blocks.SoyPlantBlock;
-import jp.tdn.japanese_food_mod.blocks.WoodenBucketBlock;
+import jp.tdn.japanese_food_mod.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -31,6 +28,7 @@ public class JPBlocks {
     public static final Block ROCK_SALT_BLOCK = register(new RockSaltBlock(), "rock_salt_block");
     public static final Block RICE_PLANT = register(new RicePlantBlock(), "rice_plant");
     public static final Block WOODEN_BUCKET = register(new WoodenBucketBlock(), "wooden_bucket");
+    public static final Block MICRO_SCOPE = register(new MicroScopeBlock(), "microscope");
 
     public static Block register(@Nonnull Block block, @Nonnull String name){
         block.setRegistryName(JapaneseFoodMod.MOD_ID, name);
