@@ -11,5 +11,6 @@
   "block.japanese_food_mod.rice_plant": "米の苗",
   "item.japanese_food_mod.rice": "米",
   "block.japanese_food_mod.wooden_bucket": "木桶",
-  "block.japanese_food_mod.microscope": "顕微鏡"
+  "block.japanese_food_mod.microscope": "顕微鏡",
+  "item.japanese_food_mod.yeast_cell": "麹菌"
 }

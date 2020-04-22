@@ -29,6 +29,7 @@ public class JPItems {
     public static final Item POT = register(new CockWareItem(), "pot");
     public static final Item SALT = register(new SimpleItem(), "salt");
     public static final Item ROCK_SALT = register(new SimpleItem(), "rock_salt");
+    public static final Item YEAST_CELL = register(new SimpleItem(), "yeast_cell");
 
     // Food
     public static final Item BOILED_SOY_BEANS = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "boiled_soy_beans");

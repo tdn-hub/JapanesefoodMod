@@ -1,9 +1,8 @@
 package jp.tdn.japanese_food_mod.recipes;
 
 import com.google.gson.JsonObject;
-import com.mojang.realmsclient.util.JsonUtils;
+import com.google.gson.JsonSyntaxException;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
@@ -16,9 +15,8 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import javax.annotation.Nullable;
 
 public class MicroScopeRecipe implements IRecipe<IInventory> {
-    public static final ShapedRecipe.Serializer SERIALIZER = new ShapedRecipe.Serializer();
+    public static final IRecipeSerializer SERIALIZER = new ShapedRecipe.Serializer();
     public static final IRecipeType<MicroScopeRecipe> RECIPE_TYPE = new IRecipeType<MicroScopeRecipe>() {
-
     };
     protected final ResourceLocation id;
     protected Ingredient ingredient;
@@ -74,15 +72,21 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
         return RECIPE_TYPE;
     }
 
-    public static class Selializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<MicroScopeRecipe>{
+    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<MicroScopeRecipe>{
 
         @Override
         public MicroScopeRecipe read(ResourceLocation recipeId, JsonObject json) {
             MicroScopeRecipe recipe = new MicroScopeRecipe(recipeId);
-            recipe.result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-            recipe.cookTime = JSONUtils.getInt(json, "process_time", 50);
-            recipe.experience = JSONUtils.getFloat(json, "xp", 0.0f);
-            recipe.ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "ingredient"));
+            if(!json.has("result")){
+                throw new JsonSyntaxException("Missing result, expected to find a string or object");
+            }else {
+                if(json.get("result").isJsonObject()) {
+                    recipe.result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+                }
+                recipe.cookTime = JSONUtils.getInt(json, "process_time", 50);
+                recipe.experience = JSONUtils.getFloat(json, "xp", 0.0f);
+                recipe.ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "ingredient"));
+            }
             return recipe;
         }
 

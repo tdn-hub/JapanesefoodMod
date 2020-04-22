@@ -1,0 +1,11 @@
+{
+  "type": "japanese_food_mod:identifying",
+  "ingredient": {
+    "item": "japanese_food_mod:rice"
+  },
+  "result": {
+    "item": "japanese_food_mod:yeast_cell"
+  },
+  "xp": 1.0,
+  "process_time": 1000
+}

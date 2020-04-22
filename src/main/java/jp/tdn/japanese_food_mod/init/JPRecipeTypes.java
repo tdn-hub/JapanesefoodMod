@@ -19,7 +19,7 @@ public class JPRecipeTypes {
     @SubscribeEvent
     public static void registryRecipes(RegistryEvent.Register<IRecipeSerializer<?>> event){
         event.getRegistry().registerAll(
-                setup(MicroScopeRecipe.SERIALIZER, "microscope")
+                setup(new MicroScopeRecipe.Serializer(), "identifying")
         );
     }
 

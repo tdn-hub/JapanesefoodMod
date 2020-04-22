@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  -",
+    " ##",
+    "+-+"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "-": {
+      "item": "minecraft:glass"
+    },
+    "+": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "item": "japanese_food_mod:microscope"
+  }
+}
