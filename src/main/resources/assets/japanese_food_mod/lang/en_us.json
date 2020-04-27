@@ -12,5 +12,15 @@
   "item.japanese_food_mod.rice": "Rice",
   "block.japanese_food_mod.wooden_bucket": "Wooden Bucket",
   "block.japanese_food_mod.microscope": "Microscope",
-  "item.japanese_food_mod.yeast_cell": "Yeast Cell"
+  "item.japanese_food_mod.yeast_cell": "Yeast Cell",
+  "item.japanese_food_mod.miso": "Miso",
+  "item.japanese_food_mod.wakame": "Wakame Seaweed",
+  "item.japanese_food_mod.miso_soup_of_tofu_and_wakame": "Miso Soup of Tofu and Wakame",
+  "item.japanese_food_mod.soy_sauce": "Soy Sauce",
+  "item.japanese_food_mod.cooking_oil": "Cooking Oil",
+  "block.japanese_food_mod.presser": "Presser",
+  "gui.japanese_food_mod.identifiedTimeProgress": "Time Progress",
+  "gui.japanese_food_mod.fermentationTimeProgress": "Time Progress",
+  "gui.japanese_food_mod.pressingTimeProgress": "Time Progress",
+  "gui.japanese_food_mod.oilRemaining": "Oil"
 }

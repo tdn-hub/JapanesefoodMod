@@ -5,7 +5,13 @@
       "item": "japanese_food_mod:tyawan"
     },
     {
-      "item": "japanese_food_mod:soy_beans"
+      "item": "japanese_food_mod:miso"
+    },
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "item": "minecraft:water_bucket"
     }
   ],
   "result": {

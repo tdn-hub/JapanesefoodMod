@@ -1,6 +1,5 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
-import com.sun.jna.platform.win32.WinUser;
 import jp.tdn.japanese_food_mod.container.MicroScopeContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
@@ -15,8 +14,6 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -32,16 +29,18 @@ import net.minecraftforge.items.wrapper.RangedWrapper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Optional;
+import java.util.Random;
 
 public class MicroScopeTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
     public static final int INPUT_SLOT = 0;
+    public static final int CONTAINER_SLOT = 2;
     public static final int OUTPUT_SLOT = 1;
 
     private static final String INVENTORY_TAG = "inventory";
     private static final String IDENTIFIED_TIME_LEFT_TAG = "identifiedTimeLeft";
     private static final String MAX_IDENTIFIED_TIME_TAG = "maxIdentifiedTime";
 
-    public ItemStackHandler inventory = new ItemStackHandler(2){
+    public ItemStackHandler inventory = new ItemStackHandler(3){
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             switch (slot){
@@ -49,6 +48,8 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
                     return isInput(stack);
                 case OUTPUT_SLOT:
                     return isOutput(stack);
+                case CONTAINER_SLOT:
+                    return isContainerInput(stack);
                 default:
                     return false;
             }
@@ -77,6 +78,10 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
         return getRecipe(stack).isPresent();
     }
 
+    private boolean isContainerInput(final ItemStack stack){
+        return stack.getItem() == Items.GLASS_BOTTLE;
+    }
+
     private boolean isOutput(final ItemStack stack){
         final Optional<ItemStack> result = getResult(inventory.getStackInSlot(INPUT_SLOT));
         return result.isPresent() && ItemStack.areItemsEqual(result.get(), stack);
@@ -100,9 +105,10 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
         if(world == null || world.isRemote) return;
 
         final ItemStack input = inventory.getStackInSlot(INPUT_SLOT);
+        final ItemStack container = inventory.getStackInSlot(CONTAINER_SLOT);
         final ItemStack result = getResult(input).orElse(ItemStack.EMPTY);
 
-        if(!result.isEmpty() && isInput(input)){
+        if(!result.isEmpty() && isInput(input) && isContainerInput(container)){
             final boolean canInsertResultIntoOutPut = inventory.insertItem(OUTPUT_SLOT, result, true).isEmpty();
             if(canInsertResultIntoOutPut){
                 if(identifiedTimeLeft == -1){
@@ -113,7 +119,9 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
                         inventory.insertItem(OUTPUT_SLOT, result, false);
                         if(input.hasContainerItem()) insertOrDropContainerItem(input, INPUT_SLOT);
                         input.shrink(1);
+                        container.shrink(1);
                         inventory.setStackInSlot(INPUT_SLOT, input);
+                        inventory.setStackInSlot(CONTAINER_SLOT, container);
                         identifiedTimeLeft = -1;
                     }
                 }

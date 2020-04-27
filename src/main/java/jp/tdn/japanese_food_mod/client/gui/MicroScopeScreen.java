@@ -15,6 +15,7 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
 
     public MicroScopeScreen(final MicroScopeContainer container, final PlayerInventory inventory, final ITextComponent title){
         super(container, inventory, title);
+        this.ySize = 187;
     }
 
     @Override
@@ -26,7 +27,7 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
         int relMouseX = mouseX - this.guiLeft;
         int relMouseY = mouseY - this.guiTop;
         final MicroScopeTileEntity tileEntity = this.container.tileEntity;
-        boolean arrowHovered = relMouseX > 79 && relMouseX < 104 && relMouseY > 34 && relMouseY < 50;
+        boolean arrowHovered = relMouseX > 87 && relMouseX < 114 && relMouseY > 44 && relMouseY < 71;
         if(arrowHovered && tileEntity.maxIdentifiedTime > 0){
             String tooltip = new TranslationTextComponent(
                     "gui." + JapaneseFoodMod.MOD_ID + ".identifiedTimeProgress",
@@ -40,8 +41,8 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
     protected void drawGuiContainerForegroundLayer(int mouseX_, int mouseY) {
         super.drawGuiContainerForegroundLayer(mouseX_, mouseY);
         String s = this.title.getFormattedText();
-        this.font.drawString(s, (float)(this.xSize / 2 - this.font.getStringWidth(s) / 2), 6.0F, 0x404040);
-        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 96 + 2), 0x404040);
+        this.font.drawString(s, (float)(this.xSize / 1.5 - this.font.getStringWidth(s) / 2), 6.0F, 0x404040);
+        //this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 96 + 2), 0x404040);
     }
 
     @Override
@@ -55,11 +56,11 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
 
         final MicroScopeTileEntity tileEntity = container.tileEntity;
         if(tileEntity.identifiedTimeLeft > 0){
-            int arrowWidth = getIdentifiedTimeScaled();
+            int arrowHeight = getIdentifiedTimeScaled();
             this.blit(
-                    startX + 79, startY + 34,
+                    startX + 87, startY + 44,
                     176, 0,
-                    arrowWidth, 16
+                    27, 28 - arrowHeight
                     );
         }
     }
@@ -69,6 +70,6 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
         final short identifiedTimeLeft = tileEntity.identifiedTimeLeft;
         final short maxIdentifiedTime = tileEntity.maxIdentifiedTime;
         if(identifiedTimeLeft <= 0 || maxIdentifiedTime <= 0) return 0;
-        return (maxIdentifiedTime - identifiedTimeLeft) * 24 / maxIdentifiedTime;
+        return (maxIdentifiedTime - identifiedTimeLeft) * 28 / maxIdentifiedTime;
     }
 }

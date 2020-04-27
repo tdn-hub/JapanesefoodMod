@@ -3,9 +3,9 @@ package jp.tdn.japanese_food_mod.init;
 import com.google.common.base.Preconditions;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.recipes.MicroScopeRecipe;
-import net.minecraft.client.gui.recipebook.RecipeList;
+import jp.tdn.japanese_food_mod.recipes.PresserRecipe;
+import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,7 +19,9 @@ public class JPRecipeTypes {
     @SubscribeEvent
     public static void registryRecipes(RegistryEvent.Register<IRecipeSerializer<?>> event){
         event.getRegistry().registerAll(
-                setup(new MicroScopeRecipe.Serializer(), "identifying")
+                setup(new MicroScopeRecipe.Serializer(), "identifying"),
+                setup(new WoodenBucketRecipe.Serializer(), "fermentation"),
+                setup(new PresserRecipe.Serializer(), "pressing")
         );
     }
 

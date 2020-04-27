@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.blocks.tileentity.MicroScopeTileEntity;
+import jp.tdn.japanese_food_mod.blocks.tileentity.PresserTileEntity;
+import jp.tdn.japanese_food_mod.blocks.tileentity.WoodenBucketTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -18,11 +20,15 @@ import javax.annotation.Nonnull;
 @Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JPTileEntities {
      public static final TileEntityType<MicroScopeTileEntity> MICROSCOPE = JapaneseFoodUtil._null();
+     public static final TileEntityType<WoodenBucketTileEntity> WOODEN_BUCKET = JapaneseFoodUtil._null();
+     public static final TileEntityType<PresserTileEntity> PRESSER = JapaneseFoodUtil._null();
 
      @SubscribeEvent
      public static void registerTileEntityTypes(@Nonnull final RegistryEvent.Register<TileEntityType<?>> event){
           event.getRegistry().registerAll(
-               setup(TileEntityType.Builder.create(MicroScopeTileEntity::new, JPBlocks.MICRO_SCOPE).build(null), "microscope")
+                  setup(TileEntityType.Builder.create(MicroScopeTileEntity::new, JPBlocks.MICRO_SCOPE).build(null), "microscope"),
+                  setup(TileEntityType.Builder.create(WoodenBucketTileEntity::new, JPBlocks.WOODEN_BUCKET).build(null), "wooden_bucket"),
+                  setup(TileEntityType.Builder.create(PresserTileEntity::new, JPBlocks.PRESSER).build(null), "presser")
           );
      }
 

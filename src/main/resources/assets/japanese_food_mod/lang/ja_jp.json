@@ -7,10 +7,20 @@
   "item.japanese_food_mod.rock_salt": "岩塩",
   "block.japanese_food_mod.rock_salt_block": "岩塩ブロック",
   "item.japanese_food_mod.boiled_soy_beans": "水煮大豆",
-  "item.japanese_food_mod.miso_soup": "味噌汁",
+  "item.japanese_food_mod.miso_soup": "みそ汁",
   "block.japanese_food_mod.rice_plant": "米の苗",
   "item.japanese_food_mod.rice": "米",
   "block.japanese_food_mod.wooden_bucket": "木桶",
   "block.japanese_food_mod.microscope": "顕微鏡",
-  "item.japanese_food_mod.yeast_cell": "麹菌"
+  "item.japanese_food_mod.yeast_cell": "麹菌",
+  "item.japanese_food_mod.miso": "みそ",
+  "item.japanese_food_mod.wakame": "ワカメ",
+  "item.japanese_food_mod.miso_soup_of_tofu_and_wakame": "豆腐とワカメのみそ汁",
+  "item.japanese_food_mod.soy_sauce": "醤油",
+  "item.japanese_food_mod.cooking_oil": "食用油",
+  "block.japanese_food_mod.presser": "搾油機",
+  "gui.japanese_food_mod.identifiedTimeProgress": "進捗",
+  "gui.japanese_food_mod.fermentationTimeProgress": "発酵中",
+  "gui.japanese_food_mod.pressingTimeProgress": "搾り中",
+  "gui.japanese_food_mod.oilRemaining": "油"
 }

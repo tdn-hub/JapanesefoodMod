@@ -17,6 +17,10 @@ public class MisoSoupItem extends SoupItem {
                 .group(JPItems.ItemGroup_Japanese));
     }
 
+    public MisoSoupItem(Item.Properties properties){
+        super(properties);
+    }
+
     @Override
     @Nonnull
     public ItemStack onItemUseFinish(@Nonnull ItemStack item, @Nonnull World world, @Nonnull LivingEntity entity) {

@@ -4,6 +4,9 @@ import com.google.common.base.Preconditions;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.container.MicroScopeContainer;
+import jp.tdn.japanese_food_mod.container.PresserContainer;
+import jp.tdn.japanese_food_mod.container.WoodenBucketContainer;
+import net.minecraft.block.ContainerBlock;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.extensions.IForgeContainerType;
@@ -19,11 +22,14 @@ import javax.annotation.Nonnull;
 @Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JPContainerTypes {
     public static final ContainerType<MicroScopeContainer> MICROSCOPE = JapaneseFoodUtil._null();
-
+    public static final ContainerType<WoodenBucketContainer> WOODEN_BUCKET = JapaneseFoodUtil._null();
+    public static final ContainerType<PresserContainer> PRESSER = JapaneseFoodUtil._null();
     @SubscribeEvent
     public static void registerContainerTypes(@Nonnull final RegistryEvent.Register<ContainerType<?>> event){
         event.getRegistry().registerAll(
-                setup(IForgeContainerType.create(MicroScopeContainer::new), "microscope")
+                setup(IForgeContainerType.create(MicroScopeContainer::new), "microscope"),
+                setup(IForgeContainerType.create(WoodenBucketContainer::new), "wooden_bucket"),
+                setup(IForgeContainerType.create(PresserContainer::new), "presser")
         );
     }
 

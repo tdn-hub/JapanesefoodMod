@@ -1,0 +1,19 @@
+{
+  "type": "japanese_food_mod:fermentation",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:yeast_cell"
+    },
+    {
+      "item": "japanese_food_mod:boiled_soy_beans"
+    },
+    {
+      "tag": "forge:dusts/salt"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:miso",
+    "count": 16
+  },
+  "process_time": 12000
+}

@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": {"model": "japanese_food_mod:block/microscope"}
+    "facing=north": {"model": "japanese_food_mod:block/microscope"},
+    "facing=south": {"model": "japanese_food_mod:block/microscope", "y": 180},
+    "facing=west":  {"model": "japanese_food_mod:block/microscope", "y": 270},
+    "facing=east":  {"model": "japanese_food_mod:block/microscope", "y": 90}
   }
 }

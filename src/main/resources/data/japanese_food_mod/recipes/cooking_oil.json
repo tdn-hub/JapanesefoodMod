@@ -1,0 +1,8 @@
+{
+  "type": "japanese_food_mod:pressing",
+  "ingredient": {
+    "tag": "forge:fleshes"
+  },
+  "process_time": 200,
+  "result": 50
+}

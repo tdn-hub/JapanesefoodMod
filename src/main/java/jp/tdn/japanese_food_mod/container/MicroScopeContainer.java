@@ -10,7 +10,6 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -19,7 +18,7 @@ import java.util.Objects;
 
 public class MicroScopeContainer extends Container {
     public final MicroScopeTileEntity tileEntity;
-    private final IWorldPosCallable canInterraceWithCallable;
+    private final IWorldPosCallable canInteractWithCallable;
 
     public MicroScopeContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data){
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
@@ -28,16 +27,17 @@ public class MicroScopeContainer extends Container {
     public MicroScopeContainer(final int windowId, final PlayerInventory playerInventory, final MicroScopeTileEntity tileEntity){
         super(JPContainerTypes.MICROSCOPE, windowId);
         this.tileEntity = tileEntity;
-        this.canInterraceWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
+        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.identifiedTimeLeft, v -> tileEntity.identifiedTimeLeft = (short)v));
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxIdentifiedTime, v -> tileEntity.maxIdentifiedTime = (short)v));
 
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, MicroScopeTileEntity.INPUT_SLOT, 56, 35));
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, MicroScopeTileEntity.OUTPUT_SLOT, 116, 35));
+        this.addSlot(new SlotItemHandler(tileEntity.inventory, MicroScopeTileEntity.INPUT_SLOT, 42, 38));
+        this.addSlot(new SlotItemHandler(tileEntity.inventory, MicroScopeTileEntity.OUTPUT_SLOT, 136, 78));
+        this.addSlot(new SlotItemHandler(tileEntity.inventory, MicroScopeTileEntity.CONTAINER_SLOT, 136, 38));
 
         final int playerInventoryStartX = 8;
-        final int playerInventoryStartY = 84;
+        final int playerInventoryStartY = 105;
         final int slotSizePlus2 = 18;
 
         for(int row = 0; row < 3; ++row){
@@ -96,6 +96,6 @@ public class MicroScopeContainer extends Container {
 
     @Override
     public boolean canInteractWith(@Nonnull final PlayerEntity player) {
-        return isWithinUsableDistance(canInterraceWithCallable, player, JPBlocks.MICRO_SCOPE);
+        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.MICRO_SCOPE);
     }
 }

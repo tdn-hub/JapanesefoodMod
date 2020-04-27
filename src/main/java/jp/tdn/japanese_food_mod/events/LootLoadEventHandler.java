@@ -9,13 +9,18 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID)
-public class EventHandler {
+public class LootLoadEventHandler {
     private static ResourceLocation grass = new ResourceLocation("minecraft", "blocks/grass");
+    private static ResourceLocation sea_grass = new ResourceLocation("minecraft", "blocks/seagrass");
 
     @SubscribeEvent
     public static void onLootLoad(LootTableLoadEvent event){
         if(event.getName().equals(grass)){
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "blocks/grass"))).build());
+        }
+
+        if(event.getName().equals(sea_grass)){
+            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "blocks/seagrass"))).build());
         }
     }
 }

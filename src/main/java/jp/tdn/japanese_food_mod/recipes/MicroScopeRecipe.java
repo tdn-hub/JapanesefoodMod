@@ -2,6 +2,7 @@ package jp.tdn.japanese_food_mod.recipes;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
@@ -41,7 +42,7 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
         return true;
     }
 
-    public NonNullList<Ingredient> getIngrediens(){
+    public NonNullList<Ingredient> getIngredients(){
         NonNullList<Ingredient> nonNullList = NonNullList.create();
         nonNullList.add(this.ingredient);
         return nonNullList;
@@ -87,6 +88,7 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
                 recipe.experience = JSONUtils.getFloat(json, "xp", 0.0f);
                 recipe.ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "ingredient"));
             }
+            JapaneseFoodMod.LOGGER.info(recipe.ingredient);
             return recipe;
         }
 
