@@ -19,8 +19,8 @@
   "item.japanese_food_mod.soy_sauce": "醤油",
   "item.japanese_food_mod.cooking_oil": "食用油",
   "block.japanese_food_mod.presser": "搾油機",
-  "gui.japanese_food_mod.identifiedTimeProgress": "進捗",
-  "gui.japanese_food_mod.fermentationTimeProgress": "発酵中",
-  "gui.japanese_food_mod.pressingTimeProgress": "搾り中",
-  "gui.japanese_food_mod.oilRemaining": "油"
+  "gui.japanese_food_mod.identifiedTimeProgress": "進捗: %1$s%2$s",
+  "gui.japanese_food_mod.fermentationTimeProgress": "発酵中: %1$s%2$s",
+  "gui.japanese_food_mod.pressingTimeProgress": "搾り中: %1$s%2$s",
+  "gui.japanese_food_mod.oilRemaining": "油: %1$s/%2$s"
 }

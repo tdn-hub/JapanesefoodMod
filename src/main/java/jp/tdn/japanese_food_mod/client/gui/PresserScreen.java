@@ -29,10 +29,11 @@ public class PresserScreen extends ContainerScreen<PresserContainer> {
         int relMouseY = mouseY - this.guiTop;
         final PresserTileEntity tileEntity = this.container.tileEntity;
         boolean arrowHovered = relMouseX > 34 && relMouseX < 50 && relMouseY > 32 && relMouseY < 52;
-        if(arrowHovered && tileEntity.maxPressedTime > 0){
+        if(arrowHovered && tileEntity.maxPressedTime > 0 && tileEntity.oilRemaining < 500){
             String tooltip = new TranslationTextComponent(
                     "gui." + JapaneseFoodMod.MOD_ID + ".pressingTimeProgress",
-                    String.valueOf(tileEntity.pressedTimeLeft) + "/" + String.valueOf(tileEntity.maxPressedTime)
+                    (short)(((float)(tileEntity.maxPressedTime - tileEntity.pressedTimeLeft) / (float)tileEntity.maxPressedTime) * 100),
+                    "%"
             ).getFormattedText();
             this.renderTooltip(tooltip, mouseX, mouseY);
         }
@@ -41,7 +42,7 @@ public class PresserScreen extends ContainerScreen<PresserContainer> {
         if(arrowHovered){
             String tooltip = new TranslationTextComponent(
                     "gui." + JapaneseFoodMod.MOD_ID + ".oilRemaining",
-                    String.valueOf(tileEntity.oilRemaining) + "/" + String.valueOf(tileEntity.maxOilRemaining)
+                    tileEntity.oilRemaining, tileEntity.maxOilRemaining
             ).getFormattedText();
             this.renderTooltip(tooltip, mouseX, mouseY);
         }

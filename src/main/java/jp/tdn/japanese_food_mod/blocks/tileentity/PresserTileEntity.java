@@ -9,6 +9,7 @@ import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import jp.tdn.japanese_food_mod.recipes.PresserRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -163,8 +164,11 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
             level = 2;
         }
         PresserBlock block = (PresserBlock) world.getBlockState(pos).getBlock();
-        JapaneseFoodMod.LOGGER.info(oilRemaining);
         block.setOil(world, pos, world.getBlockState(pos), level);
+
+        if(isPressing){
+
+        }
     }
 
     private void insertOrDropContainerItem(final ItemStack stack, final int slot){

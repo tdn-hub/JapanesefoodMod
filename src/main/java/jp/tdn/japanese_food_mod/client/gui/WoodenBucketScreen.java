@@ -32,7 +32,8 @@ public class WoodenBucketScreen extends ContainerScreen<WoodenBucketContainer> {
         if(arrowHovered && tileEntity.maxFermentationTime > 0){
             String tooltip = new TranslationTextComponent(
                     "gui." + JapaneseFoodMod.MOD_ID + ".fermentationTimeProgress",
-                    String.valueOf(tileEntity.fermentationTimeLeft), String.valueOf(tileEntity.maxFermentationTime)
+                    (short)(((float)(tileEntity.maxFermentationTime - tileEntity.fermentationTimeLeft) / (float)tileEntity.maxFermentationTime) * 100),
+                    "%"
             ).getFormattedText();
             this.renderTooltip(tooltip, mouseX, mouseY);
         }

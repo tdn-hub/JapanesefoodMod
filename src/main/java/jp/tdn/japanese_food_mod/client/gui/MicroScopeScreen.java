@@ -31,7 +31,8 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
         if(arrowHovered && tileEntity.maxIdentifiedTime > 0){
             String tooltip = new TranslationTextComponent(
                     "gui." + JapaneseFoodMod.MOD_ID + ".identifiedTimeProgress",
-                    tileEntity.identifiedTimeLeft, tileEntity.maxIdentifiedTime
+                    (short)(((float)(tileEntity.maxIdentifiedTime - tileEntity.identifiedTimeLeft) / tileEntity.maxIdentifiedTime) * 100),
+                    "%"
             ).getFormattedText();
             this.renderTooltip(tooltip, mouseX, mouseY);
         }

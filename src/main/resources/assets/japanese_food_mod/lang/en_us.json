@@ -19,8 +19,8 @@
   "item.japanese_food_mod.soy_sauce": "Soy Sauce",
   "item.japanese_food_mod.cooking_oil": "Cooking Oil",
   "block.japanese_food_mod.presser": "Presser",
-  "gui.japanese_food_mod.identifiedTimeProgress": "Time Progress",
-  "gui.japanese_food_mod.fermentationTimeProgress": "Time Progress",
-  "gui.japanese_food_mod.pressingTimeProgress": "Time Progress",
-  "gui.japanese_food_mod.oilRemaining": "Oil"
+  "gui.japanese_food_mod.identifiedTimeProgress": "Progress: $s",
+  "gui.japanese_food_mod.fermentationTimeProgress": "Progress: $s",
+  "gui.japanese_food_mod.pressingTimeProgress": "Progress: $s",
+  "gui.japanese_food_mod.oilRemaining": "Oil: %1$s/%1$s"
 }
