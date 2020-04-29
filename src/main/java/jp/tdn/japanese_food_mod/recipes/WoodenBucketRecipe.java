@@ -1,10 +1,9 @@
 package jp.tdn.japanese_food_mod.recipes;
 
+import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mojang.realmsclient.util.JsonUtils;
-import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
@@ -16,13 +15,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class WoodenBucketRecipe implements IRecipe<IInventory> {
-    public static final IRecipeSerializer SERIALIZER = new Serializer();
+    public static final Serializer SERIALIZER = new Serializer();
     public static final IRecipeType<WoodenBucketRecipe> RECIPE_TYPE = new IRecipeType<WoodenBucketRecipe>() {
     };
     protected final ResourceLocation id;
@@ -34,24 +34,21 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
         this.id = idIn;
     }
 
-    public boolean matches(IInventory inventory, World worldIn){
+    public boolean matches(@Nonnull IInventory inventory, @Nonnull World worldIn){
         boolean check;
-        List<ItemStack> inputs = new ArrayList();
+        List<ItemStack> inputs = Lists.newArrayList();
         for(int i = 0; i < 3; ++i){
             inputs.add(inventory.getStackInSlot(i));
         }
 
-        if(RecipeMatcher.findMatches(inputs, this.ingredients) != null){
-            check = true;
-        }else{
-            check = false;
-        }
+        check = RecipeMatcher.findMatches(inputs, this.ingredients) != null;
 
         return check;
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inventory) {
+    @Nonnull
+    public ItemStack getCraftingResult(@Nonnull IInventory inventory) {
         return this.result.copy();
     }
 
@@ -59,18 +56,19 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
         return true;
     }
 
+    @Nonnull
     public NonNullList<Ingredient> getIngredients(){
         NonNullList<Ingredient> nonNullList = NonNullList.create();
-        for(Ingredient ingredient: this.ingredients) {
-            nonNullList.add(ingredient);
-        }
+        nonNullList.addAll(this.ingredients);
         return nonNullList;
     }
 
+    @Nonnull
     public ItemStack getRecipeOutput(){
         return this.result;
     }
 
+    @Nonnull
     public ResourceLocation getId(){
         return id;
     }
@@ -80,10 +78,12 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
     }
 
     @Override
+    @Nonnull
     public IRecipeSerializer<?> getSerializer() {
         return SERIALIZER;
     }
 
+    @Nonnull
     public IRecipeType<?> getType(){
         return RECIPE_TYPE;
     }
@@ -104,7 +104,8 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
         }
 
         @Override
-        public WoodenBucketRecipe read(ResourceLocation recipeId, JsonObject json) {
+        @Nonnull
+        public WoodenBucketRecipe read(@Nonnull ResourceLocation recipeId, JsonObject json) {
             WoodenBucketRecipe recipe = new WoodenBucketRecipe(recipeId);
             if(!json.has("result")){
                 throw new JsonSyntaxException("Missing result, expected to find a string or object");
@@ -121,7 +122,7 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
 
         @Nullable
         @Override
-        public WoodenBucketRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public WoodenBucketRecipe read(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
             WoodenBucketRecipe recipe = new WoodenBucketRecipe(recipeId);
             int index = buffer.readVarInt();
             NonNullList<Ingredient> nonnulllist = NonNullList.withSize(index, Ingredient.EMPTY);
@@ -134,15 +135,12 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
         }
 
         @Override
-        public void write(PacketBuffer buffer, WoodenBucketRecipe recipe) {
-            Iterator it = recipe.ingredients.iterator();
-            while(it.hasNext()){
-                Ingredient ingredient = (Ingredient)it.next();
+        public void write(@Nonnull PacketBuffer buffer, WoodenBucketRecipe recipe) {
+            for (Ingredient ingredient : recipe.ingredients) {
                 ingredient.write(buffer);
             }
             buffer.writeItemStack(recipe.result);
             buffer.writeVarInt(recipe.cookTime);
-            return;
         }
     }
 }

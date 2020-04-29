@@ -6,7 +6,6 @@ import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.container.MicroScopeContainer;
 import jp.tdn.japanese_food_mod.container.PresserContainer;
 import jp.tdn.japanese_food_mod.container.WoodenBucketContainer;
-import net.minecraft.block.ContainerBlock;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.extensions.IForgeContainerType;

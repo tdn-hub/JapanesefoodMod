@@ -2,9 +2,7 @@ package jp.tdn.japanese_food_mod.client.gui;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import jp.tdn.japanese_food_mod.blocks.tileentity.MicroScopeTileEntity;
 import jp.tdn.japanese_food_mod.blocks.tileentity.PresserTileEntity;
-import jp.tdn.japanese_food_mod.container.MicroScopeContainer;
 import jp.tdn.japanese_food_mod.container.PresserContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;

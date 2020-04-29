@@ -1,19 +1,20 @@
 package jp.tdn.japanese_food_mod.blocks;
 
 import jp.tdn.japanese_food_mod.blocks.tileentity.PresserTileEntity;
-import jp.tdn.japanese_food_mod.blocks.tileentity.WoodenBucketTileEntity;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.RedstoneTorchBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.*;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -30,11 +31,11 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class PresserBlock extends HorizontalBlock {
-    protected static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D));
+    protected static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(2.0D, 0.0D, 1.0D, 14.0D, 13.0D, 14.0D));
     public static final DirectionProperty DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty OIL = BlockStateProperties.LEVEL_0_3;
     public static final BooleanProperty PRESSING = BooleanProperty.create("pressing");
@@ -55,12 +56,14 @@ public class PresserBlock extends HorizontalBlock {
         return JPTileEntities.PRESSER.create();
     }
 
+    @Nonnull
     public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
         return SHAPE;
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getCollisionShape(BlockState p_220071_1_, IBlockReader p_220071_2_, BlockPos p_220071_3_, ISelectionContext p_220071_4_) {
+    public VoxelShape getCollisionShape(@Nonnull BlockState p_220071_1_, @Nonnull IBlockReader p_220071_2_, @Nonnull BlockPos p_220071_3_, ISelectionContext p_220071_4_) {
         return SHAPE;
     }
 
@@ -74,7 +77,7 @@ public class PresserBlock extends HorizontalBlock {
     }
 
     @Override
-    public void onReplaced(BlockState oldState, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState oldState, @Nonnull World worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
         if (oldState.getBlock() != newState.getBlock()) {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
             if (tileEntity instanceof PresserTileEntity) {
@@ -111,15 +114,18 @@ public class PresserBlock extends HorizontalBlock {
     }
 
     @Override
+    @Nonnull
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(DIRECTION, rot.rotate(state.get(DIRECTION)));
     }
 
     @Override
+    @Nonnull
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(DIRECTION)));
     }
 
+    @Nonnull
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }

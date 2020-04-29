@@ -27,7 +27,7 @@ public class PresserContainer extends Container {
     public PresserContainer(final int windowId, final PlayerInventory playerInventory, final PresserTileEntity tileEntity){
         super(JPContainerTypes.PRESSER, windowId);
         this.tileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
+        this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
 
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.pressedTimeLeft, v -> tileEntity.pressedTimeLeft = (short)v));
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxPressedTime, v -> tileEntity.maxPressedTime = (short)v));
@@ -35,7 +35,7 @@ public class PresserContainer extends Container {
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxOilRemaining, v -> tileEntity.maxOilRemaining = (short)v));
 
         this.addSlot(new SlotItemHandler(tileEntity.inventory, PresserTileEntity.INPUT_SLOT, 34, 8));
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, PresserTileEntity.OUTPUT_SLOT, 133, 53));
+        this.addSlot(new SlotItemHandler(tileEntity.inventory, PresserTileEntity.OUTPUT_SLOT, 135, 55));
         this.addSlot(new SlotItemHandler(tileEntity.inventory, PresserTileEntity.CONTAINER_SLOT, 70, 51));
 
         final int playerInventoryStartX = 8;
@@ -63,6 +63,7 @@ public class PresserContainer extends Container {
     }
 
     @Override
+    @Nonnull
     public ItemStack transferStackInSlot(PlayerEntity player, int index) {
         ItemStack returnStack = ItemStack.EMPTY;
         final Slot slot = this.inventorySlots.get(index);

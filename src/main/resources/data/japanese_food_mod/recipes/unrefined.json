@@ -1,0 +1,19 @@
+{
+  "type": "japanese_food_mod:fermentation",
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "japanese_food_mod:yeast_cell"
+    },
+    {
+      "tag": "forge:dusts/salt"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:unrefined",
+    "count": 16
+  },
+  "process_time": 12000
+}

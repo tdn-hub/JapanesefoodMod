@@ -12,10 +12,13 @@
     },
     {
       "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "japanese_food_mod:wakame"
     }
   ],
   "result": {
-    "item": "japanese_food_mod:miso_soup",
+    "item": "japanese_food_mod:miso_soup_of_tofu_and_wakame",
     "count": 1
   }
 }

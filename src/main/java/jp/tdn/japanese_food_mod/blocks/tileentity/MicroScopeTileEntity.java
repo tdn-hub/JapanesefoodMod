@@ -28,8 +28,8 @@ import net.minecraftforge.items.wrapper.RangedWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.Random;
 
 public class MicroScopeTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
     public static final int INPUT_SLOT = 0;
@@ -92,7 +92,7 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
     }
 
     private Optional<MicroScopeRecipe> getRecipe(final IInventory inventory){
-        return world.getRecipeManager().getRecipe(MicroScopeRecipe.RECIPE_TYPE, inventory, world);
+        return Objects.requireNonNull(world).getRecipeManager().getRecipe(MicroScopeRecipe.RECIPE_TYPE, inventory, world);
     }
 
     private Optional<ItemStack> getResult(final ItemStack input){
@@ -117,7 +117,7 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
                     --identifiedTimeLeft;
                     if(identifiedTimeLeft == 0){
                         inventory.insertItem(OUTPUT_SLOT, result, false);
-                        if(input.hasContainerItem()) insertOrDropContainerItem(input, INPUT_SLOT);
+                        if(input.hasContainerItem()) insertOrDropContainerItem(input);
                         input.shrink(1);
                         container.shrink(1);
                         inventory.setStackInSlot(INPUT_SLOT, input);
@@ -131,13 +131,13 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
         }
     }
 
-    private void insertOrDropContainerItem(final ItemStack stack, final int slot){
+    private void insertOrDropContainerItem(final ItemStack stack){
         final ItemStack containerItem = stack.getContainerItem();
-        final boolean canInsertContainerItemIntoSlot = inventory.insertItem(slot, containerItem, true).isEmpty();
+        final boolean canInsertContainerItemIntoSlot = inventory.insertItem(MicroScopeTileEntity.INPUT_SLOT, containerItem, true).isEmpty();
         if(canInsertContainerItemIntoSlot){
-            inventory.insertItem(slot, containerItem, false);
+            inventory.insertItem(MicroScopeTileEntity.INPUT_SLOT, containerItem, false);
         }else{
-            InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), containerItem);
+            InventoryHelper.spawnItemStack(Objects.requireNonNull(world), pos.getX(), pos.getY(), pos.getZ(), containerItem);
         }
     }
 
@@ -152,7 +152,7 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
             return inventoryCapabilityExternal.cast();
         }
 
-        switch (side){
+        switch (Objects.requireNonNull(side)){
 
             case DOWN:
                 return inventoryCapabilityExternalDown.cast();
@@ -176,6 +176,7 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
     }
 
     @Override
+    @Nonnull
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
         compound.put(INVENTORY_TAG, this.inventory.serializeNBT());
@@ -203,7 +204,7 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
 
     @Nonnull
     @Override
-    public Container createMenu(int windowId, PlayerInventory inventory, PlayerEntity player) {
+    public Container createMenu(int windowId, @Nonnull PlayerInventory inventory, @Nonnull PlayerEntity player) {
         return new MicroScopeContainer(windowId, inventory, this);
     }
 }

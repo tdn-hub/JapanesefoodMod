@@ -1,15 +1,11 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
-import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.PresserBlock;
 import jp.tdn.japanese_food_mod.container.PresserContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
-import jp.tdn.japanese_food_mod.init.JPItems;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import jp.tdn.japanese_food_mod.recipes.PresserRecipe;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -23,7 +19,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -35,6 +30,7 @@ import net.minecraftforge.items.wrapper.RangedWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 
 import static jp.tdn.japanese_food_mod.init.JPItems.COOKING_OIL;
@@ -103,7 +99,7 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
     }
 
     private Optional<PresserRecipe> getRecipe(final IInventory inventory){
-        return world.getRecipeManager().getRecipe(PresserRecipe.RECIPE_TYPE, inventory, world);
+        return Objects.requireNonNull(world).getRecipeManager().getRecipe(PresserRecipe.RECIPE_TYPE, inventory, world);
     }
 
     private short getResult(final ItemStack input){
@@ -130,7 +126,7 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
                     if(pressedTimeLeft == 0){
                         oilRemaining = (short)Math.min(500, oilRemaining + result);
 
-                        if (input.hasContainerItem()) insertOrDropContainerItem(input, INPUT_SLOT);
+                        if (input.hasContainerItem()) insertOrDropContainerItem(input);
                         input.shrink(1);
                         inventory.setStackInSlot(INPUT_SLOT, input);
                         pressedTimeLeft = -1;
@@ -166,18 +162,15 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
         PresserBlock block = (PresserBlock) world.getBlockState(pos).getBlock();
         block.setOil(world, pos, world.getBlockState(pos), level);
 
-        if(isPressing){
-
-        }
     }
 
-    private void insertOrDropContainerItem(final ItemStack stack, final int slot){
+    private void insertOrDropContainerItem(final ItemStack stack){
         final ItemStack containerItem = stack.getContainerItem();
-        final boolean canInsertContainerItemIntoSlot = inventory.insertItem(slot, containerItem, true).isEmpty();
+        final boolean canInsertContainerItemIntoSlot = inventory.insertItem(PresserTileEntity.INPUT_SLOT, containerItem, true).isEmpty();
         if(canInsertContainerItemIntoSlot){
-            inventory.insertItem(slot, containerItem, false);
+            inventory.insertItem(PresserTileEntity.INPUT_SLOT, containerItem, false);
         }else{
-            InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), containerItem);
+            InventoryHelper.spawnItemStack(Objects.requireNonNull(world), pos.getX(), pos.getY(), pos.getZ(), containerItem);
         }
     }
 
@@ -192,7 +185,7 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
             return inventoryCapabilityExternal.cast();
         }
 
-        switch (side){
+        switch (Objects.requireNonNull(side)){
 
             case DOWN:
                 return inventoryCapabilityExternalDown.cast();
@@ -217,6 +210,7 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
     }
 
     @Override
+    @Nonnull
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
         compound.put(INVENTORY_TAG, this.inventory.serializeNBT());
@@ -245,7 +239,7 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
 
     @Nonnull
     @Override
-    public Container createMenu(int windowId, PlayerInventory inventory, PlayerEntity player) {
+    public Container createMenu(int windowId, @Nonnull PlayerInventory inventory, @Nonnull PlayerEntity player) {
         return new PresserContainer(windowId, inventory, this);
     }
 }

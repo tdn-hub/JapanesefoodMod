@@ -9,7 +9,6 @@ import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,6 +30,9 @@ public class JPItems {
     public static final Item ROCK_SALT = register(new SimpleItem(), "rock_salt");
     public static final Item YEAST_CELL = register(new SimpleItem(), "yeast_cell");
     public static final Item COOKING_OIL = register(new SimpleItem(), "cooking_oil");
+    public static final Item BREAD_CRUMBS = register(new SimpleItem(), "bread_crumbs");
+    public static final Item WHEAT_FLOUR = register(new SimpleItem(), "wheat_flour");
+    public static final Item POTATO_STARCH = register(new SimpleItem(), "potato_starch");
 
     // Food
     public static final Item BOILED_SOY_BEANS = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "boiled_soy_beans");
@@ -40,6 +42,7 @@ public class JPItems {
     public static final Item WAKAME = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).fastToEat().build())), "wakame");
     public static final Item MISO_SOUP_OF_TOFU_AND_WAKAME = register(new MisoSoupOfTAW(), "miso_soup_of_tofu_and_wakame");
     public static final Item SOY_SAUCE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(0.0f).effect(new EffectInstance(Effects.POISON, 100, 2), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 100, 1), 1.0f).build())), "soy_sauce");
+    public static final Item OMELET = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(2.5f).build())), "omelet");
 
     // Block Items
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
@@ -48,6 +51,7 @@ public class JPItems {
     public static final Item WOODEN_BUCKET = register(new BlockItem(JPBlocks.WOODEN_BUCKET, new Item.Properties().group(ItemGroup_Japanese)), "wooden_bucket");
     public static final Item MICROSCOPE = register(new BlockItem(JPBlocks.MICRO_SCOPE, new Item.Properties().group(ItemGroup_Japanese)), "microscope");
     public static final Item PRESSER = register(new BlockItem(JPBlocks.PRESSER, new Item.Properties().group(ItemGroup_Japanese)), "presser");
+    public static final Item UNREFINED = register(new BlockItem(JPBlocks.UNREFINED, new Item.Properties().group(ItemGroup_Japanese)), "unrefined");
 
     public static Item register(@Nonnull Item item, @Nonnull String name){
         item.setRegistryName(modId, name);

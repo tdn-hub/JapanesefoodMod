@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "sauce=true": {"model": "japanese_food_mod:block/unrefined"},
+    "sauce=false": {"model": "japanese_food_mod:block/unrefined_empty"}
+  }
+}

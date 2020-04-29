@@ -1,13 +1,12 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
-import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import jp.tdn.japanese_food_mod.container.MicroScopeContainer;
+import com.google.common.collect.Lists;
+import jp.tdn.japanese_food_mod.blocks.WoodenBucketBlock;
 import jp.tdn.japanese_food_mod.container.WoodenBucketContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import jp.tdn.japanese_food_mod.recipes.MicroScopeRecipe;
 import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
-import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -16,7 +15,6 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -25,7 +23,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
@@ -33,9 +30,9 @@ import net.minecraftforge.items.wrapper.RangedWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class WoodenBucketTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
@@ -75,6 +72,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
 
     public short fermentationTimeLeft = -1;
     public short maxFermentationTime = -1;
+    private boolean lastActive = false;
 
     public WoodenBucketTileEntity(){
         super(JPTileEntities.WOODEN_BUCKET);
@@ -95,7 +93,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
 
     private boolean isOutput(final ItemStack stack){
         final Optional<ItemStack> result;
-        ItemStack input[] = new ItemStack[3];
+        ItemStack[] input = new ItemStack[3];
         for(int index = 0; index < 3; ++index) {
             input[index] = inventory.getStackInSlot(INPUT_SLOT[index]);
         }
@@ -112,7 +110,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     }
 
     private Optional<WoodenBucketRecipe> getRecipe(final IInventory inventory){
-        return world.getRecipeManager().getRecipe(WoodenBucketRecipe.RECIPE_TYPE, inventory, world);
+        return Objects.requireNonNull(world).getRecipeManager().getRecipe(WoodenBucketRecipe.RECIPE_TYPE, inventory, world);
     }
 
     private Optional<ItemStack> getResult(final ItemStack[] input){
@@ -123,8 +121,9 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     @Override
     public void tick() {
         if(world == null || world.isRemote) return;
+        boolean isActive = false;
 
-        final List<ItemStack> inputs = new ArrayList();
+        final List<ItemStack> inputs = Lists.newArrayList();
         for(int index = 0; index <= INPUT_SLOT[2]; ++index){
             inputs.add(inventory.getStackInSlot(index));
         }
@@ -133,6 +132,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         if(!result.isEmpty() && isInput(inputs.toArray(new ItemStack[inputs.size()]))){
             final boolean canInsertResultIntoOutPut = inventory.insertItem(OUTPUT_SLOT, result, true).isEmpty();
             if(canInsertResultIntoOutPut){
+                isActive = true;
                 if(fermentationTimeLeft == -1){
                     fermentationTimeLeft = maxFermentationTime = getFermentationTime(inputs.toArray(new ItemStack[inputs.size()]));
                 }else{
@@ -155,6 +155,13 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         }else{
             fermentationTimeLeft = maxFermentationTime = -1;
         }
+
+        if(lastActive != isActive){
+            markDirty();
+            final BlockState newState = world.getBlockState(pos).with(WoodenBucketBlock.FER, isActive);
+            world.setBlockState(pos, newState);
+            lastActive = isActive;
+        }
     }
 
     private void insertOrDropContainerItem(final ItemStack stack, final int slot){
@@ -163,7 +170,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         if(canInsertContainerItemIntoSlot){
             inventory.insertItem(slot, containerItem, false);
         }else{
-            InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), containerItem);
+            InventoryHelper.spawnItemStack(Objects.requireNonNull(world), pos.getX(), pos.getY(), pos.getZ(), containerItem);
         }
     }
 
@@ -178,7 +185,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
             return inventoryCapabilityExternal.cast();
         }
 
-        switch (side){
+        switch (Objects.requireNonNull(side)){
 
             case DOWN:
                 return inventoryCapabilityExternalDown.cast();
@@ -202,6 +209,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     }
 
     @Override
+    @Nonnull
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
         compound.put(INVENTORY_TAG, this.inventory.serializeNBT());
@@ -229,7 +237,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
 
     @Nonnull
     @Override
-    public Container createMenu(int windowId, PlayerInventory inventory, PlayerEntity player) {
+    public Container createMenu(int windowId, @Nonnull PlayerInventory inventory, @Nonnull PlayerEntity player) {
         return new WoodenBucketContainer(windowId, inventory, this);
     }
 }
