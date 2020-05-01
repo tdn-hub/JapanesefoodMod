@@ -37,8 +37,11 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
     public boolean matches(@Nonnull IInventory inventory, @Nonnull World worldIn){
         boolean check;
         List<ItemStack> inputs = Lists.newArrayList();
-        for(int i = 0; i < 3; ++i){
-            inputs.add(inventory.getStackInSlot(i));
+        for(int i = 0; i < inventory.getSizeInventory(); ++i){
+            ItemStack stack = inventory.getStackInSlot(i);
+            if(!stack.isEmpty()){
+                inputs.add(stack);
+            }
         }
 
         check = RecipeMatcher.findMatches(inputs, this.ingredients) != null;

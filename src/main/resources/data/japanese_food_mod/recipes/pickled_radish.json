@@ -1,0 +1,25 @@
+{
+  "type": "japanese_food_mod:fermentation",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:rice"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:dusts/salt"
+    },
+    {
+      "item": "minecraft:kelp"
+    },
+    {
+      "item": "japanese_food_mod:radish_sprout"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:pickled_radish",
+    "count": 16
+  },
+  "process_time": 6000
+}

@@ -15,7 +15,6 @@
   "item.japanese_food_mod.yeast_cell": "麹菌",
   "item.japanese_food_mod.miso": "みそ",
   "item.japanese_food_mod.wakame": "ワカメ",
-  "item.japanese_food_mod.miso_soup_of_tofu_and_wakame": "豆腐とワカメのみそ汁",
   "item.japanese_food_mod.soy_sauce": "醤油",
   "item.japanese_food_mod.cooking_oil": "食用油",
   "block.japanese_food_mod.presser": "搾油機",
@@ -24,8 +23,13 @@
   "block.japanese_food_mod.unrefined": "諸味",
   "item.japanese_food_mod.potato_starch": "片栗粉",
   "item.japanese_food_mod.omelet": "卵焼き",
+  "item.japanese_food_mod.onigiri": "おにぎり",
+  "item.japanese_food_mod.salmon_onigiri": "鮭おにぎり",
+  "item.japanese_food_mod.pickled_radish": "たくあん",
+  "block.japanese_food_mod.radish_sprout_plant": "大根",
+  "item.japanese_food_mod.grater": "おろし金",
   "gui.japanese_food_mod.identifiedTimeProgress": "進捗: %1$s%2$s",
-  "gui.japanese_food_mod.fermentationTimeProgress": "発酵中: %1$s%2$s",
+  "gui.japanese_food_mod.fermentationTimeProgress": "進捗: %1$s%2$s",
   "gui.japanese_food_mod.pressingTimeProgress": "搾り中: %1$s%2$s",
   "gui.japanese_food_mod.oilRemaining": "油: %1$s/%2$s"
 }

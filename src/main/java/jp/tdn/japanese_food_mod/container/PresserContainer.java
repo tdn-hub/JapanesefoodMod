@@ -39,7 +39,7 @@ public class PresserContainer extends Container {
         this.addSlot(new SlotItemHandler(tileEntity.inventory, PresserTileEntity.CONTAINER_SLOT, 70, 51));
 
         final int playerInventoryStartX = 8;
-        final int playerInventoryStartY = 84;
+        final int playerInventoryStartY = 88;
         final int slotSizePlus2 = 18;
 
         for(int row = 0; row < 3; ++row){

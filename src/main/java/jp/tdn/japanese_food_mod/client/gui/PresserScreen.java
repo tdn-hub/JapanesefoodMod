@@ -15,6 +15,7 @@ public class PresserScreen extends ContainerScreen<PresserContainer> {
 
     public PresserScreen(final PresserContainer container, final PlayerInventory inventory, final ITextComponent title){
         super(container, inventory, title);
+        this.ySize = 168;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class PresserScreen extends ContainerScreen<PresserContainer> {
         super.drawGuiContainerForegroundLayer(mouseX_, mouseY);
         String s = this.title.getFormattedText();
         this.font.drawString(s, (float)(this.xSize / 1.5 - this.font.getStringWidth(s) / 2), 6.0F, 0x404040);
-        //this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 96 + 2), 0x404040);
+        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 94 + 2), 0x404040);
     }
 
     @Override

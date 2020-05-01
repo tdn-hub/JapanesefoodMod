@@ -37,7 +37,7 @@ public class MicroScopeContainer extends Container {
         this.addSlot(new SlotItemHandler(tileEntity.inventory, MicroScopeTileEntity.CONTAINER_SLOT, 136, 38));
 
         final int playerInventoryStartX = 8;
-        final int playerInventoryStartY = 105;
+        final int playerInventoryStartY = 111;
         final int slotSizePlus2 = 18;
 
         for(int row = 0; row < 3; ++row){

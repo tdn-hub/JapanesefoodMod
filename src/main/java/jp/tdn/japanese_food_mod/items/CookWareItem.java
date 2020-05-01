@@ -4,8 +4,8 @@ import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class CockWareItem extends Item {
-    public CockWareItem(){
+public class CookWareItem extends Item {
+    public CookWareItem(){
         super(new Item.Properties().maxStackSize(1).group(JPItems.ItemGroup_Japanese));
     }
 

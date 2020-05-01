@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "japanese_food_mod:items/miso_soup_of_tofu_and_wakame"
-  }
-}

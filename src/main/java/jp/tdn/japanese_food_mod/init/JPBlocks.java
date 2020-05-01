@@ -22,6 +22,7 @@ public class JPBlocks {
     public static final Block MICRO_SCOPE = register(new MicroScopeBlock(), "microscope");
     public static final Block PRESSER = register(new PresserBlock(), "presser");
     public static final Block UNREFINED = register(new UnrefinedBlock(), "unrefined");
+    public static final Block RADISH_SPROUT_PLANT = register(new RadishSproutPlantBlock(), "radish_sprout_plant");
 
     public static Block register(@Nonnull Block block, @Nonnull String name){
         block.setRegistryName(JapaneseFoodMod.MOD_ID, name);

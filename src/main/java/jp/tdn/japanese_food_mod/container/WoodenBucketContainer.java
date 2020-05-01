@@ -1,5 +1,6 @@
 package jp.tdn.japanese_food_mod.container;
 
+import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.tileentity.WoodenBucketTileEntity;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPContainerTypes;
@@ -32,14 +33,22 @@ public class WoodenBucketContainer extends Container {
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.fermentationTimeLeft, v -> tileEntity.fermentationTimeLeft = (short)v));
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxFermentationTime, v -> tileEntity.maxFermentationTime = (short)v));
 
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.INPUT_SLOT[0], 43, 19));
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.INPUT_SLOT[1], 30, 48));
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.INPUT_SLOT[2], 57, 48));
+        final int inputStartX = 21;
+        final int inputStartY = 16;
+        final int slotSizePlus2 = 18;
+        int index = 0;
+
+        for(int row = 0;row < 3; ++row){
+            for(int col = 0;col < 2; ++col){
+                this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.INPUT_SLOT[index], inputStartX + (col * slotSizePlus2), inputStartY + (row * slotSizePlus2)));
+                ++index;
+            }
+        }
+
         this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.OUTPUT_SLOT, 116, 35));
 
         final int playerInventoryStartX = 8;
-        final int playerInventoryStartY = 84;
-        final int slotSizePlus2 = 18;
+        final int playerInventoryStartY = 92;
 
         for(int row = 0; row < 3; ++row){
             for(int column = 0; column < 9; ++column){
@@ -62,6 +71,7 @@ public class WoodenBucketContainer extends Container {
     }
 
     @Override
+    @Nonnull
     public ItemStack transferStackInSlot(PlayerEntity player, int index) {
         ItemStack returnStack = ItemStack.EMPTY;
         final Slot slot = this.inventorySlots.get(index);

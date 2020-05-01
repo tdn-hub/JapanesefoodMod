@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import com.google.common.collect.Lists;
+import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.WoodenBucketBlock;
 import jp.tdn.japanese_food_mod.container.WoodenBucketContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
@@ -36,14 +37,14 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class WoodenBucketTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
-    public static final int[] INPUT_SLOT = {0,1,2};
-    public static final int OUTPUT_SLOT = 3;
+    public static final int[] INPUT_SLOT = {0,1,2,3,4,5};
+    public static final int OUTPUT_SLOT = 6;
 
     private static final String INVENTORY_TAG = "inventory";
     private static final String FERMENTATION_TIME_LEFT = "fermentation_time_left";
     private static final String MAX_FERMENTATION_TIME = "max_fermentation_time";
 
-    public ItemStackHandler inventory = new ItemStackHandler(4){
+    public ItemStackHandler inventory = new ItemStackHandler(7){
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             switch (slot){
@@ -51,6 +52,9 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
                 case 0:
                 case 1:
                 case 2:
+                case 3:
+                case 4:
+                case 5:
                     return true;
                 case OUTPUT_SLOT:
                     return isOutput(stack);
@@ -67,7 +71,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     };
 
     private final LazyOptional<ItemStackHandler> inventoryCapabilityExternal = LazyOptional.of(() -> this.inventory);
-    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalUpAndSides = LazyOptional.of(() -> new RangedWrapper(this.inventory, INPUT_SLOT[0], INPUT_SLOT[2] + 1));
+    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalUpAndSides = LazyOptional.of(() -> new RangedWrapper(this.inventory, INPUT_SLOT[0], INPUT_SLOT[5] + 1));
     private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalDown = LazyOptional.of(() -> new RangedWrapper(this.inventory, OUTPUT_SLOT, OUTPUT_SLOT + 1));
 
     public short fermentationTimeLeft = -1;
@@ -93,8 +97,8 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
 
     private boolean isOutput(final ItemStack stack){
         final Optional<ItemStack> result;
-        ItemStack[] input = new ItemStack[3];
-        for(int index = 0; index < 3; ++index) {
+        ItemStack[] input = new ItemStack[INPUT_SLOT.length];
+        for(int index = 0; index < INPUT_SLOT.length; ++index) {
             input[index] = inventory.getStackInSlot(INPUT_SLOT[index]);
         }
         result = getResult(input);
@@ -124,8 +128,11 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         boolean isActive = false;
 
         final List<ItemStack> inputs = Lists.newArrayList();
-        for(int index = 0; index <= INPUT_SLOT[2]; ++index){
-            inputs.add(inventory.getStackInSlot(index));
+        for(int index = 0; index < INPUT_SLOT.length; ++index){
+            ItemStack stack = inventory.getStackInSlot(index);
+            if(!stack.isEmpty()){
+                inputs.add(stack);
+            }
         }
         final ItemStack result = getResult(inputs.toArray(new ItemStack[inputs.size()])).orElse(ItemStack.EMPTY);
 
@@ -141,7 +148,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
                         inventory.insertItem(OUTPUT_SLOT, result, false);
                         int i = 0;
                         for(ItemStack input: inputs) {
-                            if(i <= INPUT_SLOT[2]) {
+                            if(i < INPUT_SLOT.length) {
                                 if (input.hasContainerItem()) insertOrDropContainerItem(input, INPUT_SLOT[i]);
                                 input.shrink(1);
                                 inventory.setStackInSlot(INPUT_SLOT[i], input);

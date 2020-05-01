@@ -15,7 +15,7 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
 
     public MicroScopeScreen(final MicroScopeContainer container, final PlayerInventory inventory, final ITextComponent title){
         super(container, inventory, title);
-        this.ySize = 187;
+        this.ySize = 191;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
         super.drawGuiContainerForegroundLayer(mouseX_, mouseY);
         String s = this.title.getFormattedText();
         this.font.drawString(s, (float)(this.xSize / 1.5 - this.font.getStringWidth(s) / 2), 6.0F, 0x404040);
-        //this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 96 + 2), 0x404040);
+        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 92 + 2), 0x404040);
     }
 
     @Override
@@ -63,6 +63,10 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
                     176, 0,
                     27, 28 - arrowHeight
                     );
+        }else{
+            this.blit(startX + 87, startY + 44,
+                    176, 0,
+                    27, 28);
         }
     }
 
