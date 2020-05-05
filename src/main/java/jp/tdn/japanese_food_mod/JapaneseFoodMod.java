@@ -33,6 +33,6 @@ public class JapaneseFoodMod {
 
     private void doClientStuff(final FMLClientSetupEvent event){
         // do something that can only be done on the client
-        LOGGER.info("Hello from Client Setup");
+        LOGGER.info("Client Setup");
     }
 }

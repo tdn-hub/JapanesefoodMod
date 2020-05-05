@@ -12,6 +12,10 @@
     "facing=south,level=2,pressing=false": {"model": "japanese_food_mod:block/presser_2", "y": 180},
     "facing=west,level=2,pressing=false":  {"model": "japanese_food_mod:block/presser_2", "y": 270},
     "facing=east,level=2,pressing=false":  {"model": "japanese_food_mod:block/presser_2", "y": 90},
+    "facing=north,level=3,pressing=false": {"model": "japanese_food_mod:block/presser_2"},
+    "facing=south,level=3,pressing=false": {"model": "japanese_food_mod:block/presser_2", "y": 180},
+    "facing=west,level=3,pressing=false":  {"model": "japanese_food_mod:block/presser_2", "y": 270},
+    "facing=east,level=3,pressing=false":  {"model": "japanese_food_mod:block/presser_2", "y": 90},
 
     "facing=north,level=0,pressing=true": {"model": "japanese_food_mod:block/presser_on"},
     "facing=south,level=0,pressing=true": {"model": "japanese_food_mod:block/presser_on", "y": 180},
@@ -24,6 +28,10 @@
     "facing=north,level=2,pressing=true": {"model": "japanese_food_mod:block/presser_on_2"},
     "facing=south,level=2,pressing=true": {"model": "japanese_food_mod:block/presser_on_2", "y": 180},
     "facing=west,level=2,pressing=true":  {"model": "japanese_food_mod:block/presser_on_2", "y": 270},
-    "facing=east,level=2,pressing=true":  {"model": "japanese_food_mod:block/presser_on_2", "y": 90}
+    "facing=east,level=2,pressing=true":  {"model": "japanese_food_mod:block/presser_on_2", "y": 90},
+    "facing=north,level=3,pressing=true": {"model": "japanese_food_mod:block/presser_on_2"},
+    "facing=south,level=3,pressing=true": {"model": "japanese_food_mod:block/presser_on_2", "y": 180},
+    "facing=west,level=3,pressing=true":  {"model": "japanese_food_mod:block/presser_on_2", "y": 270},
+    "facing=east,level=3,pressing=true":  {"model": "japanese_food_mod:block/presser_on_2", "y": 90}
     }
 }

@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "japanese_food_mod:soy_sauce"
+    },
+    "title": {
+      "translate": "advancements.japanese_food_mod.soy_sauce.title"
+    },
+    "frame": "task",
+    "description":{
+      "translate": "advancements.japanese_food_mod.soy_sauce.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "japanese_food_mod:jpfood/fermentation",
+  "criteria": {
+    "get_soy_source": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "japanese_food_mod:soy_sauce",
+            "count": {
+              "min": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}

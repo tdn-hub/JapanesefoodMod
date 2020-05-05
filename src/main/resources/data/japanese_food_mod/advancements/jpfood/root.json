@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "japanese_food_mod:rice"
+    },
+    "title": {
+      "translate": "advancements.japanese_food_mod.root.title"
+    },
+    "frame": "task",
+    "description":{
+      "translate": "advancements.japanese_food_mod.root.description"
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/husbandry.png",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_rice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "japanese_food_mod:rice",
+            "count": {
+              "min": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}

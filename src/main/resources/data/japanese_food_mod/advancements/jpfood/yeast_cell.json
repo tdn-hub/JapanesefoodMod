@@ -1,0 +1,38 @@
+{
+  "display": {
+    "icon": {
+      "item": "japanese_food_mod:yeast_cell"
+    },
+    "title": {
+      "translate": "advancements.japanese_food_mod.yeast_cell.title"
+    },
+    "frame": "task",
+    "description":{
+      "translate": "advancements.japanese_food_mod.yeast_cell.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "japanese_food_mod:jpfood/root",
+  "criteria": {
+    "get_yeast_cell": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "japanese_food_mod:yeast_cell",
+            "count": {
+              "min": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "japanese_food_mod:wooden_bucket"
+    ]
+  }
+}

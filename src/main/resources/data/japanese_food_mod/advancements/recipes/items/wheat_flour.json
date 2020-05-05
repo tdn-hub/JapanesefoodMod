@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "japanese_food_mod:salt"
+      "japanese_food_mod:wheat_flour"
     ]
   },
   "criteria": {
-    "has_pot": {
+    "has_1_wheat": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "japanese_food_mod:pot",
+            "item": "minecraft:wheat",
             "count": {
               "min": 1
             }
@@ -22,13 +22,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "japanese_food_mod:salt"
+        "recipe": "japanese_food_mod:wheat_flour"
       }
     }
   },
   "requirements": [
     [
-      "has_pot",
+      "has_1_wheat",
       "has_the_recipe"
     ]
   ]

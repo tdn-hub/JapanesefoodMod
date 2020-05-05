@@ -1,6 +1,6 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import jp.tdn.japanese_food_mod.blocks.tileentity.UnrefinedTileEntity;
+import jp.tdn.japanese_food_mod.blocks.tileentity.UnrefinedSoySauceTileEntity;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import net.minecraft.block.Block;
@@ -17,16 +17,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
-public class UnrefinedBlock extends Block {
+public class UnrefinedSoySauceBlock extends Block {
     public static BooleanProperty SAUCE = BooleanProperty.create("sauce");
 
-    public UnrefinedBlock(){
+    public UnrefinedSoySauceBlock(){
         super(Properties.create(Material.SAND, MaterialColor.BROWN).hardnessAndResistance(1.0f).doesNotBlockMovement().tickRandomly());
         this.setDefaultState(this.getDefaultState().with(SAUCE, true));
     }
@@ -39,7 +37,7 @@ public class UnrefinedBlock extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return JPTileEntities.UNREFINED.create();
+        return JPTileEntities.UNREFINED_SOY_SAUCE.create();
     }
 
     @Override
@@ -48,8 +46,8 @@ public class UnrefinedBlock extends Block {
             if(state.get(SAUCE) && hasUpSideBlock(world, pos)){
                 ItemStack insert = new ItemStack(JPItems.SOY_SAUCE);
                 TileEntity tileEntity = world.getTileEntity(pos);
-                if(tileEntity instanceof UnrefinedTileEntity){
-                    if(((UnrefinedTileEntity) tileEntity).useSauce() >= 0){
+                if(tileEntity instanceof UnrefinedSoySauceTileEntity){
+                    if(((UnrefinedSoySauceTileEntity) tileEntity).useSauce() >= 0){
                         entity.inventory.addItemStackToInventory(insert);
                     }else{
                         world.setBlockState(pos, state.with(SAUCE, false));

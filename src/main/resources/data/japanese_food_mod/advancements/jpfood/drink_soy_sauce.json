@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "japanese_food_mod:soy_sauce"
+    },
+    "title": {
+      "translate": "advancements.japanese_food_mod.drink_soy_sauce.title"
+    },
+    "frame": "challenge",
+    "description":{
+      "translate": "advancements.japanese_food_mod.drink_soy_sauce.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "japanese_food_mod:jpfood/soy_sauce",
+  "criteria": {
+    "get_yeast_cell": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "items": [
+          {
+            "item": "japanese_food_mod:soy_sauce"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "japanese_food_mod:give_milk"
+  }
+}

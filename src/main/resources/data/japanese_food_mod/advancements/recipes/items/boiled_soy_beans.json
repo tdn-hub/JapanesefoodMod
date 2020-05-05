@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "japanese_food_mod:salt"
+      "japanese_food_mod:boiled_soy_beans"
     ]
   },
   "criteria": {
@@ -22,7 +22,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "japanese_food_mod:salt"
+        "recipe": "japanese_food_mod:boiled_soy_beans"
       }
     }
   },

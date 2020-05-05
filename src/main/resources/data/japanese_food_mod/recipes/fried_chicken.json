@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:soy_sauce"
+    },
+    {
+      "tag": "forge:dusts/salt"
+    },
+    {
+      "item": "minecraft:chicken"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "japanese_food_mod:potato_starch"
+    },
+    {
+      "item": "japanese_food_mod:cooking_oil"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:fried_chicken",
+    "count": 1
+  }
+}

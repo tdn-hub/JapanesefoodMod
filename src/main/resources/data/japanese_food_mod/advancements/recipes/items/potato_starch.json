@@ -2,14 +2,20 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "japanese_food_mod:salt"
+      "japanese_food_mod:potato_starch"
     ]
   },
   "criteria": {
-    "has_pot": {
+    "has_1_potato_and_pot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
+          {
+            "item": "minecraft:potato",
+            "count": {
+              "min": 1
+            }
+          },
           {
             "item": "japanese_food_mod:pot",
             "count": {
@@ -22,13 +28,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "japanese_food_mod:salt"
+        "recipe": "japanese_food_mod:potato_starch"
       }
     }
   },
   "requirements": [
     [
-      "has_pot",
+      "has_1_potato_and_pot",
       "has_the_recipe"
     ]
   ]

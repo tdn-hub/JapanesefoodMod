@@ -13,12 +13,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class UnrefinedTileEntity extends TileEntity{
+public class UnrefinedSoySauceTileEntity extends TileEntity{
     public static final String SAUCE_REMAINING_TAG = "sauceRemaining";
     public short sauceRemaining = 8;
 
-    public UnrefinedTileEntity(){
-        super(JPTileEntities.UNREFINED);
+    public UnrefinedSoySauceTileEntity(){
+        super(JPTileEntities.UNREFINED_SOY_SAUCE);
     }
 
     public int useSauce(){

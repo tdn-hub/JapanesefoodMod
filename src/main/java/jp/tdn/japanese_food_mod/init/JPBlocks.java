@@ -21,7 +21,7 @@ public class JPBlocks {
     public static final Block WOODEN_BUCKET = register(new WoodenBucketBlock(), "wooden_bucket");
     public static final Block MICRO_SCOPE = register(new MicroScopeBlock(), "microscope");
     public static final Block PRESSER = register(new PresserBlock(), "presser");
-    public static final Block UNREFINED = register(new UnrefinedBlock(), "unrefined");
+    public static final Block UNREFINED_SOY_SAUCE = register(new UnrefinedSoySauceBlock(), "unrefined_soy_sauce");
     public static final Block RADISH_SPROUT_PLANT = register(new RadishSproutPlantBlock(), "radish_sprout_plant");
 
     public static Block register(@Nonnull Block block, @Nonnull String name){

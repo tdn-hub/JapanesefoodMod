@@ -1,0 +1,52 @@
+{
+  "display": {
+    "icon": {
+      "item": "japanese_food_mod:wooden_bucket"
+    },
+    "title": {
+      "translate": "advancements.japanese_food_mod.fermentation.title"
+    },
+    "frame": "task",
+    "description":{
+      "translate": "advancements.japanese_food_mod.fermentation.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "japanese_food_mod:jpfood/yeast_cell",
+  "criteria": {
+    "get_unrefined_soy_sauce": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "japanese_food_mod:unrefined_soy_sauce",
+            "count": {
+              "min": 1
+            }
+          }
+        ]
+      }
+    },
+    "get_miso": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "japanese_food_mod:miso",
+            "count": {
+              "min": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+    "get_unrefined_soy_sauce",
+    "get_miso"
+    ]
+  ]
+}
