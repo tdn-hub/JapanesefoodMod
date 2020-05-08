@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import jp.tdn.japanese_food_mod.JapaneseFoodItemGroup;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.items.*;
+import net.minecraft.data.loot.FishingLootTables;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
@@ -39,6 +40,7 @@ public class JPItems {
     public static final Item MISO = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "miso");
     public static final Item WAKAME = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).fastToEat().build())), "wakame");
     public static final Item SOY_SAUCE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(0.0f).effect(new EffectInstance(Effects.POISON, 100, 2), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 100, 1), 1.0f).build())), "soy_sauce");
+    public static final Item BATTER = register(new SimpleItem(), "batter");
 
     //Seed
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
@@ -54,6 +56,11 @@ public class JPItems {
     public static final Item SALMON_ONIGIRI  = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(4.5f).build())), "salmon_onigiri");
     public static final Item PICKLED_RADISH = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(1.5f).build())), "pickled_radish");
     public static final Item FRIED_CHICKEN = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(5).saturation(4.0f).build())), "fried_chicken");
+    public static final Item SHRIMP = register(new FoodItem(2, 1.5f), "shrimp");
+    public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
+    public static final Item SKEWERED_CHICKEN = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).effect(new EffectInstance(Effects.HUNGER, 100, 1), 0.3f).build())), "skewered_chicken");
+    public static final Item YAKITORI = register(new FoodItem(3, 2.0f), "yakitori");
+    public static final Item SQUID_RING = register(new FoodItem(3, 2.0f), "squid_ring");
 
     // Block Items
     public static final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");

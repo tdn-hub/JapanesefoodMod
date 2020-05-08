@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:wheat_flour"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "japanese_food_mod:batter"
+    },
+    {
+      "item": "japanese_food_mod:cooking_oil"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "japanese_food_mod:squid"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:squid_ring",
+    "count": 1
+  }
+}
