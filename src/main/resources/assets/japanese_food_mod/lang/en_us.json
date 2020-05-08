@@ -34,6 +34,8 @@
   "item.japanese_food_mod.skewered_chicken": "Skewered Chicken",
   "item.japanese_food_mod.yakitori": "Yakitori",
   "item.japanese_food_mod.squid_ring": "Squid Ring",
+  "block.japanese_food_mod.unrefined_sake": "Unrefined Sake",
+  "item.japanese_food_mod.sake": "Sake",
   "gui.japanese_food_mod.identifiedTimeProgress": "Progress: $s",
   "gui.japanese_food_mod.fermentationTimeProgress": "Progress: $s",
   "gui.japanese_food_mod.pressingTimeProgress": "Progress: $s",

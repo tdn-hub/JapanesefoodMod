@@ -3,10 +3,7 @@ package jp.tdn.japanese_food_mod.init;
 import com.google.common.base.Preconditions;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
-import jp.tdn.japanese_food_mod.blocks.tileentity.MicroScopeTileEntity;
-import jp.tdn.japanese_food_mod.blocks.tileentity.PresserTileEntity;
-import jp.tdn.japanese_food_mod.blocks.tileentity.UnrefinedSoySauceTileEntity;
-import jp.tdn.japanese_food_mod.blocks.tileentity.WoodenBucketTileEntity;
+import jp.tdn.japanese_food_mod.blocks.tileentity.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -24,6 +21,7 @@ public class JPTileEntities {
      public static final TileEntityType<WoodenBucketTileEntity> WOODEN_BUCKET = JapaneseFoodUtil._null();
      public static final TileEntityType<PresserTileEntity> PRESSER = JapaneseFoodUtil._null();
      public static final TileEntityType<UnrefinedSoySauceTileEntity> UNREFINED_SOY_SAUCE = JapaneseFoodUtil._null();
+     public static final TileEntityType<UnrefinedSakeTileEntity> UNREFINED_SAKE = JapaneseFoodUtil._null();
 
      @SubscribeEvent
      public static void registerTileEntityTypes(@Nonnull final RegistryEvent.Register<TileEntityType<?>> event){
@@ -31,7 +29,8 @@ public class JPTileEntities {
                   setup(TileEntityType.Builder.create(MicroScopeTileEntity::new, JPBlocks.MICRO_SCOPE).build(null), "microscope"),
                   setup(TileEntityType.Builder.create(WoodenBucketTileEntity::new, JPBlocks.WOODEN_BUCKET).build(null), "wooden_bucket"),
                   setup(TileEntityType.Builder.create(PresserTileEntity::new, JPBlocks.PRESSER).build(null), "presser"),
-                  setup(TileEntityType.Builder.create(UnrefinedSoySauceTileEntity::new, JPBlocks.UNREFINED_SOY_SAUCE).build(null), "unrefined_soy_sauce")
+                  setup(TileEntityType.Builder.create(UnrefinedSoySauceTileEntity::new, JPBlocks.UNREFINED_SOY_SAUCE).build(null), "unrefined_soy_sauce"),
+                  setup(TileEntityType.Builder.create(UnrefinedSakeTileEntity::new, JPBlocks.UNREFINED_SAKE).build(null), "unrefined_sake")
           );
      }
 

@@ -21,10 +21,10 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class UnrefinedSoySauceBlock extends Block {
+public class UnrefinedSakeBlock extends Block {
     public static BooleanProperty SAUCE = BooleanProperty.create("sauce");
 
-    public UnrefinedSoySauceBlock(){
+    public UnrefinedSakeBlock(){
         super(Properties.create(Material.SAND, MaterialColor.BROWN).hardnessAndResistance(1.0f).doesNotBlockMovement().tickRandomly());
         this.setDefaultState(this.getDefaultState().with(SAUCE, true));
     }
@@ -37,14 +37,14 @@ public class UnrefinedSoySauceBlock extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return JPTileEntities.UNREFINED_SOY_SAUCE.create();
+        return JPTileEntities.UNREFINED_SAKE.create();
     }
 
     @Override
     public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockRayTraceResult rayTraceResult) {
         if(!world.isRemote){
             if(state.get(SAUCE) && hasUpSideBlock(world, pos)){
-                ItemStack insert = new ItemStack(JPItems.SOY_SAUCE);
+                ItemStack insert = new ItemStack(JPItems.SAKE);
                 TileEntity tileEntity = world.getTileEntity(pos);
                 if(tileEntity instanceof UnrefinedSoySauceTileEntity){
                     if(((UnrefinedSoySauceTileEntity) tileEntity).sauceRemaining > 0){
