@@ -47,8 +47,7 @@ public class UnrefinedSoySauceBlock extends Block {
                 ItemStack insert = new ItemStack(JPItems.SOY_SAUCE);
                 TileEntity tileEntity = world.getTileEntity(pos);
                 if(tileEntity instanceof UnrefinedSoySauceTileEntity){
-                    if(((UnrefinedSoySauceTileEntity) tileEntity).sauceRemaining > 0){
-                        ((UnrefinedSoySauceTileEntity) tileEntity).useSauce();
+                    if(((UnrefinedSoySauceTileEntity) tileEntity).useSauce() >= 0){
                         entity.inventory.addItemStackToInventory(insert);
                     }else{
                         world.setBlockState(pos, state.with(SAUCE, false));
@@ -59,7 +58,7 @@ public class UnrefinedSoySauceBlock extends Block {
         return true;
     }
 
-    private boolean hasUpSideBlock(World world, BlockPos pos){
+    public boolean hasUpSideBlock(World world, BlockPos pos){
         BlockPos upSide = pos.up();
         Block up = world.getBlockState(upSide).getBlock();
 

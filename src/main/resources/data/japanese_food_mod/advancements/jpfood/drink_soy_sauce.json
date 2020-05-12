@@ -16,14 +16,12 @@
   },
   "parent": "japanese_food_mod:jpfood/soy_sauce",
   "criteria": {
-    "get_yeast_cell": {
+    "drink_soy_sauce": {
       "trigger": "minecraft:consume_item",
       "conditions": {
-        "items": [
-          {
-            "item": "japanese_food_mod:soy_sauce"
-          }
-        ]
+        "item": {
+          "item": "japanese_food_mod:soy_sauce"
+        }
       }
     }
   },

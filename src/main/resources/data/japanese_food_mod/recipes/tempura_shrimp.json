@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:shrimp"
+    },
+    {
+      "item": "japanese_food_mod:batter"
+    },
+    {
+      "item": "japanese_food_mod:cooking_oil"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:tempura_shrimp",
+    "count": 1
+  }
+}

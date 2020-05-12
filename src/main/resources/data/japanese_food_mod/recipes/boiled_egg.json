@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "japanese_food_mod:sake"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "japanese_food_mod:pot"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:boiled_egg",
+    "count": 1
+  }
+}

@@ -1,6 +1,10 @@
 package jp.tdn.japanese_food_mod;
 
+import jp.tdn.japanese_food_mod.client.renders.JPRenderRegistry;
+import jp.tdn.japanese_food_mod.init.JPEntities;
 import jp.tdn.japanese_food_mod.world.OreGeneration;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -29,10 +33,12 @@ public class JapaneseFoodMod {
 
     private void setup(final FMLCommonSetupEvent event){
         OreGeneration.setupOreGeneration();
+        JPEntities.registerEntityWorldSpawns();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event){
         // do something that can only be done on the client
+        JPRenderRegistry.registryEntityRenders();
         LOGGER.info("Client Setup");
     }
 }

@@ -21,17 +21,11 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class UnrefinedSakeBlock extends Block {
+public class UnrefinedSakeBlock extends UnrefinedSoySauceBlock {
     public static BooleanProperty SAUCE = BooleanProperty.create("sauce");
 
     public UnrefinedSakeBlock(){
-        super(Properties.create(Material.SAND, MaterialColor.BROWN).hardnessAndResistance(1.0f).doesNotBlockMovement().tickRandomly());
-        this.setDefaultState(this.getDefaultState().with(SAUCE, true));
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+        super();
     }
 
     @Nullable
@@ -47,8 +41,7 @@ public class UnrefinedSakeBlock extends Block {
                 ItemStack insert = new ItemStack(JPItems.SAKE);
                 TileEntity tileEntity = world.getTileEntity(pos);
                 if(tileEntity instanceof UnrefinedSoySauceTileEntity){
-                    if(((UnrefinedSoySauceTileEntity) tileEntity).sauceRemaining > 0){
-                        ((UnrefinedSoySauceTileEntity) tileEntity).useSauce();
+                    if(((UnrefinedSoySauceTileEntity) tileEntity).useSauce() >= 0){
                         entity.inventory.addItemStackToInventory(insert);
                     }else{
                         world.setBlockState(pos, state.with(SAUCE, false));
@@ -57,18 +50,5 @@ public class UnrefinedSakeBlock extends Block {
             }
         }
         return true;
-    }
-
-    private boolean hasUpSideBlock(World world, BlockPos pos){
-        BlockPos upSide = pos.up();
-        Block up = world.getBlockState(upSide).getBlock();
-
-        return up != Blocks.AIR;
-    }
-
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
-        builder.add(SAUCE);
     }
 }

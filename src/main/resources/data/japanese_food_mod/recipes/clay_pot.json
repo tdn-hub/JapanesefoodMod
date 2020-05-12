@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "japanese_food_mod:clay_pot_before_heating"
+  },
+  "result": {
+    "item": "japanese_food_mod:clay_pot"
+  },
+  "cookingtime": 600
+}
