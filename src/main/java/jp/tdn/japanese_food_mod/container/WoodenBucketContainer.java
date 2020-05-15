@@ -1,6 +1,5 @@
 package jp.tdn.japanese_food_mod.container;
 
-import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.tileentity.WoodenBucketTileEntity;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPContainerTypes;

@@ -5,15 +5,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SoupItem;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class MisoSoupItem extends SoupItem {
-    public MisoSoupItem(){
+public class MisoSoupItem extends DrinkItem {
+    public MisoSoupItem(int hunger, float saturation){
         super(new Item.Properties()
-                .food(new Food.Builder().hunger(3).saturation(2.5f).build())
+                .food(new Food.Builder().hunger(hunger).saturation(saturation).build())
                 .group(JPItems.ItemGroup_Japanese));
     }
 

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:japanese_knife"
+    },
+    {
+      "item": "japanese_food_mod:tuna"
+    },
+    {
+      "item": "japanese_food_mod:soy_sauce"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:tuna_sashimi",
+    "count": 1
+  }
+}

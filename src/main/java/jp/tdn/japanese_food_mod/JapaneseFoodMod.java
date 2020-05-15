@@ -1,10 +1,10 @@
 package jp.tdn.japanese_food_mod;
 
 import jp.tdn.japanese_food_mod.client.renders.JPRenderRegistry;
+import jp.tdn.japanese_food_mod.config.Config;
 import jp.tdn.japanese_food_mod.init.JPEntities;
+import jp.tdn.japanese_food_mod.world.GrassGeneration;
 import jp.tdn.japanese_food_mod.world.OreGeneration;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -29,10 +29,13 @@ public class JapaneseFoodMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        Config.loadConfig();
     }
 
     private void setup(final FMLCommonSetupEvent event){
         OreGeneration.setupOreGeneration();
+        GrassGeneration.setupGrassGeneration();
         JPEntities.registerEntityWorldSpawns();
     }
 

@@ -4,8 +4,6 @@ import com.google.common.collect.Lists;
 import jp.tdn.japanese_food_mod.JapaneseFoodItemGroup;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.items.*;
-import net.minecraft.data.loot.FishingLootTables;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -39,9 +37,12 @@ public class JPItems {
     public static final Item YEAST_CELL = register(new SimpleItem(), "yeast_cell");
     public static final Item MISO = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "miso");
     public static final Item WAKAME = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).fastToEat().build())), "wakame");
-    public static final Item SOY_SAUCE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(0.0f).effect(new EffectInstance(Effects.POISON, 100, 2), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 100, 1), 1.0f).build())), "soy_sauce");
+    public static final Item SOY_SAUCE = register(new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(0.0f).effect(new EffectInstance(Effects.POISON, 100, 2), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 100, 1), 1.0f).build())), "soy_sauce");
     public static final Item BATTER = register(new SimpleItem(), "batter");
     public static final Item CLAY_POT_BEFORE_HEATING = register(new SimpleItem(), "clay_pot_before_heating");
+    public static final Item TARE_SAUCE = register(new SimpleItem(), "tare_sauce");
+    public static final Item ACETIC_ACID_BACTERIA = register(new SimpleItem(), "acetic_acid_bacteria");
+    public static final Item VINEGAR = register(new DrinkItem(1, 0f), "vinegar");
 
     //Seed
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
@@ -51,7 +52,7 @@ public class JPItems {
     public static final Item RADISH_SPROUT = register(new BlockItem(JPBlocks.RADISH_SPROUT_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "radish_sprout");
     public static final Item RICE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "rice");
     public static final Item BOILED_SOY_BEANS = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "boiled_soy_beans");
-    public static final Item MISO_SOUP = register(new MisoSoupItem(), "miso_soup");
+    public static final Item MISO_SOUP = register(new MisoSoupItem(3, 2.5f), "miso_soup");
     public static final Item OMELET = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(2.5f).build())), "omelet");
     public static final Item ONIGIRI = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(3).saturation(4.0f).build())), "onigiri");
     public static final Item SALMON_ONIGIRI  = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(4.5f).build())), "salmon_onigiri");
@@ -60,10 +61,13 @@ public class JPItems {
     public static final Item SKEWERED_CHICKEN = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).effect(new EffectInstance(Effects.HUNGER, 100, 1), 0.3f).build())), "skewered_chicken");
     public static final Item YAKITORI = register(new FoodItem(3, 2.0f), "yakitori");
     public static final Item SQUID_RING = register(new FoodItem(3, 2.0f), "squid_ring");
-    public static final Item SAKE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(1.0f).effect(new EffectInstance(Effects.NAUSEA, 200, 1), 0.75f).build())), "sake");
+    public static final Item SAKE = register(new SakeItem(2, 1.0f), "sake");
     public static final Item TEMPURA_SHRIMP = register(new FoodItem(3, 2.5f), "tempura_shrimp");
     public static final Item FUGU_SASHIMI = register(new FoodItem(4, 4.0f), "fugu_sashimi");
     public static final Item BOILED_EGG = register(new FoodItem(3, 3.0f), "boiled_egg");
+    public static final Item GRATED_DAIKON = register(new FoodItem(3, 1.5f),"grated_daikon");
+    public static final Item TUNA_SASHIMI = register(new FoodItem(4, 3.5f), "tuna_sashimi");
+    public static final Item TUNA_SUSHI = register(new FoodItem(5, 3.5f), "tuna_sushi");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
@@ -71,6 +75,7 @@ public class JPItems {
     public static final Item JAPANESE_PUFFER_FISH = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(1.5f).effect(new EffectInstance(Effects.POISON, 1000, 3), 1.0f).build())), "japanese_puffer_fish");
     public static final Item EEL = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(1.5f).effect(new EffectInstance(Effects.POISON, 500, 2), 0.2f).build())), "eel");
     public static final Item CRAB = register(new FoodItem(2, 1.5f), "crab");
+    public static final Item TUNA = register(new FoodItem(3, 2.0f), "tuna");
 
     // Block Items
     public static final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");
@@ -83,6 +88,7 @@ public class JPItems {
     // Spawn Eggs
     public static final Item EEL_ENTITY_EGG = register(new SpawnEggItem(JPEntities.EEL, 0x00c3ff, 0x694b3a, new Item.Properties().group(ItemGroup_Japanese)), "eel_spawn_egg");
     public static final Item CRAB_ENTITY_EGG = register(new SpawnEggItem(JPEntities.CRAB, 0x00c3ff, 0xba2d20, new Item.Properties().group(ItemGroup_Japanese)), "crab_spawn_egg");
+    public static final Item TUNA_ENTITY_EGG = register(new SpawnEggItem(JPEntities.TUNA, 0x00c3ff, 0x0000ff, new Item.Properties().group(ItemGroup_Japanese)), "tuna_spawn_egg");
 
     public static Item register(@Nonnull Item item, @Nonnull String name){
         item.setRegistryName(modId, name);

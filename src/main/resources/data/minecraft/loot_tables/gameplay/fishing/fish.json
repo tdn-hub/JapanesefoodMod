@@ -20,6 +20,11 @@
           "name": "japanese_food_mod:eel"
         },
         {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "japanese_food_mod:tuna"
+        },
+        {
         "type": "minecraft:item",
         "weight": 60,
         "name": "minecraft:cod"

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "japanese_food_mod:radish_sprout",
+          "weight": 10
+        }
+      ]
+    }
+  ]
+}

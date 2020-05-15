@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:soy_sauce"
+    },
+    {
+      "item": "japanese_food_mod:sake"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:tare_sauce",
+    "count": 4
+  }
+}

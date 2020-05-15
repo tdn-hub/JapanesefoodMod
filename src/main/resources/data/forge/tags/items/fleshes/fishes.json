@@ -4,6 +4,11 @@
     "minecraft:cod",
     "minecraft:salmon",
     "minecraft:tropical_fish",
-    "minecraft:pufferfish"
+    "minecraft:pufferfish",
+    "japanese_food_mod:eel",
+    "japanese_food_mod:shrimp",
+    "japanese_food_mod:crab",
+    "japanese_food_mod:squid",
+    "japanese_food_mod:japanese_puffer_fish"
   ]
 }

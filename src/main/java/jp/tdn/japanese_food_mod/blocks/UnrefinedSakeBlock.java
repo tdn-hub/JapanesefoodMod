@@ -1,17 +1,11 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import jp.tdn.japanese_food_mod.blocks.tileentity.UnrefinedSoySauceTileEntity;
+import jp.tdn.japanese_food_mod.blocks.tileentity.UnrefinedSakeTileEntity;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -21,9 +15,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class UnrefinedSakeBlock extends UnrefinedSoySauceBlock {
-    public static BooleanProperty SAUCE = BooleanProperty.create("sauce");
-
+public class UnrefinedSakeBlock extends UnrefinedBlock {
     public UnrefinedSakeBlock(){
         super();
     }
@@ -40,11 +32,14 @@ public class UnrefinedSakeBlock extends UnrefinedSoySauceBlock {
             if(state.get(SAUCE) && hasUpSideBlock(world, pos)){
                 ItemStack insert = new ItemStack(JPItems.SAKE);
                 TileEntity tileEntity = world.getTileEntity(pos);
-                if(tileEntity instanceof UnrefinedSoySauceTileEntity){
-                    if(((UnrefinedSoySauceTileEntity) tileEntity).useSauce() >= 0){
+                if(tileEntity instanceof UnrefinedSakeTileEntity){
+                    if(((UnrefinedSakeTileEntity) tileEntity).getSauceRemaining() > 0) {
                         entity.inventory.addItemStackToInventory(insert);
-                    }else{
-                        world.setBlockState(pos, state.with(SAUCE, false));
+                        ((UnrefinedSakeTileEntity) tileEntity).useSauce();
+
+                        if (((UnrefinedSakeTileEntity) tileEntity).getSauceRemaining() <= 0) {
+                            world.setBlockState(pos, state.with(SAUCE, false));
+                        }
                     }
                 }
             }

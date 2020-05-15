@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:grater"
+    },
+    {
+      "item": "japanese_food_mod:radish_sprout"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:grated_daikon",
+    "count": 1
+  }
+}

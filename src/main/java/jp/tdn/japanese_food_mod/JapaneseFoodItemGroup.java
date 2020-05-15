@@ -3,7 +3,6 @@ package jp.tdn.japanese_food_mod;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 
 import javax.annotation.Nonnull;
 

@@ -70,6 +70,7 @@ public class WoodenBucketBlock extends HorizontalBlock {
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if(!worldIn.isRemote){
             final TileEntity tileEntity = worldIn.getTileEntity(pos);
+            worldIn.playSound((PlayerEntity) null, (double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5f, worldIn.rand.nextFloat() * 0.1f + 0.9f);
             if(tileEntity instanceof WoodenBucketTileEntity) NetworkHooks.openGui((ServerPlayerEntity) player, (WoodenBucketTileEntity) tileEntity, pos);
         }
         return true;
