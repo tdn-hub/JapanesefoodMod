@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "japanese_food_mod:blocks/leek_plant_age_1"
+  }
+}

@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EelEntity extends AbstractFishEntity {
 
     public EelEntity(EntityType<? extends AbstractFishEntity> type, World worldIn){

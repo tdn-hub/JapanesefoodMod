@@ -36,7 +36,7 @@ public class Config {
         try{
             Files.createDirectory(jpConfigPath);
         }catch (FileAlreadyExistsException e){
-
+            // Do nothing
         }catch (IOException e){
             JapaneseFoodMod.LOGGER.error("Failed to create japanesefoodmod config directory", e);
         }

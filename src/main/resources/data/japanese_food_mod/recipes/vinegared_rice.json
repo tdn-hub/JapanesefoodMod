@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:rice"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "japanese_food_mod:vinegar"
+    },
+    {
+      "tag": "forge:dusts/salt"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:vinegared_rice",
+    "count": 1
+  }
+}

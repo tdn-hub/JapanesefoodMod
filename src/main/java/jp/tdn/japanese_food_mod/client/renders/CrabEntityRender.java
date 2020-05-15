@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
@@ -19,7 +20,7 @@ public class CrabEntityRender extends MobRenderer<CrabEntity, CrabEntityModel<Cr
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(CrabEntity crabEntity) {
+    protected ResourceLocation getEntityTexture(@Nonnull CrabEntity crabEntity) {
         return new ResourceLocation(JapaneseFoodMod.MOD_ID + ":textures/entities/crab.png");
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
@@ -19,7 +20,7 @@ public class EelEntityRender extends MobRenderer<EelEntity, EelEntityModel<EelEn
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(EelEntity ellEntity) {
+    protected ResourceLocation getEntityTexture(@Nonnull EelEntity ellEntity) {
         return new ResourceLocation(JapaneseFoodMod.MOD_ID + ":textures/entities/eel.png");
     }
 }

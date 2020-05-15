@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
@@ -21,7 +22,7 @@ public class TunaEntityRender extends MobRenderer<TunaEntity, TunaEntityModel<Tu
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(TunaEntity tunaEntity) {
+    protected ResourceLocation getEntityTexture(@Nonnull TunaEntity tunaEntity) {
         return new ResourceLocation(JapaneseFoodMod.MOD_ID + ":textures/entities/tuna.png");
     }
 }

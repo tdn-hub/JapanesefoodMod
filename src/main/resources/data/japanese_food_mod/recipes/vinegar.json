@@ -1,0 +1,16 @@
+{
+  "type": "japanese_food_mod:fermentation",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:acetic_acid_bacteria"
+    },
+    {
+      "item": "japanese_food_mod:sake"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:vinegar",
+    "count": 16
+  },
+  "process_time": 12000
+}

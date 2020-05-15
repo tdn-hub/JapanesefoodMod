@@ -5,7 +5,7 @@
       "item": "japanese_food_mod:japanese_knife"
     },
     {
-      "item": "japanese_food_mod:tuna"
+      "item": "minecraft:salmon"
     },
     {
       "item": "japanese_food_mod:vinegared_rice"
@@ -15,7 +15,7 @@
     }
   ],
   "result": {
-    "item": "japanese_food_mod:tuna_sushi",
+    "item": "japanese_food_mod:salmon_sushi",
     "count": 1
   }
 }

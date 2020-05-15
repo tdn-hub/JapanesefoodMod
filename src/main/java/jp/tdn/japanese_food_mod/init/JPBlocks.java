@@ -25,6 +25,7 @@ public class JPBlocks {
     public static final Block RADISH_SPROUT_PLANT = register(new RadishSproutPlantBlock(), "radish_sprout_plant");
     public static final Block UNREFINED_SAKE = register(new UnrefinedSakeBlock(), "unrefined_sake");
     public static final Block CROP_GRASS = register(new CropGrassBlock(), "crop_grass");
+    public static final Block LEEK_PLANT = register(new LeekPlantBlock(), "leek_plant");
 
     public static Block register(@Nonnull Block block, @Nonnull String name){
         block.setRegistryName(JapaneseFoodMod.MOD_ID, name);
