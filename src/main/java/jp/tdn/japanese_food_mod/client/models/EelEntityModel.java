@@ -11,6 +11,8 @@ public class EelEntityModel<T extends LivingEntity> extends EntityModel<T> {
     private final RendererModel body;
     private final RendererModel head;
     private final RendererModel body2;
+    private final RendererModel hire;
+    private final RendererModel hire2;
 
     public EelEntityModel() {
         textureWidth = 32;
@@ -37,6 +39,16 @@ public class EelEntityModel<T extends LivingEntity> extends EntityModel<T> {
         body2.setRotationPoint(0.0F, 23.0F, 5.0F);
         body2.cubeList.add(new ModelBox(body2, 8, 0, -1.0F, -1.5F, 0.0F, 2, 2, 3, 0.0F, false));
         body2.cubeList.add(new ModelBox(body2, 7, 5, -1.0F, -1.5F, 3.0F, 2, 2, 4, 0.0F, false));
+
+        hire = new RendererModel(this);
+        hire.setRotationPoint(1.0F, 23.0F, -7.0F);
+        setRotationAngle(hire, 0.0F, 0.2618F, 0.0F);
+        hire.cubeList.add(new ModelBox(hire, 0, 3, 0.0F, -0.5F, 0.0F, 0, 1, 4, 0.0F, false));
+
+        hire2 = new RendererModel(this);
+        hire2.setRotationPoint(-1.0F, 23.0F, -7.0F);
+        setRotationAngle(hire2, 0.0F, -0.2618F, 0.0F);
+        hire2.cubeList.add(new ModelBox(hire2, 0, 3, 0.0F, -0.5F, 0.0F, 0, 1, 4, 0.0F, true));
     }
 
     @Override
@@ -45,6 +57,8 @@ public class EelEntityModel<T extends LivingEntity> extends EntityModel<T> {
         body.render(f5);
         head.render(f5);
         body2.render(f5);
+        hire.render(f5);
+        hire2.render(f5);
     }
 
     @Override

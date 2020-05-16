@@ -63,6 +63,8 @@ public class JPItems {
     public static final Item FRIED_CHICKEN = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(5).saturation(4.0f).build())), "fried_chicken");
     public static final Item SKEWERED_CHICKEN = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).effect(new EffectInstance(Effects.HUNGER, 100, 1), 0.3f).build())), "skewered_chicken");
     public static final Item YAKITORI = register(new FoodItem(3, 2.0f), "yakitori");
+    public static final Item RAW_NEGIMA = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).effect(new EffectInstance(Effects.HUNGER, 100, 1), 0.3f).build())), "raw_negima");
+    public static final Item NEGIMA = register(new FoodItem(3, 2.3f), "negima");
     public static final Item SQUID_RING = register(new FoodItem(3, 2.0f), "squid_ring");
     public static final Item SURUME = register(new FoodItem(3, 2.0f), "surume");
     public static final Item SAKE = register(new SakeItem(2, 1.0f), "sake");
