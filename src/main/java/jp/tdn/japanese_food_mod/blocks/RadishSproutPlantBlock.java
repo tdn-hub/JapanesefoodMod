@@ -24,7 +24,7 @@ public class RadishSproutPlantBlock extends CropsBlock{
     @Override
     @Nonnull
     protected IItemProvider getSeedsItem(){
-        return JPItems.RADISH_SPROUT;
+        return JPItems.RADISH_SPROUT_SEED;
     }
 
     @Override

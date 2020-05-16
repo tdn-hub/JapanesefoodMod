@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:radish_sprout"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:radish_sprout_seed",
+    "count": 4
+  }
+}

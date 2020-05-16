@@ -100,6 +100,10 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
         return getRecipe(dummyInventory).map(recipe -> recipe.getCraftingResult(dummyInventory));
     }
 
+    public ItemStack getInventory(){
+        return inventory.getStackInSlot(INPUT_SLOT);
+    }
+
     @Override
     public void tick() {
         if(world == null || world.isRemote) return;

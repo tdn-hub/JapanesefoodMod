@@ -24,7 +24,7 @@ public class LeekPlantBlock extends CropsBlock{
     @Override
     @Nonnull
     protected IItemProvider getSeedsItem(){
-        return JPItems.LEEK;
+        return JPItems.LEEK_SEED;
     }
 
     @Override

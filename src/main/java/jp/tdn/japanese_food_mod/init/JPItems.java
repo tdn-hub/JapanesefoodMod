@@ -47,11 +47,13 @@ public class JPItems {
     //Seed
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
     public static final Item RICE_SEEDLING = register(new RiceSeedlingItem(JPBlocks.RICE_PLANT, new Item.Properties().group(ItemGroup_Japanese)),"rice_seedling");
+    public static final Item RADISH_SPROUT_SEED = register(new BlockItem(JPBlocks.RADISH_SPROUT_PLANT, new Item.Properties().group(ItemGroup_Japanese)), "radish_sprout_seed");
+    public static final Item LEEK_SEED = register(new BlockItem(JPBlocks.LEEK_PLANT, new Item.Properties().group(ItemGroup_Japanese)),"leek_seed");
 
     // Food
-    public static final Item RADISH_SPROUT = register(new BlockItem(JPBlocks.RADISH_SPROUT_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "radish_sprout");
+    public static final Item RADISH_SPROUT = register(new FoodItem(1, 0.5f), "radish_sprout");
     public static final Item RICE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "rice");
-    public static final Item LEEK = register(new BlockItem(JPBlocks.LEEK_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "leek");
+    public static final Item LEEK = register(new FoodItem(1, 0.5f), "leek");
     public static final Item BOILED_SOY_BEANS = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "boiled_soy_beans");
     public static final Item MISO_SOUP = register(new MisoSoupItem(3, 2.5f), "miso_soup");
     public static final Item OMELET = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(2.5f).build())), "omelet");
@@ -62,6 +64,7 @@ public class JPItems {
     public static final Item SKEWERED_CHICKEN = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).effect(new EffectInstance(Effects.HUNGER, 100, 1), 0.3f).build())), "skewered_chicken");
     public static final Item YAKITORI = register(new FoodItem(3, 2.0f), "yakitori");
     public static final Item SQUID_RING = register(new FoodItem(3, 2.0f), "squid_ring");
+    public static final Item SURUME = register(new FoodItem(3, 2.0f), "surume");
     public static final Item SAKE = register(new SakeItem(2, 1.0f), "sake");
     public static final Item TEMPURA_SHRIMP = register(new FoodItem(3, 2.5f), "tempura_shrimp");
     public static final Item FUGU_SASHIMI = register(new FoodItem(4, 4.0f), "fugu_sashimi");
