@@ -9,9 +9,9 @@ modId="japanese_food_mod"
 # The version number of the mod
 version="1.0.0"
 # A display name for the mod
-displayName="Japanese Food Mod"
+#displayName="Japanese Food Mod"
 # A URL for the mod
-displayURL="" #optional
+#displayURL="" #optional
 # A file name (in the root of the mod JAR9 containing a logo for display
 logoFile="" #optional
 # A text field displayed in the mod UI
