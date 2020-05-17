@@ -19,9 +19,9 @@ public class JPRecipeTypes {
     @SubscribeEvent
     public static void registryRecipes(RegistryEvent.Register<IRecipeSerializer<?>> event){
         event.getRegistry().registerAll(
-                setup(new MicroScopeRecipe.Serializer(), "identifying"),
-                setup(new WoodenBucketRecipe.Serializer(), "fermentation"),
-                setup(new PresserRecipe.Serializer(), "pressing")
+                setup(MicroScopeRecipe.SERIALIZER, "identifying"),
+                setup(WoodenBucketRecipe.SERIALIZER, "fermentation"),
+                setup(PresserRecipe.SERIALIZER, "pressing")
         );
     }
 
