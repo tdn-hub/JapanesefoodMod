@@ -67,9 +67,9 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
         }
     };
 
-    private final LazyOptional<ItemStackHandler> inventoryCapabilityExternal = LazyOptional.of(() -> this.inventory);
-    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalUpAndSides = LazyOptional.of(() -> new RangedWrapper(this.inventory, INPUT_SLOT, INPUT_SLOT + 1));
-    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalDown = LazyOptional.of(() -> new RangedWrapper(this.inventory, OUTPUT_SLOT, OUTPUT_SLOT + 1));
+//    private final LazyOptional<ItemStackHandler> inventoryCapabilityExternal = LazyOptional.of(() -> this.inventory);
+//    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalUpAndSides = LazyOptional.of(() -> new RangedWrapper(this.inventory, INPUT_SLOT, INPUT_SLOT + 1));
+//    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalDown = LazyOptional.of(() -> new RangedWrapper(this.inventory, OUTPUT_SLOT, OUTPUT_SLOT + 1));
 
     public short pressedTimeLeft = -1;
     public short maxPressedTime = -1;
@@ -178,27 +178,27 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
         return getRecipe(input).map(PresserRecipe::getCookTime).orElse(200).shortValue();
     }
 
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
-            return inventoryCapabilityExternal.cast();
-        }
-
-        switch (Objects.requireNonNull(side)){
-
-            case DOWN:
-                return inventoryCapabilityExternalDown.cast();
-            case UP:
-            case NORTH:
-            case SOUTH:
-            case WEST:
-            case EAST:
-                return inventoryCapabilityExternalUpAndSides.cast();
-        }
-
-        return super.getCapability(cap, side);
-    }
+//    @Nonnull
+//    @Override
+//    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+//        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
+//            return inventoryCapabilityExternal.cast();
+//        }
+//
+//        switch (Objects.requireNonNull(side)){
+//
+//            case DOWN:
+//                return inventoryCapabilityExternalDown.cast();
+//            case UP:
+//            case NORTH:
+//            case SOUTH:
+//            case WEST:
+//            case EAST:
+//                return inventoryCapabilityExternalUpAndSides.cast();
+//        }
+//
+//        return super.getCapability(cap, side);
+//    }
 
     @Override
     public void read(CompoundNBT compound) {
@@ -225,11 +225,11 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
         return this.write(new CompoundNBT());
     }
 
-    @Override
-    public void remove() {
-        super.remove();
-        inventoryCapabilityExternal.invalidate();
-    }
+//    @Override
+//    public void remove() {
+//        super.remove();
+//        inventoryCapabilityExternal.invalidate();
+//    }
 
     @Nonnull
     @Override
