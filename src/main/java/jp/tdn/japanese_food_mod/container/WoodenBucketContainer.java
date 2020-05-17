@@ -27,7 +27,7 @@ public class WoodenBucketContainer extends Container {
     public WoodenBucketContainer(final int windowId, final PlayerInventory playerInventory, final WoodenBucketTileEntity tileEntity){
         super(JPContainerTypes.WOODEN_BUCKET, windowId);
         this.tileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
+        this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
 
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.fermentationTimeLeft, v -> tileEntity.fermentationTimeLeft = (short)v));
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxFermentationTime, v -> tileEntity.maxFermentationTime = (short)v));

@@ -27,7 +27,7 @@ public class MicroScopeContainer extends Container {
     public MicroScopeContainer(final int windowId, final PlayerInventory playerInventory, final MicroScopeTileEntity tileEntity){
         super(JPContainerTypes.MICROSCOPE, windowId);
         this.tileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
+        this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
 
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.identifiedTimeLeft, v -> tileEntity.identifiedTimeLeft = (short)v));
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxIdentifiedTime, v -> tileEntity.maxIdentifiedTime = (short)v));
@@ -60,6 +60,7 @@ public class MicroScopeContainer extends Container {
         throw new IllegalStateException("Tile entity is not correct" + tileAtPos);
     }
 
+    @Nonnull
     @Override
     public ItemStack transferStackInSlot(PlayerEntity player, int index) {
         ItemStack returnStack = ItemStack.EMPTY;

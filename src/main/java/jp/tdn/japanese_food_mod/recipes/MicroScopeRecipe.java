@@ -13,10 +13,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class MicroScopeRecipe implements IRecipe<IInventory> {
-    public static final IRecipeSerializer SERIALIZER = new ShapedRecipe.Serializer();
+    public static final Serializer SERIALIZER = new Serializer();
     public static final IRecipeType<MicroScopeRecipe> RECIPE_TYPE = new IRecipeType<MicroScopeRecipe>() {
     };
     protected final ResourceLocation id;
@@ -29,12 +30,13 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
         this.id = idIn;
     }
 
-    public boolean matches(IInventory inventory, World worldIn){
+    public boolean matches(IInventory inventory, @Nonnull World worldIn){
         return this.ingredient.test(inventory.getStackInSlot(0));
     }
 
+    @Nonnull
     @Override
-    public ItemStack getCraftingResult(IInventory inventory) {
+    public ItemStack getCraftingResult(@Nonnull IInventory inventory) {
         return this.result.copy();
     }
 
@@ -42,6 +44,7 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
         return true;
     }
 
+    @Nonnull
     public NonNullList<Ingredient> getIngredients(){
         NonNullList<Ingredient> nonNullList = NonNullList.create();
         nonNullList.add(this.ingredient);
@@ -52,6 +55,7 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
         return this.experience;
     }
 
+    @Nonnull
     public ItemStack getRecipeOutput(){
         return this.result;
     }
@@ -60,23 +64,27 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
         return cookTime;
     }
 
+    @Nonnull
     public ResourceLocation getId(){
         return id;
     }
 
+    @Nonnull
     @Override
     public IRecipeSerializer<?> getSerializer() {
         return SERIALIZER;
     }
 
+    @Nonnull
     public IRecipeType<?> getType(){
         return RECIPE_TYPE;
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<MicroScopeRecipe>{
 
+        @Nonnull
         @Override
-        public MicroScopeRecipe read(ResourceLocation recipeId, JsonObject json) {
+        public MicroScopeRecipe read(@Nonnull ResourceLocation recipeId, JsonObject json) {
             MicroScopeRecipe recipe = new MicroScopeRecipe(recipeId);
             if(!json.has("result")){
                 throw new JsonSyntaxException("Missing result, expected to find a string or object");
@@ -94,7 +102,7 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
 
         @Nullable
         @Override
-        public MicroScopeRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public MicroScopeRecipe read(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
             MicroScopeRecipe recipe = new MicroScopeRecipe(recipeId);
             recipe.cookTime = buffer.readVarInt();
             recipe.result = buffer.readItemStack();
@@ -108,7 +116,6 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
             buffer.writeItemStack(recipe.result);
             buffer.writeFloat(recipe.experience);
             recipe.ingredient.write(buffer);
-            return;
         }
     }
 }
