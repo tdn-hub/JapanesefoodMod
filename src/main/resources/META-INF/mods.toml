@@ -7,7 +7,7 @@ loaderVersion="[28,)"
 # The moded of the mod
 modId="japanese_food_mod"
 # The version number of the mod
-version="${file.version}"
+version="${file.jarVersion}"
 # A display name for the mod
 #displayName="Japanese Food Mod"
 # A URL for the mod
