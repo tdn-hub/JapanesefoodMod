@@ -3,7 +3,6 @@ package jp.tdn.japanese_food_mod.client.renders.tileentity;
 import com.mojang.blaze3d.platform.GlStateManager;
 import jp.tdn.japanese_food_mod.blocks.MicroScopeBlock;
 import jp.tdn.japanese_food_mod.blocks.tileentity.MicroScopeTileEntity;
-import jp.tdn.japanese_food_mod.init.JPBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;

@@ -6,14 +6,13 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
 
 public class EelEntity extends AbstractFishEntity {
 
     public EelEntity(EntityType<? extends AbstractFishEntity> type, World worldIn){
-        super((EntityType<? extends AbstractFishEntity>) JPEntities.EEL, worldIn);
+        super(JPEntities.EEL, worldIn);
     }
 
     @Override
@@ -23,7 +22,7 @@ public class EelEntity extends AbstractFishEntity {
 
     @Override
     protected SoundEvent getFlopSound() {
-        return null;
+        return SoundEvents.ENTITY_COD_FLOP;
     }
 
     @Override

@@ -3,16 +3,16 @@ package jp.tdn.japanese_food_mod.entities;
 import jp.tdn.japanese_food_mod.init.JPEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.passive.fish.AbstractGroupFishEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
 public class TunaEntity extends AbstractGroupFishEntity {
 
     public TunaEntity(EntityType<? extends AbstractGroupFishEntity> type, World worldIn){
-        super((EntityType<? extends AbstractGroupFishEntity>) JPEntities.TUNA, worldIn);
+        super(JPEntities.TUNA, worldIn);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class TunaEntity extends AbstractGroupFishEntity {
 
     @Override
     protected SoundEvent getFlopSound() {
-        return null;
+        return SoundEvents.ENTITY_COD_FLOP;
     }
 
     @Override
