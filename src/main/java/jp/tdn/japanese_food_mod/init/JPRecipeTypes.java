@@ -2,6 +2,7 @@ package jp.tdn.japanese_food_mod.init;
 
 import com.google.common.base.Preconditions;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
+import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.recipes.MicroScopeRecipe;
 import jp.tdn.japanese_food_mod.recipes.PresserRecipe;
 import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
@@ -11,31 +12,20 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.ObjectHolder;
 
 import javax.annotation.Nonnull;
 
 @Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JPRecipeTypes {
+    //public static final IRecipeSerializer<MicroScopeRecipe> MICRO_SCOPE_RECIPE = JapaneseFoodUtil._null();
+
     @SubscribeEvent
     public static void registryRecipes(RegistryEvent.Register<IRecipeSerializer<?>> event){
         event.getRegistry().registerAll(
-                setup(MicroScopeRecipe.SERIALIZER, "identifying"),
-                setup(WoodenBucketRecipe.SERIALIZER, "fermentation"),
-                setup(PresserRecipe.SERIALIZER, "pressing")
+                MicroScopeRecipe.SERIALIZER,
+                WoodenBucketRecipe.SERIALIZER,
+                PresserRecipe.SERIALIZER
         );
-    }
-
-    @Nonnull
-    private static <T extends IForgeRegistryEntry<T>> T setup(@Nonnull final T entry, @Nonnull final String name){
-        Preconditions.checkNotNull(name, "Name to assign to entry cannot be null");
-        return setup(entry, new ResourceLocation(JapaneseFoodMod.MOD_ID, name));
-    }
-
-    @Nonnull
-    private static <T extends IForgeRegistryEntry<T>> T setup(@Nonnull final T entry, @Nonnull final ResourceLocation registryName) {
-        Preconditions.checkNotNull(entry, "Entry cannot be null!");
-        Preconditions.checkNotNull(registryName, "Registry name to assign to entry cannot be null!");
-        entry.setRegistryName(registryName);
-        return entry;
     }
 }

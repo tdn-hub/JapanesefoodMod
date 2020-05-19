@@ -1,9 +1,8 @@
 package jp.tdn.japanese_food_mod.recipes;
 
 import com.google.common.collect.Lists;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
+import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
@@ -12,6 +11,7 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -90,33 +90,30 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<WoodenBucketRecipe>{
+        Serializer(){
+            this.setRegistryName(new ResourceLocation(JapaneseFoodMod.MOD_ID, "fermentation"));
+        }
 
         private static NonNullList<Ingredient> readIngredients(JsonArray ingredients){
             NonNullList<Ingredient> rec = NonNullList.create();
 
-            for(int i = 0; i < ingredients.size(); ++i){
-                Ingredient ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(ingredients.get(i), "ingredient"));
-                if(!ingredient.hasNoMatchingItems()){
-                    rec.add(ingredient);
-                }
+            for(final JsonElement element: ingredients) {
+                rec.add(CraftingHelper.getIngredient(element));
             }
 
+            if(rec.isEmpty())
+                throw new JsonParseException("No ingredients for shapeless recipe");
             return rec;
         }
 
         @Override
         @Nonnull
-        public WoodenBucketRecipe read(@Nonnull ResourceLocation recipeId, JsonObject json) {
+        public WoodenBucketRecipe read(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
             WoodenBucketRecipe recipe = new WoodenBucketRecipe(recipeId);
-            if(!json.has("result")){
-                throw new JsonSyntaxException("Missing result, expected to find a string or object");
-            }else {
-                if(json.get("result").isJsonObject()) {
-                    recipe.result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-                }
-                recipe.cookTime = JSONUtils.getInt(json, "process_time");
-                recipe.ingredients = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
-            }
+
+            recipe.result = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "result"), true);
+            recipe.cookTime = JSONUtils.getInt(json, "process_time");
+            recipe.ingredients = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
 
             return recipe;
         }
@@ -125,7 +122,7 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
         @Override
         public WoodenBucketRecipe read(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
             WoodenBucketRecipe recipe = new WoodenBucketRecipe(recipeId);
-            int index = buffer.readVarInt();
+            final int index = buffer.readVarInt();
             NonNullList<Ingredient> nonnulllist = NonNullList.withSize(index, Ingredient.EMPTY);
             for(int j = 0; j < nonnulllist.size(); ++j) {
                 nonnulllist.set(j, Ingredient.read(buffer));
@@ -137,6 +134,7 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
 
         @Override
         public void write(@Nonnull PacketBuffer buffer, WoodenBucketRecipe recipe) {
+            buffer.writeVarInt(recipe.ingredients.size());
             for (Ingredient ingredient : recipe.ingredients) {
                 ingredient.write(buffer);
             }

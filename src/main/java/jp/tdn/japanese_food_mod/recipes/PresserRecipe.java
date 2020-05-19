@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.recipes;
 
 import com.google.gson.JsonObject;
+import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -82,6 +83,9 @@ public class PresserRecipe implements IRecipe<IInventory> {
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<PresserRecipe>{
+        Serializer(){
+            this.setRegistryName(new ResourceLocation(JapaneseFoodMod.MOD_ID, "pressing"));
+        }
 
         @Override
         @Nonnull

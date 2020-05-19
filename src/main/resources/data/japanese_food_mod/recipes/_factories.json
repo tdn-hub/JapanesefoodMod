@@ -1,7 +1,0 @@
-{
-  "recipes": {
-    "identifying": "japanese_food_mod.recipes.MicroScopeRecipe.Serializer",
-    "fermentation": "japanese_food_mod.recipes.WoodenBucketRecipe.Serializer",
-    "pressing": "japanese_food_mod.recipes.PresserRecipe.Serialize"
-  }
-}
