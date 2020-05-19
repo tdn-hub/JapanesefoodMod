@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import com.google.common.collect.Lists;
+import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.WoodenBucketBlock;
 import jp.tdn.japanese_food_mod.container.WoodenBucketContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
@@ -30,6 +31,7 @@ import net.minecraftforge.items.wrapper.RangedWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -68,9 +70,9 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         }
     };
 
-//    private final LazyOptional<ItemStackHandler> inventoryCapabilityExternal = LazyOptional.of(() -> this.inventory);
-//    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalUpAndSides = LazyOptional.of(() -> new RangedWrapper(this.inventory, INPUT_SLOT[0], INPUT_SLOT[5] + 1));
-//    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalDown = LazyOptional.of(() -> new RangedWrapper(this.inventory, OUTPUT_SLOT, OUTPUT_SLOT + 1));
+    private final LazyOptional<ItemStackHandler> inventoryCapabilityExternal = LazyOptional.of(() -> this.inventory);
+    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalUpAndSides = LazyOptional.of(() -> new RangedWrapper(this.inventory, INPUT_SLOT[0], INPUT_SLOT[5] + 1));
+    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalDown = LazyOptional.of(() -> new RangedWrapper(this.inventory, OUTPUT_SLOT, OUTPUT_SLOT + 1));
 
     public short fermentationTimeLeft = -1;
     public short maxFermentationTime = -1;
@@ -132,14 +134,14 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
                 inputs.add(stack);
             }
         }
-        final ItemStack result = getResult(inputs.toArray(new ItemStack[inputs.size()])).orElse(ItemStack.EMPTY);
+        final ItemStack result = getResult(inputs.toArray(new ItemStack[0])).orElse(ItemStack.EMPTY);
 
-        if(!result.isEmpty() && isInput(inputs.toArray(new ItemStack[inputs.size()]))){
+        if(!result.isEmpty() && isInput(inputs.toArray(new ItemStack[0]))){
             final boolean canInsertResultIntoOutPut = inventory.insertItem(OUTPUT_SLOT, result, true).isEmpty();
             if(canInsertResultIntoOutPut){
                 isActive = true;
                 if(fermentationTimeLeft == -1){
-                    fermentationTimeLeft = maxFermentationTime = getFermentationTime(inputs.toArray(new ItemStack[inputs.size()]));
+                    fermentationTimeLeft = maxFermentationTime = getFermentationTime(inputs.toArray(new ItemStack[0]));
                 }else{
                     --fermentationTimeLeft;
                     if(fermentationTimeLeft == 0){
@@ -182,28 +184,28 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     private short getFermentationTime(final ItemStack[] input){
         return getRecipe(input).map(WoodenBucketRecipe::getCookTime).orElse(200).shortValue();
     }
-    
-//    @Nonnull
-//    @Override
-//    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-//        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
-//            return inventoryCapabilityExternal.cast();
-//        }
-//
-//        switch (Objects.requireNonNull(side)){
-//
-//            case DOWN:
-//                return inventoryCapabilityExternalDown.cast();
-//            case UP:
-//            case NORTH:
-//            case SOUTH:
-//            case WEST:
-//            case EAST:
-//                return inventoryCapabilityExternalUpAndSides.cast();
-//        }
-//
-//        return super.getCapability(cap, side);
-//    }
+
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
+            return inventoryCapabilityExternal.cast();
+        }
+
+        switch (Objects.requireNonNull(side)){
+
+            case DOWN:
+                return inventoryCapabilityExternalDown.cast();
+            case UP:
+            case NORTH:
+            case SOUTH:
+            case WEST:
+            case EAST:
+                return inventoryCapabilityExternalUpAndSides.cast();
+        }
+
+        return super.getCapability(cap, side);
+    }
 
     @Override
     public void read(CompoundNBT compound) {
@@ -228,11 +230,11 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         return this.write(new CompoundNBT());
     }
 
-//    @Override
-//    public void remove() {
-//        super.remove();
-//        inventoryCapabilityExternal.invalidate();
-//    }
+    @Override
+    public void remove() {
+        super.remove();
+        inventoryCapabilityExternal.invalidate();
+    }
 
     @Nonnull
     @Override
