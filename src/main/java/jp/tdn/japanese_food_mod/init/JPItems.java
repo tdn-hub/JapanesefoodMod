@@ -27,22 +27,22 @@ public class JPItems {
 
     // Misc
     public static final Item TYAWAN = register(new SimpleItem(), "tyawan");
-    public static final Item COOKING_OIL = register(new SimpleItem(), "cooking_oil");
+    public static final Item CLAY_POT_BEFORE_HEATING = register(new SimpleItem(), "clay_pot_before_heating");
+    public static final Item CLAY_POT = register(new SimpleItem(), "clay_pot");
     public static final Item BREAD_CRUMBS = register(new SimpleItem(), "bread_crumbs");
     public static final Item WHEAT_FLOUR = register(new SimpleItem(), "wheat_flour");
     public static final Item POTATO_STARCH = register(new SimpleItem(), "potato_starch");
     public static final Item SALT = register(new SimpleItem(), "salt");
     public static final Item ROCK_SALT = register(new SimpleItem(), "rock_salt");
-    public static final Item YEAST_CELL = register(new SimpleItem(), "yeast_cell");
+    public static final Item COOKING_OIL = register(new SimpleItem(), "cooking_oil");
     public static final Item MISO = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "miso");
     public static final Item WAKAME = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).fastToEat().build())), "wakame");
     public static final Item SOY_SAUCE = register(new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(0.0f).effect(new EffectInstance(Effects.POISON, 100, 2), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 100, 1), 1.0f).build())), "soy_sauce");
-    public static final Item BATTER = register(new SimpleItem(), "batter");
-    public static final Item CLAY_POT_BEFORE_HEATING = register(new SimpleItem(), "clay_pot_before_heating");
-    public static final Item CLAY_POT = register(new SimpleItem(), "clay_pot");
-    public static final Item TARE_SAUCE = register(new SimpleItem(), "tare_sauce");
-    public static final Item ACETIC_ACID_BACTERIA = register(new SimpleItem(), "acetic_acid_bacteria");
     public static final Item VINEGAR = register(new DrinkItem(1, 0f), "vinegar");
+    public static final Item BATTER = register(new SimpleItem(), "batter");
+    public static final Item TARE_SAUCE = register(new SimpleItem(), "tare_sauce");
+    public static final Item YEAST_CELL = register(new SimpleItem(), "yeast_cell");
+    public static final Item ACETIC_ACID_BACTERIA = register(new SimpleItem(), "acetic_acid_bacteria");
 
     //Seed
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
@@ -55,6 +55,7 @@ public class JPItems {
     public static final Item RICE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "rice");
     public static final Item LEEK = register(new FoodItem(1, 0.5f), "leek");
     public static final Item BOILED_SOY_BEANS = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "boiled_soy_beans");
+    public static final Item BOILED_WAKAME = register(new FoodItem(2, 1.0f), "boiled_wakame");
     public static final Item MISO_SOUP = register(new MisoSoupItem(3, 2.5f), "miso_soup");
     public static final Item OMELET = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(2.5f).build())), "omelet");
     public static final Item ONIGIRI = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(3).saturation(4.0f).build())), "onigiri");
