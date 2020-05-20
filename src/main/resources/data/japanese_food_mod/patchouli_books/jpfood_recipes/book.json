@@ -1,0 +1,9 @@
+{
+  "name": "JPFOOD RECIPES",
+  "landing_text": "jpfood.landing",
+  "version": "book_version",
+  "book_texture": "patchouli:textures/gui/book_red.png",
+  "creative_tab": "japanese_food_mod",
+  "model": "patchouli:book_red",
+  "i18n": true
+}

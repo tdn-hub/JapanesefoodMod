@@ -24,16 +24,15 @@ public class CrabEntity extends WaterMobEntity {
     }
 
     protected void updateAir(int p_209207_1_) {
-        if (this.isAlive() && !this.isInWaterOrBubbleColumn()) {
-            this.setAir(p_209207_1_ - 1);
-            if (this.getAir() == -20) {
-                this.setAir(0);
-                this.attackEntityFrom(DamageSource.DROWN, 2.0F);
-            }
-        } else {
-            this.setAir(20000);
-        }
-
+//        if (this.isAlive() && !this.isInWaterOrBubbleColumn()) {
+//            this.setAir(p_209207_1_ - 1);
+//            if (this.getAir() == -20) {
+//                this.setAir(0);
+//                this.attackEntityFrom(DamageSource.DROWN, 2.0F);
+//            }
+//        } else {
+//            this.setAir(20000);
+//        }
     }
 
     @Override

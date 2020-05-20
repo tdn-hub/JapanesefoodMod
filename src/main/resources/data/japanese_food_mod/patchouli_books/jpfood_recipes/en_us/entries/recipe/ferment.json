@@ -1,0 +1,46 @@
+{
+  "name": "jpfood.ferment.name",
+  "category": "japanese_food_mod:recipe",
+  "icon": "japanese_food_mod:wooden_bucket",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.page.ferment0.title",
+      "text": "jpfood.page.ferment0"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:wooden_bucket",
+      "title": "jpfood.page.ferment1.title"
+    },
+    {
+      "type": "ferment",
+      "text": "jpfood.page.ferment2",
+      "recipe": "japanese_food_mod:miso"
+    },
+    {
+      "type": "ferment",
+      "text": "jpfood.page.ferment3",
+      "recipe": "japanese_food_mod:unrefined_sake"
+    },
+    {
+      "type": "ferment",
+      "text": "jpfood.page.ferment4",
+      "recipe": "japanese_food_mod:unrefined_soy_sauce"
+    },
+    {
+      "type": "ferment",
+      "text": "jpfood.page.ferment5",
+      "recipe": "japanese_food_mod:vinegar"
+    },
+    {
+      "type": "text",
+      "text": "jpfood.page.ferment6"
+    },
+    {
+      "type": "image",
+      "image": "japanese_food_mod:textures/gui/ferment_page_7.png",
+      "title": "jpfood.page.ferment7.title"
+    }
+  ]
+}

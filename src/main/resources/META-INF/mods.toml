@@ -18,8 +18,7 @@ version="${file.jarVersion}"
 authors="TDN"
 # The description text for the mod (multi line)
 description='''
-    Add recipes and items for Japanese food.
-'''
+    Add recipes and items for Japanese food.'''
 # A dependency - use the . to indicate dependency for a specific modid
 [[dependencies.jp.tdn.japanese_food_mod]] #optional
     # the modid of the dependency
@@ -32,10 +31,17 @@ description='''
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
+
 # Here's another dependency
 [[dependencies.jp.tdn.japanese_food_mod]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.14.4]"
     ordering="NONE"
+    side="BOTH"
+
+[[dependencies.jp.tdn.japanese_food_mod]]
+    modId="patchouli"
+    mandatory=true
+    versionRange="[1.14.4-1.1-25,)"
     side="BOTH"

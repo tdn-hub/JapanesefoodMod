@@ -1,0 +1,25 @@
+{
+  "processor": "jp.tdn.japanese_food_mod.client.patchouli.processor.MicroScopeRecipeProcessor",
+  "components": [
+    {
+      "type": "header",
+      "text": "#header",
+      "x": -1,
+      "y": -1
+    },
+    {
+      "type": "item",
+      "item": "#input",
+      "framed": "true",
+      "x": 5,
+      "y": 55
+    },
+    {
+      "type": "item",
+      "item": "#output",
+      "framed": "true",
+      "x": 41,
+      "y": 55
+    }
+  ]
+}

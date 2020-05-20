@@ -13,7 +13,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.14.4-1.0.5'
+def mc_version = "1.14.4"
+def mod_version = "1.0.6"
+version = "${mc_version}-${mod_version}"
 group = 'jp.tdn.japanese_food_mod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'japanese_food_mod'
 
@@ -85,6 +87,13 @@ minecraft {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven{
+        url = "https://maven.blamejared.com"
+    }
+}
+
 dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
@@ -104,6 +113,8 @@ dependencies {
 
     // These dependencies get remapped to your current MCP mappings
     // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+
+    compile fg.deobf("vazkii.patchouli:Patchouli:1.14.4-1.1-25.135"){ transitive = false}
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
@@ -129,6 +140,13 @@ jar {
     }
 }
 
+processResources{
+    filesMatching('data/japanese_food_mod/pathouli_books/jpfood_recipes/book.json'){
+        filter{
+            it.replaceAll("book_version", mod_version)
+        }
+    }
+}
 // Example configuration to allow publishing using the maven-publish task
 // we define a custom artifact that is sourced from the reobfJar output task
 // and then declare that to be published

@@ -1,0 +1,25 @@
+{
+  "name": "jpfood.identify.name",
+  "category": "japanese_food_mod:recipe",
+  "icon": "japanese_food_mod:microscope",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.page.identify0.title",
+      "text": "jpfood.page.identify0"
+    },
+    {
+      "type": "crafting",
+      "title": "jpfood.page.identify1.title",
+      "recipe": "japanese_food_mod:microscope"
+    },
+    {
+      "type": "identify",
+      "recipe": "japanese_food_mod:acetic_acid_bacteria"
+    },
+    {
+      "type": "identify",
+      "recipe": "japanese_food_mod:yeast_cell"
+    }
+  ]
+}

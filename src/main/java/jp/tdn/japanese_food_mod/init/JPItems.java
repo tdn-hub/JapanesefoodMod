@@ -20,6 +20,9 @@ public class JPItems {
     public static final ItemGroup ItemGroup_Japanese = new JapaneseFoodItemGroup();
     public static final List<Item> itemlist = Lists.newArrayList();
 
+    // Book
+    //public static final Item JPFOOD_RECIPES = register(new )
+
     //Tool
     public static final Item POT = register(new CookWareItem(), "pot");
     public static final Item GRATER = register(new CookWareItem(), "grater");
