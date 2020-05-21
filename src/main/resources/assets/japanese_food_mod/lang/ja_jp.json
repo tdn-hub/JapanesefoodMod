@@ -102,11 +102,12 @@
   "jpfood.page.ferment3": "酒の諸味の材料:$(br)麹菌、水、米",
   "jpfood.page.ferment4": "醤油の諸味の材料:$(br)麹菌、水、塩、水煮大豆、小麦",
   "jpfood.page.ferment5": "酢の材料:$(br)酢酸菌、日本酒",
+  "jpfood.page.ferment6.title": "注意点",
   "jpfood.page.ferment6": "  諸味から酒や醤油を取り出すには、何か重い物（石など）を上に置いて圧縮し、右クリックする必要があります。",
   "jpfood.page.ferment7.title": "圧縮の例",
 
   "jpfood.identify.name": "菌の特定",
-  "jpfood.page.identify.title": "$(l)%1$s",
+  "jpfood.page.identify.title": "%1$s",
   "jpfood.page.identify0.title": "必要なブロック",
   "jpfood.page.identify0": "  発酵する際に必要な麹菌や酢酸菌を見つけるには、顕微鏡を作る必要があります。$(br)  レシピは次の通りです。",
   "jpfood.page.identify1.title": "顕微鏡"

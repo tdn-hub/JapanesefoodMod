@@ -8,17 +8,27 @@
       "y": -1
     },
     {
+      "type": "image",
+      "image": "japanese_food_mod:textures/gui/entries/identify.png",
+      "width": 23,
+      "height": 15,
+      "texture_width": 32,
+      "texture_height": 16,
+      "x": 45,
+      "y": 55
+    },
+    {
       "type": "item",
       "item": "#input",
       "framed": "true",
-      "x": 5,
+      "x": 10,
       "y": 55
     },
     {
       "type": "item",
       "item": "#output",
       "framed": "true",
-      "x": 95,
+      "x": 90,
       "y": 55
     }
   ]

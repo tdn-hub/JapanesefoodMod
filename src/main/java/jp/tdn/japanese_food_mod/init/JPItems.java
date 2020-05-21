@@ -21,7 +21,7 @@ public class JPItems {
     public static final List<Item> itemlist = Lists.newArrayList();
 
     // Book
-    //public static final Item JPFOOD_RECIPES = register(new )
+    //public static final Item JPFOOD_RECIPES = register(new RecipeBookItem(new Item.Properties().group(ItemGroup_Japanese)), "jpfood_recipes");
 
     //Tool
     public static final Item POT = register(new CookWareItem(), "pot");

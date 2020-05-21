@@ -143,7 +143,7 @@ jar {
 processResources{
     filesMatching('data/japanese_food_mod/pathouli_books/jpfood_recipes/book.json'){
         filter{
-            it.replaceAll("book_version", mod_version)
+            it.replaceAll("book_version", "${mod_version}")
         }
     }
 }
