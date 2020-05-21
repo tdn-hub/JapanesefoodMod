@@ -24,7 +24,7 @@ public class MicroScopeRecipeProcessor implements IComponentProcessor {
         if(recipe == null){
             return null;
         }else if(key.equals("heading")){
-            return I18n.format("jpfood.page.identify.title", recipe.getRecipeOutput().getTranslationKey());
+            return I18n.format("jpfood.page.identify.title", recipe.getRecipeOutput().getDisplayName());
         }else if(key.equals("output")) {
             return PatchouliAPI.instance.serializeItemStack(recipe.getRecipeOutput());
         }else if(key.startsWith("input")) {

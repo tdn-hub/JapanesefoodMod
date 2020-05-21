@@ -94,9 +94,9 @@
   "jpfood.category.recipe.description": "  右の項目から各レシピを閲覧できます。",
 
   "jpfood.ferment.name": "発酵",
-  "jpfood.page.ferment.title": "$(l)%1$s",
+  "jpfood.page.ferment.title": "%1$s",
   "jpfood.page.ferment0.title": "必要なブロック",
-  "jpfood.page.ferment0": "  発酵を行うには、木桶が必要です。木桶のレシピは次のようになっています。$(br)  この中に正しい材料を入れると自動的に発行が始まります。",
+  "jpfood.page.ferment0": "  発酵を行うには、木桶が必要です。木桶のレシピは次のようになっています。$(br)  この中に正しい材料を入れると自動的に発酵が始まります。",
   "jpfood.page.ferment1.title": "木桶",
   "jpfood.page.ferment2": "みその材料:$(br)麹菌、水煮大豆、塩",
   "jpfood.page.ferment3": "酒の諸味の材料:$(br)麹菌、水、米",
@@ -105,7 +105,7 @@
   "jpfood.page.ferment6": "  諸味から酒や醤油を取り出すには、何か重い物（石など）を上に置いて圧縮し、右クリックする必要があります。",
   "jpfood.page.ferment7.title": "圧縮の例",
 
-  "jpfood.identify.name": "菌を見つける",
+  "jpfood.identify.name": "菌の特定",
   "jpfood.page.identify.title": "$(l)%1$s",
   "jpfood.page.identify0.title": "必要なブロック",
   "jpfood.page.identify0": "  発酵する際に必要な麹菌や酢酸菌を見つけるには、顕微鏡を作る必要があります。$(br)  レシピは次の通りです。",

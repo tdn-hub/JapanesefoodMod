@@ -71,10 +71,10 @@
   "entity.japanese_food_mod.crab": "Crab",
   "entity.japanese_food_mod.tuna": "Tuna",
 
-  "gui.japanese_food_mod.identifiedTimeProgress": "Progress: $s",
-  "gui.japanese_food_mod.fermentationTimeProgress": "Progress: $s",
-  "gui.japanese_food_mod.pressingTimeProgress": "Progress: $s",
-  "gui.japanese_food_mod.oilRemaining": "Oil: %1$s/%1$s",
+  "gui.japanese_food_mod.identifiedTimeProgress": "Progress: %1$s%2$s",
+  "gui.japanese_food_mod.fermentationTimeProgress": "Progress: %1$s%2$s",
+  "gui.japanese_food_mod.pressingTimeProgress": "Progress: %1$s%2$s",
+  "gui.japanese_food_mod.oilRemaining": "Oil: %1$s/%2$s",
 
   "advancements.japanese_food_mod.root.title": "Japanese food",
   "advancements.japanese_food_mod.root.description": "Get the rice.",
@@ -93,7 +93,7 @@
   "jpfood.category.recipe.description": " You can view each recipe from the items on the right.",
 
   "jpfood.ferment.name": "Fermentation",
-  "jpfood.page.ferment.title": "$(l)%1$s",
+  "jpfood.page.ferment.title": "$(1)%1$s",
   "jpfood.page.ferment0.title": "Necessary blocks",
   "jpfood.page.ferment0": " A wooden bucket is required to perform the fermentation. The recipe for the wooden bucket looks like this.",
   "jpfood.page.ferment1.title": "Wooden bucket",
@@ -105,7 +105,7 @@
   "jpfood.page.ferment7.title": "Examples of compression",
 
   "jpfood.identify.name": "Identify",
-  "jpfood.page.identify.title": "$(l)%1$s",
+  "jpfood.page.identify.title": "%1$s",
   "jpfood.page.identify0.title": "Necessary blocks",
   "jpfood.page.identify0": " In order to find the koji and acetic acid bacteria needed for fermentation, you need to build a microscope.$(br) Here's the recipe.",
   "jpfood.page.identify1.title": "Microscope"

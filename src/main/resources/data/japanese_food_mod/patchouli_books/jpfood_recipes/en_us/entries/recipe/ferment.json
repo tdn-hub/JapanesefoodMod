@@ -39,8 +39,9 @@
     },
     {
       "type": "image",
-      "image": "japanese_food_mod:textures/gui/ferment_page_7.png",
-      "title": "jpfood.page.ferment7.title"
+      "image": "japanese_food_mod:textures/gui/entries/ferment_page_7.png",
+      "title": "jpfood.page.ferment7.title",
+      "border": true
     }
   ]
 }
