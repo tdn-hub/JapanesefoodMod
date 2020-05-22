@@ -8,7 +8,7 @@
       "item": "japanese_food_mod:rice"
     },
     {
-      "item": "minecraft:water_bucket"
+      "tag": "forge:water"
     }
   ],
   "result": {

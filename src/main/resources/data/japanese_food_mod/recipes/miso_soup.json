@@ -11,7 +11,7 @@
       "item": "japanese_food_mod:pot"
     },
     {
-      "item": "minecraft:water_bucket"
+      "tag": "forge:water"
     },
     {
       "item": "japanese_food_mod:wakame"

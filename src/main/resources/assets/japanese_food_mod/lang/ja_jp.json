@@ -64,6 +64,9 @@
   "item.japanese_food_mod.surume": "スルメ",
   "item.japanese_food_mod.raw_negima": "生のねぎま",
   "item.japanese_food_mod.negima": "ねぎま",
+  "item.japanese_food_mod.boiled_wakame": "煮たワカメ",
+  "item.japanese_food_mod.cup": "コップ",
+  "item.japanese_food_mod.cup_with_water": "水の入ったコップ",
   "item.japanese_food_mod.eel_spawn_egg": "ウナギのスポーンエッグ",
   "item.japanese_food_mod.crab_spawn_egg": "カニのスポーンエッグ",
   "item.japanese_food_mod.tuna_spawn_egg": "マグロのスポーンエッグ",
@@ -88,27 +91,36 @@
   "advancements.japanese_food_mod.drink_soy_sauce.title": "致死量1L",
   "advancements.japanese_food_mod.drink_soy_sauce.description": "醤油の一気飲みはやめましょう",
 
-  "jpfood.landing": "  これは、日本食MODで追加されるレシピを記した本です。$(br)",
+  "jpfood.name": "和食レシピ集",
+  "jpfood.landing": "これは、日本食MODで追加されるレシピを記した本です。$(br)",
 
   "jpfood.category.recipe": "レシピ",
-  "jpfood.category.recipe.description": "  右の項目から各レシピを閲覧できます。",
+  "jpfood.category.recipe.description": "右の項目から各レシピを閲覧できます。",
 
   "jpfood.ferment.name": "発酵",
   "jpfood.page.ferment.title": "%1$s",
-  "jpfood.page.ferment0.title": "必要なブロック",
-  "jpfood.page.ferment0": "  発酵を行うには、木桶が必要です。木桶のレシピは次のようになっています。$(br)  この中に正しい材料を入れると自動的に発酵が始まります。",
+  "jpfood.page.ferment0.title": "発酵について",
+  "jpfood.page.ferment0": "発酵を行うには、木桶が必要です。木桶のレシピは次のようになっています。$(br)この中に正しい材料を入れると自動的に発酵が始まります。",
   "jpfood.page.ferment1.title": "木桶",
   "jpfood.page.ferment2": "みその材料:$(br)麹菌、水煮大豆、塩",
   "jpfood.page.ferment3": "酒の諸味の材料:$(br)麹菌、水、米",
   "jpfood.page.ferment4": "醤油の諸味の材料:$(br)麹菌、水、塩、水煮大豆、小麦",
   "jpfood.page.ferment5": "酢の材料:$(br)酢酸菌、日本酒",
   "jpfood.page.ferment6.title": "注意点",
-  "jpfood.page.ferment6": "  諸味から酒や醤油を取り出すには、何か重い物（石など）を上に置いて圧縮し、右クリックする必要があります。",
+  "jpfood.page.ferment6": "諸味から酒や醤油を取り出すには、何か重い物（石など）を上に置いて圧縮し、右クリックする必要があります。",
   "jpfood.page.ferment7.title": "圧縮の例",
 
-  "jpfood.identify.name": "菌の特定",
+  "jpfood.identify.name": "菌の発見",
   "jpfood.page.identify.title": "%1$s",
-  "jpfood.page.identify0.title": "必要なブロック",
-  "jpfood.page.identify0": "  発酵する際に必要な麹菌や酢酸菌を見つけるには、顕微鏡を作る必要があります。$(br)  レシピは次の通りです。",
-  "jpfood.page.identify1.title": "顕微鏡"
+  "jpfood.page.identify0.title": "菌の発見について",
+  "jpfood.page.identify0": "発酵する際に必要な麹菌や酢酸菌を見つけるには、   顕微鏡を作る必要があります。$(br)レシピは次の通りです。",
+  "jpfood.page.identify1.title": "顕微鏡",
+
+  "jpfood.food.name": "料理",
+  "jpfood.page.food0": "料理のレシピ一覧です。",
+
+  "jpfood.presser.name": "搾油",
+  "jpfood.page.presser0.title": "搾油について",
+  "jpfood.page.presser0": "搾油機を使うことで調理用の油を手に入れることができます。",
+  "jpfood.page.presser1": "$(o)大体の肉から搾れる"
 }

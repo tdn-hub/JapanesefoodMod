@@ -1,0 +1,21 @@
+{
+  "name": "jpfood.presser.name",
+  "category": "japanese_food_mod:recipe",
+  "icon": "japanese_food_mod:presser",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.page.presser0.title",
+      "text": "jpfood.page.presser0"
+    },
+    {
+      "type": "spotlight",
+      "item": "japanese_food_mod:cooking_oil",
+      "text": "jpfood.page.presser1"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:presser"
+    }
+  ]
+}

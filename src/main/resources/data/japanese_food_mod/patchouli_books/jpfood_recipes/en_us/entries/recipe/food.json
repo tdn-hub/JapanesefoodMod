@@ -1,0 +1,65 @@
+{
+  "name": "jpfood.food.name",
+  "category": "japanese_food_mod:recipe",
+  "icon": "japanese_food_mod:onigiri",
+  "pages": [
+    {
+      "type": "text",
+      "text": "jpfood.page.food0"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:batter",
+      "recipe2": "japanese_food_mod:boiled_egg"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:boiled_soy_beans",
+      "recipe2": "japanese_food_mod:boiled_wakame"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:fried_chicken",
+      "recipe2": "japanese_food_mod:fugu_sashimi"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:grated_daikon",
+      "recipe2": "japanese_food_mod:miso_soup"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:omelet",
+      "recipe2": "japanese_food_mod:onigiri"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:salmon_onigiri",
+      "recipe2": "japanese_food_mod:raw_negima"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:skewered_chicken",
+      "recipe2": "japanese_food_mod:squid_ring"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:surume",
+      "recipe2": "japanese_food_mod:tempura_shrimp"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:tuna_sashimi",
+      "recipe2": "japanese_food_mod:tuna_sushi"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:vinegared_rice"
+    },
+    {
+      "type": "smelting",
+      "recipe": "japanese_food_mod:yakitori",
+      "recipe2": "japanese_food_mod:negima"
+    }
+  ]
+}
