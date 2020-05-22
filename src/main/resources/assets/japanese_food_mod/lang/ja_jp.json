@@ -127,5 +127,10 @@
   "jpfood.presser.name": "搾油",
   "jpfood.page.presser0.title": "搾油について",
   "jpfood.page.presser0": "搾油機を使うことで調理用の油を手に入れることができます。",
-  "jpfood.page.presser1": "$(o)    大体の肉から搾れる"
+  "jpfood.page.presser1": "$(o)    大体の肉から搾れる",
+
+  "jpfood.misc.name": "その他",
+  "jpfood.page.misc0.title": "その他のレシピ",
+  "jpfood.page.misc0": "その他諸々のレシピ一覧です。"
+
 }

@@ -1,0 +1,46 @@
+{
+  "name": "jpfood.misc.name",
+  "category": "japanese_food_mod:recipe",
+  "icon": "japanese_food_mod:pot",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.page.misc0.title",
+      "text": "jpfood.page.misc0"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:batter",
+      "recipe2": "japanese_food_mod:bread_crumbs"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:clay_pot",
+      "recipe2": "japanese_food_mod:cup"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:grater",
+      "recipe2": "japanese_food_mod:japanese_knife"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:miso_sauce",
+      "recipe2": "japanese_food_mod:pot"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:potato_starch",
+      "recipe2": "japanese_food_mod:tare_sauce"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:tyawan",
+      "recipe2": "japanese_food_mod:wheat_flour"
+    },
+    {
+      "type": "smelting",
+      "recipe": "japanese_food_mod:cray_pot"
+    }
+  ]
+}

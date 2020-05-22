@@ -126,5 +126,9 @@
   "jpfood.presser.name": "Oil pressing",
   "jpfood.page.presser0.title": "About Oil Pressing",
   "jpfood.page.presser0": "You can get oil for cooking by using an oil press.",
-  "jpfood.page.presser1": "$(o)    You can squeeze it out of most meat."
+  "jpfood.page.presser1": "$(o)    You can squeeze it out of most meat.",
+
+  "jpfood.misc.name": "Misc",
+  "jpfood.page.misc0.title": "Misc Recipes",
+  "jpfood.page.misc0": "Here is a list of misc recipes."
 }
