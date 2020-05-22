@@ -4,9 +4,11 @@ import com.google.common.collect.Lists;
 import jp.tdn.japanese_food_mod.JapaneseFoodItemGroup;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.items.*;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.tags.FluidTags;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -46,6 +48,7 @@ public class JPItems {
     public static final Item VINEGAR = register(new DrinkItem(1, 0f), "vinegar");
     public static final Item BATTER = register(new SimpleItem(), "batter");
     public static final Item TARE_SAUCE = register(new SimpleItem(), "tare_sauce");
+    public static final Item MISO_SAUCE = register(new SimpleItem(), "miso_sauce");
     public static final Item YEAST_CELL = register(new SimpleItem(), "yeast_cell");
     public static final Item ACETIC_ACID_BACTERIA = register(new SimpleItem(), "acetic_acid_bacteria");
 
@@ -83,6 +86,8 @@ public class JPItems {
     public static final Item TUNA_SUSHI = register(new FoodItem(5, 3.5f), "tuna_sushi");
     public static final Item SALMON_SUSHI = register(new FoodItem(5, 3.5f), "salmon_sushi");
     public static final Item SALMON_ROE = register(new FoodItem(3, 1.5f), "salmon_roe");
+    public static final Item TONKATSU = register(new FoodItem(4, 3.0f), "tonkatsu");
+    public static final Item MISO_TONKATSU = register(new FoodItem(5, 3.0f), "miso_tonkatsu");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
@@ -91,6 +96,8 @@ public class JPItems {
     public static final Item EEL = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(1.5f).effect(new EffectInstance(Effects.POISON, 500, 2), 0.2f).build())), "eel");
     public static final Item CRAB = register(new FoodItem(2, 1.5f), "crab");
     public static final Item TUNA = register(new FoodItem(3, 2.0f), "tuna");
+    public static final Item EEL_BUCKET = register(new FishBucketItem(JPEntities.EEL, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "eel_bucket");
+    public static final Item TUNA_BUCKET = register(new FishBucketItem(JPEntities.TUNA, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "tuna_bucket");
 
     // Block Items
     public static final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");

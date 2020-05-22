@@ -6,7 +6,9 @@
     "   "
   ],
   "key": {
-    "#": "minecraft:glass"
+    "#": {
+      "item": "minecraft:glass"
+    }
   },
   "result": {
     "item": "japanese_food_mod:cup",

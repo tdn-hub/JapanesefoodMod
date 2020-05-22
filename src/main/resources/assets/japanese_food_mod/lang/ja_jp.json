@@ -67,9 +67,14 @@
   "item.japanese_food_mod.boiled_wakame": "煮たワカメ",
   "item.japanese_food_mod.cup": "コップ",
   "item.japanese_food_mod.cup_with_water": "水の入ったコップ",
+  "item.japanese_food_mod.tonkatsu": "とんかつ",
+  "item.japanese_food_mod.miso_tonkatsu": "みそかつ",
+  "item.japanese_food_mod.miso_sauce": "みそダレ",
   "item.japanese_food_mod.eel_spawn_egg": "ウナギのスポーンエッグ",
   "item.japanese_food_mod.crab_spawn_egg": "カニのスポーンエッグ",
   "item.japanese_food_mod.tuna_spawn_egg": "マグロのスポーンエッグ",
+  "item.japanese_food_mod.eel_bucket": "ウナギ入りバケツ",
+  "item.japanese_food_mod.tuna_bucket": "マグロ入りバケツ",
 
   "entity.japanese_food_mod.eel": "ウナギ",
   "entity.japanese_food_mod.crab": "カニ",
@@ -106,9 +111,9 @@
   "jpfood.page.ferment3": "酒の諸味の材料:$(br)麹菌、水、米",
   "jpfood.page.ferment4": "醤油の諸味の材料:$(br)麹菌、水、塩、水煮大豆、小麦",
   "jpfood.page.ferment5": "酢の材料:$(br)酢酸菌、日本酒",
-  "jpfood.page.ferment6.title": "注意点",
   "jpfood.page.ferment6": "諸味から酒や醤油を取り出すには、何か重い物（石など）を上に置いて圧縮し、右クリックする必要があります。",
   "jpfood.page.ferment7.title": "圧縮の例",
+  "jpfood.page.ferment8": "たくあんの材料:$(br)米、砂糖、塩、コンブ、大根",
 
   "jpfood.identify.name": "菌の発見",
   "jpfood.page.identify.title": "%1$s",
@@ -122,5 +127,5 @@
   "jpfood.presser.name": "搾油",
   "jpfood.page.presser0.title": "搾油について",
   "jpfood.page.presser0": "搾油機を使うことで調理用の油を手に入れることができます。",
-  "jpfood.page.presser1": "$(o)大体の肉から搾れる"
+  "jpfood.page.presser1": "$(o)    大体の肉から搾れる"
 }

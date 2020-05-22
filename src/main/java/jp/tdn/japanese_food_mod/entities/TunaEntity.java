@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.entities;
 
 import jp.tdn.japanese_food_mod.init.JPEntities;
+import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.fish.AbstractGroupFishEntity;
@@ -17,7 +18,7 @@ public class TunaEntity extends AbstractGroupFishEntity {
 
     @Override
     protected ItemStack getFishBucket() {
-        return null;
+        return new ItemStack(JPItems.TUNA_BUCKET);
     }
 
     @Override

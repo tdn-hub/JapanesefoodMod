@@ -34,8 +34,15 @@
       "recipe": "japanese_food_mod:vinegar"
     },
     {
+      "type": "ferment",
+      "text": "jpfood.page.ferment8",
+      "recipe": "japanese_food_mod:pickled_radish"
+    },
+    {
+      "type": "empty"
+    },
+    {
       "type": "text",
-      "title": "jpfood.page.ferment6.title",
       "text": "jpfood.page.ferment6"
     },
     {

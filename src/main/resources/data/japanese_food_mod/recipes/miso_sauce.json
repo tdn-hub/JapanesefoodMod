@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "japanese_food_mod:miso"
+    },
+    {
+      "item": "japanese_food_mod:sake"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:miso_sauce",
+    "count": 1
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:porkchop"
+    },
+    {
+      "tag": "forge:dusts/salt"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "japanese_food_mod:wheat_flour"
+    },
+    {
+      "item": "japanese_food_mod:bread_crumbs"
+    },
+    {
+      "item": "japanese_food_mod:cooking_oil"
+    },
+    {
+      "item": "japanese_food_mod:miso_sauce"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:miso_tonkatsu",
+    "count": 1
+  }
+}
