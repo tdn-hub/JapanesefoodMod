@@ -5,7 +5,7 @@
       "item": "minecraft:potato"
     },
     {
-      "item": "minecraft:water_bucket"
+      "tag": "japanese_food_mod:water"
     }
   ],
   "result": {
