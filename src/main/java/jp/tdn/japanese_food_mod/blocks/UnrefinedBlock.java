@@ -1,5 +1,6 @@
 package jp.tdn.japanese_food_mod.blocks;
 
+import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -29,7 +30,7 @@ public class UnrefinedBlock extends Block {
         BlockPos upSide = pos.up();
         Block up = world.getBlockState(upSide).getBlock();
 
-        return BlockTags.getCollection().getOrCreate(new ResourceLocation("forge", "heavy")).contains(up);
+        return BlockTags.getCollection().getOrCreate(new ResourceLocation("japanese_food_mod", "heavy")).contains(up);
     }
 
     @Override
