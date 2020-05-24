@@ -8,6 +8,11 @@
           "type": "minecraft:item",
           "name": "japanese_food_mod:radish_sprout",
           "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "japanese_food_mod:leek",
+          "weight": 10
         }
       ]
     }

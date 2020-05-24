@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "facing=north,nori=0": {"model": "japanese_food_mod:block/oyster_shell_0"},
+    "facing=south,nori=0": {"model": "japanese_food_mod:block/oyster_shell_0", "y": 180},
+    "facing=west,nori=0":  {"model": "japanese_food_mod:block/oyster_shell_0", "y": 270},
+    "facing=east,nori=0":  {"model": "japanese_food_mod:block/oyster_shell_0", "y": 90},
+
+    "facing=north,nori=1": {"model": "japanese_food_mod:block/oyster_shell_1"},
+    "facing=south,nori=1": {"model": "japanese_food_mod:block/oyster_shell_1", "y": 180},
+    "facing=west,nori=1":  {"model": "japanese_food_mod:block/oyster_shell_1", "y": 270},
+    "facing=east,nori=1":  {"model": "japanese_food_mod:block/oyster_shell_1", "y": 90},
+
+    "facing=north,nori=2": {"model": "japanese_food_mod:block/oyster_shell_2"},
+    "facing=south,nori=2": {"model": "japanese_food_mod:block/oyster_shell_2", "y": 180},
+    "facing=west,nori=2":  {"model": "japanese_food_mod:block/oyster_shell_2", "y": 270},
+    "facing=east,nori=2":  {"model": "japanese_food_mod:block/oyster_shell_2", "y": 90}
+  }
+}

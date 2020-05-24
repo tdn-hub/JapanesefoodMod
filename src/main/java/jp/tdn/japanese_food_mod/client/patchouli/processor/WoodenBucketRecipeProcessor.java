@@ -1,5 +1,7 @@
 package jp.tdn.japanese_food_mod.client.patchouli.processor;
 
+import com.ibm.icu.impl.IllegalIcuArgumentException;
+import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.init.JPRecipeTypes;
 import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
 import net.minecraft.client.Minecraft;
@@ -23,6 +25,7 @@ public class WoodenBucketRecipeProcessor implements IComponentProcessor {
 
     @Override
     public String process(String key) {
+        JapaneseFoodMod.LOGGER.debug(recipe.getIngredients());
         if(recipe == null){
             return null;
         }else if(key.equals("heading")){

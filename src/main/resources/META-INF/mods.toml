@@ -31,5 +31,5 @@ description='''
 [[dependencies.jp.tdn.japanese_food_mod]]
     modId="patchouli"
     mandatory=true
-    versionRange="[1.14.4-1.1-25,)"
+    versionRange="[1.14.4-1.1-27,)"
     side="BOTH"

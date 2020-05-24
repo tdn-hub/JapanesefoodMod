@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "#forge:crops/rice",
-    "#forge:crops/soy_beans"
+    "#forge:crops/soy_beans",
+    "#forge:crops/leek",
+    "#forge:crops/radish_sprout"
   ]
 }

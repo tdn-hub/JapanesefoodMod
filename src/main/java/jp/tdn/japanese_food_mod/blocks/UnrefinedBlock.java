@@ -29,7 +29,7 @@ public class UnrefinedBlock extends Block {
         BlockPos upSide = pos.up();
         Block up = world.getBlockState(upSide).getBlock();
 
-        return up != Blocks.AIR && BlockTags.getCollection().getOrCreate(new ResourceLocation("forge", "heavy")).contains(up);
+        return BlockTags.getCollection().getOrCreate(new ResourceLocation("forge", "heavy")).contains(up);
     }
 
     @Override

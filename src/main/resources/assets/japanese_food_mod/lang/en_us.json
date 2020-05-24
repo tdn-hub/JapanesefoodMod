@@ -10,6 +10,7 @@
   "block.japanese_food_mod.unrefined_soy_sauce": "Unrefined Soy Sauce",
   "block.japanese_food_mod.radish_sprout_plant": "Japanese White Radish Seeds",
   "block.japanese_food_mod.unrefined_sake": "Unrefined Sake",
+  "block.japanese_food_mod.oyster_shell": "Oyster Shell",
 
   "item.japanese_food_mod.tyawan": "Tyawan",
   "item.japanese_food_mod.pot": "Pot",
@@ -69,6 +70,7 @@
   "item.japanese_food_mod.tonkatsu": "Tonkatsu",
   "item.japanese_food_mod.miso_tonkatsu": "Miso Tonkatsu",
   "item.japanese_food_mod.miso_sauce": "Miso Sauce",
+  "item.japanese_food_mod.nori": "Nori",
   "item.japanese_food_mod.eel_spawn_egg": "Eel Spawn Egg",
   "item.japanese_food_mod.crab_spawn_egg": "Crab Spawn Egg",
   "item.japanese_food_mod.tuna_spawn_egg": "Tuna Spawn Egg",

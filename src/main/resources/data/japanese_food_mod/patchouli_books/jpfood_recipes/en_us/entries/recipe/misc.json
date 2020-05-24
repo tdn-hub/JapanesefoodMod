@@ -15,7 +15,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "japanese_food_mod:clay_pot",
+      "recipe": "japanese_food_mod:clay_pot_before_heating",
       "recipe2": "japanese_food_mod:cup"
     },
     {

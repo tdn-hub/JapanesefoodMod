@@ -65,9 +65,7 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
 
     @Nonnull
     public NonNullList<Ingredient> getIngredients(){
-        NonNullList<Ingredient> nonNullList = NonNullList.create();
-        nonNullList.addAll(this.ingredients);
-        return nonNullList;
+        return this.ingredients;
     }
 
     @Nonnull
@@ -133,6 +131,7 @@ public class WoodenBucketRecipe implements IRecipe<IInventory> {
             for(int j = 0; j < nonnulllist.size(); ++j) {
                 nonnulllist.set(j, Ingredient.read(buffer));
             }
+            recipe.ingredients = nonnulllist;
             recipe.result = buffer.readItemStack();
             recipe.cookTime = buffer.readVarInt();
             return recipe;

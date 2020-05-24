@@ -81,11 +81,12 @@ public class JPItems {
     public static final Item FUGU_SASHIMI = register(new FoodItem(4, 4.0f), "fugu_sashimi");
     public static final Item BOILED_EGG = register(new FoodItem(3, 3.0f), "boiled_egg");
     public static final Item GRATED_DAIKON = register(new FoodItem(3, 1.5f),"grated_daikon");
+    public static final Item NORI = register(new FoodItem(1, 0f), "nori");
     public static final Item VINEGARED_RICE = register(new FoodItem(3, 2.5f), "vinegared_rice");
     public static final Item TUNA_SASHIMI = register(new FoodItem(4, 3.5f), "tuna_sashimi");
     public static final Item TUNA_SUSHI = register(new FoodItem(5, 3.5f), "tuna_sushi");
     public static final Item SALMON_SUSHI = register(new FoodItem(5, 3.5f), "salmon_sushi");
-    public static final Item SALMON_ROE = register(new FoodItem(3, 1.5f), "salmon_roe");
+    public static final Item SALMON_ROE = register(new FoodItem(5, 2.5f), "salmon_roe");
     public static final Item TONKATSU = register(new FoodItem(4, 3.0f), "tonkatsu");
     public static final Item MISO_TONKATSU = register(new FoodItem(5, 3.0f), "miso_tonkatsu");
 
@@ -106,6 +107,7 @@ public class JPItems {
     public static final Item WOODEN_BUCKET = register(new BlockItem(JPBlocks.WOODEN_BUCKET, new Item.Properties().group(ItemGroup_Japanese)), "wooden_bucket");
     public static final Item MICROSCOPE = register(new BlockItem(JPBlocks.MICRO_SCOPE, new Item.Properties().group(ItemGroup_Japanese)), "microscope");
     public static final Item PRESSER = register(new BlockItem(JPBlocks.PRESSER, new Item.Properties().group(ItemGroup_Japanese)), "presser");
+    public static final Item OYSTER_SHELL = register(new BlockItem(JPBlocks.OYSTER_SHELL, new Item.Properties().group(ItemGroup_Japanese)), "oyster_shell");
 
     // Spawn Eggs
     public static final Item EEL_ENTITY_EGG = register(new SpawnEggItem(JPEntities.EEL, 0x00c3ff, 0x694b3a, new Item.Properties().group(ItemGroup_Japanese)), "eel_spawn_egg");

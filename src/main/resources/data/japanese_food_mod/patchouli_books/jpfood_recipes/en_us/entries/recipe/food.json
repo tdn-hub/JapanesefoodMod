@@ -54,6 +54,11 @@
     },
     {
       "type": "crafting",
+      "recipe": "japanese_food_mod:salmon_sushi",
+      "recipe2": "japanese_food_mod:salmon_roe"
+    },
+    {
+      "type": "crafting",
       "recipe": "japanese_food_mod:vinegared_rice",
       "recipe2": "japanese_food_mod:tonkatsu"
     },
