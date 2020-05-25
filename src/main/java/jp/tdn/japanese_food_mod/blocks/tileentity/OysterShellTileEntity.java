@@ -1,12 +1,10 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 
 import javax.annotation.Nonnull;
 

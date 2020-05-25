@@ -1,7 +1,6 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import com.google.common.collect.Lists;
-import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.WoodenBucketBlock;
 import jp.tdn.japanese_food_mod.container.WoodenBucketContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
@@ -31,7 +30,6 @@ import net.minecraftforge.items.wrapper.RangedWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

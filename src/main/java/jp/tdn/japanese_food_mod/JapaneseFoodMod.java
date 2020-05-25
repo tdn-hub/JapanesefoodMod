@@ -2,7 +2,6 @@ package jp.tdn.japanese_food_mod;
 
 import jp.tdn.japanese_food_mod.client.renders.JPRenderRegistry;
 import jp.tdn.japanese_food_mod.config.Config;
-import jp.tdn.japanese_food_mod.config.OystergenConfig;
 import jp.tdn.japanese_food_mod.init.JPEntities;
 import jp.tdn.japanese_food_mod.world.GrassGeneration;
 import jp.tdn.japanese_food_mod.world.OreGeneration;

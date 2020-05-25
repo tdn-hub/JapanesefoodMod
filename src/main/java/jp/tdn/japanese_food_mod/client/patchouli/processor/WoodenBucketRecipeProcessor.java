@@ -1,9 +1,5 @@
 package jp.tdn.japanese_food_mod.client.patchouli.processor;
 
-import com.ibm.icu.impl.IllegalIcuArgumentException;
-import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import jp.tdn.japanese_food_mod.init.JPRecipeTypes;
-import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.crafting.IRecipe;
