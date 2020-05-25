@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:oyster_shell"
+    }
+  ],
+  "result": {
+    "item": "minecraft:bone_meal",
+    "count": 4
+  }
+}
