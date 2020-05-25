@@ -25,7 +25,6 @@ public class WoodenBucketRecipeProcessor implements IComponentProcessor {
 
     @Override
     public String process(String key) {
-        JapaneseFoodMod.LOGGER.debug(recipe.getIngredients());
         if(recipe == null){
             return null;
         }else if(key.equals("heading")){
