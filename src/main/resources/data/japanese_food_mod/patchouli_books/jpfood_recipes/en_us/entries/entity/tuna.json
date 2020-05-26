@@ -1,0 +1,17 @@
+{
+  "name": "jpfood.entity.tuna",
+  "category": "japanese_food_mod:entity",
+  "icon": "japanese_food_mod:tuna",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.entity.tuna.title",
+      "text": "jpfood.page.tuna0"
+    },
+    {
+      "type": "entity",
+      "entity": "japanese_food_mod:tuna",
+      "text": "jpfood.page.tuna1"
+    }
+  ]
+}

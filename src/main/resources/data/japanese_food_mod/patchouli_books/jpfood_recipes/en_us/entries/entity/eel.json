@@ -1,0 +1,17 @@
+{
+  "name": "jpfood.entity.eel",
+  "category": "japanese_food_mod:entity",
+  "icon": "japanese_food_mod:eel",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.entity.eel.title",
+      "text": "jpfood.page.eel0"
+    },
+    {
+      "type": "entity",
+      "entity": "japanese_food_mod:eel",
+      "text": "jpfood.page.eel1"
+    }
+  ]
+}

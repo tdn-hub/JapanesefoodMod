@@ -103,6 +103,8 @@
 
   "jpfood.category.recipe": "レシピ",
   "jpfood.category.recipe.description": "右の項目から各レシピを閲覧できます。",
+  "jpfood.category.entity": "エンティティ",
+  "jpfood.category.entity.description": "追加されるモブの一覧です。",
 
   "jpfood.ferment.name": "発酵",
   "jpfood.page.ferment.title": "%1$s",
@@ -133,6 +135,18 @@
 
   "jpfood.misc.name": "その他",
   "jpfood.page.misc0.title": "その他のレシピ",
-  "jpfood.page.misc0": "その他諸々のレシピ一覧です。"
+  "jpfood.page.misc0": "その他諸々のレシピ一覧です。",
 
+  "jpfood.entity.eel": "ウナギ",
+  "jpfood.entity.eel.title": "ウナギについて",
+  "jpfood.page.eel0": "ウナギは、海で孵化し、淡水にさかのぼっていきます。なので、海と川のどちらでも発見することが可能です。",
+  "jpfood.page.eel1": "$(o)おいしい",
+  "jpfood.entity.crab": "カニ",
+  "jpfood.entity.crab.title": "カニについて",
+  "jpfood.page.crab0": "カニは、基本的に海底にいます。どのような海でも生息できるので、簡単に発見できるでしょう。",
+  "jpfood.page.crab1": "$(o)おいしい",
+  "jpfood.entity.tuna": "マグロ",
+  "jpfood.entity.tuna.title": "マグロについて",
+  "jpfood.page.tuna0": "暖かい海で発見できます。一般的なマグロは止まると窒息しますが、この世界のマグロは問題ないようです。",
+  "jpfood.page.tuna1": "$(o)おいしい"
 }

@@ -39,6 +39,10 @@
       "recipe2": "japanese_food_mod:wheat_flour"
     },
     {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:oyster_powder"
+    },
+    {
       "type": "smelting",
       "recipe": "japanese_food_mod:cray_pot"
     }

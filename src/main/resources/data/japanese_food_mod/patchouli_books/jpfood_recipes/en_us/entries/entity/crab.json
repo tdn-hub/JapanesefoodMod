@@ -1,0 +1,17 @@
+{
+  "name": "jpfood.entity.crab",
+  "category": "japanese_food_mod:entity",
+  "icon": "japanese_food_mod:crab",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.entity.crab.title",
+      "text": "jpfood.page.crab0"
+    },
+    {
+      "type": "entity",
+      "entity": "japanese_food_mod:crab",
+      "text": "jpfood.page.crab1"
+    }
+  ]
+}

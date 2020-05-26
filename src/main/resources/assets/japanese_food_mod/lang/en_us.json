@@ -102,6 +102,8 @@
 
   "jpfood.category.recipe": "Recipe",
   "jpfood.category.recipe.description": " You can view each recipe from the items on the right.",
+  "jpfood.category.entity": "Entity",
+  "jpfood.category.entity.description": "Here is the list of entities that will be added.",
 
   "jpfood.ferment.name": "Fermentation",
   "jpfood.page.ferment.title": "%1$s",
@@ -132,5 +134,18 @@
 
   "jpfood.misc.name": "Misc",
   "jpfood.page.misc0.title": "Misc Recipes",
-  "jpfood.page.misc0": "Here is a list of misc recipes."
+  "jpfood.page.misc0": "Here is a list of misc recipes.",
+
+  "jpfood.entity.eel": "Eel",
+  "jpfood.entity.eel.title": "About Eel",
+  "jpfood.page.eel0": "Eels hatch in the ocean and trace their way back to freshwater. So it can be found in both the sea and the river.",
+  "jpfood.page.eel1": "$(o)Delicious",
+  "jpfood.entity.crab": "Crab",
+  "jpfood.entity.crab.title": "About Crab",
+  "jpfood.page.crab0": "Crabs are essentially on the ocean floor. They can be found in any ocean, so they will be easy to spot.",
+  "jpfood.page.crab1": "$(o)Delicious",
+  "jpfood.entity.tuna": "Tuna",
+  "jpfood.entity.tuna.title": "About Tuna",
+  "jpfood.page.tuna0": "They can be found in warm waters. The average tuna chokes when it stops, but the tuna of this world doesn't seem to have a problem.",
+  "jpfood.page.tuna1": "$(o)Delicious"
 }
