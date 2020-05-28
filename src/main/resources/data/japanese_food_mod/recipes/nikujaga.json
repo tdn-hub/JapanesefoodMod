@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "item": "minecraft:porkchop"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "japanese_food_mod:edamame"
+    },
+    {
+      "item": "japanese_food_mod:soy_sauce"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "japanese_food_mod:broth"
+    },
+    {
+      "item": "japanese_food_mod:mirin"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:nikujaga",
+    "count": 1
+  }
+}

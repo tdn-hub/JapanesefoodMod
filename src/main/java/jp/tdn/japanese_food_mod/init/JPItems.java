@@ -45,9 +45,11 @@ public class JPItems {
     public static final Item WAKAME = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).fastToEat().build())), "wakame");
     public static final Item SOY_SAUCE = register(new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(0.0f).effect(new EffectInstance(Effects.POISON, 100, 2), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 100, 1), 1.0f).build())), "soy_sauce");
     public static final Item VINEGAR = register(new DrinkItem(1, 0f), "vinegar");
+    public static final Item MIRIN = register(new DrinkItem(1, 0f), "mirin");
     public static final Item BATTER = register(new SimpleItem(), "batter");
     public static final Item TARE_SAUCE = register(new SimpleItem(), "tare_sauce");
     public static final Item MISO_SAUCE = register(new SimpleItem(), "miso_sauce");
+    public static final Item BROTH = register(new SimpleItem(), "broth");
     public static final Item YEAST_CELL = register(new SimpleItem(), "yeast_cell");
     public static final Item ACETIC_ACID_BACTERIA = register(new SimpleItem(), "acetic_acid_bacteria");
 
@@ -58,6 +60,7 @@ public class JPItems {
     public static final Item LEEK_SEED = register(new BlockItem(JPBlocks.LEEK_PLANT, new Item.Properties().group(ItemGroup_Japanese)),"leek_seed");
 
     // Food
+    public static final Item EDAMAME = register(new FoodItem(1, 0f), "edamame");
     public static final Item RADISH_SPROUT = register(new FoodItem(1, 0.5f), "radish_sprout");
     public static final Item RICE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "rice");
     public static final Item LEEK = register(new FoodItem(1, 0.5f), "leek");
@@ -67,6 +70,7 @@ public class JPItems {
     public static final Item OMELET = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(2.5f).build())), "omelet");
     public static final Item ONIGIRI = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(3).saturation(4.0f).build())), "onigiri");
     public static final Item SALMON_ONIGIRI  = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(4.5f).build())), "salmon_onigiri");
+    public static final Item NIKUJAGA = register(new FoodItem(7, 2.5f), "nikujaga");
     public static final Item PICKLED_RADISH = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(1.5f).build())), "pickled_radish");
     public static final Item FRIED_CHICKEN = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(5).saturation(4.0f).build())), "fried_chicken");
     public static final Item SKEWERED_CHICKEN = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).effect(new EffectInstance(Effects.HUNGER, 100, 1), 0.3f).build())), "skewered_chicken");
@@ -96,6 +100,7 @@ public class JPItems {
     public static final Item EEL = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(1.5f).effect(new EffectInstance(Effects.POISON, 500, 2), 0.2f).build())), "eel");
     public static final Item CRAB = register(new FoodItem(2, 1.5f), "crab");
     public static final Item TUNA = register(new FoodItem(3, 2.0f), "tuna");
+    public static final Item SARDINE = register(new FoodItem(1, 0.5f), "sardine");
     public static final Item EEL_BUCKET = register(new FishBucketItem(JPEntities.EEL, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "eel_bucket");
     public static final Item TUNA_BUCKET = register(new FishBucketItem(JPEntities.TUNA, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "tuna_bucket");
 
@@ -103,6 +108,7 @@ public class JPItems {
     public static final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");
     public static final Item UNREFINED_SAKE = register(new BlockItem(JPBlocks.UNREFINED_SAKE, new Item.Properties().group(ItemGroup_Japanese)), "unrefined_sake");
     public static final Item UNREFINED_SOY_SAUCE = register(new BlockItem(JPBlocks.UNREFINED_SOY_SAUCE, new Item.Properties().group(ItemGroup_Japanese)), "unrefined_soy_sauce");
+    public static final Item UNREFINED_MIRIN = register(new BlockItem(JPBlocks.UNREFINED_MIRIN, new Item.Properties().group(ItemGroup_Japanese)), "unrefined_mirin");
     public static final Item WOODEN_BUCKET = register(new BlockItem(JPBlocks.WOODEN_BUCKET, new Item.Properties().group(ItemGroup_Japanese)), "wooden_bucket");
     public static final Item MICROSCOPE = register(new BlockItem(JPBlocks.MICRO_SCOPE, new Item.Properties().group(ItemGroup_Japanese)), "microscope");
     public static final Item PRESSER = register(new BlockItem(JPBlocks.PRESSER, new Item.Properties().group(ItemGroup_Japanese)), "presser");

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "tag": "japanese_food_mod:broth_ingredients"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:broth",
+    "count": 2
+  }
+}

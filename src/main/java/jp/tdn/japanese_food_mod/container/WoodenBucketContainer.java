@@ -33,7 +33,7 @@ public class WoodenBucketContainer extends Container {
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxFermentationTime, v -> tileEntity.maxFermentationTime = (short)v));
 
         final int inputStartX = 21;
-        final int inputStartY = 16;
+        final int inputStartY = 20;
         final int slotSizePlus2 = 18;
         int index = 0;
 
@@ -44,7 +44,7 @@ public class WoodenBucketContainer extends Container {
             }
         }
 
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.OUTPUT_SLOT, 116, 35));
+        this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.OUTPUT_SLOT, 115, 34));
 
         final int playerInventoryStartX = 8;
         final int playerInventoryStartY = 92;

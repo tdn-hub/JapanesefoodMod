@@ -34,6 +34,10 @@ public class SoyPlantBlock extends CropsBlock{
                 world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(JPItems.SOY_BEANS,1)));
                 world.setBlockState(pos, this.withAge(0));
                 return true;
+            }else if(this.getAge(state) >= 5 && this.getAge(state) <= 6){
+                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(JPItems.EDAMAME, 1)));
+                world.setBlockState(pos, this.withAge(0));
+                return true;
             }
         }
         return false;
