@@ -103,6 +103,7 @@ public class JPItems {
     public static final Item SARDINE = register(new FoodItem(1, 0.5f), "sardine");
     public static final Item EEL_BUCKET = register(new FishBucketItem(JPEntities.EEL, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "eel_bucket");
     public static final Item TUNA_BUCKET = register(new FishBucketItem(JPEntities.TUNA, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "tuna_bucket");
+    public static final Item CLAM = register(new FoodItem(1, 0.5f), "clam");
 
     // Block Items
     public static final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");
@@ -118,6 +119,7 @@ public class JPItems {
     public static final Item EEL_ENTITY_EGG = register(new SpawnEggItem(JPEntities.EEL, 0x00c3ff, 0x694b3a, new Item.Properties().group(ItemGroup_Japanese)), "eel_spawn_egg");
     public static final Item CRAB_ENTITY_EGG = register(new SpawnEggItem(JPEntities.CRAB, 0x00c3ff, 0xba2d20, new Item.Properties().group(ItemGroup_Japanese)), "crab_spawn_egg");
     public static final Item TUNA_ENTITY_EGG = register(new SpawnEggItem(JPEntities.TUNA, 0x00c3ff, 0x0000ff, new Item.Properties().group(ItemGroup_Japanese)), "tuna_spawn_egg");
+    public static final Item CLAM_ENTITY_EGG = register(new SpawnEggItem(JPEntities.CLAM, 0x00c3ff, 0x996136, new Item.Properties().group(ItemGroup_Japanese)), "clam_spawn_egg");
 
     public static Item register(@Nonnull Item item, @Nonnull String name){
         item.setRegistryName(modId, name);

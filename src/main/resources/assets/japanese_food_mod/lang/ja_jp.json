@@ -78,15 +78,18 @@
   "item.japanese_food_mod.sardine": "イワシ",
   "item.japanese_food_mod.nikujaga": "肉じゃが",
   "item.japanese_food_mod.mirin": "みりん",
+  "item.japanese_food_mod.clam": "ハマグリ",
   "item.japanese_food_mod.eel_spawn_egg": "ウナギのスポーンエッグ",
   "item.japanese_food_mod.crab_spawn_egg": "カニのスポーンエッグ",
   "item.japanese_food_mod.tuna_spawn_egg": "マグロのスポーンエッグ",
+  "item.japanese_food_mod.clam_spawn_egg": "ハマグリのスポーンエッグ",
   "item.japanese_food_mod.eel_bucket": "ウナギ入りバケツ",
   "item.japanese_food_mod.tuna_bucket": "マグロ入りバケツ",
 
   "entity.japanese_food_mod.eel": "ウナギ",
   "entity.japanese_food_mod.crab": "カニ",
   "entity.japanese_food_mod.tuna": "マグロ",
+  "entity.japanese_food_mod.clam": "ハマグリ",
 
   "gui.japanese_food_mod.identifiedTimeProgress": "進捗: %1$s%2$s",
   "gui.japanese_food_mod.fermentationTimeProgress": "進捗: %1$s%2$s",

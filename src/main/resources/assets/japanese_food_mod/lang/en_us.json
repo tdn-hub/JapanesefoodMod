@@ -77,15 +77,18 @@
   "item.japanese_food_mod.sardine": "Sardine",
   "item.japanese_food_mod.nikujaga": "Nikujaga",
   "item.japanese_food_mod.mirin": "Mirin",
+  "item.japanese_food_mod.clam": "Clam",
   "item.japanese_food_mod.eel_spawn_egg": "Eel Spawn Egg",
   "item.japanese_food_mod.crab_spawn_egg": "Crab Spawn Egg",
   "item.japanese_food_mod.tuna_spawn_egg": "Tuna Spawn Egg",
+  "item.japanese_food_mod.clam_spawn_egg": "Clam Spawn Egg",
   "item.japanese_food_mod.eel_bucket": "Eel Bucket",
   "item.japanese_food_mod.tuna_bucket": "Tuna Bucket",
 
   "entity.japanese_food_mod.eel": "Eel",
   "entity.japanese_food_mod.crab": "Crab",
   "entity.japanese_food_mod.tuna": "Tuna",
+  "entity.japanese_food_mod.clam": "Clam",
 
   "gui.japanese_food_mod.identifiedTimeProgress": "Progress: %1$s%2$s",
   "gui.japanese_food_mod.fermentationTimeProgress": "Progress: %1$s%2$s",
