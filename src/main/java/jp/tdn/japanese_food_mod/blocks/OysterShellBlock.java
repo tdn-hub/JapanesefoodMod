@@ -1,5 +1,6 @@
 package jp.tdn.japanese_food_mod.blocks;
 
+import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.blocks.tileentity.OysterShellTileEntity;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
@@ -41,7 +42,7 @@ import java.util.Random;
 public class OysterShellBlock extends HorizontalBlock implements ILiquidContainer {
     public static IntegerProperty NORI = IntegerProperty.create("nori", 0, 2);
     public static DirectionProperty DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
-    private static VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(6.0D, 0.0D, 4.0D, 10.0D, 3.0D, 14.0D));
+    private static VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 10.0D, 3.0D, 10.0D));
 
     public OysterShellBlock(){
         super(Properties.create(Material.ROCK, MaterialColor.CLAY).doesNotBlockMovement().hardnessAndResistance(2.5f).tickRandomly());

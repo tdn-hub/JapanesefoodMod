@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class CrabEntity extends WaterMobEntity {
     public CrabEntity(EntityType<? extends WaterMobEntity> type, World worldIn){
-        super((EntityType<? extends WaterMobEntity>) JPEntities.CRAB, worldIn);
+        super(JPEntities.CRAB, worldIn);
     }
 
     protected void updateAir(int p_209207_1_) {

@@ -32,7 +32,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class MicroScopeBlock extends HorizontalBlock {
-    protected static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(5.0D, 0.0D, 4.0D, 11.0D, 16.0D,12.0D));
+    protected static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D,12.0D));
     public static final DirectionProperty DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
     
     public MicroScopeBlock(){

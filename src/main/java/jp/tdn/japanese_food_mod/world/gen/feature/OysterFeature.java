@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.world.gen.feature;
 
 import com.mojang.datafixers.Dynamic;
+import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +22,7 @@ public class OysterFeature extends Feature<NoFeatureConfig> {
     @Override
     public boolean place(IWorld iWorld, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random random, BlockPos blockPos, NoFeatureConfig noFeatureConfig) {
         if(iWorld.getBlockState(blockPos).getBlock() == Blocks.WATER && iWorld.getBlockState(blockPos.down()).getBlock() != Blocks.WATER){
-            iWorld.setBlockState(blockPos, JPBlocks.OYSTER_SHELL.getDefaultState(), 1);
+            iWorld.setBlockState(blockPos, JPBlocks.OYSTER_SHELL.getDefaultState().rotate(JapaneseFoodUtil.rotations.get(JapaneseFoodUtil.rand.nextInt(JapaneseFoodUtil.rotations.size()))), 1);
             return true;
         }
         return false;
