@@ -17,6 +17,7 @@ public class ClamEntityModel<T extends LivingEntity> extends EntityModel<T> {
 
         body = new RendererModel(this);
         body.setRotationPoint(0.0F, 24.0F, 0.0F);
+        setRotationAngle(body, 0.0F, 3.1416F, 0.0F);
 
 
         bone = new RendererModel(this);

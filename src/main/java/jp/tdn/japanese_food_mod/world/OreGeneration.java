@@ -19,7 +19,7 @@ public class OreGeneration {
     public static void setupOreGeneration(){
         if(OregenConfig.generate_overworld.get()){
             for(Biome biome : ForgeRegistries.BIOMES){
-                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, JPBlocks.ROCK_SALT_BLOCK.getDefaultState(), 8), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, JPBlocks.ROCK_SALT_BLOCK.getDefaultState(), 8), Placement.COUNT_RANGE, new CountRangeConfig(14, 0, 0, 64)));
             }
         }
     }

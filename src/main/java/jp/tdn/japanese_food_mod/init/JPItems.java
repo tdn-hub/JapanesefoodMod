@@ -90,6 +90,8 @@ public class JPItems {
     public static final Item TUNA_SUSHI = register(new FoodItem(5, 3.5f), "tuna_sushi");
     public static final Item SALMON_SUSHI = register(new FoodItem(5, 3.5f), "salmon_sushi");
     public static final Item SALMON_ROE = register(new FoodItem(5, 2.5f), "salmon_roe");
+    public static final Item SHRIMP_SUSHI = register(new FoodItem(4,2.0f), "shrimp_sushi");
+    public static final Item SQUID_SUSHI = register(new FoodItem(4, 2.0f), "squid_sushi");
     public static final Item TONKATSU = register(new FoodItem(4, 3.0f), "tonkatsu");
     public static final Item MISO_TONKATSU = register(new FoodItem(5, 3.0f), "miso_tonkatsu");
 
@@ -101,6 +103,7 @@ public class JPItems {
     public static final Item CRAB = register(new FoodItem(2, 1.5f), "crab");
     public static final Item TUNA = register(new FoodItem(3, 2.0f), "tuna");
     public static final Item SARDINE = register(new FoodItem(1, 0.5f), "sardine");
+    public static final Item AMBERJACK = register(new FoodItem(2, 1.5f), "amberjack");
     public static final Item EEL_BUCKET = register(new FishBucketItem(JPEntities.EEL, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "eel_bucket");
     public static final Item TUNA_BUCKET = register(new FishBucketItem(JPEntities.TUNA, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "tuna_bucket");
     public static final Item CLAM = register(new FoodItem(1, 0.5f), "clam");
@@ -123,7 +126,7 @@ public class JPItems {
     public static final Item TUNA_ENTITY_EGG = register(new SpawnEggItem(JPEntities.TUNA, 0x00c3ff, 0x0000ff, new Item.Properties().group(ItemGroup_Japanese)), "tuna_spawn_egg");
     public static final Item CLAM_ENTITY_EGG = register(new SpawnEggItem(JPEntities.CLAM, 0x00c3ff, 0x996136, new Item.Properties().group(ItemGroup_Japanese)), "clam_spawn_egg");
     public static final Item ASARI_CLAM_ENTITY_EGG = register(new SpawnEggItem(JPEntities.ASARI_CLAM, 0x00c3ff, 0x827a51, new Item.Properties().group(ItemGroup_Japanese)), "asari_clam_spawn_egg");
-    public static final Item TURBAN_SHELL_ENTITY_EGG = register(new SpawnEggItem(JPEntities.TURBAN_SHELL, 0x00c3ff, 0x807a51, new Item.Properties().group(ItemGroup_Japanese)), "turban_shell_spawn_egg");
+    public static final Item TURBAN_SHELL_ENTITY_EGG = register(new SpawnEggItem(JPEntities.TURBAN_SHELL, 0x00c3ff, 0xfca503, new Item.Properties().group(ItemGroup_Japanese)), "turban_shell_spawn_egg");
 
     public static Item register(@Nonnull Item item, @Nonnull String name){
         item.setRegistryName(modId, name);

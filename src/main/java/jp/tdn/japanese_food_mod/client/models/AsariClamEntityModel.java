@@ -16,20 +16,21 @@ public class AsariClamEntityModel<T extends LivingEntity> extends EntityModel<T>
 
         body = new RendererModel(this);
         body.setRotationPoint(0.0F, 24.0F, 0.0F);
+        setRotationAngle(body, 0.0F, 3.1416F, 0.0F);
 
 
         bone = new RendererModel(this);
         bone.setRotationPoint(0.0F, 0.0F, 0.0F);
         body.addChild(bone);
-        bone.cubeList.add(new ModelBox(bone, 0, 19, -1.7F, -1.0F, -1.0F, 3, 1, 3, 0.0F, false));
-        bone.cubeList.add(new ModelBox(bone, 0, 5, -1.7F, -3.0F, -1.0F, 3, 1, 3, 0.0F, false));
-        bone.cubeList.add(new ModelBox(bone, 0, 9, -0.7F, -2.0F, 2.0F, 1, 1, 1, 0.0F, false));
-        bone.cubeList.add(new ModelBox(bone, 0, 13, -0.7F, -1.0F, 2.0F, 1, 1, 1, 0.0F, false));
+        bone.cubeList.add(new ModelBox(bone, 0, 19, -1.5F, -1.0F, -1.0F, 3, 1, 3, 0.0F, false));
+        bone.cubeList.add(new ModelBox(bone, 0, 5, -1.5F, -3.0F, -1.0F, 3, 1, 3, 0.0F, false));
+        bone.cubeList.add(new ModelBox(bone, 0, 9, -0.5F, -2.0F, 2.0F, 1, 1, 1, 0.0F, false));
+        bone.cubeList.add(new ModelBox(bone, 0, 13, -0.5F, -1.0F, 2.0F, 1, 1, 1, 0.0F, false));
 
         bone2 = new RendererModel(this);
         bone2.setRotationPoint(0.0F, -1.0F, 3.0F);
         body.addChild(bone2);
-        bone2.cubeList.add(new ModelBox(bone2, 0, 0, -2.7F, -1.0F, -5.0F, 5, 1, 4, 0.0F, false));
+        bone2.cubeList.add(new ModelBox(bone2, 0, 0, -2.5F, -1.0F, -5.0F, 5, 1, 4, 0.0F, false));
     }
 
     @Override

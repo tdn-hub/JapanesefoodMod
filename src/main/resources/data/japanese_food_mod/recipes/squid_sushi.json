@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:japanese_knife"
+    },
+    {
+      "item": "japanese_food_mod:squid"
+    },
+    {
+      "item": "japanese_food_mod:vinegared_rice"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:squid_sushi",
+    "count": 1
+  }
+}
