@@ -104,6 +104,7 @@ public class JPItems {
     public static final Item TUNA = register(new FoodItem(3, 2.0f), "tuna");
     public static final Item SARDINE = register(new FoodItem(1, 0.5f), "sardine");
     public static final Item AMBERJACK = register(new FoodItem(2, 1.5f), "amberjack");
+    public static final Item ANGLERFISN = register(new FoodItem(2, 1.0f), "anglerfish");
     public static final Item EEL_BUCKET = register(new FishBucketItem(JPEntities.EEL, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "eel_bucket");
     public static final Item TUNA_BUCKET = register(new FishBucketItem(JPEntities.TUNA, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "tuna_bucket");
     public static final Item CLAM = register(new FoodItem(1, 0.5f), "clam");
@@ -127,6 +128,7 @@ public class JPItems {
     public static final Item CLAM_ENTITY_EGG = register(new SpawnEggItem(JPEntities.CLAM, 0x00c3ff, 0x996136, new Item.Properties().group(ItemGroup_Japanese)), "clam_spawn_egg");
     public static final Item ASARI_CLAM_ENTITY_EGG = register(new SpawnEggItem(JPEntities.ASARI_CLAM, 0x00c3ff, 0x827a51, new Item.Properties().group(ItemGroup_Japanese)), "asari_clam_spawn_egg");
     public static final Item TURBAN_SHELL_ENTITY_EGG = register(new SpawnEggItem(JPEntities.TURBAN_SHELL, 0x00c3ff, 0xfca503, new Item.Properties().group(ItemGroup_Japanese)), "turban_shell_spawn_egg");
+    public static final Item ANGLERFISH_ENTITY_EGG = register(new SpawnEggItem(JPEntities.ANGLERFISH, 0x00c3ff, 0xfca000, new Item.Properties().group(ItemGroup_Japanese)), "anglerfish_spawn_egg");
 
     public static Item register(@Nonnull Item item, @Nonnull String name){
         item.setRegistryName(modId, name);

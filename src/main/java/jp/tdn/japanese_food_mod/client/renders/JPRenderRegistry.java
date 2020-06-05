@@ -17,6 +17,7 @@ public class JPRenderRegistry {
         RenderingRegistry.registerEntityRenderingHandler(ClamEntity.class, ClamEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(AsariClamEntity.class, AsariClamEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(TurbanShellEntity.class, TurbanShellEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(AnglerfishEntity.class, AnglerfishEntityRender::new);
     }
 
     public static void registryTileEntityRenders(){

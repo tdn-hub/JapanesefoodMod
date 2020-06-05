@@ -7,7 +7,12 @@
         {
           "type": "minecraft:item",
           "name": "japanese_food_mod:soy_beans"
-        },
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
         {
           "type": "minecraft:alternatives",
           "children": [
@@ -40,7 +45,8 @@
                     "age": "6"
                   }
                 }
-              ]
+              ],
+              "name": "japanese_food_mod:edamame"
             }
           ]
         }

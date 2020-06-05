@@ -89,6 +89,7 @@
   "item.japanese_food_mod.clam_spawn_egg": "Clam Spawn Egg",
   "item.japanese_food_mod.asari_clam_spawn_egg": "Asari Clam Spawn Egg",
   "item.japanese_food_mod.turban_shell_spawn_egg": "Turban Shell Spawn Egg",
+  "item.japanese_food_mod.anglerfish_spawn_egg": "Anglerfish Spawn Egg",
   "item.japanese_food_mod.eel_bucket": "Eel Bucket",
   "item.japanese_food_mod.tuna_bucket": "Tuna Bucket",
 
@@ -98,6 +99,7 @@
   "entity.japanese_food_mod.clam": "Clam",
   "entity.japanese_food_mod.asari_clam": "Asari Clam",
   "entity.japanese_food_mod.turban_shell": "Turban Shell",
+  "entity.japanese_food_mod.anglerfish": "Anglerfish",
 
   "gui.japanese_food_mod.identifiedTimeProgress": "Progress: %1$s%2$s",
   "gui.japanese_food_mod.fermentationTimeProgress": "Progress: %1$s%2$s",

@@ -90,6 +90,7 @@
   "item.japanese_food_mod.clam_spawn_egg": "ハマグリのスポーンエッグ",
   "item.japanese_food_mod.asari_clam_spawn_egg": "アサリのスポーンエッグ",
   "item.japanese_food_mod.turban_shell_spawn_egg": "サザエのスポーンエッグ",
+  "item.japanese_food_mod.anglerfish_spawn_egg": "アンコウのスポーンエッグ",
   "item.japanese_food_mod.eel_bucket": "ウナギ入りバケツ",
   "item.japanese_food_mod.tuna_bucket": "マグロ入りバケツ",
 
@@ -99,6 +100,7 @@
   "entity.japanese_food_mod.clam": "ハマグリ",
   "entity.japanese_food_mod.asari_clam": "アサリ",
   "entity.japanese_food_mod.turban_shell": "サザエ",
+  "entity.japanese_food_mod.anglerfish": "アンコウ",
 
   "gui.japanese_food_mod.identifiedTimeProgress": "進捗: %1$s%2$s",
   "gui.japanese_food_mod.fermentationTimeProgress": "進捗: %1$s%2$s",
