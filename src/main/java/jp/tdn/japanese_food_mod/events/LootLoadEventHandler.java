@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.events;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
+import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
@@ -13,6 +14,7 @@ public class LootLoadEventHandler {
     private static ResourceLocation grass = new ResourceLocation("minecraft", "blocks/grass");
     private static ResourceLocation sea_grass = new ResourceLocation("minecraft", "blocks/seagrass");
     private static ResourceLocation squid = new ResourceLocation("minecraft", "entities/squid");
+    //private static ResourceLocation bamboo = new ResourceLocation("minecraft", "blocks/bamboo_sapling");
 
     @SubscribeEvent
     public static void onLootLoad(LootTableLoadEvent event){

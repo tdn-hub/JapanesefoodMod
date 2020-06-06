@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "item": "japanese_food_mod:turban_shell"
+    },
+    {
+      "item": "japanese_food_mod:soy_sauce"
+    },
+    {
+      "item": "japanese_food_mod:sake"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:grilled_turban_shell",
+    "count": 1
+  }
+}

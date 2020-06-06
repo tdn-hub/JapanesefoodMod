@@ -113,6 +113,36 @@
               ]
             }
           ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "japanese_food_mod:sea_bream",
+          "conditions": [
+            {
+              "condition": "minecraft:alternative",
+              "terms": [
+                {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
+                    "biome": "minecraft:warm_ocean"
+                  }
+                },
+                {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
+                    "biome": "minecraft:lukewarm_ocean"
+                  }
+                },
+                {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
+                    "biome": "minecraft:ocean"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     }
