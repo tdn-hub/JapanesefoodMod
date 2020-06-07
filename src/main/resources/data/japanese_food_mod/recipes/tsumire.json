@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "item": "japanese_food_mod:fish_paste"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:tsumire",
+    "count": 1
+  }
+}

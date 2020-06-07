@@ -98,6 +98,12 @@ public class JPItems {
     public static final Item GRILLED_TURBAN_SHELL = register(new FoodItem(4, 1.5f), "grilled_turban_shell");
     public static final Item BAMBOO_SHOOT = register(new FoodItem(2, 0.1f), "bamboo_shoot");
     public static final Item GLAZE_GRILLED_EEL = register(new FoodItem(5, 2.5f), "glaze_grilled_eel");
+    public static final Item EEL_RICE_BOX = register(new FoodItem(7, 3.0f), "eel_rice_box");
+    public static final Item FISH_PASTE = register(new FoodItem(1, 0.5f), "fish_paste");
+    public static final Item KAMABOKO = register(new FoodItem(3, 1.0f), "kamaboko");
+    public static final Item CHIKUWA = register(new FoodItem(3, 1.0f), "chikuwa");
+    public static final Item HANPEN = register(new FoodItem(3, 1.0f), "hanpen");
+    public static final Item TSUMIRE = register(new FoodItem(2, 0.5f), "tsumire");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
@@ -110,6 +116,7 @@ public class JPItems {
     public static final Item AMBERJACK = register(new FoodItem(2, 1.5f), "amberjack");
     public static final Item ANGLERFISN = register(new FoodItem(2, 1.0f), "anglerfish");
     public static final Item SEA_BREAM = register(new FoodItem(2, 0.5f), "sea_bream");
+    public static final Item MACKEREL = register(new FoodItem(1, 0.5f), "mackerel");
     public static final Item EEL_BUCKET = register(new FishBucketItem(JPEntities.EEL, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "eel_bucket");
     public static final Item TUNA_BUCKET = register(new FishBucketItem(JPEntities.TUNA, Fluids.WATER, new Item.Properties().maxStackSize(1).group(ItemGroup_Japanese)), "tuna_bucket");
     public static final Item CLAM = register(new FoodItem(1, 0.5f), "clam");

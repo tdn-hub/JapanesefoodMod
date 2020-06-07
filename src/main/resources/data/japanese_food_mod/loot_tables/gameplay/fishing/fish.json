@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 25,
+          "weight": 15,
           "name": "japanese_food_mod:shrimp"
         },
         {
@@ -18,6 +18,11 @@
           "type": "minecraft:item",
           "weight": 10,
           "name": "japanese_food_mod:eel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 30,
+          "name": "japanese_food_mod:mackerel"
         },
         {
           "type": "minecraft:item",

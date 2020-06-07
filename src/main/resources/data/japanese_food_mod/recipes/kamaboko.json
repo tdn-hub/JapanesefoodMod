@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "   ",
+    "   "
+  ],
+  "key": {
+    "#": {
+      "item": "japanese_food_mod:fish_paste"
+    }
+  },
+  "result": {
+    "item": "japanese_food_mod:kamaboko"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":[
+    {
+      "item": "japanese_food_mod:glaze_grilled_eel"
+    },
+    {
+      "item": "japanese_food_mod:rice"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:eel_rice_box"
+  }
+}

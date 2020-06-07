@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredient": {
+    "tag": "japanese_food_mod:paste_ingredients"
+  },
+  "result": {
+    "item": "japanese_food_mod:fish_paste",
+    "count": "2"
+  }
+}
