@@ -92,10 +92,12 @@ public class JPItems {
     public static final Item SALMON_ROE = register(new FoodItem(5, 2.5f), "salmon_roe");
     public static final Item SHRIMP_SUSHI = register(new FoodItem(4,2.0f), "shrimp_sushi");
     public static final Item SQUID_SUSHI = register(new FoodItem(4, 2.0f), "squid_sushi");
+    public static final Item SEA_BREAM_SUSHI = register(new FoodItem(5, 2.0f), "sea_bream_sushi");
     public static final Item TONKATSU = register(new FoodItem(4, 3.0f), "tonkatsu");
     public static final Item MISO_TONKATSU = register(new FoodItem(5, 3.0f), "miso_tonkatsu");
     public static final Item GRILLED_TURBAN_SHELL = register(new FoodItem(4, 1.5f), "grilled_turban_shell");
     public static final Item BAMBOO_SHOOT = register(new FoodItem(2, 0.1f), "bamboo_shoot");
+    public static final Item GLAZE_GRILLED_EEL = register(new FoodItem(5, 2.5f), "glaze_grilled_eel");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");

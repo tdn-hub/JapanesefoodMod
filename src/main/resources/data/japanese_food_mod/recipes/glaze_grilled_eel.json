@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "item": "japanese_food_mod:japanese_knife"
+    },
+    {
+      "item": "japanese_food_mod:eel"
+    },
+    {
+      "item": "japanese_food_mod:tare_sauce"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:glaze_grilled_eel",
+    "count": 1
+  }
+}
