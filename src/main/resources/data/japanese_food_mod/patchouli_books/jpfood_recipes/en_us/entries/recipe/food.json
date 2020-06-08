@@ -59,13 +59,42 @@
     },
     {
       "type": "crafting",
-      "recipe": "japanese_food_mod:vinegared_rice",
+      "recipe": "japanese_food_mod:sea_bream_sushi",
+      "recipe2": "japanese_food_mod:shrimp_sushi"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:squid_sushi",
+      "recipe2": "japanese_food_mod:vinegared_rice"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:fish_paste",
+      "recipe2": "japanese_food_mod:kamaboko"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:chikuwa",
+      "recipe2": "japanese_food_mod:hanpen"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:tsumire",
       "recipe2": "japanese_food_mod:tonkatsu"
     },
     {
       "type": "crafting",
-      "recipe": "japanese_food_mod:miso_tonkatsu"
-
+      "recipe": "japanese_food_mod:miso_tonkatsu",
+      "recipe2": "japanese_food_mod:nikujaga"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:glaze_grilled_eel",
+      "recipe2": "japanese_food_mod:eel_rice_box"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:grilled_turban_shell"
     },
     {
       "type": "smelting",

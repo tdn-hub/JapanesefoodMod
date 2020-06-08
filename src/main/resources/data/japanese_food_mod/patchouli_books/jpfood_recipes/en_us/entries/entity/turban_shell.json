@@ -1,0 +1,17 @@
+{
+  "name": "jpfood.entity.turban_shell",
+  "category": "japanese_food_mod:entity",
+  "icon": "japanese_food_mod:turban_shell",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.entity.turban_shell.title",
+      "text": "jpfood.page.turban_shell0"
+    },
+    {
+      "type": "entity",
+      "entity": "japanese_food_mod:turban_shell",
+      "text": "jpfood.page.turban_shell1"
+    }
+  ]
+}

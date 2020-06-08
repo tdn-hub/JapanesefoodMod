@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "japanese_food_mod:boiled_soy_beans"
+      "japanese_food_mod:jpfood_recipes"
     ]
   },
   "criteria": {
-    "has_pot": {
+    "has_rice": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "japanese_food_mod:pot",
+            "item": "japanese_food_mod:rice",
             "count": {
               "min": 1
             }
@@ -22,13 +22,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "japanese_food_mod:boiled_soy_beans"
+        "recipe": "japanese_food_mod:jpfood_recipes"
       }
     }
   },
   "requirements": [
     [
-      "has_pot",
+      "has_rice",
       "has_the_recipe"
     ]
   ]

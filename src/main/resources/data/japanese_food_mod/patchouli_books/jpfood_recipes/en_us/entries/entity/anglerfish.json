@@ -1,0 +1,17 @@
+{
+  "name": "jpfood.entity.anglerfish",
+  "category": "japanese_food_mod:entity",
+  "icon": "japanese_food_mod:anglerfish",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.entity.anglerfish.title",
+      "text": "jpfood.page.anglerfish0"
+    },
+    {
+      "type": "entity",
+      "entity": "japanese_food_mod:anglerfish",
+      "text": "jpfood.page.anglerfish1"
+    }
+  ]
+}

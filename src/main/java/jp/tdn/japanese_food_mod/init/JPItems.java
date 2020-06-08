@@ -21,9 +21,6 @@ public class JPItems {
     public static final ItemGroup ItemGroup_Japanese = new JapaneseFoodItemGroup();
     public static final List<Item> itemlist = Lists.newArrayList();
 
-    // Book
-    //public static final Item JPFOOD_RECIPES = register(new RecipeBookItem(new Item.Properties().group(ItemGroup_Japanese)), "jpfood_recipes");
-
     //Tool
     public static final Item POT = register(new CookWareItem(), "pot");
     public static final Item GRATER = register(new CookWareItem(), "grater");
@@ -31,6 +28,7 @@ public class JPItems {
 
     // Misc
     public static final Item TYAWAN = register(new SimpleItem(), "tyawan");
+    public static final Item JAPANESE_BOWL = register(new SimpleItem(), "japanese_bowl");
     public static final Item CLAY_POT_BEFORE_HEATING = register(new SimpleItem(), "clay_pot_before_heating");
     public static final Item CLAY_POT = register(new SimpleItem(), "clay_pot");
     public static final Item CUP = register(new CupItem(), "cup");

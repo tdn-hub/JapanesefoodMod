@@ -40,7 +40,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "japanese_food_mod:oyster_powder"
+      "recipe": "japanese_food_mod:oyster_powder",
+      "recipe2": "japanese_food_mod:japanese_bowl"
     },
     {
       "type": "smelting",

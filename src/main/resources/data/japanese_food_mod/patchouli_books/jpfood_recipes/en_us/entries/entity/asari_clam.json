@@ -1,0 +1,17 @@
+{
+  "name": "jpfood.entity.asari_clam",
+  "category": "japanese_food_mod:entity",
+  "icon": "japanese_food_mod:asari_clam",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.entity.asari_clam.title",
+      "text": "jpfood.page.asari_clam0"
+    },
+    {
+      "type": "entity",
+      "entity": "japanese_food_mod:asari_clam",
+      "text": "jpfood.page.asari_clam1"
+    }
+  ]
+}

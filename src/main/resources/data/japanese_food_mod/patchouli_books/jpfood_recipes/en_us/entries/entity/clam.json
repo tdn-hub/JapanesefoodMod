@@ -1,0 +1,17 @@
+{
+  "name": "jpfood.entity.clam",
+  "category": "japanese_food_mod:entity",
+  "icon": "japanese_food_mod:clam",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.entity.clam.title",
+      "text": "jpfood.page.clam0"
+    },
+    {
+      "type": "entity",
+      "entity": "japanese_food_mod:clam",
+      "text": "jpfood.page.clam1"
+    }
+  ]
+}
