@@ -20,7 +20,7 @@ public class CrabEntityRender extends MobRenderer<CrabEntity, CrabEntityModel<Cr
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(@Nonnull CrabEntity crabEntity) {
+    public ResourceLocation getEntityTexture(@Nonnull CrabEntity crabEntity) {
         return new ResourceLocation(JapaneseFoodMod.MOD_ID + ":textures/entities/crab.png");
     }
 }

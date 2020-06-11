@@ -22,7 +22,7 @@ public class TurbanShellEntityRender extends MobRenderer<TurbanShellEntity, Turb
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(@Nonnull TurbanShellEntity clamEntity) {
+    public ResourceLocation getEntityTexture(@Nonnull TurbanShellEntity clamEntity) {
         return new ResourceLocation(JapaneseFoodMod.MOD_ID + ":textures/entities/turban_shell.png");
     }
 }

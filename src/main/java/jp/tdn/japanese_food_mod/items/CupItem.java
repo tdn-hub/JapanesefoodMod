@@ -30,7 +30,7 @@ public class CupItem extends SimpleItem {
         if (!AECEntityList.isEmpty()) {
             AreaEffectCloudEntity AECEntity = (AreaEffectCloudEntity)AECEntityList.get(0);
             AECEntity.setRadius(AECEntity.getRadius() - 0.5F);
-            worldIn.playSound((PlayerEntity)null, player.posX, player.posY, player.posZ, SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+            worldIn.playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
             return new ActionResult(ActionResultType.SUCCESS, this.turnBottleIntoItem(inHand, player, new ItemStack(Items.DRAGON_BREATH)));
         } else {
             RayTraceResult rayTrace = rayTrace(worldIn, player, RayTraceContext.FluidMode.SOURCE_ONLY);
@@ -44,7 +44,7 @@ public class CupItem extends SimpleItem {
                     }
 
                     if (worldIn.getFluidState(pos).isTagged(FluidTags.WATER)) {
-                        worldIn.playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+                        worldIn.playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
                         return new ActionResult(ActionResultType.SUCCESS, this.turnBottleIntoItem(inHand, player, new ItemStack(JPItems.CUP_WITH_WATER)));
                     }
                 }

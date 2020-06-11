@@ -3,6 +3,12 @@ package jp.tdn.japanese_food_mod.client.renders;
 import jp.tdn.japanese_food_mod.blocks.tileentity.MicroScopeTileEntity;
 import jp.tdn.japanese_food_mod.client.renders.tileentity.MicroScopeTileEntityRenderer;
 import jp.tdn.japanese_food_mod.entities.*;
+import jp.tdn.japanese_food_mod.init.JPBlocks;
+import jp.tdn.japanese_food_mod.init.JPEntities;
+import jp.tdn.japanese_food_mod.init.JPTileEntities;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -11,16 +17,24 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 @OnlyIn(Dist.CLIENT)
 public class JPRenderRegistry {
     public static void registryEntityRenders(){
-        RenderingRegistry.registerEntityRenderingHandler(EelEntity.class, EelEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(CrabEntity.class, CrabEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(TunaEntity.class, TunaEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(ClamEntity.class, ClamEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(AsariClamEntity.class, AsariClamEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(TurbanShellEntity.class, TurbanShellEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(AnglerfishEntity.class, AnglerfishEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(JPEntities.EEL, EelEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(JPEntities.CRAB, CrabEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(JPEntities.TUNA, TunaEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(JPEntities.CLAM, ClamEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(JPEntities.ASARI_CLAM, AsariClamEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(JPEntities.TURBAN_SHELL, TurbanShellEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(JPEntities.ANGLERFISH, AnglerfishEntityRender::new);
     }
 
     public static void registryTileEntityRenders(){
-        ClientRegistry.bindTileEntitySpecialRenderer(MicroScopeTileEntity.class, new MicroScopeTileEntityRenderer());
+        ClientRegistry.bindTileEntityRenderer(JPTileEntities.MICROSCOPE, MicroScopeTileEntityRenderer::new);
+    }
+
+    public static void registryRenderLayer(){
+        RenderTypeLookup.setRenderLayer(JPBlocks.CROP_GRASS, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(JPBlocks.LEEK_PLANT, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(JPBlocks.RADISH_SPROUT_PLANT, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(JPBlocks.RICE_PLANT, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(JPBlocks.SOY_PLANT, RenderType.getCutout());
     }
 }

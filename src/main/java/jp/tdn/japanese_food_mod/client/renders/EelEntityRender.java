@@ -20,7 +20,7 @@ public class EelEntityRender extends MobRenderer<EelEntity, EelEntityModel<EelEn
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(@Nonnull EelEntity ellEntity) {
+    public ResourceLocation getEntityTexture(@Nonnull EelEntity ellEntity) {
         return new ResourceLocation(JapaneseFoodMod.MOD_ID + ":textures/entities/eel.png");
     }
 }

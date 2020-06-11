@@ -4,10 +4,7 @@ import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.blocks.tileentity.OysterShellTileEntity;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.ILiquidContainer;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,7 +18,7 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -34,6 +31,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -71,7 +69,7 @@ public class OysterShellBlock extends HorizontalBlock implements ILiquidContaine
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace) {
         if(!worldIn.isRemote()){
             int level = 0;
             TileEntity entity = worldIn.getTileEntity(pos);
@@ -84,11 +82,11 @@ public class OysterShellBlock extends HorizontalBlock implements ILiquidContaine
                 }
             }
         }
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
     @Override
-    public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
+    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
         super.tick(state, worldIn, pos, rand);
         TileEntity entity = worldIn.getTileEntity(pos);
         if(entity instanceof OysterShellTileEntity){
@@ -137,9 +135,8 @@ public class OysterShellBlock extends HorizontalBlock implements ILiquidContaine
     }
 
     @Override
-    @Nonnull
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 
     public IFluidState getFluidState(BlockState p_204507_1_) {

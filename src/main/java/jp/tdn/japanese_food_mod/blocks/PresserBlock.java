@@ -3,6 +3,7 @@ package jp.tdn.japanese_food_mod.blocks;
 import jp.tdn.japanese_food_mod.blocks.tileentity.PresserTileEntity;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
@@ -68,12 +69,12 @@ public class PresserBlock extends HorizontalBlock {
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if(!worldIn.isRemote){
             final TileEntity tileEntity = worldIn.getTileEntity(pos);
             if(tileEntity instanceof PresserTileEntity) NetworkHooks.openGui((ServerPlayerEntity) player, (PresserTileEntity) tileEntity, pos);
         }
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
     @Override
@@ -125,8 +126,8 @@ public class PresserBlock extends HorizontalBlock {
         return state.rotate(mirrorIn.toRotation(state.get(DIRECTION)));
     }
 
-    @Nonnull
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 }

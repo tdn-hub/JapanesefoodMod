@@ -20,7 +20,7 @@ public class TunaEntityRender extends MobRenderer<TunaEntity, TunaEntityModel<Tu
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(@Nonnull TunaEntity tunaEntity) {
+    public ResourceLocation getEntityTexture(@Nonnull TunaEntity tunaEntity) {
         return new ResourceLocation(JapaneseFoodMod.MOD_ID + ":textures/entities/tuna.png");
     }
 }

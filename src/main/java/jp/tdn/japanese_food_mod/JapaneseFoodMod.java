@@ -44,6 +44,7 @@ public class JapaneseFoodMod {
         // do something that can only be done on the client
         JPRenderRegistry.registryEntityRenders();
         JPRenderRegistry.registryTileEntityRenders();
+        JPRenderRegistry.registryRenderLayer();
         LOGGER.info("Client Setup");
     }
 }

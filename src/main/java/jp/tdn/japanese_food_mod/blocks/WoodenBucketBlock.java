@@ -3,6 +3,7 @@ package jp.tdn.japanese_food_mod.blocks;
 import jp.tdn.japanese_food_mod.blocks.tileentity.WoodenBucketTileEntity;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
@@ -67,13 +68,13 @@ public class WoodenBucketBlock extends HorizontalBlock {
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if(!worldIn.isRemote){
             final TileEntity tileEntity = worldIn.getTileEntity(pos);
             worldIn.playSound((PlayerEntity) null, (double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5f, worldIn.rand.nextFloat() * 0.1f + 0.9f);
             if(tileEntity instanceof WoodenBucketTileEntity) NetworkHooks.openGui((ServerPlayerEntity) player, (WoodenBucketTileEntity) tileEntity, pos);
         }
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
     @Override
@@ -132,8 +133,8 @@ public class WoodenBucketBlock extends HorizontalBlock {
         }
     }
 
-    @Nonnull
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 }

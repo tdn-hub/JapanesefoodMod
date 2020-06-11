@@ -1,45 +1,50 @@
 package jp.tdn.japanese_food_mod.client.models;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.RendererModel;
-import net.minecraft.client.renderer.model.ModelBox;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 
 public class ClamEntityModel<T extends LivingEntity> extends EntityModel<T> {
-    private final RendererModel body;
-    private final RendererModel bone;
-    private final RendererModel bone2;
+    private final ModelRenderer body;
+    private final ModelRenderer bone;
+    private final ModelRenderer bone2;
 
     public ClamEntityModel() {
         textureWidth = 32;
         textureHeight = 32;
 
-        body = new RendererModel(this);
+        body = new ModelRenderer(this);
         body.setRotationPoint(0.0F, 24.0F, 0.0F);
-        setRotationAngle(body, 0.0F, 3.1416F, 0.0F);
 
 
-        bone = new RendererModel(this);
+        bone = new ModelRenderer(this);
         bone.setRotationPoint(0.0F, 0.0F, 0.0F);
         body.addChild(bone);
-        bone.cubeList.add(new ModelBox(bone, 0, 16, -2.7F, -1.0F, -2.0F, 5, 1, 4, 0.0F, false));
-        bone.cubeList.add(new ModelBox(bone, 0, 11, -2.7F, -3.0F, -2.0F, 5, 1, 4, 0.0F, false));
-        bone.cubeList.add(new ModelBox(bone, 0, 6, 0.3F, -4.0F, 0.0F, 2, 1, 2, 0.0F, false));
-        bone.cubeList.add(new ModelBox(bone, 0, 9, -2.7F, -2.0F, 2.0F, 5, 1, 1, 0.0F, false));
+        bone.setTextureOffset(0, 16).addBox(-2.7F, -1.0F, -2.0F, 5.0F, 1.0F, 4.0F, 0.0F, false);
+        bone.setTextureOffset(0, 11).addBox(-2.7F, -3.0F, -2.0F, 5.0F, 1.0F, 4.0F, 0.0F, false);
+        bone.setTextureOffset(0, 6).addBox(0.3F, -4.0F, 0.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
+        bone.setTextureOffset(0, 9).addBox(-2.7F, -2.0F, 2.0F, 5.0F, 1.0F, 1.0F, 0.0F, false);
 
-        bone2 = new RendererModel(this);
+        bone2 = new ModelRenderer(this);
         bone2.setRotationPoint(0.0F, -1.0F, 3.0F);
         body.addChild(bone2);
-        bone2.cubeList.add(new ModelBox(bone2, 0, 0, -4.7F, -1.0F, -6.0F, 8, 1, 5, 0.0F, false));
+        bone2.setTextureOffset(0, 0).addBox(-4.7F, -1.0F, -6.0F, 8.0F, 1.0F, 5.0F, 0.0F, false);
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        body.render(f5);
+    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+        //previously the render function, render code was moved to a method below
     }
 
-    public void setRotationAngle(RendererModel modelRenderer, float x, float y, float z) {
+    @Override
+    public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+        body.render(matrixStack, buffer, packedLight, packedOverlay);
+    }
+
+    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
