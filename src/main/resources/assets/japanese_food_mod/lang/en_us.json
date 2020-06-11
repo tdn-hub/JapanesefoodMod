@@ -130,6 +130,8 @@
   "advancements.japanese_food_mod.soy_sauce.description": "Obtaining soy sauce from compressed unrefined soy sauce",
   "advancements.japanese_food_mod.drink_soy_sauce.title": "Lethal dose 1L",
   "advancements.japanese_food_mod.drink_soy_sauce.description": "Don't drink soy sauce in one gulp because it's dangerous!",
+  "advancements.japanese_food_mod.get_recipe_book.title": "Recipes",
+  "advancements.japanese_food_mod.get_recipe_book.description": "If you read this, it's almost manageable.",
 
   "jpfood.name": "JPFOOD RECIPES",
   "jpfood.landing": "This is a book of recipes that will be added with Japanese Food MOD.$(p)$(#f00)NOTE$(0):These sentences are written using machine translation.",
