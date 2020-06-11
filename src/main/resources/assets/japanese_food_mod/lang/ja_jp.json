@@ -131,6 +131,8 @@
   "advancements.japanese_food_mod.soy_sauce.description": "圧縮した諸味から醤油を手に入れる",
   "advancements.japanese_food_mod.drink_soy_sauce.title": "致死量1L",
   "advancements.japanese_food_mod.drink_soy_sauce.description": "醤油の一気飲みはやめましょう",
+  "advancements.japanese_food_mod.get_recipe_book.title": "レシピ集",
+  "advancements.japanese_food_mod.get_recipe_book.description": "これを読めばだいたい何とかなる",
 
   "jpfood.name": "和食レシピ集",
   "jpfood.landing": "これは、日本食MODで追加されるレシピを記した本です。$(br)",
