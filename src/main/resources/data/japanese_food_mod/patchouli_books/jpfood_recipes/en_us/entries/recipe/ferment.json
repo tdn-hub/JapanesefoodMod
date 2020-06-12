@@ -30,6 +30,11 @@
     },
     {
       "type": "ferment",
+      "text": "jpfood.page.ferment9",
+      "recipe": "japanese_food_mod:unrefined_mirin"
+    },
+    {
+      "type": "ferment",
       "text": "jpfood.page.ferment5",
       "recipe": "japanese_food_mod:vinegar"
     },
@@ -37,9 +42,6 @@
       "type": "ferment",
       "text": "jpfood.page.ferment8",
       "recipe": "japanese_food_mod:pickled_radish"
-    },
-    {
-      "type": "empty"
     },
     {
       "type": "text",
