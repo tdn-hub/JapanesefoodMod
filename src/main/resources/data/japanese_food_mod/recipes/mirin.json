@@ -1,0 +1,19 @@
+{
+  "type": "japanese_food_mod:fermentation",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:yeast_cell"
+    },
+    {
+      "item": "japanese_food_mod:rice"
+    },
+    {
+      "tag": "japanese_food_mod:sake"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:mirin",
+    "count": 8
+  },
+  "process_time": 8000
+}
