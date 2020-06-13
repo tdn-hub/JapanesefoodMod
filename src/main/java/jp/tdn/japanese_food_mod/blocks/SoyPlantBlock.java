@@ -23,11 +23,11 @@ public class SoyPlantBlock extends CropsBlock{
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().sound(SoundType.CROP));
     }
 
-    @Override
-    @Nonnull
-    protected IItemProvider getSeedsItem(){
-        return JPItems.SOY_BEANS;
-    }
+//    @Override
+//    @Nonnull
+//    protected IItemProvider getSeedsItem(){
+//        return JPItems.SOY_BEANS;
+//    }
 
 //    @Override
 //    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
