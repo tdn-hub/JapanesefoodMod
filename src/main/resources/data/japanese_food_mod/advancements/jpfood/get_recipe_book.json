@@ -2,9 +2,7 @@
   "display": {
     "icon": {
       "item": "patchouli:guide_book",
-      "nbt": {
-        "patchouli:book": "japanese_food_mod:jpfood_recipes"
-      }
+      "nbt": "{\"patchouli:book\":\"japanese_food_mod:jpfood_recipes\"}"
     },
     "title": {
       "translate": "advancements.japanese_food_mod.get_recipe_book.title"
@@ -25,9 +23,7 @@
         "items": [
           {
             "item": "patchouli:guide_book",
-            "nbt": {
-              "patchouli:book": "japanese_food_mod:jpfood_recipes"
-            },
+            "nbt": "{\"patchouli:book\":\"japanese_food_mod:jpfood_recipes\"}",
             "count": {
               "min": 1
             }
