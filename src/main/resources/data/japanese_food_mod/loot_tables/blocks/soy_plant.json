@@ -33,19 +33,25 @@
             },
             {
               "type": "minecraft:item",
-              "condition": "minecraft:alternative",
-              "terms": [
+              "conditions": [
                 {
-                  "block": "japanese_food_mod:soy_plant",
-                  "properties": {
-                    "age": "5"
-                  }
-                },
-                {
-                  "block": "japanese_food_mod:soy_plant",
-                  "properties": {
-                    "age": "6"
-                  }
+                  "condition": "minecraft:alternative",
+                  "terms": [
+                    {
+                      "condition": "minecraft:block_state_property",
+                      "block": "japanese_food_mod:soy_plant",
+                      "properties": {
+                        "age": "5"
+                      }
+                    },
+                    {
+                      "condition": "minecraft:block_state_property",
+                      "block": "japanese_food_mod:soy_plant",
+                      "properties": {
+                        "age": "6"
+                      }
+                    }
+                  ]
                 }
               ],
               "functions": [
@@ -98,36 +104,6 @@
                 }
               ],
               "name": "japanese_food_mod:soy_beans"
-            },
-            {
-              "type": "minecraft:item",
-              "condition": "minecraft:alternative",
-              "terms": [
-                {
-                  "block": "japanese_food_mod:soy_plant",
-                  "properties": {
-                  "age": "5"
-                  }
-                },
-                {
-                  "block": "japanese_food_mod:soy_plant",
-                  "properties": {
-                    "age": "6"
-                  }
-                }
-              ],
-              "functions": [
-                {
-                  "function": "minecraft:apply_bonus",
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:binomial_with_bonus_count",
-                  "parameters": {
-                    "extra": 2,
-                    "probability": 0.5714286
-                  }
-                }
-              ],
-              "name": "japanese_food_mod:edamame"
             }
           ]
         }
