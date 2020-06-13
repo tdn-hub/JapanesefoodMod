@@ -37,15 +37,15 @@ public class RicePlantBlock extends CropsBlock{
         return fluidState.getFluid() == Fluids.WATER;
     }
 
-    @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        if(!world.isRemote){
-            if(this.isMaxAge(state)){
-                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(JPItems.RICE, RANDOM.nextInt(2) + 1)));
-                world.setBlockState(pos, this.withAge(0));
-                return ActionResultType.SUCCESS;
-            }
-        }
-        return ActionResultType.FAIL;
-    }
+//    @Override
+//    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+//        if(!world.isRemote){
+//            if(this.isMaxAge(state)){
+//                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(JPItems.RICE, RANDOM.nextInt(2) + 1)));
+//                world.setBlockState(pos, this.withAge(0));
+//                return ActionResultType.SUCCESS;
+//            }
+//        }
+//        return ActionResultType.FAIL;
+//    }
 }

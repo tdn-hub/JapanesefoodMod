@@ -28,15 +28,15 @@ public class LeekPlantBlock extends CropsBlock{
         return JPItems.LEEK_SEED;
     }
 
-    @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        if(!world.isRemote){
-            if(this.isMaxAge(state)){
-                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(JPItems.LEEK, 1)));
-                world.setBlockState(pos, this.withAge(0));
-                return ActionResultType.SUCCESS;
-            }
-        }
-        return ActionResultType.FAIL;
-    }
+//    @Override
+//    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+//        if(!world.isRemote){
+//            if(this.isMaxAge(state)){
+//                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(JPItems.LEEK, 1)));
+//                world.setBlockState(pos, this.withAge(0));
+//                return ActionResultType.SUCCESS;
+//            }
+//        }
+//        return ActionResultType.FAIL;
+//    }
 }
