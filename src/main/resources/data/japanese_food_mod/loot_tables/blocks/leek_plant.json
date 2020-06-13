@@ -36,24 +36,23 @@
               "name": "japanese_food_mod:leek"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
         {
-          "rolls": 1.0,
-          "entries": [
+          "type": "minecraft:item",
+          "functions": [
             {
-              "type": "minecraft:item",
-              "functions": [
-                {
-                  "function": "minecraft:apply_bonus",
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:binomial_with_bonus_count",
-                  "parameters": {
-                    "extra": 2,
-                    "probability": 0.5714286
-                  }
-                }
-              ],
-              "name": "japanese_food_mod:leek"
+              "function": "minecraft:apply_bonus",
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "parameters": {
+                "extra": 2,
+                "probability": 0.5714286
+              }
             }
           ],
           "conditions": [
@@ -64,7 +63,8 @@
                 "age": "7"
               }
             }
-          ]
+          ],
+          "name": "japanese_food_mod:leek"
         }
       ],
       "functions": [
