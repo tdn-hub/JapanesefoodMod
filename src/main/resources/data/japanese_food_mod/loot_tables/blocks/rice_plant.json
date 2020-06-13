@@ -44,11 +44,11 @@
               }
             }
           ],
-          "name": "xlfoodmod:rice_seedling",
+          "name": "japanese_food_mod:rice_seedling",
           "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "xlfoodmod:rice_plant",
+              "block": "japanese_food_mod:rice_plant",
               "properties": {
                 "age": "7"
               }
