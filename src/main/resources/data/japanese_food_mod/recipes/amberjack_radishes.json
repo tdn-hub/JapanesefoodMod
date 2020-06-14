@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:amberjack"
+    },
+    {
+      "item": "japanese_food_mod:radish_sprout"
+    },
+    {
+      "item": "japanese_food_mod:soy_sauce"
+    },
+    {
+      "item": "japanese_food_mod:mirin"
+    },
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "japanese_food_mod:broth"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:amberjack_radishes",
+    "count": 1
+  }
+}

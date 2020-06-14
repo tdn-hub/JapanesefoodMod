@@ -2,6 +2,7 @@ package jp.tdn.japanese_food_mod.recipes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.realmsclient.util.JsonUtils;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -28,16 +29,19 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
     protected Ingredient ingredient;
     protected ItemStack result;
     protected float experience;
+    protected float probability;
     protected int cookTime;
 
-    public MicroScopeRecipe(ResourceLocation idIn, Ingredient ingredient, ItemStack result, float experience, int cookTime){
+    public MicroScopeRecipe(ResourceLocation idIn, Ingredient ingredient, ItemStack result, float experience, float probability, int cookTime){
         this.id = idIn;
         this.ingredient = ingredient;
         this.result = result;
         this.experience = experience;
+        this.probability = probability;
         this.cookTime = cookTime;
     }
 
+    @Override
     public boolean matches(IInventory inventory, @Nonnull World worldIn){
         return this.ingredient.test(inventory.getStackInSlot(0));
     }
@@ -48,11 +52,13 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
         return this.result.copy();
     }
 
+    @Override
     public boolean canFit(int width, int height){
         return true;
     }
 
     @Nonnull
+    @Override
     public NonNullList<Ingredient> getIngredients(){
         NonNullList<Ingredient> nonNullList = NonNullList.create();
         nonNullList.add(this.ingredient);
@@ -63,7 +69,12 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
         return this.experience;
     }
 
+    public float getProbability(){
+        return probability;
+    }
+
     @Nonnull
+    @Override
     public ItemStack getRecipeOutput(){
         return this.result;
     }
@@ -73,6 +84,7 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
     }
 
     @Nonnull
+    @Override
     public ResourceLocation getId(){
         return this.id;
     }
@@ -84,6 +96,7 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
     }
 
     @Nonnull
+    @Override
     public IRecipeType<?> getType(){
         return RECIPE_TYPE;
     }
@@ -101,9 +114,10 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
             Ingredient ingredient = CraftingHelper.getIngredient(inputElement);
             int cookTime = JSONUtils.getInt(json, "process_time", 50);
             float experience = JSONUtils.getFloat(json, "xp", 0.0f);
+            float probability = JSONUtils.getFloat(json, "probability");
             //JapaneseFoodMod.LOGGER.info(recipe.ingredient);
 
-            return new MicroScopeRecipe(recipeId, ingredient, result, experience, cookTime);
+            return new MicroScopeRecipe(recipeId, ingredient, result, experience, probability, cookTime);
         }
 
         @Nullable
@@ -113,8 +127,9 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
             ItemStack result = buffer.readItemStack();
             int cookTime = buffer.readVarInt();
             float experience = buffer.readFloat();
+            float probability = buffer.readFloat();
 
-            return new MicroScopeRecipe(recipeId, ingredient, result, experience, cookTime);
+            return new MicroScopeRecipe(recipeId, ingredient, result, experience, probability, cookTime);
         }
 
         @Override
@@ -123,6 +138,7 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
             buffer.writeItemStack(recipe.result);
             buffer.writeVarInt(recipe.cookTime);
             buffer.writeFloat(recipe.experience);
+            buffer.writeFloat(recipe.probability);
         }
     }
 }

@@ -13,6 +13,7 @@
   "block.japanese_food_mod.leek_plant": "ネギの種",
   "block.japanese_food_mod.oyster_shell": "牡蠣の殻",
   "block.japanese_food_mod.unrefined_mirin": "みりんの諸味",
+  "block.japanese_food_mod.giant_cauldron": "巨大な釜",
 
   "item.japanese_food_mod.tyawan": "茶わん",
   "item.japanese_food_mod.pot": "鍋",
@@ -98,6 +99,7 @@
   "item.japanese_food_mod.hanpen": "はんぺん",
   "item.japanese_food_mod.tsumire": "つみれ",
   "item.japanese_food_mod.japanese_bowl": "どんぶり",
+  "item.japanese_food_mod.amberjack_radishes": "ブリ大根",
   "item.japanese_food_mod.eel_spawn_egg": "ウナギのスポーンエッグ",
   "item.japanese_food_mod.crab_spawn_egg": "カニのスポーンエッグ",
   "item.japanese_food_mod.tuna_spawn_egg": "マグロのスポーンエッグ",

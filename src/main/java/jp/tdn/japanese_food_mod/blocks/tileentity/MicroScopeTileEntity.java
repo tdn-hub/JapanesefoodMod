@@ -1,5 +1,6 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
+import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.container.MicroScopeContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
@@ -74,7 +75,9 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
     }
 
     private boolean isInput(final ItemStack stack){
-        if(stack.isEmpty()) return false;
+        if(stack.isEmpty()) {
+            return false;
+        }
         return getRecipe(stack).isPresent();
     }
 
@@ -106,7 +109,9 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
 
     @Override
     public void tick() {
-        if(world == null || world.isRemote) return;
+        if(world == null || world.isRemote) {
+            return;
+        }
 
         final ItemStack input = inventory.getStackInSlot(INPUT_SLOT);
         final ItemStack container = inventory.getStackInSlot(CONTAINER_SLOT);
@@ -120,12 +125,17 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
                 }else{
                     --identifiedTimeLeft;
                     if(identifiedTimeLeft == 0){
-                        inventory.insertItem(OUTPUT_SLOT, result, false);
-                        if(input.hasContainerItem()) insertOrDropContainerItem(input);
+                        if(JapaneseFoodUtil.rand.nextInt(101) <= getRecipe(input).get().getProbability() * 100){
+                            inventory.insertItem(OUTPUT_SLOT, result, false);
+                            if (input.hasContainerItem()) {
+                                insertOrDropContainerItem(input);
+                            }
+                            container.shrink(1);
+                            inventory.setStackInSlot(CONTAINER_SLOT, container);
+                        }
                         input.shrink(1);
-                        container.shrink(1);
+
                         inventory.setStackInSlot(INPUT_SLOT, input);
-                        inventory.setStackInSlot(CONTAINER_SLOT, container);
                         identifiedTimeLeft = -1;
                     }
                 }
@@ -189,6 +199,7 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
         return compound;
     }
 
+    @Override
     @Nonnull
     public CompoundNBT getUpdateTag(){
         return this.write(new CompoundNBT());

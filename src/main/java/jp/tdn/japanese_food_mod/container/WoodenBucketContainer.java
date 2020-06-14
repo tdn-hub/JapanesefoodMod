@@ -32,11 +32,11 @@ public class WoodenBucketContainer extends Container {
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.fermentationTimeLeft, v -> tileEntity.fermentationTimeLeft = (short)v));
         this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxFermentationTime, v -> tileEntity.maxFermentationTime = (short)v));
 
+        // InputSlot
         final int inputStartX = 21;
         final int inputStartY = 20;
         final int slotSizePlus2 = 18;
         int index = 0;
-
         for(int row = 0;row < 3; ++row){
             for(int col = 0;col < 2; ++col){
                 this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.INPUT_SLOT[index], inputStartX + (col * slotSizePlus2), inputStartY + (row * slotSizePlus2)));
@@ -44,11 +44,19 @@ public class WoodenBucketContainer extends Container {
             }
         }
 
+        // OutputSlot
         this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.OUTPUT_SLOT, 115, 34));
 
+        // ReturnSlot
+        final int returnStartX = 97;
+        final int returnStartY = 64;
+        for(index = 0; index < WoodenBucketTileEntity.RETURN_SLOT.length; ++index){
+            this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.RETURN_SLOT[index], returnStartX + (index * slotSizePlus2), returnStartY));
+        }
+
+        // InventorySlot
         final int playerInventoryStartX = 8;
         final int playerInventoryStartY = 92;
-
         for(int row = 0; row < 3; ++row){
             for(int column = 0; column < 9; ++column){
                 this.addSlot(new Slot(playerInventory, 9 + (row * 9) + column, playerInventoryStartX + (column * slotSizePlus2), playerInventoryStartY + (row * slotSizePlus2)));
@@ -65,7 +73,9 @@ public class WoodenBucketContainer extends Container {
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
         final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
-        if(tileAtPos instanceof WoodenBucketTileEntity) return (WoodenBucketTileEntity)tileAtPos;
+        if(tileAtPos instanceof WoodenBucketTileEntity) {
+            return (WoodenBucketTileEntity)tileAtPos;
+        }
         throw new IllegalStateException("Tile entity is not correct" + tileAtPos);
     }
 
