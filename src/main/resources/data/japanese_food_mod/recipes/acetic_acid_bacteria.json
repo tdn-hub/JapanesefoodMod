@@ -7,5 +7,6 @@
     "item": "japanese_food_mod:acetic_acid_bacteria"
   },
   "xp": 1.0,
+  "probability": 0.25,
   "process_time": 1000
 }

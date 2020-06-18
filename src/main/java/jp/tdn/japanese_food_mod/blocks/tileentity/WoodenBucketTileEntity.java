@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import jp.tdn.japanese_food_mod.blocks.WoodenBucketBlock;
 import jp.tdn.japanese_food_mod.container.WoodenBucketContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
+import jp.tdn.japanese_food_mod.init.JPItems;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
 import net.minecraft.block.BlockState;
@@ -15,6 +16,7 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -37,12 +39,13 @@ import java.util.Optional;
 public class WoodenBucketTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
     public static final int[] INPUT_SLOT = {0,1,2,3,4,5};
     public static final int OUTPUT_SLOT = 6;
+    public static final int[] RETURN_SLOT = {7, 8, 9};
 
     private static final String INVENTORY_TAG = "inventory";
     private static final String FERMENTATION_TIME_LEFT = "fermentation_time_left";
     private static final String MAX_FERMENTATION_TIME = "max_fermentation_time";
 
-    public ItemStackHandler inventory = new ItemStackHandler(7){
+    public ItemStackHandler inventory = new ItemStackHandler(10){
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             switch (slot){
@@ -56,6 +59,10 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
                     return true;
                 case OUTPUT_SLOT:
                     return isOutput(stack);
+                case 7:
+                case 8:
+                case 9:
+                    return isReturnOutput(stack);
                 default:
                     return false;
             }
@@ -89,7 +96,9 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     }
 
     private boolean isInput(final ItemStack[] stack){
-        if(isEmpty(stack)) return false;
+        if(isEmpty(stack)) {
+            return false;
+        }
         return getRecipe(stack).isPresent();
     }
 
@@ -101,6 +110,10 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         }
         result = getResult(input);
         return result.isPresent() && ItemStack.areItemsEqual(result.get(), stack);
+    }
+
+    private boolean isReturnOutput(final ItemStack stack){
+        return stack.getItem() == Items.GLASS_BOTTLE || stack.getItem() == JPItems.CUP;
     }
 
     private Optional<WoodenBucketRecipe> getRecipe(final ItemStack input){
@@ -122,7 +135,9 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
 
     @Override
     public void tick() {
-        if(world == null || world.isRemote) return;
+        if(world == null || world.isRemote) {
+            return;
+        }
         boolean isActive = false;
 
         final List<ItemStack> inputs = Lists.newArrayList();
@@ -147,7 +162,9 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
                         int i = 0;
                         for(ItemStack input: inputs) {
                             if(i < INPUT_SLOT.length) {
-                                if (input.hasContainerItem()) insertOrDropContainerItem(input, INPUT_SLOT[i]);
+                                if (input.hasContainerItem()) {
+                                    insertOrDropContainerItem(input, INPUT_SLOT[i]);
+                                }
                                 input.shrink(1);
                                 inventory.setStackInSlot(INPUT_SLOT[i], input);
                                 ++i;
@@ -170,12 +187,20 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     }
 
     private void insertOrDropContainerItem(final ItemStack stack, final int slot){
+        int index;
         final ItemStack containerItem = stack.getContainerItem();
-        final boolean canInsertContainerItemIntoSlot = inventory.insertItem(slot, containerItem, true).isEmpty();
-        if(canInsertContainerItemIntoSlot){
-            inventory.insertItem(slot, containerItem, false);
-        }else{
-            InventoryHelper.spawnItemStack(Objects.requireNonNull(world), pos.getX(), pos.getY(), pos.getZ(), containerItem);
+        boolean canInsertContainerItemIntoReturnSlot = false;
+        for(index = 0; index < RETURN_SLOT.length && !(canInsertContainerItemIntoReturnSlot = inventory.insertItem(RETURN_SLOT[index], containerItem, true).isEmpty()); ++index);
+
+        if(canInsertContainerItemIntoReturnSlot){
+            inventory.insertItem(RETURN_SLOT[index], containerItem, false);
+        }else {
+            final boolean canInsertContainerItemIntoSlot = inventory.insertItem(slot, containerItem, true).isEmpty();
+            if (canInsertContainerItemIntoSlot) {
+                inventory.insertItem(slot, containerItem, false);
+            } else {
+                InventoryHelper.spawnItemStack(Objects.requireNonNull(world), pos.getX(), pos.getY(), pos.getZ(), containerItem);
+            }
         }
     }
 
@@ -223,6 +248,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         return compound;
     }
 
+    @Override
     @Nonnull
     public CompoundNBT getUpdateTag(){
         return this.write(new CompoundNBT());

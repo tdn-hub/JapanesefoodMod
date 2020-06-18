@@ -9,8 +9,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "japanese_food_mod:batter",
-      "recipe2": "japanese_food_mod:boiled_egg"
+      "recipe": "japanese_food_mod:boiled_egg"
     },
     {
       "type": "crafting",
