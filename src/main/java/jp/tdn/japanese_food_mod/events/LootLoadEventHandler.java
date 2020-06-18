@@ -14,6 +14,7 @@ public class LootLoadEventHandler {
     private static ResourceLocation grass = new ResourceLocation("minecraft", "blocks/grass");
     private static ResourceLocation sea_grass = new ResourceLocation("minecraft", "blocks/seagrass");
     private static ResourceLocation squid = new ResourceLocation("minecraft", "entities/squid");
+    private static ResourceLocation pig = new ResourceLocation("minecraft", "entities/pig");
     //private static ResourceLocation bamboo = new ResourceLocation("minecraft", "blocks/bamboo_sapling");
 
     @SubscribeEvent
@@ -28,6 +29,10 @@ public class LootLoadEventHandler {
 
         if(event.getName().equals(squid)){
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "entities/squid"))).build());
+        }
+
+        if(event.getName().equals(pig)){
+            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "entities/pig"))).build());
         }
     }
 }
