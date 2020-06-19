@@ -96,6 +96,31 @@
       "recipe": "japanese_food_mod:grilled_turban_shell"
     },
     {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:menma",
+      "recipe2": "japanese_food_mod:noodles"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:soy_sauce_ramen_soup",
+      "recipe2": "japanese_food_mod:soy_sauce_ramen"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:pork_bone_ramen_soup",
+      "recipe2": "japanese_food_mod:pork_bone_ramen"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:salt_ramen_soup",
+      "recipe2": "japanese_food_mod:salt_ramen"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:miso_ramen_soup",
+      "recipe2": "japanese_food_mod:miso_ramen"
+    },
+    {
       "type": "smelting",
       "recipe": "japanese_food_mod:yakitori",
       "recipe2": "japanese_food_mod:negima"
