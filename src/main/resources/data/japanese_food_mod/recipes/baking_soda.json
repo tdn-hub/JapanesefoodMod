@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "japanese_food_mod:trona_ore"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:baking_soda",
+    "count": 4
+  }
+}

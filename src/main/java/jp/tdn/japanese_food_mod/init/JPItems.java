@@ -25,6 +25,7 @@ public class JPItems {
     public static final Item POT = register(new CookWareItem(), "pot");
     public static final Item GRATER = register(new CookWareItem(), "grater");
     public static final Item JAPANESE_KNIFE = register(new CookWareItem(), "japanese_knife");
+    public static final Item ROLLING_PIN = register(new CookWareItem(), "rolling_pin");
 
     // Misc
     public static final Item TYAWAN = register(new SimpleItem(), "tyawan");
@@ -38,6 +39,7 @@ public class JPItems {
     public static final Item POTATO_STARCH = register(new SimpleItem(), "potato_starch");
     public static final Item SALT = register(new SimpleItem(), "salt");
     public static final Item ROCK_SALT = register(new SimpleItem(), "rock_salt");
+    public static final Item BAKING_SODA = register(new SimpleItem(), "baking_soda");
     public static final Item COOKING_OIL = register(new SimpleItem(), "cooking_oil");
     public static final Item MISO = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "miso");
     public static final Item WAKAME = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).fastToEat().build())), "wakame");
@@ -50,6 +52,7 @@ public class JPItems {
     public static final Item BROTH = register(new SimpleItem(), "broth");
     public static final Item YEAST_CELL = register(new YeastCellItem(Items.GLASS_BOTTLE), "yeast_cell");
     public static final Item ACETIC_ACID_BACTERIA = register(new YeastCellItem(Items.GLASS_BOTTLE), "acetic_acid_bacteria");
+    public static final Item PORK_BONE = register(new SimpleItem(), "pork_bone");
 
     //Seed
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
@@ -103,6 +106,16 @@ public class JPItems {
     public static final Item CHIKUWA = register(new FoodItem(3, 1.0f), "chikuwa");
     public static final Item HANPEN = register(new FoodItem(3, 1.0f), "hanpen");
     public static final Item TSUMIRE = register(new FoodItem(2, 0.5f), "tsumire");
+    public static final Item MENMA = register(new FoodItem(2, 0.5f), "menma");
+    public static final Item NOODLES = register(new FoodItem(2, 0.5f), "noodles");
+    public static final Item SOY_SAUCE_RAMEN_SOUP = register(new DrinkItem(2, 0.5f), "soy_sauce_ramen_soup");
+    public static final Item PORK_BONE_RAMEN_SOUP = register(new DrinkItem(2, 0.5f), "pork_bone_ramen_soup");
+    public static final Item SALT_RAMEN_SOUP = register(new DrinkItem(2, 0.5f), "salt_ramen_soup");
+    public static final Item MISO_RAMEN_SOUP = register(new DrinkItem(2, 0.5f), "miso_ramen_soup");
+    public static final Item SOY_SAUCE_RAMEN = register(new DrinkItem(8, 5.0f), "soy_sauce_ramen");
+    public static final Item PORK_BONE_RAMEN = register(new DrinkItem(8, 5.0f), "pork_bone_ramen");
+    public static final Item SALT_RAMEN = register(new DrinkItem(8, 5.0f), "salt_ramen");
+    public static final Item MISO_RAMEN = register(new DrinkItem(8, 5.0f), "miso_ramen");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
@@ -124,6 +137,7 @@ public class JPItems {
 
     // Block Items
     public static final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");
+    public static final Item TRONA_ORE = register(new BlockItem(JPBlocks.TRONA_ORE, new Item.Properties().group(ItemGroup_Japanese)), "trona_ore");
     public static final Item UNREFINED_SAKE = register(new BlockItem(JPBlocks.UNREFINED_SAKE, new Item.Properties().group(ItemGroup_Japanese)), "unrefined_sake");
     public static final Item UNREFINED_SOY_SAUCE = register(new BlockItem(JPBlocks.UNREFINED_SOY_SAUCE, new Item.Properties().group(ItemGroup_Japanese)), "unrefined_soy_sauce");
     public static final Item UNREFINED_MIRIN = register(new BlockItem(JPBlocks.UNREFINED_MIRIN, new Item.Properties().group(ItemGroup_Japanese)), "unrefined_mirin");

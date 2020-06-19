@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "japanese_food_mod:soy_sauce"
+    },
+    {
+      "item": "japanese_food_mod:cooking_oil"
+    },
+    {
+      "item": "japanese_food_mod:broth"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:soy_sauce_ramen_soup",
+    "count": 1
+  }
+}

@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.OreBlock;
+import net.minecraft.block.material.Material;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +30,7 @@ public class JPBlocks {
     public static final Block LEEK_PLANT = register(new LeekPlantBlock(), "leek_plant");
     public static final Block OYSTER_SHELL = register(new OysterShellBlock(), "oyster_shell");
     public static final Block UNREFINED_MIRIN = register(new UnrefinedMirinBlock(), "unrefined_mirin");
+    public static final Block TRONA_ORE = register(new OreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F)), "trona_ore");
 
     public static Block register(@Nonnull Block block, @Nonnull String name){
         block.setRegistryName(JapaneseFoodMod.MOD_ID, name);

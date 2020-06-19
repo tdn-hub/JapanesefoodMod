@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "japanese_food_mod:pork_bone"
+    },
+    {
+      "item": "japanese_food_mod:leek"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:pork_bone_ramen_soup",
+    "count": 1
+  }
+}

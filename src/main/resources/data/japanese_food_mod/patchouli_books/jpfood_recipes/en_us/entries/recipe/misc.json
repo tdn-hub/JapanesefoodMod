@@ -44,6 +44,11 @@
       "recipe2": "japanese_food_mod:japanese_bowl"
     },
     {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:baking_soda",
+      "recipe2": "japanese_food_mod:rolling_pin"
+    },
+    {
       "type": "smelting",
       "recipe": "japanese_food_mod:cray_pot"
     }

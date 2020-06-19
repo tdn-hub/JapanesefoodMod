@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "japanese_food_mod:bamboo_shoot"
+    },
+    {
+      "item": "japanese_food_mod:soy_sauce"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:menma",
+    "count": 4
+  }
+}

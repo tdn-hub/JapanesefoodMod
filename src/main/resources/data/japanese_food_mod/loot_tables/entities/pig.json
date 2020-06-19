@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:block",
+  "type": "minecraft:entity",
   "pools": [
     {
-      "rolls": 2,
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "japanese_food_mod:rock_salt"
+          "name": "japanese_food_mod:pork_bone"
         }
       ]
     }

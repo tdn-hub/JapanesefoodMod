@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:rolling_pin"
+    },
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "japanese_food_mod:baking_soda"
+    },
+    {
+      "tag": "forge:dusts/salt"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "japanese_food_mod:wheat_flour"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:noodles",
+    "count": 1
+  }
+}
