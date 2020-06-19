@@ -107,11 +107,16 @@ public class JPItems {
     public static final Item CHIKUWA = register(new FoodItem(3, 1.0f), "chikuwa");
     public static final Item HANPEN = register(new FoodItem(3, 1.0f), "hanpen");
     public static final Item TSUMIRE = register(new FoodItem(2, 0.5f), "tsumire");
+    public static final Item MENMA = register(new FoodItem(2, 0.5f), "menma");
     public static final Item NOODLES = register(new FoodItem(2, 0.5f), "noodles");
     public static final Item SOY_SAUCE_RAMEN_SOUP = register(new DrinkItem(2, 0.5f), "soy_sauce_ramen_soup");
     public static final Item PORK_BONE_RAMEN_SOUP = register(new DrinkItem(2, 0.5f), "pork_bone_ramen_soup");
+    public static final Item SALT_RAMEN_SOUP = register(new DrinkItem(2, 0.5f), "salt_ramen_soup");
+    public static final Item MISO_RAMEN_SOUP = register(new DrinkItem(2, 0.5f), "miso_ramen_soup");
     public static final Item SOY_SAUCE_RAMEN = register(new DrinkItem(8, 5.0f), "soy_sauce_ramen");
     public static final Item PORK_BONE_RAMEN = register(new DrinkItem(8, 5.0f), "pork_bone_ramen");
+    public static final Item SALT_RAMEN = register(new DrinkItem(8, 5.0f), "salt_ramen");
+    public static final Item MISO_RAMEN = register(new DrinkItem(8, 5.0f), "miso_ramen");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
