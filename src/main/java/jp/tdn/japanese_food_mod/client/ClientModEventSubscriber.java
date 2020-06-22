@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.client;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
+import jp.tdn.japanese_food_mod.client.gui.FurnaceCauldronScreen;
 import jp.tdn.japanese_food_mod.client.gui.MicroScopeScreen;
 import jp.tdn.japanese_food_mod.client.gui.PresserScreen;
 import jp.tdn.japanese_food_mod.client.gui.WoodenBucketScreen;
@@ -17,6 +18,7 @@ public class ClientModEventSubscriber {
         ScreenManager.registerFactory(JPContainerTypes.MICROSCOPE, MicroScopeScreen::new);
         ScreenManager.registerFactory(JPContainerTypes.WOODEN_BUCKET, WoodenBucketScreen::new);
         ScreenManager.registerFactory(JPContainerTypes.PRESSER, PresserScreen::new);
+        ScreenManager.registerFactory(JPContainerTypes.FURNACE_CAULDRON, FurnaceCauldronScreen::new);
         JapaneseFoodMod.LOGGER.debug("Registered ContainerTypeScreens");
     }
 }

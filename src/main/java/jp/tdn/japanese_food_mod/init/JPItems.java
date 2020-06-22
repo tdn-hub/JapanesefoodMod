@@ -53,6 +53,7 @@ public class JPItems {
     public static final Item YEAST_CELL = register(new YeastCellItem(Items.GLASS_BOTTLE), "yeast_cell");
     public static final Item ACETIC_ACID_BACTERIA = register(new YeastCellItem(Items.GLASS_BOTTLE), "acetic_acid_bacteria");
     public static final Item PORK_BONE = register(new SimpleItem(), "pork_bone");
+    public static final Item BITTERN = register(new SimpleItem(), "bittern");
 
     //Seed
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
@@ -144,6 +145,7 @@ public class JPItems {
     public static final Item WOODEN_BUCKET = register(new BlockItem(JPBlocks.WOODEN_BUCKET, new Item.Properties().group(ItemGroup_Japanese)), "wooden_bucket");
     public static final Item MICROSCOPE = register(new BlockItem(JPBlocks.MICRO_SCOPE, new Item.Properties().group(ItemGroup_Japanese)), "microscope");
     public static final Item PRESSER = register(new BlockItem(JPBlocks.PRESSER, new Item.Properties().group(ItemGroup_Japanese)), "presser");
+    public static final Item FURNACE_CAULDRON = register(new BlockItem(JPBlocks.FURNACE_CAULDRON, new Item.Properties().group(ItemGroup_Japanese)), "furnace_cauldron");
     public static final Item OYSTER_SHELL = register(new BlockItem(JPBlocks.OYSTER_SHELL, new Item.Properties().group(ItemGroup_Japanese)), "oyster_shell");
 
     // Spawn Eggs

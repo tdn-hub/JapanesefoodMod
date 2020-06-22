@@ -13,6 +13,7 @@
   "block.japanese_food_mod.oyster_shell": "Oyster Shell",
   "block.japanese_food_mod.unrefined_mirin": "Unrefined Mirin",
   "block.japanese_food_mod.trona_ore": "Trona Ore",
+  "block.japanese_food_mod.furnace_cauldron": "Salt Making Cauldron",
 
   "item.japanese_food_mod.tyawan": "Tyawan",
   "item.japanese_food_mod.pot": "Pot",
@@ -112,6 +113,7 @@
   "item.japanese_food_mod.miso_ramen": "Miso Ramen",
   "item.japanese_food_mod.miso_ramen_soup": "Miso Ramen Soup",
   "item.japanese_food_mod.menma": "Menma",
+  "item.japanese_food_mod.bittern": "Bittern",
   "item.japanese_food_mod.eel_spawn_egg": "Eel Spawn Egg",
   "item.japanese_food_mod.crab_spawn_egg": "Crab Spawn Egg",
   "item.japanese_food_mod.tuna_spawn_egg": "Tuna Spawn Egg",
@@ -133,7 +135,9 @@
   "gui.japanese_food_mod.identifiedTimeProgress": "Progress: %1$s%2$s",
   "gui.japanese_food_mod.fermentationTimeProgress": "Progress: %1$s%2$s",
   "gui.japanese_food_mod.pressingTimeProgress": "Progress: %1$s%2$s",
+  "gui.japanese_food_mod.heatingTimeProgress": "Progress: %1$s%2$s",
   "gui.japanese_food_mod.oilRemaining": "Oil: %1$s/%2$s",
+  "gui.japanese_food_mod.waterRemaining": "Water: %1$s/%2$s",
 
   "advancements.japanese_food_mod.root.title": "Japanese food",
   "advancements.japanese_food_mod.root.description": "Get the rice.",

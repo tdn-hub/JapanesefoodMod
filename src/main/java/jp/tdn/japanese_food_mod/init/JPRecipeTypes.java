@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.init;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
+import jp.tdn.japanese_food_mod.recipes.FurnaceCauldronRecipe;
 import jp.tdn.japanese_food_mod.recipes.MicroScopeRecipe;
 import jp.tdn.japanese_food_mod.recipes.PresserRecipe;
 import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
@@ -17,7 +18,8 @@ public class JPRecipeTypes {
         event.getRegistry().registerAll(
                 MicroScopeRecipe.SERIALIZER,
                 WoodenBucketRecipe.SERIALIZER,
-                PresserRecipe.SERIALIZER
+                PresserRecipe.SERIALIZER,
+                FurnaceCauldronRecipe.SERIALIZER
         );
     }
 }

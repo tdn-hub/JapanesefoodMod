@@ -1,15 +1,21 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "japanese_food_mod:salt_making",
   "ingredients": [
     {
-      "tag": "japanese_food_mod:water"
+      "item": "minecraft:water_bucket"
     },
     {
-      "item": "japanese_food_mod:pot"
+      "item": "japanese_food_mod:cup_with_water"
     }
   ],
-  "result": {
-    "item": "japanese_food_mod:salt",
-    "count": 8
-  }
+  "amounts": [
+    {
+      "amount": 500
+    },
+    {
+      "amount": 50
+    }
+  ],
+  "result": 50,
+  "process_time": 1200
 }

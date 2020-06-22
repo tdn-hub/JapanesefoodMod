@@ -36,5 +36,6 @@ public class JPRenderRegistry {
         RenderTypeLookup.setRenderLayer(JPBlocks.RADISH_SPROUT_PLANT, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(JPBlocks.RICE_PLANT, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(JPBlocks.SOY_PLANT, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(JPBlocks.FURNACE_CAULDRON, RenderType.getCutout());
     }
 }

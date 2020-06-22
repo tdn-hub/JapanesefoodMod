@@ -14,6 +14,7 @@
   "block.japanese_food_mod.oyster_shell": "牡蠣の殻",
   "block.japanese_food_mod.unrefined_mirin": "みりんの諸味",
   "block.japanese_food_mod.trona_ore": "トロナ鉱石",
+  "block.japanese_food_mod.furnace_cauldron": "製塩釜",
 
   "item.japanese_food_mod.tyawan": "茶わん",
   "item.japanese_food_mod.pot": "鍋",
@@ -113,6 +114,7 @@
   "item.japanese_food_mod.miso_ramen": "味噌ラーメン",
   "item.japanese_food_mod.miso_ramen_soup": "味噌ラーメンスープ",
   "item.japanese_food_mod.menma": "メンマ",
+  "item.japanese_food_mod.bittern": "にがり",
   "item.japanese_food_mod.eel_spawn_egg": "ウナギのスポーンエッグ",
   "item.japanese_food_mod.crab_spawn_egg": "カニのスポーンエッグ",
   "item.japanese_food_mod.tuna_spawn_egg": "マグロのスポーンエッグ",
@@ -133,8 +135,10 @@
 
   "gui.japanese_food_mod.identifiedTimeProgress": "進捗: %1$s%2$s",
   "gui.japanese_food_mod.fermentationTimeProgress": "進捗: %1$s%2$s",
+  "gui.japanese_food_mod.heatingTimeProgress": "進捗: %1$s%2$s",
   "gui.japanese_food_mod.pressingTimeProgress": "搾り中: %1$s%2$s",
   "gui.japanese_food_mod.oilRemaining": "油: %1$s/%2$s",
+  "gui.japanese_food_mod.waterRemaining": "水: %1$s/%2$s",
 
   "advancements.japanese_food_mod.root.title": "和食",
   "advancements.japanese_food_mod.root.description": "米を手に入れる",
