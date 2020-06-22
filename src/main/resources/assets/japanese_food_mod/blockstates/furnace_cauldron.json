@@ -46,18 +46,18 @@
       "y": 90
     },
     "facing=north,level=3": {
-      "model": "japanese_food_mod:block/furnace_cauldron_2"
+      "model": "japanese_food_mod:block/furnace_cauldron_3"
     },
     "facing=south,level=3": {
-      "model": "japanese_food_mod:block/furnace_cauldron_2",
+      "model": "japanese_food_mod:block/furnace_cauldron_3",
       "y": 180
     },
     "facing=west,level=3": {
-      "model": "japanese_food_mod:block/furnace_cauldron_2",
+      "model": "japanese_food_mod:block/furnace_cauldron_3",
       "y": 270
     },
     "facing=east,level=3": {
-      "model": "japanese_food_mod:block/furnace_cauldron_2",
+      "model": "japanese_food_mod:block/furnace_cauldron_3",
       "y": 90
     }
   }

@@ -33,8 +33,8 @@ public class FurnaceCauldronRecipe implements IRecipe<IInventory> {
     public static final IRecipeType<FurnaceCauldronRecipe> RECIPE_TYPE = new IRecipeType<FurnaceCauldronRecipe>() {
     };
     protected final ResourceLocation id;
-    protected NonNullList<Ingredient> ingredients;
-    protected int result;
+    protected Ingredient ingredient;
+    protected ItemStack result;
     protected int cookTime;
 
     public FurnaceCauldronRecipe(ResourceLocation idIn){
@@ -42,13 +42,8 @@ public class FurnaceCauldronRecipe implements IRecipe<IInventory> {
     }
 
     public boolean matches(@Nonnull IInventory inventory, @Nonnull World worldIn){
-        boolean check = false;
         ItemStack stack = inventory.getStackInSlot(0);
-        for(int i = 0; i < ingredients.size() && !check; ++i){
-            check = ingredients.get(i).test(stack);
-        }
-
-        return check;
+        return ingredient.test(stack);
     }
 
     @Override
@@ -57,7 +52,7 @@ public class FurnaceCauldronRecipe implements IRecipe<IInventory> {
         return new ItemStack(JPItems.SALT);
     }
 
-    public int getResult(){
+    public ItemStack getResult(){
         return result;
     }
 
@@ -67,6 +62,8 @@ public class FurnaceCauldronRecipe implements IRecipe<IInventory> {
 
     @Nonnull
     public NonNullList<Ingredient> getIngredients(){
+        NonNullList<Ingredient> ingredients = NonNullList.create();
+        ingredients.add(ingredient);
         return ingredients;
     }
 
@@ -100,26 +97,13 @@ public class FurnaceCauldronRecipe implements IRecipe<IInventory> {
             this.setRegistryName(new ResourceLocation(JapaneseFoodMod.MOD_ID, "salt_making"));
         }
 
-        private static NonNullList<Ingredient> readIngredients(JsonArray ingredients){
-            NonNullList<Ingredient> rec = NonNullList.create();
-
-            for(final JsonElement element: ingredients) {
-                rec.add(CraftingHelper.getIngredient(element));
-
-            }
-
-            if(rec.isEmpty())
-                throw new JsonParseException("No ingredients for shapeless recipe");
-            return rec;
-        }
-
         @Override
         @Nonnull
         public FurnaceCauldronRecipe read(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
             FurnaceCauldronRecipe recipe = new FurnaceCauldronRecipe(recipeId);
-            recipe.result = JSONUtils.getInt(json, "result");
+            recipe.result = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "result"), false);
             recipe.cookTime = JSONUtils.getInt(json, "process_time", 50);
-            recipe.ingredients = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
+            recipe.ingredient = CraftingHelper.getIngredient(JSONUtils.getJsonObject(json, "ingredient"));
             return recipe;
         }
 
@@ -128,24 +112,16 @@ public class FurnaceCauldronRecipe implements IRecipe<IInventory> {
         public FurnaceCauldronRecipe read(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
             FurnaceCauldronRecipe recipe = new FurnaceCauldronRecipe(recipeId);
             recipe.cookTime = buffer.readVarInt();
-            recipe.result = buffer.readVarInt();
-            final int index = buffer.readVarInt();
-            NonNullList<Ingredient> nonnulllist = NonNullList.withSize(index, Ingredient.EMPTY);
-            for(int j = 0; j < nonnulllist.size(); ++j) {
-                Ingredient ingredient = Ingredient.read(buffer);
-                nonnulllist.set(j, ingredient); }
-            recipe.ingredients = nonnulllist;
+            recipe.result = buffer.readItemStack();
+            recipe.ingredient = Ingredient.read(buffer);
             return recipe;
         }
 
         @Override
         public void write(PacketBuffer buffer, FurnaceCauldronRecipe recipe) {
             buffer.writeVarInt(recipe.cookTime);
-            buffer.writeVarInt(recipe.result);
-            buffer.writeVarInt(recipe.ingredients.size());
-            for (Ingredient ingredient : recipe.ingredients) {
-                ingredient.write(buffer);
-            }
+            buffer.writeItemStack(recipe.result);
+            recipe.ingredient.write(buffer);
         }
     }
 }

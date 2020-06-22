@@ -1,21 +1,10 @@
 {
   "type": "japanese_food_mod:salt_making",
-  "ingredients": [
-    {
-      "item": "minecraft:water_bucket"
-    },
-    {
-      "item": "japanese_food_mod:cup_with_water"
-    }
-  ],
-  "amounts": [
-    {
-      "amount": 500
-    },
-    {
-      "amount": 50
-    }
-  ],
-  "result": 50,
+  "ingredient": {
+    "tag": "japanese_food_mod:water"
+  },
+  "result": {
+    "item": "japanese_food_mod:salt"
+  },
   "process_time": 1200
 }

@@ -126,9 +126,8 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
         boolean isActive = false;
 
         final ItemStack input = inventory.getStackInSlot(INPUT_SLOT);
-        if(!input.isEmpty() && waterRemaining < maxWater){
-            int plus = input.getItem() == Items.WATER_BUCKET ? 500 : 50;
-            waterRemaining = Math.min(maxWater, waterRemaining + plus);
+        if(!input.isEmpty() && canAddWater()){
+            addWater(input);
             //JapaneseFoodMod.LOGGER.info(waterRemaining);
             if (input.hasContainerItem()) {
                 insertOrDropContainerItem(input, INPUT_SLOT);
@@ -158,6 +157,9 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
             this.markDirty();
             lastActive = isActive;
         }
+
+        FurnaceCauldronBlock block = (FurnaceCauldronBlock) world.getBlockState(pos).getBlock();
+        block.setWaterLevel(world, pos, world.getBlockState(pos), waterRemaining, maxWater);
     }
 
     private void insertOrDropItem(final ItemStack stack){
@@ -192,7 +194,29 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
     }
 
     private int getHeatingTime(ItemStack input){
-        return 1200;
+        return getRecipe(input).map(FurnaceCauldronRecipe::getCookTime).orElse(1000);
+    }
+
+    public boolean canAddWater(){
+        return waterRemaining < maxWater;
+    }
+
+    public void addWater(ItemStack interact){
+        int plus = 0;
+        if (Items.WATER_BUCKET.equals(interact.getItem())) {
+            plus = 500;
+        }else if(JPItems.CUP_WITH_WATER.equals(interact.getItem())){
+            plus = 50;
+        }
+        this.waterRemaining = Math.min(maxWater, waterRemaining + plus);
+    }
+
+    public int getWaterRemaining() {
+        return waterRemaining;
+    }
+
+    public int getMaxWater() {
+        return maxWater;
     }
 
     @Nonnull
