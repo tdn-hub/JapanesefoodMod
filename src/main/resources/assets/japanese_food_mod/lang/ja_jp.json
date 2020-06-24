@@ -119,6 +119,7 @@
   "item.japanese_food_mod.soy_milk": "豆乳",
   "item.japanese_food_mod.tofu": "豆腐",
   "item.japanese_food_mod.natto": "納豆",
+  "item.japanese_food_mod.fried_tofu": "油揚げ",
   "item.japanese_food_mod.eel_spawn_egg": "ウナギのスポーンエッグ",
   "item.japanese_food_mod.crab_spawn_egg": "カニのスポーンエッグ",
   "item.japanese_food_mod.tuna_spawn_egg": "マグロのスポーンエッグ",
@@ -164,6 +165,8 @@
   "jpfood.category.recipe.description": "右の項目から各レシピを閲覧できます。",
   "jpfood.category.entity": "エンティティ",
   "jpfood.category.entity.description": "追加されるモブの一覧です。",
+  "jpfood.category.special": "特殊なアイテム",
+  "jpfood.category.special.description": "入手方法が少し特殊なアイテムの一覧です。",
 
   "jpfood.ferment.name": "発酵",
   "jpfood.page.ferment.title": "%1$s",
@@ -224,5 +227,15 @@
   "jpfood.entity.anglerfish": "アンコウ",
   "jpfood.entity.anglerfish.title": "アンコウについて",
   "jpfood.page.anglerfish0": "アンコウは、深い海にいます。見た目はグロテスクですがおいしいです。",
-  "jpfood.page.anglerfish1": "$(o)おいしい"
+  "jpfood.page.anglerfish1": "$(o)おいしい",
+
+  "jpfood.nori.name": "海苔",
+  "jpfood.page.nori0.title": "海苔について",
+  "jpfood.page.nori0": "海苔は海底にある牡蠣の殻に付着しています。緑っぽくなっている殻を右クリックすることで入手できます。",
+  "jpfood.page.nori1.title": "海底の牡蠣の殻",
+
+  "jpfood.natto.name": "納豆",
+  "jpfood.page.natto0.title": "納豆について",
+  "jpfood.page.natto0": "納豆は干し草の中に水煮大豆を入れて発酵させることで入手できます。干し草から煙のようなものが上がったら発酵完了です。",
+  "jpfood.page.natto1.title": "納豆入りの干し草"
 }

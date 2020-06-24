@@ -118,6 +118,7 @@
   "item.japanese_food_mod.soy_milk": "Soy Milk",
   "item.japanese_food_mod.tofu": "Tofu",
   "item.japanese_food_mod.natto": "Natto",
+  "item.japanese_food_mod.fried_tofu": "Fried Tofu",
   "item.japanese_food_mod.eel_spawn_egg": "Eel Spawn Egg",
   "item.japanese_food_mod.crab_spawn_egg": "Crab Spawn Egg",
   "item.japanese_food_mod.tuna_spawn_egg": "Tuna Spawn Egg",
@@ -163,6 +164,8 @@
   "jpfood.category.recipe.description": " You can view each recipe from the items on the right.",
   "jpfood.category.entity": "Entity",
   "jpfood.category.entity.description": "Here is the list of entities that will be added.",
+  "jpfood.category.special": "Special Item",
+  "jpfood.category.special.description": "Here's a list of items that are a bit special in terms of how to get them.",
 
   "jpfood.ferment.name": "Fermentation",
   "jpfood.page.ferment.title": "%1$s",
@@ -223,5 +226,15 @@
   "jpfood.entity.anglerfish": "Anglerfish",
   "jpfood.entity.anglerfish.title": "About Anglerfish",
   "jpfood.page.anglerfish0": "The anglerfish is found in the deep sea. They look grotesque, but they are delicious.",
-  "jpfood.page.anglerfish1": "$(o)Delicious"
+  "jpfood.page.anglerfish1": "$(o)Delicious",
+
+  "jpfood.nori.name": "Nori",
+  "jpfood.page.nori0.title": "About Nori",
+  "jpfood.page.nori0": "Nori is found on the shells of oysters on the sea floor. You can get it by right-clicking on the greenish shell.",
+  "jpfood.page.nori1.title": "Oyster Shells from the Seafloor",
+
+  "jpfood.natto.name": "Natto",
+  "jpfood.page.natto0.title": "About Natto",
+  "jpfood.page.natto0": "Natto can be obtained by fermenting boiled soybeans in hay.　Fermentation is complete when something like smoke rises from the hay.",
+  "jpfood.page.natto1.title": "Hay with Soy Beans"
 }

@@ -121,6 +121,10 @@
       "recipe2": "japanese_food_mod:miso_ramen"
     },
     {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:tofu"
+    },
+    {
       "type": "smelting",
       "recipe": "japanese_food_mod:yakitori",
       "recipe2": "japanese_food_mod:negima"

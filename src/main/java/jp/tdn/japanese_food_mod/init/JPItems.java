@@ -54,7 +54,7 @@ public class JPItems {
     public static final Item ACETIC_ACID_BACTERIA = register(new ContainerItem(Items.GLASS_BOTTLE), "acetic_acid_bacteria");
     public static final Item PORK_BONE = register(new SimpleItem(), "pork_bone");
     public static final Item BITTERN = register(new SimpleItem(), "bittern");
-    public static final Item SOY_MILK = register(new ContainerItem(Items.GLASS_BOTTLE), "soy_milk");
+    public static final Item SOY_MILK = register(new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).containerItem(Items.GLASS_BOTTLE).food(new Food.Builder().saturation(0.5f).hunger(3).build())), "soy_milk");
 
     //Seed
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
@@ -120,6 +120,7 @@ public class JPItems {
     public static final Item MISO_RAMEN = register(new DrinkItem(8, 5.0f), "miso_ramen");
     public static final Item TOFU = register(new FoodItem(4, 2.5f), "tofu");
     public static final Item NATTO = register(new FoodItem(5, 3.0f), "natto");
+    public static final Item FRIED_TOFU = register(new FoodItem(2, 1.0f), "fried_tofu");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
