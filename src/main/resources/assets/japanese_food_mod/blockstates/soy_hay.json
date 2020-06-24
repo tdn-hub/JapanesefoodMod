@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "japanese_food_mod:block/soy_hay" },
+    "axis=z": { "model": "japanese_food_mod:block/soy_hay", "x": 90 },
+    "axis=x": { "model": "japanese_food_mod:block/soy_hay", "x": 90, "y": 90 }
+  }
+}

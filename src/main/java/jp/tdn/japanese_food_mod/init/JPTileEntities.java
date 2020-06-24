@@ -25,6 +25,7 @@ public class JPTileEntities {
      public static final TileEntityType<OysterShellTileEntity> OYSTER_SHELL = JapaneseFoodUtil._null();
      public static final TileEntityType<UnrefinedMirinTileEntity> UNREFINED_MIRIN = JapaneseFoodUtil._null();
      public static final TileEntityType<FurnaceCauldronTileEntity> FURNACE_CAULDRON = JapaneseFoodUtil._null();
+     public static final TileEntityType<SoyHayTileEntity> SOY_HAY = JapaneseFoodUtil._null();
 
      @SubscribeEvent
      public static void registerTileEntityTypes(@Nonnull final RegistryEvent.Register<TileEntityType<?>> event){
@@ -36,7 +37,8 @@ public class JPTileEntities {
                   setup(TileEntityType.Builder.create(UnrefinedSakeTileEntity::new, JPBlocks.UNREFINED_SAKE).build(null), "unrefined_sake"),
                   setup(TileEntityType.Builder.create(OysterShellTileEntity::new, JPBlocks.OYSTER_SHELL).build(null), "oyster_shell"),
                   setup(TileEntityType.Builder.create(UnrefinedMirinTileEntity::new, JPBlocks.UNREFINED_MIRIN).build(null), "unrefined_mirin"),
-                  setup(TileEntityType.Builder.create(FurnaceCauldronTileEntity::new, JPBlocks.FURNACE_CAULDRON).build(null), "furnace_cauldron")
+                  setup(TileEntityType.Builder.create(FurnaceCauldronTileEntity::new, JPBlocks.FURNACE_CAULDRON).build(null), "furnace_cauldron"),
+                  setup(TileEntityType.Builder.create(SoyHayTileEntity::new, JPBlocks.SOY_HAY).build(null), "soy_hay")
           );
      }
 

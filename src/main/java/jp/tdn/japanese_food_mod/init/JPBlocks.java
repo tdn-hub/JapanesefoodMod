@@ -32,6 +32,7 @@ public class JPBlocks {
     public static final Block UNREFINED_MIRIN = register(new UnrefinedMirinBlock(), "unrefined_mirin");
     public static final Block TRONA_ORE = register(new OreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F)), "trona_ore");
     public static final Block FURNACE_CAULDRON = register(new FurnaceCauldronBlock(), "furnace_cauldron");
+    public static final Block SOY_HAY = register(new SoyHayBlock(), "soy_hay");
 
     public static Block register(@Nonnull Block block, @Nonnull String name){
         block.setRegistryName(JapaneseFoodMod.MOD_ID, name);

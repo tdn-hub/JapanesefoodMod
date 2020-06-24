@@ -50,10 +50,11 @@ public class JPItems {
     public static final Item TARE_SAUCE = register(new SimpleItem(), "tare_sauce");
     public static final Item MISO_SAUCE = register(new SimpleItem(), "miso_sauce");
     public static final Item BROTH = register(new SimpleItem(), "broth");
-    public static final Item YEAST_CELL = register(new YeastCellItem(Items.GLASS_BOTTLE), "yeast_cell");
-    public static final Item ACETIC_ACID_BACTERIA = register(new YeastCellItem(Items.GLASS_BOTTLE), "acetic_acid_bacteria");
+    public static final Item YEAST_CELL = register(new ContainerItem(Items.GLASS_BOTTLE), "yeast_cell");
+    public static final Item ACETIC_ACID_BACTERIA = register(new ContainerItem(Items.GLASS_BOTTLE), "acetic_acid_bacteria");
     public static final Item PORK_BONE = register(new SimpleItem(), "pork_bone");
     public static final Item BITTERN = register(new SimpleItem(), "bittern");
+    public static final Item SOY_MILK = register(new ContainerItem(Items.GLASS_BOTTLE), "soy_milk");
 
     //Seed
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
@@ -117,6 +118,8 @@ public class JPItems {
     public static final Item PORK_BONE_RAMEN = register(new DrinkItem(8, 5.0f), "pork_bone_ramen");
     public static final Item SALT_RAMEN = register(new DrinkItem(8, 5.0f), "salt_ramen");
     public static final Item MISO_RAMEN = register(new DrinkItem(8, 5.0f), "miso_ramen");
+    public static final Item TOFU = register(new FoodItem(4, 2.5f), "tofu");
+    public static final Item NATTO = register(new FoodItem(5, 3.0f), "natto");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
@@ -147,6 +150,7 @@ public class JPItems {
     public static final Item PRESSER = register(new BlockItem(JPBlocks.PRESSER, new Item.Properties().group(ItemGroup_Japanese)), "presser");
     public static final Item FURNACE_CAULDRON = register(new BlockItem(JPBlocks.FURNACE_CAULDRON, new Item.Properties().group(ItemGroup_Japanese)), "furnace_cauldron");
     public static final Item OYSTER_SHELL = register(new BlockItem(JPBlocks.OYSTER_SHELL, new Item.Properties().group(ItemGroup_Japanese)), "oyster_shell");
+    public static final Item SOY_HAY = register(new BlockItem(JPBlocks.SOY_HAY, new Item.Properties().group(ItemGroup_Japanese)), "soy_hay");
 
     // Spawn Eggs
     public static final Item EEL_ENTITY_EGG = register(new SpawnEggItem(JPEntities.EEL, 0x00c3ff, 0x694b3a, new Item.Properties().group(ItemGroup_Japanese)), "eel_spawn_egg");
