@@ -13,8 +13,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-def mc_version = "1.15.2"
-def mod_version = "1.0.4"
+def mc_version = "1.16.1"
+def mod_version = "1.0.0"
 version = "${mc_version}-${mod_version}"
 group = 'jp.tdn.japanese_food_mod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'japanese_food_mod'
