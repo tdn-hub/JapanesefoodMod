@@ -5,12 +5,12 @@ import jp.tdn.japanese_food_mod.blocks.MicroScopeBlock;
 import jp.tdn.japanese_food_mod.blocks.tileentity.MicroScopeTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.vector.Vector3f;
 
 public class MicroScopeTileEntityRenderer extends TileEntityRenderer<MicroScopeTileEntity> {
     public MicroScopeTileEntityRenderer(TileEntityRendererDispatcher dispatcher){

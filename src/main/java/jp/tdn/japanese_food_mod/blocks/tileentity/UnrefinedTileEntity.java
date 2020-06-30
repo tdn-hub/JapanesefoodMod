@@ -1,5 +1,6 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -24,8 +25,8 @@ public class UnrefinedTileEntity extends TileEntity{
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+        super.func_230337_a_(state, compound);
         this.sauceRemaining = compound.getShort("sauceRemaining");
     }
 

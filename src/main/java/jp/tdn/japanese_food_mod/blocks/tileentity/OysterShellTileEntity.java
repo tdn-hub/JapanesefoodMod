@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -49,8 +50,8 @@ public class OysterShellTileEntity extends TileEntity implements ITickableTileEn
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+        super.func_230337_a_(state, compound);
         this.noriRemaining = compound.getShort("noriRemaining");
         this.elapsedTime = compound.getShort("elapsedTime");
     }

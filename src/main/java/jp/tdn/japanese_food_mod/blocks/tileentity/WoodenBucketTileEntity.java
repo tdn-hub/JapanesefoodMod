@@ -231,8 +231,8 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void func_230337_a_(BlockState state,CompoundNBT compound) {
+        super.func_230337_a_(state, compound);
         this.inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         this.fermentationTimeLeft = compound.getShort(FERMENTATION_TIME_LEFT);
         this.maxFermentationTime = compound.getShort(MAX_FERMENTATION_TIME);

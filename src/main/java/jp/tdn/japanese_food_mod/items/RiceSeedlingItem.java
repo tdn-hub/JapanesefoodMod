@@ -7,8 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -52,9 +52,9 @@ public class RiceSeedlingItem extends BlockItem {
                 BlockPos blockpos1 = blockpos.up();
                 BlockState blockstate = world.getBlockState(blockpos);
                 Material material = blockstate.getMaterial();
-                IFluidState ifluidstate = world.getFluidState(blockpos);
+                FluidState ifluidstate = world.getFluidState(blockpos);
                 if ((ifluidstate.getFluid() == Fluids.WATER) && world.isAirBlock(blockpos1)) {
-                    BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(world, blockpos1);
+                    BlockSnapshot blocksnapshot = BlockSnapshot.create(world, blockpos1);
                     world.setBlockState(blockpos1, JPBlocks.RICE_PLANT.getDefaultState(), 11);
                     if (ForgeEventFactory.onBlockPlace(playerentity, blocksnapshot, Direction.UP)) {
                         blocksnapshot.restore(true, false);

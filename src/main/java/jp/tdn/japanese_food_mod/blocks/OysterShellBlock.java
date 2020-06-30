@@ -1,6 +1,5 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.blocks.tileentity.OysterShellTileEntity;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
@@ -9,8 +8,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
@@ -139,7 +138,7 @@ public class OysterShellBlock extends HorizontalBlock implements ILiquidContaine
         return BlockRenderType.MODEL;
     }
 
-    public IFluidState getFluidState(BlockState p_204507_1_) {
+    public FluidState getFluidState(BlockState p_204507_1_) {
         return Fluids.WATER.getStillFluidState(false);
     }
 
@@ -147,7 +146,7 @@ public class OysterShellBlock extends HorizontalBlock implements ILiquidContaine
         return false;
     }
 
-    public boolean receiveFluid(IWorld p_204509_1_, BlockPos p_204509_2_, BlockState p_204509_3_, IFluidState p_204509_4_) {
+    public boolean receiveFluid(IWorld p_204509_1_, BlockPos p_204509_2_, BlockState p_204509_3_, FluidState p_204509_4_) {
         return false;
     }
 }

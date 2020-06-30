@@ -5,18 +5,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
@@ -33,7 +26,7 @@ public class RicePlantBlock extends CropsBlock{
 
     @Override
     protected boolean isValidGround(BlockState block, IBlockReader reader, BlockPos pos){
-        IFluidState fluidState = reader.getFluidState(pos);
+        FluidState fluidState = reader.getFluidState(pos);
         return fluidState.getFluid() == Fluids.WATER;
     }
 

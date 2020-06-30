@@ -5,6 +5,7 @@ import jp.tdn.japanese_food_mod.container.MicroScopeContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import jp.tdn.japanese_food_mod.recipes.MicroScopeRecipe;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -182,8 +183,8 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+        super.func_230337_a_(state, compound);
         this.inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         this.identifiedTimeLeft = compound.getShort(IDENTIFIED_TIME_LEFT_TAG);
         this.maxIdentifiedTime = compound.getShort(MAX_IDENTIFIED_TIME_TAG);

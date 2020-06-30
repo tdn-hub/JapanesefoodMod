@@ -3,6 +3,7 @@ package jp.tdn.japanese_food_mod.blocks.tileentity;
 import jp.tdn.japanese_food_mod.blocks.SoyHayBlock;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -34,8 +35,8 @@ public class SoyHayTileEntity extends TileEntity implements ITickableTileEntity 
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+        super.func_230337_a_(state, compound);
         this.fermentLeftTime = compound.getShort("fermentLeftTime");
     }
 

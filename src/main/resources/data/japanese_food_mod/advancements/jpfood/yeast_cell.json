@@ -14,7 +14,7 @@
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "japanese_food_mod:jpfood/get_recipe_book",
+  "parent": "japanese_food_mod:jpfood/root",
   "criteria": {
     "get_yeast_cell": {
       "trigger": "minecraft:inventory_changed",

@@ -71,7 +71,7 @@ public class FurnaceCauldronBlock extends JPHorizontalBlock {
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult rayTraceResult) {
         if(!world.isRemote()){
             ItemStack heldItem = playerEntity.getHeldItem(hand);
-            if(ItemTags.getCollection().getOrCreate(JPItemTags.WATER.getId()).contains(heldItem.getItem())){
+            if(JPItemTags.WATER.func_230235_a_(heldItem.getItem())){
                 TileEntity blockEntity = world.getTileEntity(pos);
                 if(blockEntity instanceof FurnaceCauldronTileEntity){
                     if(((FurnaceCauldronTileEntity) blockEntity).canAddWater()) {

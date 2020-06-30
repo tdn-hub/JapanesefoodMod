@@ -1,20 +1,23 @@
 package jp.tdn.japanese_food_mod.entities;
 
-import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class ShellfishEntity extends WaterMobEntity {
@@ -34,15 +37,13 @@ public class ShellfishEntity extends WaterMobEntity {
         this.goalSelector.addGoal(0, new RandomWalkingGoal(this, 1.0D));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5.0d);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.15d);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 5.0D).func_233815_a_(Attributes.field_233821_d_, 0.15D);
     }
 
     @Override
-    protected boolean processInteract(PlayerEntity player, Hand hand) {
+    @Nonnull
+    public ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
         ItemStack handStack = player.getHeldItem(hand);
         if(handStack.isEmpty()){
             player.setHeldItem(hand, new ItemStack(interactItem));
@@ -50,7 +51,7 @@ public class ShellfishEntity extends WaterMobEntity {
             player.dropItem(new ItemStack(interactItem), false);
         }
         this.remove();
-        return true;
+        return ActionResultType.func_233537_a_(this.world.isRemote);
     }
 
     public static boolean spawnHandler(EntityType<? extends ShellfishEntity> entityIn, IWorld worldIn, SpawnReason reason, BlockPos pos, Random random){

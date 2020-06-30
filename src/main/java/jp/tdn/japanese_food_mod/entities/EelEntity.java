@@ -3,7 +3,9 @@ package jp.tdn.japanese_food_mod.entities;
 import jp.tdn.japanese_food_mod.init.JPEntities;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
@@ -26,10 +28,7 @@ public class EelEntity extends AbstractFishEntity {
         return SoundEvents.ENTITY_COD_FLOP;
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(7.0d);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5d);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 7.0D).func_233815_a_(Attributes.field_233821_d_, 0.5D);
     }
 }

@@ -6,6 +6,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.AttributeModifierManager;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -30,7 +34,6 @@ public class JPEntities {
 
         EntityType<T> entity = EntityType.Builder.create(factory, entityClassification).size(width, height).build(location.toString());
         entity.setRegistryName(location);
-
         return entity;
     }
 
@@ -45,6 +48,14 @@ public class JPEntities {
                 TURBAN_SHELL,
                 ANGLERFISH
         );
+
+        GlobalEntityTypeAttributes.put(EEL, EelEntity.registerAttributes().func_233813_a_());
+        GlobalEntityTypeAttributes.put(CRAB, CrabEntity.registerAttributes().func_233813_a_());
+        GlobalEntityTypeAttributes.put(TUNA, TunaEntity.registerAttributes().func_233813_a_());
+        GlobalEntityTypeAttributes.put(CLAM, ClamEntity.registerAttributes().func_233813_a_());
+        GlobalEntityTypeAttributes.put(ASARI_CLAM, AsariClamEntity.registerAttributes().func_233813_a_());
+        GlobalEntityTypeAttributes.put(TURBAN_SHELL, TurbanShellEntity.registerAttributes().func_233813_a_());
+        GlobalEntityTypeAttributes.put(ANGLERFISH, AnglerfishEntity.getAttributeMap().func_233813_a_());
 
         EntitySpawnPlacementRegistry.register(EEL, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, EelEntity::func_223363_b);
         EntitySpawnPlacementRegistry.register(CRAB, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.OCEAN_FLOOR_WG, CrabEntity::spawnHandler);

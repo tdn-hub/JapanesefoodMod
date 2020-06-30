@@ -3,8 +3,10 @@ package jp.tdn.japanese_food_mod.entities;
 import jp.tdn.japanese_food_mod.init.JPEntities;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.FindWaterGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
@@ -47,11 +49,8 @@ public class CrabEntity extends WaterMobEntity {
         this.goalSelector.addGoal(3, new PanicGoal(this, 1.5d));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5.0d);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3d);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 5.0D).func_233815_a_(Attributes.field_233821_d_, 0.3D);
     }
 
     public static boolean spawnHandler(EntityType<? extends CrabEntity> entityIn, IWorld worldIn, SpawnReason reason, BlockPos pos, Random random){

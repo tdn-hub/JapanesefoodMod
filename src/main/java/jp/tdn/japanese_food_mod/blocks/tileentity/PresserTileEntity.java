@@ -201,8 +201,8 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void func_230337_a_(BlockState state,CompoundNBT compound) {
+        super.func_230337_a_(state, compound);
         this.inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         this.pressedTimeLeft = compound.getShort(PRESSED_TIME_LEFT_TAG);
         this.maxPressedTime = compound.getShort(MAX_PRESSED_TIME_TAG);
