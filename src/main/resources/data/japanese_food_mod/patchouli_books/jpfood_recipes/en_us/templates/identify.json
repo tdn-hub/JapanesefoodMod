@@ -20,14 +20,14 @@
     {
       "type": "item",
       "item": "#input",
-      "framed": "true",
+      "framed": "false",
       "x": 10,
       "y": 55
     },
     {
       "type": "item",
       "item": "#output",
-      "framed": "true",
+      "framed": "false",
       "x": 90,
       "y": 55
     }

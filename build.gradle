@@ -14,7 +14,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 def mc_version = "1.16.1"
-def mod_version = "1.0.0"
+def mod_version = "1.0.1"
 version = "${mc_version}-${mod_version}"
 group = 'jp.tdn.japanese_food_mod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'japanese_food_mod'
@@ -113,7 +113,7 @@ dependencies {
 
     // These dependencies get remapped to your current MCP mappings
     // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-    //compile fg.deobf("vazkii.patchouli:Patchouli:1.16-36.190"){ transitive = false}
+    compile fg.deobf("vazkii.patchouli:Patchouli:1.16-37"){ transitive = false}
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
