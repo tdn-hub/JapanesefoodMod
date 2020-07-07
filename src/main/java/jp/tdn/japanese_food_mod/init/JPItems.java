@@ -141,6 +141,7 @@ public class JPItems {
     public static final Item TURBAN_SHELL = register(new FoodItem(2, 0.5f), "turban_shell");
 
     // Block Items
+    public static final Item CROP_GRASS = register(new BlockItem(JPBlocks.CROP_GRASS, new Item.Properties().group(ItemGroup_Japanese)), "crop_grass");
     public static final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");
     public static final Item TRONA_ORE = register(new BlockItem(JPBlocks.TRONA_ORE, new Item.Properties().group(ItemGroup_Japanese)), "trona_ore");
     public static final Item UNREFINED_SAKE = register(new BlockItem(JPBlocks.UNREFINED_SAKE, new Item.Properties().group(ItemGroup_Japanese)), "unrefined_sake");
