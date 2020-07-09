@@ -2,7 +2,6 @@ package jp.tdn.japanese_food_mod.recipes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mojang.realmsclient.util.JsonUtils;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

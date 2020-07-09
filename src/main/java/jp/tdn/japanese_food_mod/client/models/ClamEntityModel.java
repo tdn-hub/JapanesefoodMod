@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.MathHelper;
 
 public class ClamEntityModel<T extends LivingEntity> extends EntityModel<T> {
     private final ModelRenderer body;

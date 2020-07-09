@@ -1,11 +1,8 @@
 package jp.tdn.japanese_food_mod.events;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.config.FishingConfig;
 import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTables;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.LootTableLoadEvent;

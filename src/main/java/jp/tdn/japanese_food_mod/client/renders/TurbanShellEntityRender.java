@@ -1,9 +1,7 @@
 package jp.tdn.japanese_food_mod.client.renders;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import jp.tdn.japanese_food_mod.client.models.AsariClamEntityModel;
 import jp.tdn.japanese_food_mod.client.models.TurbanShellEntityModel;
-import jp.tdn.japanese_food_mod.entities.AsariClamEntity;
 import jp.tdn.japanese_food_mod.entities.TurbanShellEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

@@ -1,11 +1,8 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
-import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.FurnaceCauldronBlock;
 import jp.tdn.japanese_food_mod.container.FurnaceCauldronContainer;
-import jp.tdn.japanese_food_mod.container.PresserContainer;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
-import jp.tdn.japanese_food_mod.init.JPItemTags;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import jp.tdn.japanese_food_mod.recipes.FurnaceCauldronRecipe;
@@ -19,12 +16,10 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -36,7 +31,6 @@ import net.minecraftforge.items.wrapper.RangedWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 

@@ -2,12 +2,10 @@ package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import jp.tdn.japanese_food_mod.blocks.SoyHayBlock;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 
 import javax.annotation.Nonnull;
 
