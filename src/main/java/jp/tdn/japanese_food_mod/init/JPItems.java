@@ -37,6 +37,7 @@ public class JPItems {
     public static final Item BREAD_CRUMBS = register(new SimpleItem(), "bread_crumbs");
     public static final Item WHEAT_FLOUR = register(new SimpleItem(), "wheat_flour");
     public static final Item POTATO_STARCH = register(new SimpleItem(), "potato_starch");
+    public static final Item RICE_FLOUR = register(new SimpleItem(), "rice_flour");
     public static final Item SALT = register(new SimpleItem(), "salt");
     public static final Item ROCK_SALT = register(new SimpleItem(), "rock_salt");
     public static final Item BAKING_SODA = register(new SimpleItem(), "baking_soda");
@@ -69,6 +70,7 @@ public class JPItems {
     public static final Item RICE = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "rice");
     public static final Item LEEK = register(new FoodItem(1, 0.5f), "leek");
     public static final Item BOILED_SOY_BEANS = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "boiled_soy_beans");
+    public static final Item BOILED_AZUKI_BEANS = register(new FoodItem(1, 0.5f), "boiled_azuki_beans");
     public static final Item BOILED_WAKAME = register(new FoodItem(2, 1.0f), "boiled_wakame");
     public static final Item MISO_SOUP = register(new MisoSoupItem(3, 2.5f), "miso_soup");
     public static final Item OMELET = register(new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(2.5f).build())), "omelet");
@@ -122,6 +124,8 @@ public class JPItems {
     public static final Item TOFU = register(new FoodItem(4, 2.5f), "tofu");
     public static final Item NATTO = register(new FoodItem(5, 3.0f), "natto");
     public static final Item FRIED_TOFU = register(new FoodItem(2, 1.0f), "fried_tofu");
+    public static final Item TSUBU_AN = register(new FoodItem(3, 0.5f), "mashed_sweet_bean_paste");
+    public static final Item IMAGAWA_YAKI = register(new FoodItem(5, 1.0f), "imagawa_yaki");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");

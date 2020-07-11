@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":[
+    {
+      "item": "japanese_food_mod:rice"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:rice_flour"
+  }
+}
