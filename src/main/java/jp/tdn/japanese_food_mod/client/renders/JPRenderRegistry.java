@@ -1,14 +1,11 @@
 package jp.tdn.japanese_food_mod.client.renders;
 
-import jp.tdn.japanese_food_mod.blocks.tileentity.MicroScopeTileEntity;
 import jp.tdn.japanese_food_mod.client.renders.tileentity.MicroScopeTileEntityRenderer;
-import jp.tdn.japanese_food_mod.entities.*;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPEntities;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -37,5 +34,6 @@ public class JPRenderRegistry {
         RenderTypeLookup.setRenderLayer(JPBlocks.RICE_PLANT, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(JPBlocks.SOY_PLANT, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(JPBlocks.FURNACE_CAULDRON, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(JPBlocks.AZUKI_PLANT, RenderType.getCutout());
     }
 }

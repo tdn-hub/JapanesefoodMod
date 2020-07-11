@@ -1,19 +1,13 @@
 package jp.tdn.japanese_food_mod.entities;
 
 import jp.tdn.japanese_food_mod.init.JPEntities;
-import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class AnglerfishEntity extends AbstractFishEntity {
 

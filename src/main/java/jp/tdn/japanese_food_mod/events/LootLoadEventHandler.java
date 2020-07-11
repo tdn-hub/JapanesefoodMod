@@ -1,7 +1,6 @@
 package jp.tdn.japanese_food_mod.events;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;

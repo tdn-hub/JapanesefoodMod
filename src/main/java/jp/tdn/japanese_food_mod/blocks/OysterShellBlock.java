@@ -1,6 +1,5 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.blocks.tileentity.OysterShellTileEntity;
 import jp.tdn.japanese_food_mod.init.JPItems;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;

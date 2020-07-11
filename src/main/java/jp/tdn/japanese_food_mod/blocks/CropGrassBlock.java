@@ -1,7 +1,5 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

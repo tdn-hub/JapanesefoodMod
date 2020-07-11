@@ -14,6 +14,12 @@
           "name": "japanese_food_mod:leek",
           "weight": 10
         }
+      ],
+      "conditions": [
+        {
+          "condition": "random_chance",
+          "chance": 0.5
+        }
       ]
     }
   ]

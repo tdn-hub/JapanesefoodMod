@@ -2,9 +2,7 @@ package jp.tdn.japanese_food_mod.client.renders;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.client.models.AsariClamEntityModel;
-import jp.tdn.japanese_food_mod.client.models.ClamEntityModel;
 import jp.tdn.japanese_food_mod.entities.AsariClamEntity;
-import jp.tdn.japanese_food_mod.entities.ClamEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;

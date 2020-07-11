@@ -1,12 +1,10 @@
 package jp.tdn.japanese_food_mod.world;
 
 import jp.tdn.japanese_food_mod.config.OystergenConfig;
-import jp.tdn.japanese_food_mod.world.gen.feature.JPFeatures;
 import jp.tdn.japanese_food_mod.world.gen.feature.OysterFeature;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;

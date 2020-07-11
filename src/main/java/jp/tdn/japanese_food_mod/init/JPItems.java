@@ -58,6 +58,7 @@ public class JPItems {
 
     //Seed
     public static final Item SOY_BEANS = register(new BlockItem(JPBlocks.SOY_PLANT, new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "soy_beans");
+    public static final Item AZUKI_BEANS = register(new BlockItem(JPBlocks.AZUKI_PLANT, new Item.Properties().group(ItemGroup_Japanese)), "azuki_beans");
     public static final Item RICE_SEEDLING = register(new RiceSeedlingItem(JPBlocks.RICE_PLANT, new Item.Properties().group(ItemGroup_Japanese)),"rice_seedling");
     public static final Item RADISH_SPROUT_SEED = register(new BlockItem(JPBlocks.RADISH_SPROUT_PLANT, new Item.Properties().group(ItemGroup_Japanese)), "radish_sprout_seed");
     public static final Item LEEK_SEED = register(new BlockItem(JPBlocks.LEEK_PLANT, new Item.Properties().group(ItemGroup_Japanese)),"leek_seed");

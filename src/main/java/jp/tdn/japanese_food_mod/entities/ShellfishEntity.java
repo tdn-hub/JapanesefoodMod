@@ -1,6 +1,5 @@
 package jp.tdn.japanese_food_mod.entities;
 
-import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;

@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.tileentity.FurnaceCauldronTileEntity;
 import jp.tdn.japanese_food_mod.container.FurnaceCauldronContainer;
-import jp.tdn.japanese_food_mod.container.FurnaceCauldronContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;

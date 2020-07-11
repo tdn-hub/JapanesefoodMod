@@ -1,12 +1,8 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import net.minecraft.block.CropsBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-
-public class SoyPlantBlock extends CropsBlock{
-    public SoyPlantBlock(){
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().sound(SoundType.CROP));
+public class AzukiPlantBlock extends SoyPlantBlock{
+    public AzukiPlantBlock(){
+        super();
     }
 
 //    @Override
