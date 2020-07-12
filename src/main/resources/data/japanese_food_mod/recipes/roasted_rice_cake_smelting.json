@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "japanese_food_mod:rice_cake"
+  },
+  "result": {
+    "item": "japanese_food_mod:roasted_rice_cake"
+  },
+  "cookingtime": 300
+}

@@ -26,6 +26,7 @@ public class JPItems {
     public static final Item GRATER = register(new CookWareItem(), "grater");
     public static final Item JAPANESE_KNIFE = register(new CookWareItem(), "japanese_knife");
     public static final Item ROLLING_PIN = register(new CookWareItem(), "rolling_pin");
+    public static final Item PESTLE = register(new CookWareItem(), "pestle");
 
     // Misc
     public static final Item TYAWAN = register(new SimpleItem(), "tyawan");
@@ -127,6 +128,10 @@ public class JPItems {
     public static final Item FRIED_TOFU = register(new FoodItem(2, 1.0f), "fried_tofu");
     public static final Item TSUBU_AN = register(new FoodItem(3, 0.5f), "mashed_sweet_bean_paste");
     public static final Item IMAGAWA_YAKI = register(new FoodItem(5, 1.0f), "imagawa_yaki");
+    public static final Item RICE_CAKE = register(new FoodItem(4, 2.5f), "rice_cake");
+    public static final Item ROASTED_RICE_CAKE = register(new FoodItem(6, 3.5f), "roasted_rice_cake");
+    public static final Item MANJU = register(new FoodItem(4, 1.5f), "manju");
+    public static final Item OSHIRUKO = register(new DrinkItem(7, 3.5f), "oshiruko");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
@@ -147,6 +152,7 @@ public class JPItems {
     public static final Item TURBAN_SHELL = register(new FoodItem(2, 0.5f), "turban_shell");
 
     // Block Items
+    public static final Item CROP_GRASS = register(new BlockItem(JPBlocks.CROP_GRASS, new Item.Properties().group(ItemGroup_Japanese)), "crop_grass");
     public static final Item ROCK_SALT_BLOCK = register(new BlockItem(JPBlocks.ROCK_SALT_BLOCK, new Item.Properties().group(ItemGroup_Japanese)), "rock_salt_block");
     public static final Item TRONA_ORE = register(new BlockItem(JPBlocks.TRONA_ORE, new Item.Properties().group(ItemGroup_Japanese)), "trona_ore");
     public static final Item UNREFINED_SAKE = register(new BlockItem(JPBlocks.UNREFINED_SAKE, new Item.Properties().group(ItemGroup_Japanese)), "unrefined_sake");
