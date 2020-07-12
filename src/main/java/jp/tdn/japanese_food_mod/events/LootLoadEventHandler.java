@@ -1,6 +1,7 @@
 package jp.tdn.japanese_food_mod.events;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
+import jp.tdn.japanese_food_mod.config.FishingConfig;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
@@ -15,6 +16,7 @@ public class LootLoadEventHandler {
     private static ResourceLocation squid = new ResourceLocation("minecraft", "entities/squid");
     private static ResourceLocation pig = new ResourceLocation("minecraft", "entities/pig");
     //private static ResourceLocation bamboo = new ResourceLocation("minecraft", "blocks/bamboo_sapling");
+    private static ResourceLocation fish = new ResourceLocation("minecraft", "gameplay/fishing");
 
     @SubscribeEvent
     public static void onLootLoad(LootTableLoadEvent event){
@@ -32,6 +34,11 @@ public class LootLoadEventHandler {
 
         if(event.getName().equals(pig)){
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "entities/pig"))).build());
+        }
+
+        if(FishingConfig.fishing_overworld.get() && event.getName().equals(fish)){
+            event.getTable().removePool("main");
+            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "gameplay/fishing"))).build());
         }
     }
 }

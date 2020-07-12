@@ -26,7 +26,7 @@ public class Config {
         OregenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         GrassgenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         OystergenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
-        //FishingConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        FishingConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
         SERVER = SERVER_BUILDER.build();
         CLIENT = CLIENT_BUILDER.build();
     }
