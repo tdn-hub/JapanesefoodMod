@@ -34,6 +34,7 @@ public class JPItems {
     public static final Item CLAY_POT = register(new SimpleItem(), "clay_pot");
     public static final Item CUP = register(new CupItem(), "cup");
     public static final Item CUP_WITH_WATER = register(new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).containerItem(CUP).food(new Food.Builder().saturation(0f).hunger(0).build())), "cup_with_water");
+    public static final Item CUP_WITH_MILK = register(new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).containerItem(CUP).food(new Food.Builder().saturation(0f).hunger(0).build())), "cup_with_milk");
     public static final Item BREAD_CRUMBS = register(new SimpleItem(), "bread_crumbs");
     public static final Item WHEAT_FLOUR = register(new SimpleItem(), "wheat_flour");
     public static final Item POTATO_STARCH = register(new SimpleItem(), "potato_starch");
