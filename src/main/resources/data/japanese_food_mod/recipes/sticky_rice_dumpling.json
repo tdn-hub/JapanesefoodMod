@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "japanese_food_mod:rice_flour"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:sticky_rice_dumpling",
+    "count": 1
+  }
+}

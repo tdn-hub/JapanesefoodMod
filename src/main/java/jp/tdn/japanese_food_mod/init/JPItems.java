@@ -132,6 +132,12 @@ public class JPItems {
     public static final Item ROASTED_RICE_CAKE = register(new FoodItem(6, 3.5f), "roasted_rice_cake");
     public static final Item MANJU = register(new FoodItem(4, 1.5f), "manju");
     public static final Item OSHIRUKO = register(new DrinkItem(7, 3.5f), "oshiruko");
+    public static final Item RICE_CRACKER_DOUGH = register(new SimpleItem(), "rice_cracker_dough");
+    public static final Item RICE_CRACKER = register(new FoodItem(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(3).saturation(0.5f).fastToEat().build())), "rice_cracker");
+    public static final Item SOY_SAUCE_RICE_CRACKER = register(new FoodItem(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(1.0f).fastToEat().build())), "soy_sauce_rice_cracker");
+    public static final Item JAPANESE_SHAVED_ICE = register(new FoodItem(3, 0.2f), "japanese_shaved_ice");
+    public static final Item SWEET_BEAN_BUN = register(new FoodItem(6, 2.5f), "sweet_bean_bun");
+    public static final Item STICKY_RICE_DUMPLING = register(new FoodItem(2, 0.1f), "sticky_rice_dumpling");
 
     // Fish
     public static final Item SQUID = register(new FoodItem(2, 1.5f), "squid");
