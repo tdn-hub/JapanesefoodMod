@@ -23,6 +23,17 @@
           "type": "minecraft:item",
           "name": "japanese_food_mod:soy_beans",
           "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "japanese_food_mod:azuki_beans",
+          "weight": 10
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "random_chance",
+          "chance": 0.5
         }
       ]
     }

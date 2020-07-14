@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " - ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat"
+    },
+    "-": {
+      "item": "japanese_food_mod:mashed_sweet_bean_paste"
+    }
+  },
+  "result": {
+    "item": "japanese_food_mod:sweet_bean_bun",
+    "count": 1
+  }
+}

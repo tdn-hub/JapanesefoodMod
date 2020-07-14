@@ -27,3 +27,9 @@ description='''
     versionRange="[1.16.1]"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.jp.tdn.japanese_food_mod]]
+    modId="patchouli"
+    mandatory=true
+    versionRange="[1.16.1-37,)"
+    side="BOTH"

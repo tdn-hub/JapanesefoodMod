@@ -55,7 +55,12 @@
     },
     {
       "type": "crafting",
-      "recipe": "japanese_food_mod:furnace_cauldron"
+      "recipe": "japanese_food_mod:furnace_cauldron",
+      "recipe2": "japanese_food_mod:pestle"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:rice_flour"
     },
     {
       "type": "smelting",

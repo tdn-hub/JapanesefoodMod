@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:wheat_flour"
+    },
+    {
+      "item": "japanese_food_mod:mashed_sweet_bean_paste"
+    },
+    {
+      "tag": "japanese_food_mod:milk"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "japanese_food_mod:baking_soda"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:imagawa_yaki",
+    "count": 1
+  }
+}
