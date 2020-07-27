@@ -2,12 +2,17 @@ package jp.tdn.japanese_food_mod.events;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.config.FishingConfig;
+import net.minecraft.loot.LootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 @Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID)
 public class LootLoadEventHandler {
@@ -37,8 +42,21 @@ public class LootLoadEventHandler {
         }
 
         if(FishingConfig.fishing_overworld.get() && event.getName().equals(fish)){
-            event.getTable().removePool("main");
-            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "gameplay/fishing"))).build());
+            //event.getTable().removePool("main");
+            LootPool pool = event.getTable().getPool("main");
+            addEntry(pool, getInjectEntry(new ResourceLocation(JapaneseFoodMod.MOD_ID, "gameplay/fishing/fish"), 85, -1));
+            //event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "gameplay/fishing"))).build());
         }
+    }
+
+    private static LootEntry getInjectEntry(ResourceLocation location, int weight, int quality) {
+        return TableLootEntry.builder(location).weight(weight).quality(quality).build();
+    }
+
+    private static void addEntry(LootPool pool, LootEntry entry) {
+        if (pool.lootEntries.stream().anyMatch(e -> e == entry)) {
+            throw new RuntimeException("Attempted to add a duplicate entry to pool: " + entry);
+        }
+        pool.lootEntries.add(entry);
     }
 }

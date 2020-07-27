@@ -17,7 +17,7 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JPItems {
-    private static String modId = JapaneseFoodMod.MOD_ID;
+    private static final String modId = JapaneseFoodMod.MOD_ID;
     public static final ItemGroup ItemGroup_Japanese = new JapaneseFoodItemGroup();
     public static final List<Item> itemlist = Lists.newArrayList();
 
