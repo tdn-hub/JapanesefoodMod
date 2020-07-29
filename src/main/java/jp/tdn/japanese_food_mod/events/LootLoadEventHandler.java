@@ -9,10 +9,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import org.codehaus.plexus.util.PropertyUtils;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID)
 public class LootLoadEventHandler {
@@ -54,9 +55,16 @@ public class LootLoadEventHandler {
     }
 
     private static void addEntry(LootPool pool, LootEntry entry) {
-        if (pool.lootEntries.stream().anyMatch(e -> e == entry)) {
-            throw new RuntimeException("Attempted to add a duplicate entry to pool: " + entry);
+        try {
+            List<LootEntry> targets = ObfuscationReflectionHelper.getPrivateValue(LootPool.class, pool, "field_186453_a");
+            if(targets != null) {
+                if (targets.stream().anyMatch(e -> e == entry)) {
+                    throw new RuntimeException("Attempted to add a duplicate entry to pool: " + entry);
+                }
+                targets.add(entry);
+            }
+        } catch (Exception e){
+            JapaneseFoodMod.LOGGER.info("No such field.");
         }
-        pool.lootEntries.add(entry);
     }
 }
