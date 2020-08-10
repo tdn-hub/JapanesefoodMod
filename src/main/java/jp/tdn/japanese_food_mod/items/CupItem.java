@@ -2,6 +2,7 @@ package jp.tdn.japanese_food_mod.items;
 
 import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.entity.AreaEffectCloudEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -52,6 +53,20 @@ public class CupItem extends SimpleItem {
                 return new ActionResult(ActionResultType.PASS, inHand);
             }
         }
+    }
+
+    @Override
+    public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand) {
+//        ItemStack inHand = player.getHeldItem(hand);
+//        JapaneseFoodMod.LOGGER.info(stack);
+//        JapaneseFoodMod.LOGGER.info(entity.getEntityString());
+        if(stack.getItem() == JPItems.CUP){
+            if(entity.getEntityString().equals("minecraft:cow")){
+                turnBottleIntoItem(stack, player, new ItemStack(JPItems.CUP_WITH_MILK));
+                player.getEntityWorld().playSound(player, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_COW_MILK, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+            }
+        }
+        return false;
     }
 
     protected ItemStack turnBottleIntoItem(ItemStack p_185061_1_, PlayerEntity p_185061_2_, ItemStack p_185061_3_) {

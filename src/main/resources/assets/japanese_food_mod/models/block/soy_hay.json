@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "japanese_food_mod:blocks/soy_hay_block_top",
+    "side": "japanese_food_mod:blocks/soy_hay_block_side"
+  }
+}

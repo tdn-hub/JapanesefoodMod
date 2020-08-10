@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "japanese_food_mod:wheat_flour"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "japanese_food_mod:baking_soda"
+    },
+    {
+      "item": "japanese_food_mod:mashed_sweet_bean_paste"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:manju",
+    "count": 4
+  }
+}

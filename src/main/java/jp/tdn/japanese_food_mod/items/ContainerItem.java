@@ -4,11 +4,11 @@ import jp.tdn.japanese_food_mod.init.JPItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class YeastCellItem extends Item {
+public class ContainerItem extends Item {
     private static Item container;
-    public YeastCellItem(Item container){
+    public ContainerItem(Item container){
         super(new Properties().group(JPItems.ItemGroup_Japanese));
-        YeastCellItem.container = container;
+        ContainerItem.container = container;
     }
 
     @Override

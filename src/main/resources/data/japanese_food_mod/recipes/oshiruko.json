@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "japanese_food_mod:mashed_sweet_bean_paste"
+    },
+    {
+      "item": "japanese_food_mod:roasted_rice_cake"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:oshiruko",
+    "count": 1
+  }
+}

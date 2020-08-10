@@ -1,0 +1,20 @@
+{
+  "name": "jpfood.nori.name",
+  "category": "japanese_food_mod:special",
+  "icon": "japanese_food_mod:nori",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.page.nori0.title",
+      "text": "jpfood.page.nori0"
+    },
+    {
+      "type": "image",
+      "images": [
+        "japanese_food_mod:textures/gui/entries/nori.png"
+      ],
+      "title": "jpfood.page.nori1.title",
+      "border": true
+    }
+  ]
+}

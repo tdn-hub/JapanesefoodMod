@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    }
+  ],
+  "result": {
+    "item": "japanese_food_mod:japanese_shaved_ice",
+    "count": 1
+  }
+}

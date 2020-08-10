@@ -4,6 +4,9 @@ import net.minecraft.block.BushBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
+import net.minecraftforge.common.PlantType;
 
 public class CropGrassBlock extends BushBlock {
     public CropGrassBlock(){
@@ -13,5 +16,10 @@ public class CropGrassBlock extends BushBlock {
     @Override
     public OffsetType getOffsetType() {
         return OffsetType.XZ;
+    }
+
+    @Override
+    public PlantType getPlantType(IBlockReader world, BlockPos pos) {
+        return PlantType.Plains;
     }
 }

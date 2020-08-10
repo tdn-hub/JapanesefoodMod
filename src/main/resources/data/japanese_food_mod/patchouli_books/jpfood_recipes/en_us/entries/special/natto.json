@@ -1,0 +1,20 @@
+{
+  "name": "jpfood.natto.name",
+  "category": "japanese_food_mod:special",
+  "icon": "japanese_food_mod:soy_hay",
+  "pages": [
+    {
+      "type": "text",
+      "title": "jpfood.page.natto0.title",
+      "text": "jpfood.page.natto0"
+    },
+    {
+      "type": "image",
+      "images": [
+        "japanese_food_mod:textures/gui/entries/natto.png"
+      ],
+      "title": "jpfood.page.natto1.title",
+      "border": true
+    }
+  ]
+}

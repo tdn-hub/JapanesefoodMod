@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#-#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "japanese_food_mod:rice_cracker"
+    },
+    "-": {
+      "item": "japanese_food_mod:soy_sauce"
+    }
+  },
+  "result": {
+    "item": "japanese_food_mod:soy_sauce_rice_cracker",
+    "count": 8
+  }
+}

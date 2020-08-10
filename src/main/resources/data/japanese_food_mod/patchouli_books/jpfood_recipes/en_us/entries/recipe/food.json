@@ -121,9 +121,44 @@
       "recipe2": "japanese_food_mod:miso_ramen"
     },
     {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:tofu",
+      "recipe2": "japanese_food_mod:boiled_azuki_beans"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:imagawa_yaki",
+      "recipe2": "japanese_food_mod:japanese_shaved_ice"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:manju",
+      "recipe2": "japanese_food_mod:mashed_sweet_bean_paste"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:oshiruko",
+      "recipe2": "japanese_food_mod:rice_cake"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:rice_cracker_dough",
+      "recipe2": "japanese_food_mod:soy_sauce_rice_cracker"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:sticky_rice_dumpling",
+      "recipe2": "japanese_food_mod:sweet_bean_bun"
+    },
+    {
       "type": "smelting",
-      "recipe": "japanese_food_mod:yakitori",
-      "recipe2": "japanese_food_mod:negima"
+      "recipe": "japanese_food_mod:yakitori_smelting",
+      "recipe2": "japanese_food_mod:negima_smelting"
+    },
+    {
+      "type": "smelting",
+      "recipe": "japanese_food_mod:rice_cracker_smelting",
+      "recipe2": "japanese_food_mod:roasted_rice_cake_smelting"
     }
   ]
 }

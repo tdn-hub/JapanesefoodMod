@@ -49,6 +49,20 @@
       "recipe2": "japanese_food_mod:rolling_pin"
     },
     {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:soy_milk",
+      "recipe2": "japanese_food_mod:soy_hay"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:furnace_cauldron",
+      "recipe2": "japanese_food_mod:pestle"
+    },
+    {
+      "type": "crafting",
+      "recipe": "japanese_food_mod:rice_flour"
+    },
+    {
       "type": "smelting",
       "recipe": "japanese_food_mod:cray_pot"
     }

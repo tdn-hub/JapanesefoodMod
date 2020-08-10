@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "japanese_food_mod:water"
+    },
+    {
+      "item": "japanese_food_mod:pot"
+    },
+    {
+      "item": "japanese_food_mod:boiled_azuki_beans"
+    },
+    {
+      "tag": "forge:dusts/salt"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+
+  ],
+  "result": {
+    "item": "japanese_food_mod:mashed_sweet_bean_paste",
+    "count": 1
+  }
+}

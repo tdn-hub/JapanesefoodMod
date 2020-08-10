@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "japanese_food_mod:rice_cake"
+  },
+  "result": {
+    "item": "japanese_food_mod:roasted_rice_cake"
+  },
+  "cookingtime": 400
+}
