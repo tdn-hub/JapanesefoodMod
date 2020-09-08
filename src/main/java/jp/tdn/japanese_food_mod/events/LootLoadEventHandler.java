@@ -30,6 +30,7 @@ public class LootLoadEventHandler {
 //            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "blocks/grass"))).build());
 //        }
 
+        //JapaneseFoodMod.LOGGER.info(event.getName());
         if(event.getName().equals(sea_grass)){
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "blocks/seagrass"))).build());
         }

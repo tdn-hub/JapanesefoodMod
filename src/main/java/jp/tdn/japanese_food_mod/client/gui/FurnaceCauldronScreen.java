@@ -32,7 +32,7 @@ public class FurnaceCauldronScreen extends ContainerScreen<FurnaceCauldronContai
 
     @Override
     protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY) {
-        this.field_230712_o_.func_238422_b_(matrixStack, this.field_230704_d_, (float)(this.xSize / 2), 6.0f, 4210752);
+        this.field_230712_o_.func_238422_b_(matrixStack, this.field_230704_d_, (float)(this.xSize / 2) - (float)(this.field_230704_d_.getString().length() / 2) * 5, 6.0f, 4210752);
         this.field_230712_o_.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 8.0F, (float) (this.ySize - 96 + 6), 4210752);
 
     }
@@ -63,9 +63,9 @@ public class FurnaceCauldronScreen extends ContainerScreen<FurnaceCauldronContai
             //JapaneseFoodMod.LOGGER.info(waterRemaining);
             this.func_238474_b_(
                     matrixStack,
-                    startX + 14, startY + 31 + (36 - waterRemaining),
+                    startX + 14, startY + 32 + (36 - waterRemaining),
                     176, 17,
-                    47, waterRemaining
+                    48, waterRemaining
             );
         }
     }

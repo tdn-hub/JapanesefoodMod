@@ -70,9 +70,7 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
         }
     };
 
-    private final LazyOptional<ItemStackHandler> inventoryCapabilityExternal = LazyOptional.of(() -> this.inventory);
-    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalUpAndSides = LazyOptional.of(() -> new RangedWrapper(this.inventory, INPUT_SLOT, INPUT_SLOT + 1));
-    private final LazyOptional<IItemHandlerModifiable> inventoryCapabilityExternalDown = LazyOptional.of(() -> new RangedWrapper(this.inventory, OUTPUT_SLOT, OUTPUT_SLOT + 1));
+    private final LazyOptional<ItemStackHandler> inventoryCapabilityExternal = LazyOptional.of(() -> inventory);
 
     public int heatingTimeLeft = -1;
     public int maxHeatingTime = -1;
@@ -217,20 +215,8 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
+        if(!removed && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
             return inventoryCapabilityExternal.cast();
-        }
-
-        switch (Objects.requireNonNull(side)){
-
-            case DOWN:
-                return inventoryCapabilityExternalDown.cast();
-            case UP:
-            case NORTH:
-            case SOUTH:
-            case WEST:
-            case EAST:
-                return inventoryCapabilityExternalUpAndSides.cast();
         }
 
         return super.getCapability(cap, side);

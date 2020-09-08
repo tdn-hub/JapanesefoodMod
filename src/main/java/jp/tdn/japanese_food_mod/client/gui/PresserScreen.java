@@ -29,7 +29,7 @@ public class PresserScreen extends ContainerScreen<PresserContainer> {
     @Override
     protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY) {
         this.field_230712_o_.func_238422_b_(matrixStack, this.field_230704_d_, (float)(this.xSize / 2), 6.0f, 4210752);
-        this.field_230712_o_.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 8.0F, (float) (this.ySize - 96 + 2), 4210752);
+        this.field_230712_o_.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 8.0F, (float) (this.ySize - 96 + 5), 4210752);
 
     }
 
