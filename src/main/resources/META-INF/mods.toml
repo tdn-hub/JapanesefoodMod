@@ -8,6 +8,7 @@ modId="japanese_food_mod"
 version="${file.jarVersion}"
 #displayName="Japanese Food Mod"
 #displayURL="" #optional
+credits="qsefthuopq, FlutterDream"
 logoFile="logo.png" #optional
 authors="TDN"
 description='''
