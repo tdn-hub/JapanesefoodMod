@@ -6,9 +6,9 @@ loaderVersion="[32,)"
 [[mods]]
 modId="japanese_food_mod"
 version="${file.jarVersion}"
-#displayName="Japanese Food Mod"
+displayName="Japanese Food Mod"
 #displayURL="" #optional
-credits="qsefthuopq, FlutterDream"
+credits="qsefthuopq, FlutterDream, LemonJamTart"
 logoFile="logo.png" #optional
 authors="TDN"
 description='''

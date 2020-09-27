@@ -5,5 +5,6 @@ public class JPGeneration {
         GrassGeneration.setupGrassGeneration();
         OreGeneration.setupOreGeneration();
         OysterGeneration.setupOysterGeneration();
+        WakameGeneration.setupWakameGeneration();
     }
 }

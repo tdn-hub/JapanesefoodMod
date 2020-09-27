@@ -14,8 +14,8 @@ import net.minecraft.world.gen.feature.structure.StructureManager;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-public class OysterFeature extends Feature<NoFeatureConfig> {
-    public OysterFeature(Codec<NoFeatureConfig> deserializer) {
+public class WakameFeature extends Feature<NoFeatureConfig> {
+    public WakameFeature(Codec<NoFeatureConfig> deserializer) {
         super(deserializer);
     }
 
@@ -23,7 +23,7 @@ public class OysterFeature extends Feature<NoFeatureConfig> {
     @ParametersAreNonnullByDefault
     public boolean func_230362_a_(ISeedReader iSeedReader, StructureManager structureManager, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, NoFeatureConfig noFeatureConfig) {
         if (iSeedReader.getBlockState(blockPos).getBlock() == Blocks.WATER && iSeedReader.getBlockState(blockPos.down()).getBlock() != Blocks.WATER) {
-            iSeedReader.setBlockState(blockPos, JPBlocks.OYSTER_SHELL.getDefaultState().rotate(iSeedReader.getWorld(), blockPos, JapaneseFoodUtil.rotations.get(random.nextInt(4))), 1);
+            iSeedReader.setBlockState(blockPos, JPBlocks.WAKAME_BLOCK.getDefaultState(), 1);
             return true;
         }
         return false;

@@ -35,5 +35,6 @@ public class JPRenderRegistry {
         RenderTypeLookup.setRenderLayer(JPBlocks.SOY_PLANT, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(JPBlocks.FURNACE_CAULDRON, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(JPBlocks.AZUKI_PLANT, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(JPBlocks.WAKAME_BLOCK, RenderType.getCutout());
     }
 }

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "japanese_food_mod:block/wakame_bottom"
+    },
+    "half=upper": {
+      "model": "japanese_food_mod:block/wakame_top"
+    }
+  }
+}
