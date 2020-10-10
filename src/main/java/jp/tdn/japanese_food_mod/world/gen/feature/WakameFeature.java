@@ -1,7 +1,6 @@
 package jp.tdn.japanese_food_mod.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;

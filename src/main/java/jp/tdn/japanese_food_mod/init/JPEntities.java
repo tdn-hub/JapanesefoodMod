@@ -15,6 +15,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+
+import static jp.tdn.japanese_food_mod.JapaneseFoodUtil.getBiome;
 
 @Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JPEntities {
@@ -64,8 +67,8 @@ public class JPEntities {
     }
 
     public static void registerEntityWorldSpawns(){
-        registerEntityWorldSpawn(EEL, 10, 1, 5, Biomes.RIVER, Biomes.OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN);
-        registerEntityWorldSpawn(CRAB, 25, 1, 10, Biomes.OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.COLD_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_OCEAN, Biomes.DEEP_FROZEN_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.BEACH);
+        registerEntityWorldSpawn(EEL, 10, 1, 5, getBiome("river"), getBiome("ocean"), getBiome("lukewarm_ocean"), getBiome("warm_ocean"));
+        registerEntityWorldSpawn(CRAB, 25, 1, 10, getBiome("ocean"), getBiome("lukewarm_ocean"), getBiome("warm_ocean"), Biomes.COLD_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_OCEAN, Biomes.DEEP_FROZEN_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.BEACH);
         registerEntityWorldSpawn(TUNA, 2, 1, 5, Biomes.OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.DEEP_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN);
         registerEntityWorldSpawn(CLAM, 40, 1, 3, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.OCEAN,Biomes.BEACH);
         registerEntityWorldSpawn(ASARI_CLAM, 40, 1, 5, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.OCEAN, Biomes.BEACH);
@@ -77,7 +80,7 @@ public class JPEntities {
         for(Biome biome : biomes){
             Biome inBiome = ForgeRegistries.BIOMES.getValue(biome.getRegistryName());
             if(inBiome != null){
-               inBiome.getSpawns(entity.getClassification()).add(new Biome.SpawnListEntry(entity, weight, min, max));
+               inBiome.func_242440_e().
             }
         }
     }

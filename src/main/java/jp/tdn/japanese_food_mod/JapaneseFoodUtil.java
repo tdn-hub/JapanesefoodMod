@@ -2,7 +2,10 @@ package jp.tdn.japanese_food_mod;
 
 import com.google.common.collect.Lists;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -19,5 +22,7 @@ public class JapaneseFoodUtil {
         return null;
     }
 
-
+    public static Biome getBiome(String name){
+        return ForgeRegistries.BIOMES.getValue(new ResourceLocation(name));
+    }
 }
