@@ -201,7 +201,7 @@ public class MicroScopeTileEntity extends TileEntity implements ITickableTileEnt
     @Nonnull
     @Override
     public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(JPBlocks.MICRO_SCOPE.getTranslationKey());
+        return new TranslationTextComponent(JPBlocks.MICRO_SCOPE.get().getTranslationKey());
     }
 
     @Nonnull

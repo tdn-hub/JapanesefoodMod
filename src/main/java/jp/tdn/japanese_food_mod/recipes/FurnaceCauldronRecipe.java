@@ -41,7 +41,7 @@ public class FurnaceCauldronRecipe implements IRecipe<IInventory> {
     @Override
     @Nonnull
     public ItemStack getCraftingResult(@Nonnull IInventory inventory) {
-        return new ItemStack(JPItems.SALT);
+        return new ItemStack(JPItems.SALT.get());
     }
 
     public ItemStack getResult(){
@@ -61,7 +61,7 @@ public class FurnaceCauldronRecipe implements IRecipe<IInventory> {
 
     @Nonnull
     public ItemStack getRecipeOutput(){
-        return new ItemStack(JPItems.SALT);
+        return new ItemStack(JPItems.SALT.get());
     }
 
     public int getCookTime(){

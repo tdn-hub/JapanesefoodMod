@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class TurbanShellEntity extends ShellfishEntity {
     public TurbanShellEntity(EntityType<? extends WaterMobEntity> type, World worldIn){
-        super(JPEntities.TURBAN_SHELL, worldIn, JPItems.TURBAN_SHELL);
+        super(JPEntities.TURBAN_SHELL, worldIn, JPItems.TURBAN_SHELL.get());
     }
 
     protected void updateAir(int p_209207_1_) {

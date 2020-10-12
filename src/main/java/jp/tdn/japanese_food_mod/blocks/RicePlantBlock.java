@@ -21,7 +21,7 @@ public class RicePlantBlock extends CropsBlock{
     @Override
     @Nonnull
     protected IItemProvider getSeedsItem(){
-        return JPItems.RICE_SEEDLING;
+        return JPItems.RICE_SEEDLING.get();
     }
 
     @Override

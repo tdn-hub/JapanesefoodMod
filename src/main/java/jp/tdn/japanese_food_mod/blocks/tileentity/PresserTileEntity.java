@@ -89,7 +89,7 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
     }
 
     private boolean isOutput(final ItemStack stack){
-        return stack.getItem() == COOKING_OIL;
+        return stack.getItem() == COOKING_OIL.get();
     }
 
     private Optional<PresserRecipe> getRecipe(final ItemStack input){
@@ -136,7 +136,7 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
         }
 
         if(oilRemaining >= 100 && isContainerInput(container)) {
-            inventory.insertItem(OUTPUT_SLOT, new ItemStack(COOKING_OIL), false);
+            inventory.insertItem(OUTPUT_SLOT, new ItemStack(COOKING_OIL.get()), false);
             container.shrink(1);
             inventory.setStackInSlot(CONTAINER_SLOT, container);
             oilRemaining -= 100;
@@ -220,7 +220,7 @@ public class PresserTileEntity extends TileEntity implements ITickableTileEntity
     @Nonnull
     @Override
     public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(JPBlocks.PRESSER.getTranslationKey());
+        return new TranslationTextComponent(JPBlocks.PRESSER.get().getTranslationKey());
     }
 
     @Nonnull

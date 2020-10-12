@@ -20,7 +20,7 @@ public class TunaEntity extends AbstractGroupFishEntity {
 
     @Override
     protected ItemStack getFishBucket() {
-        return new ItemStack(JPItems.TUNA_BUCKET);
+        return new ItemStack(JPItems.TUNA_BUCKET.get());
     }
 
     @Override

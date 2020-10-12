@@ -55,7 +55,7 @@ public class RiceSeedlingItem extends BlockItem {
                 FluidState ifluidstate = world.getFluidState(blockpos);
                 if ((ifluidstate.getFluid() == Fluids.WATER) && world.isAirBlock(blockpos1)) {
                     BlockSnapshot blocksnapshot = BlockSnapshot.create(world, blockpos1);
-                    world.setBlockState(blockpos1, JPBlocks.RICE_PLANT.getDefaultState(), 11);
+                    world.setBlockState(blockpos1, JPBlocks.RICE_PLANT.get().getDefaultState(), 11);
                     if (ForgeEventFactory.onBlockPlace(playerentity, blocksnapshot, Direction.UP)) {
                         blocksnapshot.restore(true, false);
                         return new ActionResult<>(ActionResultType.FAIL, itemstack);

@@ -39,7 +39,7 @@ public class PresserRecipe implements IRecipe<IInventory> {
     @Override
     @Nonnull
     public ItemStack getCraftingResult(@Nonnull IInventory inventory) {
-        return new ItemStack(JPItems.COOKING_OIL);
+        return new ItemStack(JPItems.COOKING_OIL.get());
     }
 
     public int getResult(){
@@ -59,7 +59,7 @@ public class PresserRecipe implements IRecipe<IInventory> {
 
     @Nonnull
     public ItemStack getRecipeOutput(){
-        return new ItemStack(JPItems.COOKING_OIL);
+        return new ItemStack(JPItems.COOKING_OIL.get());
     }
 
     public int getCookTime(){

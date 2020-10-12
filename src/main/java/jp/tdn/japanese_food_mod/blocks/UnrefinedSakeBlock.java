@@ -31,7 +31,7 @@ public class UnrefinedSakeBlock extends UnrefinedBlock {
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockRayTraceResult rayTraceResult) {
         if(!world.isRemote){
             if(state.get(SAUCE) && hasUpSideBlock(world, pos)){
-                ItemStack insert = new ItemStack(JPItems.SAKE);
+                ItemStack insert = new ItemStack(JPItems.SAKE.get());
                 TileEntity tileEntity = world.getTileEntity(pos);
                 if(tileEntity instanceof UnrefinedSakeTileEntity){
                     if(((UnrefinedSakeTileEntity) tileEntity).getSauceRemaining() > 0) {

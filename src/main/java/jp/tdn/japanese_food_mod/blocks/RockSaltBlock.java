@@ -6,7 +6,7 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraftforge.common.ToolType;
 
 public class RockSaltBlock extends Block {
-    public RockSaltBlock(){
-        super(Properties.create(Material.ROCK, MaterialColor.PINK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.5f));
+    public RockSaltBlock(Properties properties){
+        super(properties);
     }
 }

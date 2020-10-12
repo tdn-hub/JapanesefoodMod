@@ -91,11 +91,11 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
     }
 
     private boolean isOutPut(ItemStack stack){
-        return stack.getItem() == SALT;
+        return stack.getItem() == SALT.get();
     }
 
     private boolean isReturnOutput(final ItemStack stack){
-        return stack.getItem() == Items.GLASS_BOTTLE || stack.getItem() == JPItems.CUP || stack.getItem() == Items.BUCKET || stack.getItem() == JPItems.BITTERN;
+        return stack.getItem() == Items.GLASS_BOTTLE || stack.getItem() == JPItems.CUP.get() || stack.getItem() == Items.BUCKET || stack.getItem() == JPItems.BITTERN.get();
     }
 
     private Optional<FurnaceCauldronRecipe> getRecipe(final ItemStack input){
@@ -137,8 +137,8 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
                 --heatingTimeLeft;
                 if(heatingTimeLeft <= 0){
                     waterRemaining -= needWater;
-                    inventory.insertItem(OUTPUT_SLOT, new ItemStack(SALT), false);
-                    insertOrDropItem(new ItemStack(JPItems.BITTERN));
+                    inventory.insertItem(OUTPUT_SLOT, new ItemStack(SALT.get()), false);
+                    insertOrDropItem(new ItemStack(JPItems.BITTERN.get()));
                     heatingTimeLeft = -1;
                 }
             }
@@ -255,7 +255,7 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
     @Nonnull
     @Override
     public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(JPBlocks.FURNACE_CAULDRON.getTranslationKey());
+        return new TranslationTextComponent(JPBlocks.FURNACE_CAULDRON.get().getTranslationKey());
     }
 
     @Nonnull

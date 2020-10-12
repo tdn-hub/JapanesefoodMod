@@ -5,8 +5,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 public class SoyPlantBlock extends CropsBlock{
-    public SoyPlantBlock(){
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().sound(SoundType.CROP));
+    public SoyPlantBlock(Properties properties){
+        super(properties);
     }
 
 //    @Override

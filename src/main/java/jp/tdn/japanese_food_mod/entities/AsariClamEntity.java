@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class AsariClamEntity extends ShellfishEntity {
     public AsariClamEntity(EntityType<? extends WaterMobEntity> type, World worldIn){
-        super(JPEntities.ASARI_CLAM, worldIn, JPItems.ASARI_CLAM);
+        super(JPEntities.ASARI_CLAM, worldIn, JPItems.ASARI_CLAM.get());
     }
 
     protected void updateAir(int p_209207_1_) {

@@ -20,7 +20,7 @@ public class EelEntity extends AbstractFishEntity {
 
     @Override
     protected ItemStack getFishBucket() {
-        return new ItemStack(JPItems.EEL_BUCKET);
+        return new ItemStack(JPItems.EEL_BUCKET.get());
     }
 
     @Override

@@ -111,7 +111,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     }
 
     private boolean isReturnOutput(final ItemStack stack){
-        return stack.getItem() == Items.GLASS_BOTTLE || stack.getItem() == JPItems.CUP;
+        return stack.getItem() == Items.GLASS_BOTTLE || stack.getItem() == JPItems.CUP.get();
     }
 
     private Optional<WoodenBucketRecipe> getRecipe(final ItemStack input){
@@ -249,7 +249,7 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
     @Nonnull
     @Override
     public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(JPBlocks.WOODEN_BUCKET.getTranslationKey());
+        return new TranslationTextComponent(JPBlocks.WOODEN_BUCKET.get().getTranslationKey());
     }
 
     @Nonnull

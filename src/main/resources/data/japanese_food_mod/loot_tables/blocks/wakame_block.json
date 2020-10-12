@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "japanese_food_mod:wakame_block",
+          "name": "japanese_food_mod:wakame",
           "conditions": [
             {
               "condition": "minecraft:match_tool",

@@ -15,7 +15,7 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class GrassGeneration {
-    private static final BlockClusterFeatureConfig CROP_GRASS_CONFIG = (new net.minecraft.world.gen.feature.BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(JPBlocks.CROP_GRASS.getDefaultState()), new SimpleBlockPlacer())).tries(32).build();
+    private static final BlockClusterFeatureConfig CROP_GRASS_CONFIG = (new net.minecraft.world.gen.feature.BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(JPBlocks.CROP_GRASS.get().getDefaultState()), new SimpleBlockPlacer())).tries(32).build();
 
 
     public GrassGeneration(){
@@ -27,7 +27,7 @@ public class GrassGeneration {
             for(Biome biome : ForgeRegistries.BIOMES){
                 // crop grass
                 if(biome == Biomes.PLAINS || biome == Biomes.SUNFLOWER_PLAINS) {
-                    addGrassGen(biome, JPBlocks.CROP_GRASS.getDefaultState());
+                    addGrassGen(biome, JPBlocks.CROP_GRASS.get().getDefaultState());
                 }
             }
         }
