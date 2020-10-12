@@ -27,41 +27,41 @@ public class JPItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, JapaneseFoodMod.MOD_ID);
 
     //Tool
-    public static final RegistryObject<Item> POT = register(() -> new CookWareItem(), "pot");
-    public static final RegistryObject<Item> GRATER = register(() -> new CookWareItem(), "grater");
-    public static final RegistryObject<Item> JAPANESE_KNIFE = register(() -> new CookWareItem(), "japanese_knife");
-    public static final RegistryObject<Item> ROLLING_PIN = register(() -> new CookWareItem(), "rolling_pin");
-    public static final RegistryObject<Item> PESTLE = register(() -> new CookWareItem(), "pestle");
+    public static final RegistryObject<Item> POT = register(CookWareItem::new, "pot");
+    public static final RegistryObject<Item> GRATER = register(CookWareItem::new, "grater");
+    public static final RegistryObject<Item> JAPANESE_KNIFE = register(CookWareItem::new, "japanese_knife");
+    public static final RegistryObject<Item> ROLLING_PIN = register(CookWareItem::new, "rolling_pin");
+    public static final RegistryObject<Item> PESTLE = register(CookWareItem::new, "pestle");
 
     // Misc
-    public static final RegistryObject<Item> TYAWAN = register(() -> new SimpleItem(), "tyawan");
-    public static final RegistryObject<Item> JAPANESE_BOWL = register(() -> new SimpleItem(), "japanese_bowl");
-    public static final RegistryObject<Item> CLAY_POT_BEFORE_HEATING = register(() -> new SimpleItem(), "clay_pot_before_heating");
-    public static final RegistryObject<Item> CLAY_POT = register(() -> new SimpleItem(), "clay_pot");
-    public static final RegistryObject<Item> CUP = register(() -> new CupItem(), "cup");
+    public static final RegistryObject<Item> TYAWAN = register(SimpleItem::new, "tyawan");
+    public static final RegistryObject<Item> JAPANESE_BOWL = register(SimpleItem::new, "japanese_bowl");
+    public static final RegistryObject<Item> CLAY_POT_BEFORE_HEATING = register(SimpleItem::new, "clay_pot_before_heating");
+    public static final RegistryObject<Item> CLAY_POT = register(SimpleItem::new, "clay_pot");
+    public static final RegistryObject<Item> CUP = register(CupItem::new, "cup");
     public static final RegistryObject<Item> CUP_WITH_WATER = register(() -> new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).containerItem(CUP.get()).food(new Food.Builder().saturation(0f).hunger(0).build())), "cup_with_water");
     public static final RegistryObject<Item> CUP_WITH_MILK = register(() -> new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).containerItem(CUP.get()).food(new Food.Builder().saturation(0f).hunger(0).build())), "cup_with_milk");
-    public static final RegistryObject<Item> BREAD_CRUMBS = register(() -> new SimpleItem(), "bread_crumbs");
-    public static final RegistryObject<Item> WHEAT_FLOUR = register(() -> new SimpleItem(), "wheat_flour");
-    public static final RegistryObject<Item> POTATO_STARCH = register(() -> new SimpleItem(), "potato_starch");
-    public static final RegistryObject<Item> RICE_FLOUR = register(() -> new SimpleItem(), "rice_flour");
-    public static final RegistryObject<Item> SALT = register(() -> new SimpleItem(), "salt");
-    public static final RegistryObject<Item> ROCK_SALT = register(() -> new SimpleItem(), "rock_salt");
-    public static final RegistryObject<Item> BAKING_SODA = register(() -> new SimpleItem(), "baking_soda");
-    public static final RegistryObject<Item> COOKING_OIL = register(() -> new SimpleItem(), "cooking_oil");
+    public static final RegistryObject<Item> BREAD_CRUMBS = register(SimpleItem::new, "bread_crumbs");
+    public static final RegistryObject<Item> WHEAT_FLOUR = register(SimpleItem::new, "wheat_flour");
+    public static final RegistryObject<Item> POTATO_STARCH = register(SimpleItem::new, "potato_starch");
+    public static final RegistryObject<Item> RICE_FLOUR = register(SimpleItem::new, "rice_flour");
+    public static final RegistryObject<Item> SALT = register(SimpleItem::new, "salt");
+    public static final RegistryObject<Item> ROCK_SALT = register(SimpleItem::new, "rock_salt");
+    public static final RegistryObject<Item> BAKING_SODA = register(SimpleItem::new, "baking_soda");
+    public static final RegistryObject<Item> COOKING_OIL = register(SimpleItem::new, "cooking_oil");
     public static final RegistryObject<Item> MISO = register(() -> new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).build())), "miso");
     public static final RegistryObject<Item> WAKAME = register(() -> new Item(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(1).saturation(0.5f).fastToEat().build())), "wakame");
     public static final RegistryObject<Item> SOY_SAUCE = register(() -> new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(2).saturation(0.0f).effect(new EffectInstance(Effects.POISON, 100, 2), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 100, 1), 1.0f).build())), "soy_sauce");
     public static final RegistryObject<Item> VINEGAR = register(() -> new DrinkItem(1, 0f), "vinegar");
     public static final RegistryObject<Item> MIRIN = register(() -> new DrinkItem(1, 0f), "mirin");
-    public static final RegistryObject<Item> BATTER = register(() -> new SimpleItem(), "batter");
-    public static final RegistryObject<Item> TARE_SAUCE = register(() -> new SimpleItem(), "tare_sauce");
-    public static final RegistryObject<Item> MISO_SAUCE = register(() -> new SimpleItem(), "miso_sauce");
-    public static final RegistryObject<Item> BROTH = register(() -> new SimpleItem(), "broth");
+    public static final RegistryObject<Item> BATTER = register(SimpleItem::new, "batter");
+    public static final RegistryObject<Item> TARE_SAUCE = register(SimpleItem::new, "tare_sauce");
+    public static final RegistryObject<Item> MISO_SAUCE = register(SimpleItem::new, "miso_sauce");
+    public static final RegistryObject<Item> BROTH = register(SimpleItem::new, "broth");
     public static final RegistryObject<Item> YEAST_CELL = register(() -> new ContainerItem(Items.GLASS_BOTTLE), "yeast_cell");
     public static final RegistryObject<Item> ACETIC_ACID_BACTERIA = register(() -> new ContainerItem(Items.GLASS_BOTTLE), "acetic_acid_bacteria");
-    public static final RegistryObject<Item> PORK_BONE = register(() -> new SimpleItem(), "pork_bone");
-    public static final RegistryObject<Item> BITTERN = register(() -> new SimpleItem(), "bittern");
+    public static final RegistryObject<Item> PORK_BONE = register(SimpleItem::new, "pork_bone");
+    public static final RegistryObject<Item> BITTERN = register(SimpleItem::new, "bittern");
     public static final RegistryObject<Item> SOY_MILK = register(() -> new DrinkItem(new Item.Properties().group(ItemGroup_Japanese).containerItem(Items.GLASS_BOTTLE).food(new Food.Builder().saturation(0.5f).hunger(3).build())), "soy_milk");
 
     //Seed
@@ -137,7 +137,7 @@ public class JPItems {
     public static final RegistryObject<Item> ROASTED_RICE_CAKE = register(() -> new FoodItem(6, 3.5f), "roasted_rice_cake");
     public static final RegistryObject<Item> MANJU = register(() -> new FoodItem(4, 1.5f), "manju");
     public static final RegistryObject<Item> OSHIRUKO = register(() -> new DrinkItem(7, 3.5f), "oshiruko");
-    public static final RegistryObject<Item> RICE_CRACKER_DOUGH = register(() -> new SimpleItem(), "rice_cracker_dough");
+    public static final RegistryObject<Item> RICE_CRACKER_DOUGH = register(SimpleItem::new, "rice_cracker_dough");
     public static final RegistryObject<Item> RICE_CRACKER = register(() -> new FoodItem(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(3).saturation(0.5f).fastToEat().build())), "rice_cracker");
     public static final RegistryObject<Item> SOY_SAUCE_RICE_CRACKER = register(() -> new FoodItem(new Item.Properties().group(ItemGroup_Japanese).food(new Food.Builder().hunger(4).saturation(1.0f).fastToEat().build())), "soy_sauce_rice_cracker");
     public static final RegistryObject<Item> JAPANESE_SHAVED_ICE = register(() -> new FoodItem(3, 0.2f), "japanese_shaved_ice");
