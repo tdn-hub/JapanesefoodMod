@@ -110,6 +110,6 @@ public class FurnaceCauldronContainer extends Container {
 
     @Override
     public boolean canInteractWith(@Nonnull final PlayerEntity player) {
-        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.FURNACE_CAULDRON);
+        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.FURNACE_CAULDRON.get());
     }
 }

@@ -2,9 +2,13 @@ package jp.tdn.japanese_food_mod;
 
 import jp.tdn.japanese_food_mod.client.renders.JPRenderRegistry;
 import jp.tdn.japanese_food_mod.config.Config;
+import jp.tdn.japanese_food_mod.events.BiomeLoadEventHandler;
+import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPEntities;
-import jp.tdn.japanese_food_mod.world.JPGeneration;
+import jp.tdn.japanese_food_mod.init.JPItems;
+import jp.tdn.japanese_food_mod.world.gen.feature.JPFeatures;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -22,19 +26,26 @@ public class JapaneseFoodMod {
 
 
     public JapaneseFoodMod() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the setup method for mod-loading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        modEventBus.addListener(this::setup);
         // Register the doClientStuff method for mod-loading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        modEventBus.addListener(this::doClientStuff);
+
+        JPItems.ITEMS.register(modEventBus);
+        JPBlocks.BLOCKS.register(modEventBus);
+        JPFeatures.FEATURES.register(modEventBus);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        BiomeLoadEventHandler biomeLoad = new BiomeLoadEventHandler();
+        MinecraftForge.EVENT_BUS.register(biomeLoad);
 
         Config.loadConfig();
     }
 
     private void setup(final FMLCommonSetupEvent event){
-        JPGeneration.setup();
-        JPEntities.registerEntityWorldSpawns();
+        //JPEntities.registerEntityWorldSpawns();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event){

@@ -11,13 +11,13 @@ import net.minecraft.world.World;
 
 public class TurbanShellEntity extends ShellfishEntity {
     public TurbanShellEntity(EntityType<? extends WaterMobEntity> type, World worldIn){
-        super(JPEntities.TURBAN_SHELL, worldIn, JPItems.TURBAN_SHELL);
+        super(JPEntities.TURBAN_SHELL, worldIn, JPItems.TURBAN_SHELL.get());
     }
 
     protected void updateAir(int p_209207_1_) {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 8.0D).func_233815_a_(Attributes.field_233821_d_, 0.15D);
+        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 8.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D);
     }
 }

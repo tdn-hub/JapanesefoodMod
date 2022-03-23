@@ -32,7 +32,7 @@ public class UnrefinedMirinBlock extends UnrefinedBlock {
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockRayTraceResult rayTraceResult) {
         if(!world.isRemote){
             if(state.get(SAUCE) && hasUpSideBlock(world, pos)){
-                ItemStack insert = new ItemStack(JPItems.MIRIN);
+                ItemStack insert = new ItemStack(JPItems.MIRIN.get());
                 TileEntity tileEntity = world.getTileEntity(pos);
                 if(tileEntity instanceof UnrefinedMirinTileEntity){
                     if(((UnrefinedMirinTileEntity) tileEntity).getSauceRemaining() > 0) {

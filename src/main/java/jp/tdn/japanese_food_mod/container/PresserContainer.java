@@ -99,6 +99,6 @@ public class PresserContainer extends Container {
 
     @Override
     public boolean canInteractWith(@Nonnull final PlayerEntity player) {
-        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.PRESSER);
+        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.PRESSER.get());
     }
 }

@@ -10,6 +10,7 @@ import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -49,13 +50,13 @@ public class JPEntities {
                 ANGLERFISH
         );
 
-        GlobalEntityTypeAttributes.put(EEL, EelEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(CRAB, CrabEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(TUNA, TunaEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(CLAM, ClamEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(ASARI_CLAM, AsariClamEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(TURBAN_SHELL, TurbanShellEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(ANGLERFISH, AnglerfishEntity.getAttributeMap().func_233813_a_());
+        GlobalEntityTypeAttributes.put(EEL, EelEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(CRAB, CrabEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(TUNA, TunaEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(CLAM, ClamEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(ASARI_CLAM, AsariClamEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(TURBAN_SHELL, TurbanShellEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(ANGLERFISH, AnglerfishEntity.getAttributeMap().create());
 
         EntitySpawnPlacementRegistry.register(EEL, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, EelEntity::func_223363_b);
         EntitySpawnPlacementRegistry.register(CRAB, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.OCEAN_FLOOR_WG, CrabEntity::spawnHandler);
@@ -68,19 +69,19 @@ public class JPEntities {
 
     public static void registerEntityWorldSpawns(){
         registerEntityWorldSpawn(EEL, 10, 1, 5, getBiome("river"), getBiome("ocean"), getBiome("lukewarm_ocean"), getBiome("warm_ocean"));
-        registerEntityWorldSpawn(CRAB, 25, 1, 10, getBiome("ocean"), getBiome("lukewarm_ocean"), getBiome("warm_ocean"), Biomes.COLD_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_OCEAN, Biomes.DEEP_FROZEN_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.BEACH);
-        registerEntityWorldSpawn(TUNA, 2, 1, 5, Biomes.OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.DEEP_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN);
-        registerEntityWorldSpawn(CLAM, 40, 1, 3, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.OCEAN,Biomes.BEACH);
-        registerEntityWorldSpawn(ASARI_CLAM, 40, 1, 5, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.OCEAN, Biomes.BEACH);
-        registerEntityWorldSpawn(TURBAN_SHELL, 5, 1, 2, Biomes.OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN);
-        registerEntityWorldSpawn(ANGLERFISH, 1, 1, 2, Biomes.DEEP_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN);
+        registerEntityWorldSpawn(CRAB, 25, 1, 10, getBiome("ocean"), getBiome("lukewarm_ocean"), getBiome("warm_ocean"), getBiome("cold_ocean"), getBiome("deep_cold_ocean"), getBiome("deep_ocean"), getBiome("deep_frozen_ocean"), getBiome("deep_lukewarm_ocean"), getBiome("deep_warm_ocean"), getBiome("beach"));
+        registerEntityWorldSpawn(TUNA, 2, 1, 5, getBiome("ocean"), getBiome("lukewarm_ocean"), getBiome("warm_ocean"), getBiome("deep_ocean"), getBiome("deep_warm_ocean"), getBiome("deep_lukewarm_ocean"));
+        registerEntityWorldSpawn(CLAM, 40, 1, 3, getBiome("lukewarm_ocean"), getBiome("warm_ocean"), getBiome("ocean"),getBiome("beach"));
+        registerEntityWorldSpawn(ASARI_CLAM, 40, 1, 5, getBiome("lukewarm_ocean"), getBiome("warm_ocean"), getBiome("ocean"), getBiome("beach"));
+        registerEntityWorldSpawn(TURBAN_SHELL, 5, 1, 2, getBiome("ocean"), getBiome("lukewarm_ocean"), getBiome("warm_ocean"));
+        registerEntityWorldSpawn(ANGLERFISH, 1, 1, 2, getBiome("deep_ocean"), getBiome("deep_cold_ocean"), getBiome("deep_lukewarm_ocean"), getBiome("deep_warm_ocean"));
     }
 
     public static void registerEntityWorldSpawn(EntityType<?> entity, int weight, int min, int max, Biome... biomes){
         for(Biome biome : biomes){
             Biome inBiome = ForgeRegistries.BIOMES.getValue(biome.getRegistryName());
             if(inBiome != null){
-               inBiome.func_242440_e().
+               inBiome.getMobSpawnInfo().getSpawners(entity.getClassification()).add(new MobSpawnInfo.Spawners(entity, weight, min, max));
             }
         }
     }

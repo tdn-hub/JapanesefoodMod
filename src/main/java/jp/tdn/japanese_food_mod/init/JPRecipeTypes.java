@@ -1,25 +1,24 @@
 package jp.tdn.japanese_food_mod.init;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import jp.tdn.japanese_food_mod.recipes.FurnaceCauldronRecipe;
-import jp.tdn.japanese_food_mod.recipes.MicroScopeRecipe;
+import jp.tdn.japanese_food_mod.recipes.FermentationRecipe;
+import jp.tdn.japanese_food_mod.recipes.IdentifiedRecipe;
 import jp.tdn.japanese_food_mod.recipes.PresserRecipe;
-import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JPRecipeTypes {
 
-    @SubscribeEvent
-    public static void registryRecipes(RegistryEvent.Register<IRecipeSerializer<?>> event){
-        event.getRegistry().registerAll(
-                MicroScopeRecipe.SERIALIZER,
-                WoodenBucketRecipe.SERIALIZER,
-                PresserRecipe.SERIALIZER,
-                FurnaceCauldronRecipe.SERIALIZER
-        );
+
+    public static final IRecipeType<FermentationRecipe> FERMENTATION = registerType(new ResourceLocation(JapaneseFoodMod.MOD_ID, "fermentation"));
+    public static final IRecipeType<IdentifiedRecipe> IDENTIFIED = registerType(new ResourceLocation(JapaneseFoodMod.MOD_ID, "identified"));
+    public static final IRecipeType<PresserRecipe> PRESSER = registerType(new ResourceLocation(JapaneseFoodMod.MOD_ID, "presser"));
+
+    private static <T extends IRecipe<?>> IRecipeType<T> registerType(ResourceLocation type){
+        return IRecipeType.register(type.toString());
     }
 }

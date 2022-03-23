@@ -91,11 +91,11 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
     }
 
     private boolean isOutPut(ItemStack stack){
-        return stack.getItem() == SALT;
+        return stack.getItem() == SALT.get();
     }
 
     private boolean isReturnOutput(final ItemStack stack){
-        return stack.getItem() == Items.GLASS_BOTTLE || stack.getItem() == JPItems.CUP || stack.getItem() == Items.BUCKET || stack.getItem() == JPItems.BITTERN;
+        return stack.getItem() == Items.GLASS_BOTTLE || stack.getItem() == JPItems.CUP.get() || stack.getItem() == Items.BUCKET || stack.getItem() == JPItems.BITTERN.get();
     }
 
     private Optional<FurnaceCauldronRecipe> getRecipe(final ItemStack input){
@@ -137,8 +137,8 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
                 --heatingTimeLeft;
                 if(heatingTimeLeft <= 0){
                     waterRemaining -= needWater;
-                    inventory.insertItem(OUTPUT_SLOT, new ItemStack(SALT), false);
-                    insertOrDropItem(new ItemStack(JPItems.BITTERN));
+                    inventory.insertItem(OUTPUT_SLOT, new ItemStack(SALT.get()), false);
+                    insertOrDropItem(new ItemStack(JPItems.BITTERN.get()));
                     heatingTimeLeft = -1;
                 }
             }
@@ -198,7 +198,7 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
         int plus = 0;
         if (Items.WATER_BUCKET.equals(interact.getItem())) {
             plus = 500;
-        }else if(JPItems.CUP_WITH_WATER.equals(interact.getItem())){
+        }else if(JPItems.CUP_WITH_WATER.get().equals(interact.getItem())){
             plus = 50;
         }
         this.waterRemaining = Math.min(maxWater, waterRemaining + plus);
@@ -223,8 +223,8 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
-        super.func_230337_a_(state, compound);
+    public void read(BlockState state, CompoundNBT compound) {
+        super.read(state, compound);
         this.inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         this.heatingTimeLeft = compound.getInt(HEATING_TIME_LEFT_TAG);
         this.maxHeatingTime = compound.getInt(HEATING_MAX_TIME_TAG);
@@ -255,7 +255,7 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
     @Nonnull
     @Override
     public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(JPBlocks.FURNACE_CAULDRON.getTranslationKey());
+        return new TranslationTextComponent(JPBlocks.FURNACE_CAULDRON.get().getTranslationKey());
     }
 
     @Nonnull

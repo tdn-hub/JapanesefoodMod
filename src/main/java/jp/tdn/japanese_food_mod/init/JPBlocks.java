@@ -16,14 +16,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JPBlocks {
-    private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, JapaneseFoodMod.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, JapaneseFoodMod.MOD_ID);
 
-    public static final RegistryObject<Block> SOY_PLANT = register(SoyPlantBlock::new, "soy_plant");
-    public static final RegistryObject<Block> ROCK_SALT_BLOCK = register(RockSaltBlock::new, "rock_salt_block");
-    public static final RegistryObject<Block> RICE_PLANT = register(RicePlantBlock::new, "rice_plant");
-    public static final RegistryObject<Block> WOODEN_BUCKET = register(WoodenBucketBlock::new, "wooden_bucket");
+    public static final RegistryObject<Block> SOY_PLANT = register(() -> new SoyPlantBlock(AbstractBlock.Properties.of(Material.PLANT).instabreak().randomTicks().noCollission().sound(SoundType.CROP)), "soy_plant");
+    public static final RegistryObject<Block> ROCK_SALT_BLOCK = register(() -> new RockSaltBlock(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_PINK).requiresCorrectToolForDrops().strength(2.5f, 2.5f)), "rock_salt_block");
+    public static final RegistryObject<Block> RICE_PLANT = register(() -> new RicePlantBlock(AbstractBlock.Properties.of(Material.PLANT).instabreak().randomTicks().noCollission().sound(SoundType.CROP)), "rice_plant");
+    public static final RegistryObject<Block> WOODEN_BUCKET = register(() -> new WoodenBucketBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0f)), "wooden_bucket");
     public static final RegistryObject<Block> MICRO_SCOPE = register(MicroScopeBlock::new, "microscope");
     public static final RegistryObject<Block> PRESSER = register(PresserBlock::new, "presser");
     public static final RegistryObject<Block> UNREFINED_SOY_SAUCE = register(UnrefinedSoySauceBlock::new, "unrefined_soy_sauce");
@@ -33,18 +32,13 @@ public class JPBlocks {
     public static final RegistryObject<Block> LEEK_PLANT = register(LeekPlantBlock::new, "leek_plant");
     public static final RegistryObject<Block> OYSTER_SHELL = register(OysterShellBlock::new, "oyster_shell");
     public static final RegistryObject<Block> UNREFINED_MIRIN = register(UnrefinedMirinBlock::new, "unrefined_mirin");
-    public static final RegistryObject<Block> TRONA_ORE = register(() -> new OreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F)), "trona_ore");
-    public static final RegistryObject<Block> FURNACE_CAULDRON = register(FurnaceCauldronBlock::new, "furnace_cauldron");
+    public static final RegistryObject<Block> TRONA_ORE = register(() -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()), "trona_ore");
+    public static final RegistryObject<Block> FURNACE_CAULDRON = register(() -> new FurnaceCauldronBlock(AbstractBlock.Properties.of(Material.METAL).strength(2.0f).requiresCorrectToolForDrops().noOcclusion()), "furnace_cauldron");
     public static final RegistryObject<Block> SOY_HAY = register(SoyHayBlock::new, "soy_hay");
     public static final RegistryObject<Block> AZUKI_PLANT = register(SoyPlantBlock::new, "azuki_plant");
     public static final RegistryObject<Block> WAKAME_BLOCK = register(() -> new TallSeaGrassBlock(AbstractBlock.Properties.create(Material.SEA_GRASS, MaterialColor.BROWN).zeroHardnessAndResistance().doesNotBlockMovement().sound(SoundType.WET_GRASS)), "wakame_block");
 
     public static RegistryObject<Block> register(@Nonnull Supplier<Block> block, @Nonnull String name){
         return BLOCKS.register(name, block);
-    }
-
-    @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Block> event){
-        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 }

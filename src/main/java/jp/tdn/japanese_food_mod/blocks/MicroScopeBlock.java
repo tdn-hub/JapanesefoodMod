@@ -8,7 +8,10 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -28,18 +31,29 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class MicroScopeBlock extends HorizontalBlock {
-    protected static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D,12.0D));
-    public static final DirectionProperty DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
-    
-    public MicroScopeBlock(){
-        super(Properties.create(Material.IRON, MaterialColor.IRON).doesNotBlockMovement().hardnessAndResistance(2.5f).sound(SoundType.METAL));
-        this.setDefaultState(this.getDefaultState().with(DIRECTION, Direction.NORTH));
+public class MicroScopeBlock extends ContainerBlock {
+    protected static final VoxelShape SHAPE;
+    public static final DirectionProperty FACING;
+    public static final BooleanProperty IDENTIFY;
+
+    public MicroScopeBlock(Properties properties){
+        super(properties);
+        this.registerDefaultState(
+                (BlockState) this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(IDENTIFY, false)
+        );
     }
 
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity newBlockEntity(IBlockReader iBlockReader) {
+        return new MicroScopeTileEntity();
     }
 
     @Nullable
@@ -61,61 +75,27 @@ public class MicroScopeBlock extends HorizontalBlock {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote){
-            final TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if(tileEntity instanceof MicroScopeTileEntity) NetworkHooks.openGui((ServerPlayerEntity) player, (MicroScopeTileEntity) tileEntity, pos);
-        }
-        return ActionResultType.SUCCESS;
-    }
-
-    @Override
-    public void onReplaced(BlockState oldState, @Nonnull World worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
-        if (oldState.getBlock() != newState.getBlock()) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof MicroScopeTileEntity) {
-                final ItemStackHandler inventory = ((MicroScopeTileEntity) tileEntity).inventory;
-                for(int index = 0; index < inventory.getSlots(); ++index){
-                    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(index));
-                }
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+        if(worldIn.isClientSide){
+            return ActionResultType.SUCCESS;
+        } else {
+            final TileEntity tileEntity = worldIn.getBlockEntity(pos);
+            if(tileEntity instanceof MicroScopeTileEntity) {
+                player.openMenu((INamedContainerProvider)tileEntity);
             }
-            super.onReplaced(oldState, worldIn, pos, newState, isMoving);
         }
-    }
 
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(DIRECTION, context.getPlacementHorizontalFacing().getOpposite());
+        return ActionResultType.CONSUME;
     }
 
     @Override
-    public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-        final TileEntity tileEntity = worldIn.getTileEntity(pos);
-        if(tileEntity instanceof MicroScopeTileEntity) return ItemHandlerHelper.calcRedstoneFromInventory(((MicroScopeTileEntity) tileEntity).inventory);
-        return super.getComparatorInputOverride(blockState, worldIn, pos);
-    }
-
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
-        builder.add(DIRECTION);
-    }
-
-    @Override
-    @Nonnull
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(DIRECTION, rot.rotate(state.get(DIRECTION)));
-    }
-
-    @Override
-    @Nonnull
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(DIRECTION)));
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
+    public BlockRenderType getRenderShape(BlockState p_149645_1_) {
         return BlockRenderType.MODEL;
+    }
+
+    static {
+        SHAPE = VoxelShapes.or(Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D,12.0D));
+        FACING = HorizontalBlock.FACING;
+        IDENTIFY = BooleanProperty.create("active");
     }
 }

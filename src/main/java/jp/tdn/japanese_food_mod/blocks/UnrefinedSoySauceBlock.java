@@ -32,7 +32,7 @@ public class UnrefinedSoySauceBlock extends UnrefinedBlock {
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockRayTraceResult rayTraceResult) {
         if(!world.isRemote){
             if(state.get(SAUCE) && hasUpSideBlock(world, pos)){
-                ItemStack insert = new ItemStack(JPItems.SOY_SAUCE);
+                ItemStack insert = new ItemStack(JPItems.SOY_SAUCE.get());
                 TileEntity tileEntity = world.getTileEntity(pos);
                 if(tileEntity instanceof UnrefinedSoySauceTileEntity){
                     if(((UnrefinedSoySauceTileEntity) tileEntity).getSauceRemaining() > 0) {

@@ -75,7 +75,7 @@ public class OysterShellBlock extends HorizontalBlock implements ILiquidContaine
             if(entity instanceof OysterShellTileEntity){
                 if(!((OysterShellTileEntity) entity).isEmpty()){
                     ((OysterShellTileEntity) entity).useNori();
-                    player.inventory.addItemStackToInventory(new ItemStack(JPItems.NORI));
+                    player.inventory.addItemStackToInventory(new ItemStack(JPItems.NORI.get()));
 
                     setNoriLevel(worldIn, pos, state, getLevel(((OysterShellTileEntity) entity).getnoriRemaining()));
                 }

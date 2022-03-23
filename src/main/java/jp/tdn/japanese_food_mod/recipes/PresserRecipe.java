@@ -3,6 +3,8 @@ package jp.tdn.japanese_food_mod.recipes;
 import com.google.gson.JsonObject;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.init.JPItems;
+import jp.tdn.japanese_food_mod.init.JPRecipeSerializers;
+import jp.tdn.japanese_food_mod.init.JPRecipeTypes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -14,32 +16,39 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class PresserRecipe implements IRecipe<IInventory> {
-    public static final Serializer SERIALIZER = new Serializer();
-    public static final IRecipeType<PresserRecipe> RECIPE_TYPE = new IRecipeType<PresserRecipe>() {
-    };
+    protected final IRecipeType<PresserRecipe> type;
     protected final ResourceLocation id;
-    protected Ingredient ingredient;
-    protected int result;
-    protected int cookTime;
+    private final Ingredient ingredient;
+    private final int result;
+    private final int cookTime;
 
-    public PresserRecipe(ResourceLocation idIn){
+    public PresserRecipe(ResourceLocation idIn, Ingredient ingredient, int result, int cookTime){
         this.id = idIn;
+        this.type = JPRecipeTypes.PRESSER;
+        this.ingredient = ingredient;
+        this.result = result;
+        this.cookTime = cookTime;
     }
 
     public boolean matches(IInventory inventory, @Nonnull World worldIn){
-        return this.ingredient.test(inventory.getStackInSlot(0));
+        return this.ingredient.test(inventory.getItem(0));
     }
 
     @Override
-    @Nonnull
-    public ItemStack getCraftingResult(@Nonnull IInventory inventory) {
-        return new ItemStack(JPItems.COOKING_OIL);
+    public ItemStack assemble(IInventory iInventory) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int i, int i1) {
+        return true;
     }
 
     public int getResult(){
@@ -57,61 +66,56 @@ public class PresserRecipe implements IRecipe<IInventory> {
         return nonNullList;
     }
 
-    @Nonnull
-    public ItemStack getRecipeOutput(){
-        return new ItemStack(JPItems.COOKING_OIL);
+    @Override
+    public ItemStack getResultItem() {
+        return ItemStack.EMPTY;
     }
 
     public int getCookTime(){
-        return cookTime;
+        return this.cookTime;
     }
 
     @Nonnull
     public ResourceLocation getId(){
-        return id;
+        return this.id;
     }
 
     @Override
     @Nonnull
     public IRecipeSerializer<?> getSerializer() {
-        return SERIALIZER;
+        return JPRecipeSerializers.PRESSER.get();
     }
 
     @Nonnull
     public IRecipeType<?> getType(){
-        return RECIPE_TYPE;
+        return this.type;
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<PresserRecipe>{
-        Serializer(){
-            this.setRegistryName(new ResourceLocation(JapaneseFoodMod.MOD_ID, "pressing"));
-        }
 
         @Override
         @Nonnull
-        public PresserRecipe read(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
-            PresserRecipe recipe = new PresserRecipe(recipeId);
-            recipe.result = JSONUtils.getInt(json, "result");
-            recipe.cookTime = JSONUtils.getInt(json, "process_time", 50);
-            recipe.ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "ingredient"));
-            return recipe;
+        public PresserRecipe fromJson(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
+            int result = JSONUtils.getAsInt(json, "result");
+            int cookTime = JSONUtils.getAsInt(json, "process_time", 50);
+            Ingredient ingredient = CraftingHelper.getIngredient(JSONUtils.getAsJsonObject(json, "ingredient"));
+            return new PresserRecipe(recipeId, ingredient, result, cookTime);
         }
 
         @Nullable
         @Override
-        public PresserRecipe read(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
-            PresserRecipe recipe = new PresserRecipe(recipeId);
-            recipe.cookTime = buffer.readVarInt();
-            recipe.result = buffer.readVarInt();
-            recipe.ingredient = Ingredient.read(buffer);
-            return recipe;
+        public PresserRecipe fromNetwork(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
+            int cookTime = buffer.readVarInt();
+            int result = buffer.readVarInt();
+            Ingredient ingredient = Ingredient.fromNetwork(buffer);
+            return new PresserRecipe(recipeId, ingredient, result, cookTime);
         }
 
         @Override
-        public void write(PacketBuffer buffer, PresserRecipe recipe) {
+        public void toNetwork(PacketBuffer buffer, PresserRecipe recipe) {
             buffer.writeVarInt(recipe.cookTime);
             buffer.writeVarInt(recipe.result);
-            recipe.ingredient.write(buffer);
+            recipe.ingredient.toNetwork(buffer);
         }
     }
 }

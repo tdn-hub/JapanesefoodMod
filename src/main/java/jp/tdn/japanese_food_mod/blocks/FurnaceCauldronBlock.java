@@ -5,6 +5,7 @@ import jp.tdn.japanese_food_mod.init.JPItemTags;
 import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,14 +33,17 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class FurnaceCauldronBlock extends JPHorizontalBlock{
-    protected static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 24.0D, 16.0D));
-    protected static final VoxelShape COLLISION = VoxelShapes.or(Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 24.0D, 16.0D));
-    public static final IntegerProperty WATER = BlockStateProperties.LEVEL_0_3;
+public class FurnaceCauldronBlock extends HorizontalBlock {
+    protected static final VoxelShape SHAPE;
+    public static final IntegerProperty WATER = BlockStateProperties.LEVEL_CAULDRON;
 
-    public FurnaceCauldronBlock(){
-        super(Properties.create(Material.IRON, MaterialColor.STONE).hardnessAndResistance(2.0f).notSolid());
-        setDefaultState(this.getDefaultState().with(DIRECTION, Direction.NORTH).with(WATER, 0));
+    public FurnaceCauldronBlock(Properties properties){
+        super(properties);
+        this.registerDefaultState(
+                (BlockState) this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(WATER, 0)
+        );
     }
 
     @Override
@@ -59,15 +63,10 @@ public class FurnaceCauldronBlock extends JPHorizontalBlock{
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState p_220071_1_, IBlockReader p_220071_2_, BlockPos p_220071_3_, ISelectionContext p_220071_4_) {
-        return COLLISION;
-    }
-
-    @Override
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult rayTraceResult) {
         if(!world.isRemote()){
             ItemStack heldItem = playerEntity.getHeldItem(hand);
-            if(JPItemTags.WATER.func_230235_a_(heldItem.getItem())){
+            if(JPItemTags.WATER.equals(heldItem.getItem())){
                 TileEntity blockEntity = world.getTileEntity(pos);
                 if(blockEntity instanceof FurnaceCauldronTileEntity){
                     if(((FurnaceCauldronTileEntity) blockEntity).canAddWater()) {
@@ -134,5 +133,9 @@ public class FurnaceCauldronBlock extends JPHorizontalBlock{
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
         builder.add(WATER);
+    }
+
+    static {
+        SHAPE = VoxelShapes.or(Block.box(0.0D, 0.0D, 0.0D, 16.0D, 24.0D, 16.0D));
     }
 }

@@ -38,7 +38,7 @@ public class ShellfishEntity extends WaterMobEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 5.0D).func_233815_a_(Attributes.field_233821_d_, 0.15D);
+        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 5.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D);
     }
 
     @Override

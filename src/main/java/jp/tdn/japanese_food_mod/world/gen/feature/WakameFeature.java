@@ -19,10 +19,9 @@ public class WakameFeature extends Feature<NoFeatureConfig> {
     }
 
     @Override
-    @ParametersAreNonnullByDefault
-    public boolean func_230362_a_(ISeedReader iSeedReader, StructureManager structureManager, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, NoFeatureConfig noFeatureConfig) {
+    public boolean func_241855_a(ISeedReader iSeedReader, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, NoFeatureConfig noFeatureConfig) {
         if (iSeedReader.getBlockState(blockPos).getBlock() == Blocks.WATER && iSeedReader.getBlockState(blockPos.down()).getBlock() != Blocks.WATER) {
-            iSeedReader.setBlockState(blockPos, JPBlocks.WAKAME_BLOCK.getDefaultState(), 1);
+            iSeedReader.setBlockState(blockPos, JPBlocks.WAKAME_BLOCK.get().getDefaultState(), 1);
             return true;
         }
         return false;

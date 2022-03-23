@@ -115,6 +115,6 @@ public class WoodenBucketContainer extends Container {
 
     @Override
     public boolean canInteractWith(@Nonnull final PlayerEntity player) {
-        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.WOODEN_BUCKET);
+        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.WOODEN_BUCKET.get());
     }
 }

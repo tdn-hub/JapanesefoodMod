@@ -14,13 +14,13 @@ public class ColorEventHandler{
 
     @SubscribeEvent
     public static void registerBlockColors(ColorHandlerEvent.Block event){
-        event.getBlockColors().register((blockState, iEnviromentBlockReader, blockPos, i) -> 0xffb4935d, JPBlocks.PRESSER);
-        event.getBlockColors().register((blockState, iEnviromentBlockReader, blockPos, i) -> 0xff2D8C00, JPBlocks.CROP_GRASS);
-        event.getBlockColors().register((blockState, iLightReader, blockPos, i) -> BiomeColors.getWaterColor(iLightReader, blockPos), JPBlocks.FURNACE_CAULDRON);
+        event.getBlockColors().register((blockState, iBlockDisplayReader, blockPos, i) -> 0xffb4935d, JPBlocks.PRESSER.get());
+        event.getBlockColors().register(((blockState, iBlockDisplayReader, blockPos, i) -> 0xff2D8C00), JPBlocks.CROP_GRASS.get());
+        event.getBlockColors().register((blockState, iBlockDisplayReader, blockPos, i) -> BiomeColors.getWaterColor(iBlockDisplayReader, blockPos), JPBlocks.FURNACE_CAULDRON.get());
     }
 
     @SubscribeEvent
     public static void registerItemColors(ColorHandlerEvent.Item event){
-        event.getItemColors().register((itemStack, i) -> 0xff2D8C00, JPItems.CROP_GRASS);
+        event.getItemColors().register(((itemStack, i) -> 0xff2D8C00), JPItems.CROP_GRASS.get());
     }
 }

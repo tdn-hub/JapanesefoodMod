@@ -46,7 +46,7 @@ public class CupItem extends SimpleItem {
 
                     if (worldIn.getFluidState(pos).isTagged(FluidTags.WATER)) {
                         worldIn.playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-                        return new ActionResult(ActionResultType.SUCCESS, this.turnBottleIntoItem(inHand, player, new ItemStack(JPItems.CUP_WITH_WATER)));
+                        return new ActionResult(ActionResultType.SUCCESS, this.turnBottleIntoItem(inHand, player, new ItemStack(JPItems.CUP_WITH_WATER.get())));
                     }
                 }
 
@@ -60,9 +60,9 @@ public class CupItem extends SimpleItem {
 //        ItemStack inHand = player.getHeldItem(hand);
 //        JapaneseFoodMod.LOGGER.info(stack);
 //        JapaneseFoodMod.LOGGER.info(entity.getEntityString());
-        if(stack.getItem() == JPItems.CUP){
+        if(stack.getItem() == JPItems.CUP.get()){
             if(entity.getEntityString().equals("minecraft:cow")){
-                turnBottleIntoItem(stack, player, new ItemStack(JPItems.CUP_WITH_MILK));
+                turnBottleIntoItem(stack, player, new ItemStack(JPItems.CUP_WITH_MILK.get()));
                 player.getEntityWorld().playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_COW_MILK, SoundCategory.NEUTRAL, 1.0F, 1.0F);
                 return ActionResultType.SUCCESS;
             }

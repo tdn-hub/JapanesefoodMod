@@ -28,7 +28,7 @@ public class UnrefinedBlock extends Block {
         BlockPos upSide = pos.up();
         Block up = world.getBlockState(upSide).getBlock();
 
-        return BlockTags.getCollection().get(new ResourceLocation("japanese_food_mod", "heavy")).func_230235_a_(up);
+        return BlockTags.getCollection().get(new ResourceLocation("japanese_food_mod", "heavy")).contains(up);
     }
 
     @Override

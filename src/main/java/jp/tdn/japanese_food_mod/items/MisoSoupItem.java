@@ -24,6 +24,6 @@ public class MisoSoupItem extends DrinkItem {
     @Nonnull
     public ItemStack onItemUseFinish(@Nonnull ItemStack item, @Nonnull World world, @Nonnull LivingEntity entity) {
         super.onItemUseFinish(item, world, entity);
-        return new ItemStack(JPItems.TYAWAN);
+        return new ItemStack(JPItems.TYAWAN.get());
     }
 }

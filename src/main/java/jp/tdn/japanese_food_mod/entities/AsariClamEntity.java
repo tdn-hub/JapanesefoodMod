@@ -11,13 +11,13 @@ import net.minecraft.world.World;
 
 public class AsariClamEntity extends ShellfishEntity {
     public AsariClamEntity(EntityType<? extends WaterMobEntity> type, World worldIn){
-        super(JPEntities.ASARI_CLAM, worldIn, JPItems.ASARI_CLAM);
+        super(JPEntities.ASARI_CLAM, worldIn, JPItems.ASARI_CLAM.get());
     }
 
     protected void updateAir(int p_209207_1_) {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 2.0D).func_233815_a_(Attributes.field_233821_d_, 0.15D);
+        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 2.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D);
     }
 }

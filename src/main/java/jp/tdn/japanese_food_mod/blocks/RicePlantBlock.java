@@ -14,20 +14,8 @@ import net.minecraft.world.IBlockReader;
 import javax.annotation.Nonnull;
 
 public class RicePlantBlock extends CropsBlock{
-    public RicePlantBlock(){
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0f).sound(SoundType.CROP));
-    }
-
-    @Override
-    @Nonnull
-    protected IItemProvider getSeedsItem(){
-        return JPItems.RICE_SEEDLING;
-    }
-
-    @Override
-    protected boolean isValidGround(BlockState block, IBlockReader reader, BlockPos pos){
-        FluidState fluidState = reader.getFluidState(pos);
-        return fluidState.getFluid() == Fluids.WATER;
+    public RicePlantBlock(Properties properties){
+        super(properties);
     }
 
 //    @Override

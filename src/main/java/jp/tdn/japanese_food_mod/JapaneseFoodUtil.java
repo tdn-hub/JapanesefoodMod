@@ -23,6 +23,6 @@ public class JapaneseFoodUtil {
     }
 
     public static Biome getBiome(String name){
-        return ForgeRegistries.BIOMES.getValue(new ResourceLocation(name));
+        return ForgeRegistries.BIOMES.getValue(new ResourceLocation("minecraft", name));
     }
 }

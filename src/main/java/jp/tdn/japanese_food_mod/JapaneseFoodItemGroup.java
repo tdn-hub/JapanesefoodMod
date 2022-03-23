@@ -14,6 +14,6 @@ public class JapaneseFoodItemGroup extends ItemGroup{
     @Override
     @Nonnull
     public ItemStack createIcon(){
-        return new ItemStack(JPItems.ONIGIRI);
+        return new ItemStack(JPItems.ONIGIRI.get());
     }
 }

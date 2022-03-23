@@ -20,7 +20,7 @@ public class TunaEntity extends AbstractGroupFishEntity {
 
     @Override
     protected ItemStack getFishBucket() {
-        return new ItemStack(JPItems.TUNA_BUCKET);
+        return new ItemStack(JPItems.TUNA_BUCKET.get());
     }
 
     @Override
@@ -29,6 +29,6 @@ public class TunaEntity extends AbstractGroupFishEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 10.0D).func_233815_a_(Attributes.field_233821_d_, 1.0D);
+        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 1.0D);
     }
 }

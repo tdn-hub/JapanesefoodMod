@@ -19,41 +19,41 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
     }
 
     @Override
-    public void func_230430_a_(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        this.func_230446_a_(matrixStack);
-        super.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
-        this.func_230459_a_(matrixStack, mouseX, mouseY);
+    public void render(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
+        this.renderBackground(p_230430_1_);
+        super.render(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
+        this.renderHoveredTooltip(p_230430_1_, p_230430_2_, p_230430_3_);
     }
 
     @Override
-    protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY) {
-        this.field_230712_o_.func_238422_b_(matrixStack, this.field_230704_d_, (float)(this.xSize / 2), 6.0f, 4210752);
-        this.field_230712_o_.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 8.0F, (float) (this.ySize - 96 + 4), 4210752);
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
+        this.font.func_238422_b_(matrixStack, this.title.func_241878_f(), (float)(this.xSize / 2), 6.0f, 4210752);
+        this.font.func_238422_b_(matrixStack, this.playerInventory.getDisplayName().func_241878_f(), 8.0F, (float) (this.ySize - 96 + 4), 4210752);
 
     }
 
     @Override
-    protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-        this.field_230706_i_.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
+        this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
 
         int startX = this.guiLeft;
         int startY = this.guiTop;
 
-        this.func_238474_b_(matrixStack , startX, startY, 0, 0, this.xSize, this.ySize);
+        this.blit(matrixStack , startX, startY, 0, 0, this.xSize, this.ySize);
 
         final MicroScopeTileEntity tileEntity = container.tileEntity;
         if(tileEntity.identifiedTimeLeft > 0){
             int arrowHeight = getIdentifiedTimeScaled();
-            this.func_238474_b_(
+            this.blit(
                     matrixStack,
                     startX + 87, startY + 44,
                     176, 0,
                     27, 28 - arrowHeight
                     );
         }else{
-            this.func_238474_b_(
+            this.blit(
                     matrixStack,
                     startX + 87, startY + 44,
                     176, 0,
@@ -61,57 +61,6 @@ public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
         }
     }
 
-//    @Override
-//    public void render(int mouseX, int mouseY, float partialTicks) {
-//        this.renderBackground();
-//        super.render(mouseX, mouseY, partialTicks);
-//        this.renderHoveredToolTip(mouseX, mouseY);
-//
-//        int relMouseX = mouseX - this.guiLeft;
-//        int relMouseY = mouseY - this.guiTop;
-//        final MicroScopeTileEntity tileEntity = this.container.tileEntity;
-//        boolean arrowHovered = relMouseX > 87 && relMouseX < 114 && relMouseY > 44 && relMouseY < 71;
-//        if(arrowHovered && tileEntity.maxIdentifiedTime > 0){
-//            String tooltip = new TranslationTextComponent(
-//                    "gui." + JapaneseFoodMod.MOD_ID + ".identifiedTimeProgress",
-//                    (short)(((float)(tileEntity.maxIdentifiedTime - tileEntity.identifiedTimeLeft) / tileEntity.maxIdentifiedTime) * 100),
-//                    "%"
-//            ).getFormattedText();
-//            this.renderTooltip(tooltip, mouseX, mouseY);
-//        }
-//    }
-//
-//    @Override
-//    protected void drawGuiContainerForegroundLayer(int mouseX_, int mouseY) {
-//        super.drawGuiContainerForegroundLayer(mouseX_, mouseY);
-//        String s = this.title.getFormattedText();
-//        this.font.drawString(s, (float)(this.xSize / 1.5 - this.font.getStringWidth(s) / 2), 6.0F, 0x404040);
-//        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 92 + 2), 0x404040);
-//    }
-//
-//    @Override
-//    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-//        GlStateManager.color4f(1.0f, 1.0f, 1.0f, 1.0f);
-//        getMinecraft().getTextureManager().bindTexture(BACKGROUND_TEXTURE);
-//        int startX = this.guiLeft;
-//        int startY = this.guiTop;
-//
-//        this.blit(startX, startY, 0, 0, this.xSize, this.ySize);
-//
-//        final MicroScopeTileEntity tileEntity = container.tileEntity;
-//        if(tileEntity.identifiedTimeLeft > 0){
-//            int arrowHeight = getIdentifiedTimeScaled();
-//            this.blit(
-//                    startX + 87, startY + 44,
-//                    176, 0,
-//                    27, 28 - arrowHeight
-//                    );
-//        }else{
-//            this.blit(startX + 87, startY + 44,
-//                    176, 0,
-//                    27, 28);
-//        }
-//    }
 
     private int getIdentifiedTimeScaled(){
         final MicroScopeTileEntity tileEntity = this.container.tileEntity;

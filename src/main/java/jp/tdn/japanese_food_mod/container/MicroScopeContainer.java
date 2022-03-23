@@ -97,6 +97,6 @@ public class MicroScopeContainer extends Container {
 
     @Override
     public boolean canInteractWith(@Nonnull final PlayerEntity player) {
-        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.MICRO_SCOPE);
+        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.MICRO_SCOPE.get());
     }
 }
