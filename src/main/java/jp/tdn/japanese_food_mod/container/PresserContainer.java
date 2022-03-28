@@ -3,40 +3,58 @@ package jp.tdn.japanese_food_mod.container;
 import jp.tdn.japanese_food_mod.blocks.tileentity.PresserTileEntity;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPContainerTypes;
+import jp.tdn.japanese_food_mod.init.JPRecipeTypes;
+import jp.tdn.japanese_food_mod.recipes.PresserRecipe;
+import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIntArray;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.IntArray;
+import net.minecraft.world.World;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class PresserContainer extends Container {
-    public final PresserTileEntity tileEntity;
-    private final IWorldPosCallable canInteractWithCallable;
+    private final IIntArray data;
+    private final IInventory container;
+    protected final World level;
+    private final IRecipeType<? extends PresserRecipe> recipeType;
 
-    public PresserContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data){
-        this(windowId, playerInventory, getTileEntity(playerInventory, data));
+    public PresserContainer(int windowId, PlayerInventory playerInventory){
+        this(JPContainerTypes.PRESSER, JPRecipeTypes.PRESSER, windowId, playerInventory);
     }
 
-    public PresserContainer(final int windowId, final PlayerInventory playerInventory, final PresserTileEntity tileEntity){
-        super(JPContainerTypes.PRESSER, windowId);
-        this.tileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
+    public PresserContainer(int windowId, PlayerInventory playerInventory, IInventory container, IIntArray data){
+        this(JPContainerTypes.PRESSER, JPRecipeTypes.PRESSER, windowId, playerInventory, container, data);
+    }
 
-        this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.pressedTimeLeft, v -> tileEntity.pressedTimeLeft = (short)v));
-        this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxPressedTime, v -> tileEntity.maxPressedTime = (short)v));
-        this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.oilRemaining, v -> tileEntity.oilRemaining = (short)v));
-        this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxOilRemaining, v -> tileEntity.maxOilRemaining = (short)v));
+    protected PresserContainer(ContainerType<?> containerType, IRecipeType<? extends PresserRecipe> recipeType, int windowId, PlayerInventory inventory){
+        this(containerType, recipeType, windowId, inventory, new Inventory(3), new IntArray(4));
+    }
 
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, PresserTileEntity.INPUT_SLOT, 34, 8));
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, PresserTileEntity.OUTPUT_SLOT, 135, 55));
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, PresserTileEntity.CONTAINER_SLOT, 70, 51));
+    protected PresserContainer(ContainerType<?> containerType, IRecipeType<? extends PresserRecipe> recipeType, int windowId, PlayerInventory playerInventory, IInventory container, IIntArray data){
+        super(containerType, windowId);
+        this.recipeType = recipeType;
+        checkContainerSize(container, 3);
+        checkContainerDataCount(data, 4);
+        this.container = container;
+        this.data = data;
+        this.level = playerInventory.player.level;
+        this.addSlot(new Slot(container, PresserTileEntity.INPUT_SLOT, 34, 8));
+        this.addSlot(new Slot(container, PresserTileEntity.OUTPUT_SLOT, 135, 55));
+        this.addSlot(new Slot(container, PresserTileEntity.CONTAINER_SLOT, 70, 51));
 
         final int playerInventoryStartX = 8;
         final int playerInventoryStartY = 88;
@@ -54,38 +72,35 @@ public class PresserContainer extends Container {
         }
     }
 
-    private static PresserTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data){
-        Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
-        Objects.requireNonNull(data, "data cannot be null");
-        final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
-        if(tileAtPos instanceof PresserTileEntity) return (PresserTileEntity)tileAtPos;
-        throw new IllegalStateException("Tile entity is not correct" + tileAtPos);
+    @Override
+    public boolean stillValid(PlayerEntity playerEntity) {
+        return this.container.stillValid(playerEntity);
     }
 
     @Override
     @Nonnull
-    public ItemStack transferStackInSlot(PlayerEntity player, int index) {
+    public ItemStack quickMoveStack(PlayerEntity player, int index) {
         ItemStack returnStack = ItemStack.EMPTY;
-        final Slot slot = this.inventorySlots.get(index);
-        if(slot != null && slot.getHasStack()){
-            final ItemStack slotStack = slot.getStack();
+        final Slot slot = this.slots.get(index);
+        if(slot != null && slot.hasItem()){
+            final ItemStack slotStack = slot.getItem();
             returnStack = slotStack.copy();
 
-            final int containerSlots = this.inventorySlots.size() - player.inventory.mainInventory.size();
+            final int containerSlots = this.slots.size() - player.inventory.items.size();
             if(index < containerSlots){
-                if(!mergeItemStack(slotStack, containerSlots, this.inventorySlots.size(), true)){
+                if(!this.moveItemStackTo(slotStack, containerSlots, this.slots.size(), true)){
                     return ItemStack.EMPTY;
                 }
-            }else if(!mergeItemStack(slotStack, 0, containerSlots, false)){
+            }else if(!this.moveItemStackTo(slotStack, 0, containerSlots, false)){
 
                 return ItemStack.EMPTY;
             }
 
             if(slotStack.getCount() == 0){
 
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             }else{
-                slot.onSlotChanged();
+                slot.setChanged();
             }
 
             if(slotStack.getCount() == returnStack.getCount()){
@@ -95,10 +110,5 @@ public class PresserContainer extends Container {
             slot.onTake(player, slotStack);
         }
         return returnStack;
-    }
-
-    @Override
-    public boolean canInteractWith(@Nonnull final PlayerEntity player) {
-        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.PRESSER.get());
     }
 }

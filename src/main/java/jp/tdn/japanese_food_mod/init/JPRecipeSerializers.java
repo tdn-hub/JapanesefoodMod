@@ -2,6 +2,7 @@ package jp.tdn.japanese_food_mod.init;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.recipes.FermentationRecipe;
+import jp.tdn.japanese_food_mod.recipes.FurnaceCauldronRecipe;
 import jp.tdn.japanese_food_mod.recipes.IdentifiedRecipe;
 import jp.tdn.japanese_food_mod.recipes.PresserRecipe;
 import net.minecraft.block.Block;
@@ -20,4 +21,5 @@ public class JPRecipeSerializers {
     public static final RegistryObject<IRecipeSerializer<FermentationRecipe>> FERMENTATION = RECIPE_SERIALIZERS.register("fermentation", FermentationRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<IdentifiedRecipe>> IDENTIFY = RECIPE_SERIALIZERS.register("identify", IdentifiedRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<PresserRecipe>> PRESSER = RECIPE_SERIALIZERS.register("presser", PresserRecipe.Serializer::new);
+    public static final RegistryObject<IRecipeSerializer<FurnaceCauldronRecipe>> CAULDRON = RECIPE_SERIALIZERS.register("furnace_cauldron", FurnaceCauldronRecipe.Serializer::new);
 }

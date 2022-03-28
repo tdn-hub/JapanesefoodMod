@@ -3,34 +3,51 @@ package jp.tdn.japanese_food_mod.container;
 import jp.tdn.japanese_food_mod.blocks.tileentity.WoodenBucketTileEntity;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPContainerTypes;
+import jp.tdn.japanese_food_mod.init.JPRecipeTypes;
+import jp.tdn.japanese_food_mod.recipes.FermentationRecipe;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.AbstractCookingRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIntArray;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.IntArray;
+import net.minecraft.world.World;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class WoodenBucketContainer extends Container {
-    public final WoodenBucketTileEntity tileEntity;
-    private final IWorldPosCallable canInteractWithCallable;
+    private final IInventory container;
+    private final IIntArray data;
+    protected final World level;
+    private final IRecipeType<? extends FermentationRecipe> recipeType;
 
-    public WoodenBucketContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data){
-        this(windowId, playerInventory, getTileEntity(playerInventory, data));
+    public WoodenBucketContainer(int windowId, PlayerInventory playerInventory, IInventory container, IIntArray data){
+        this(JPContainerTypes.WOODEN_BUCKET, JPRecipeTypes.FERMENTATION, windowId, playerInventory, container, data);
     }
 
-    public WoodenBucketContainer(final int windowId, final PlayerInventory playerInventory, final WoodenBucketTileEntity tileEntity){
-        super(JPContainerTypes.WOODEN_BUCKET, windowId);
-        this.tileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
+    protected WoodenBucketContainer(ContainerType<?> containerType, IRecipeType<? extends FermentationRecipe> recipeType, int windowId, PlayerInventory playerInventory){
+        this(containerType, recipeType, windowId, playerInventory, new Inventory(10), new IntArray(2));
+    }
 
-        this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.fermentationTimeLeft, v -> tileEntity.fermentationTimeLeft = (short)v));
-        this.trackInt(new FunctionalIntReferenceHolder(() -> tileEntity.maxFermentationTime, v -> tileEntity.maxFermentationTime = (short)v));
+    public WoodenBucketContainer(ContainerType<?> containerType, IRecipeType<? extends FermentationRecipe> recipeType, int windowId, PlayerInventory playerInventory, IInventory container, IIntArray data){
+        super(containerType, windowId);
+        this.recipeType = recipeType;
+        checkContainerSize(container, 10);
+        checkContainerDataCount(data, 2);
+        this.container = container;
+        this.data = data;
+        this.level = playerInventory.player.level;
 
         // InputSlot
         final int inputStartX = 21;
@@ -39,19 +56,19 @@ public class WoodenBucketContainer extends Container {
         int index = 0;
         for(int row = 0;row < 3; ++row){
             for(int col = 0;col < 2; ++col){
-                this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.INPUT_SLOT[index], inputStartX + (col * slotSizePlus2), inputStartY + (row * slotSizePlus2)));
+                this.addSlot(new Slot(container, WoodenBucketTileEntity.INPUT_SLOT[index], inputStartX + (col * slotSizePlus2), inputStartY + (row * slotSizePlus2)));
                 ++index;
             }
         }
 
         // OutputSlot
-        this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.OUTPUT_SLOT, 115, 34));
+        this.addSlot(new Slot(container, WoodenBucketTileEntity.OUTPUT_SLOT, 115, 34));
 
         // ReturnSlot
         final int returnStartX = 97;
         final int returnStartY = 64;
         for(index = 0; index < WoodenBucketTileEntity.RETURN_SLOT.length; ++index){
-            this.addSlot(new SlotItemHandler(tileEntity.inventory, WoodenBucketTileEntity.RETURN_SLOT[index], returnStartX + (index * slotSizePlus2), returnStartY));
+            this.addSlot(new Slot(container, WoodenBucketTileEntity.RETURN_SLOT[index], returnStartX + (index * slotSizePlus2), returnStartY));
         }
 
         // InventorySlot
@@ -69,39 +86,29 @@ public class WoodenBucketContainer extends Container {
         }
     }
 
-    private static WoodenBucketTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data){
-        Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
-        Objects.requireNonNull(data, "data cannot be null");
-        final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
-        if(tileAtPos instanceof WoodenBucketTileEntity) {
-            return (WoodenBucketTileEntity)tileAtPos;
-        }
-        throw new IllegalStateException("Tile entity is not correct" + tileAtPos);
-    }
-
     @Override
     @Nonnull
-    public ItemStack transferStackInSlot(PlayerEntity player, int index) {
+    public ItemStack quickMoveStack(PlayerEntity player, int index) {
         ItemStack returnStack = ItemStack.EMPTY;
-        final Slot slot = this.inventorySlots.get(index);
-        if(slot != null && slot.getHasStack()){
-            final ItemStack slotStack = slot.getStack();
+        final Slot slot = this.slots.get(index);
+        if(slot != null && slot.hasItem()){
+            final ItemStack slotStack = slot.getItem();
             returnStack = slotStack.copy();
 
-            final int containerSlots = this.inventorySlots.size() - player.inventory.mainInventory.size();
+            final int containerSlots = this.slots.size() - player.inventory.items.size();
             if(index < containerSlots){
-                if(!mergeItemStack(slotStack, containerSlots, this.inventorySlots.size(), true)){
+                if(!this.moveItemStackTo(slotStack, containerSlots, this.slots.size(), true)){
                     return ItemStack.EMPTY;
                 }
-            }else if(!mergeItemStack(slotStack, 0, containerSlots, false)){
+            }else if(!moveItemStackTo(slotStack, 0, containerSlots, false)){
 
                 return ItemStack.EMPTY;
             }
 
             if(slotStack.getCount() == 0){
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             }else{
-                slot.onSlotChanged();
+                slot.setChanged();
             }
 
             if(slotStack.getCount() == returnStack.getCount()){
@@ -114,7 +121,7 @@ public class WoodenBucketContainer extends Container {
     }
 
     @Override
-    public boolean canInteractWith(@Nonnull final PlayerEntity player) {
-        return isWithinUsableDistance(canInteractWithCallable, player, JPBlocks.WOODEN_BUCKET.get());
+    public boolean stillValid(PlayerEntity playerEntity) {
+        return this.container.stillValid(playerEntity);
     }
 }

@@ -55,7 +55,7 @@ public abstract class AbstractBucketTileEntity extends LockableTileEntity implem
     protected NonNullList<ItemStack> items;
     private int ferProgress;
     private int ferTotalTime;
-    private IIntArray dataAccess;
+    protected final IIntArray dataAccess;
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed;
     protected final IRecipeType<? extends FermentationRecipe> recipeType;
     LazyOptional<? extends IItemHandler> handler;

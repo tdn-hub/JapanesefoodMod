@@ -19,8 +19,8 @@ public class WoodenBucketTileEntity extends AbstractBucketTileEntity {
 
     @Nonnull
     @Override
-    public Container createMenu(int windowId, @Nonnull PlayerInventory inventory) {
-        return new WoodenBucketContainer(windowId, inventory, this);
+    protected Container createMenu(int windowId, @Nonnull PlayerInventory inventory) {
+        return new WoodenBucketContainer(windowId, inventory, this, this.dataAccess);
     }
 
     @Override

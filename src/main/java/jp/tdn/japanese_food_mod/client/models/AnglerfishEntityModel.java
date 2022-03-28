@@ -24,8 +24,8 @@ public class AnglerfishEntityModel<T extends LivingEntity> extends EntityModel<T
     private final ModelRenderer side_hire2;
 
     public AnglerfishEntityModel() {
-        textureWidth = 32;
-        textureHeight = 32;
+        this.texWidth = 32;
+        this.texHeight = 32;
 
         bone = new ModelRenderer(this);
         bone.setRotationPoint(0.0F, 24.0F, 0.0F);

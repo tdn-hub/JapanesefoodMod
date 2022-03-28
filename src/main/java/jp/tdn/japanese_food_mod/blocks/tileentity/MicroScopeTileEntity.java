@@ -323,6 +323,6 @@ public class MicroScopeTileEntity extends LockableTileEntity implements IInvento
 
     @Override
     protected Container createMenu(int i, PlayerInventory playerInventory) {
-        return new MicroScopeContainer(i, playerInventory, this);
+        return new MicroScopeContainer(i, playerInventory, this, this.dataAccess);
     }
 }

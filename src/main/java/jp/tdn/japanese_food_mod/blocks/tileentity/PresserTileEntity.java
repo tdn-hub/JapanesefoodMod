@@ -340,12 +340,6 @@ public class PresserTileEntity extends LockableTileEntity implements IInventory,
 
     @Override
     protected Container createMenu(int i, PlayerInventory playerInventory) {
-        return new PresserContainer(i, playerInventory, this);
-    }
-
-    @Nonnull
-    @Override
-    public Container createMenu(int windowId, @Nonnull PlayerInventory inventory, @Nonnull PlayerEntity player) {
-        return new PresserContainer(windowId, inventory, this);
+        return new PresserContainer(i, playerInventory, this, this.dataAccess);
     }
 }
