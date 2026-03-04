@@ -1,10 +1,14 @@
 package jp.tdn.japanese_food_mod.init;
 
-import net.minecraft.item.Item;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.ItemTags;
+import jp.tdn.japanese_food_mod.JapaneseFoodMod;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 
 public class JPItemTags {
-    public static final ITag.INamedTag<Item> SALT = ItemTags.makeWrapperTag("forge:dusts/salt");
-    public static final ITag.INamedTag<Item> WATER = ItemTags.makeWrapperTag("japanese_food_mod:water");
+    public static final TagKey<Item> SALT = TagKey.create(Registries.ITEM,
+            ResourceLocation.fromNamespaceAndPath("neoforge", "dusts/salt"));
+    public static final TagKey<Item> WATER = TagKey.create(Registries.ITEM,
+            ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "water"));
 }

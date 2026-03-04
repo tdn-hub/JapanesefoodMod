@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "japanese_food_mod:rice",
+            "items": "japanese_food_mod:rice",
             "count": {
               "min": 1
             }

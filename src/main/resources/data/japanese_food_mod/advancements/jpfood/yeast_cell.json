@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "japanese_food_mod:yeast_cell"
+      "id": "japanese_food_mod:yeast_cell"
     },
     "title": {
       "translate": "advancements.japanese_food_mod.yeast_cell.title"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "japanese_food_mod:yeast_cell",
+            "items": "japanese_food_mod:yeast_cell",
             "count": {
               "min": 1
             }

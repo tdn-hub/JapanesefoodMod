@@ -5,21 +5,24 @@ import jp.tdn.japanese_food_mod.recipes.FurnaceCauldronRecipe;
 import jp.tdn.japanese_food_mod.recipes.MicroScopeRecipe;
 import jp.tdn.japanese_food_mod.recipes.PresserRecipe;
 import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
-@Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JPRecipeTypes {
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
+            DeferredRegister.create(Registries.RECIPE_SERIALIZER, JapaneseFoodMod.MOD_ID);
 
-    @SubscribeEvent
-    public static void registryRecipes(RegistryEvent.Register<IRecipeSerializer<?>> event){
-        event.getRegistry().registerAll(
-                MicroScopeRecipe.SERIALIZER,
-                WoodenBucketRecipe.SERIALIZER,
-                PresserRecipe.SERIALIZER,
-                FurnaceCauldronRecipe.SERIALIZER
-        );
-    }
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MicroScopeRecipe>> MICROSCOPE_SERIALIZER =
+            RECIPE_SERIALIZERS.register("identifying", () -> MicroScopeRecipe.SERIALIZER);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<WoodenBucketRecipe>> WOODEN_BUCKET_SERIALIZER =
+            RECIPE_SERIALIZERS.register("fermentation", () -> WoodenBucketRecipe.SERIALIZER);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<PresserRecipe>> PRESSER_SERIALIZER =
+            RECIPE_SERIALIZERS.register("pressing", () -> PresserRecipe.SERIALIZER);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<FurnaceCauldronRecipe>> FURNACE_CAULDRON_SERIALIZER =
+            RECIPE_SERIALIZERS.register("salt_making", () -> FurnaceCauldronRecipe.SERIALIZER);
 }

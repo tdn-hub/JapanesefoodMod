@@ -1,18 +1,20 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
 
-public class UnrefinedTileEntity extends TileEntity{
+public class UnrefinedTileEntity extends BlockEntity {
     public static final String SAUCE_REMAINING_TAG = "sauceRemaining";
     private short sauceRemaining;
 
-    public UnrefinedTileEntity(TileEntityType<?> type, short sauceRemaining){
-        super(type);
+    public UnrefinedTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, short sauceRemaining){
+        super(type, pos, state);
         this.sauceRemaining = sauceRemaining;
     }
 
@@ -25,25 +27,22 @@ public class UnrefinedTileEntity extends TileEntity{
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
-        super.func_230337_a_(state, compound);
+    public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
         this.sauceRemaining = compound.getShort("sauceRemaining");
     }
 
     @Override
     @Nonnull
-    public CompoundNBT write(CompoundNBT compound) {
+    public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
         compound.putShort(SAUCE_REMAINING_TAG, sauceRemaining);
-        return super.write(compound);
+        super.saveAdditional(compound, registries);
     }
 
     @Nonnull
-    public CompoundNBT getUpdateTag(){
-        return this.write(new CompoundNBT());
-    }
-
-    @Override
-    public void remove() {
-        super.remove();
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries){
+        CompoundTag tag = new CompoundTag();
+        this.saveAdditional(tag, registries);
+        return tag;
     }
 }

@@ -1,46 +1,41 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HayBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import jp.tdn.japanese_food_mod.init.JPBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HayBlock;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.MapColor;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
-public class SoyHayBlock extends HayBlock {
+public class SoyHayBlock extends HayBlock implements EntityBlock {
     public static BooleanProperty COMPLETION = BooleanProperty.create("comp");
 
     public SoyHayBlock(){
-        super(Properties.create(Material.ORGANIC, MaterialColor.RED).hardnessAndResistance(0.5F).sound(SoundType.PLANT));
-        this.setDefaultState(this.getDefaultState().with(COMPLETION, false).with(AXIS, Direction.Axis.Y));
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).strength(0.5F).sound(SoundType.GRASS));
+        this.registerDefaultState(this.defaultBlockState().setValue(COMPLETION, false).setValue(AXIS, Direction.Axis.Y));
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return JPTileEntities.SOY_HAY.create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return JPBlockEntities.SOY_HAY.get().create(pos, state);
     }
 
     @Override
-    public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
-        if(state.get(COMPLETION)){
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+        if(state.getValue(COMPLETION)){
             double posX = (double) pos.getX() + random.nextDouble();
             double posY = (double) pos.getY() + 1.0D;
             double posZ = (double) pos.getZ() + random.nextDouble();
@@ -49,8 +44,8 @@ public class SoyHayBlock extends HayBlock {
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(COMPLETION);
     }
 }

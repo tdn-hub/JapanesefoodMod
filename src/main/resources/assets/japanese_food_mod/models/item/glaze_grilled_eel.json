@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/glaze_grilled_eel"
+    "layer0": "japanese_food_mod:item/glaze_grilled_eel"
   }
 }

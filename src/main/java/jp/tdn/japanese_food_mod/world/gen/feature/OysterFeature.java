@@ -1,29 +1,35 @@
 package jp.tdn.japanese_food_mod.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import jp.tdn.japanese_food_mod.JapaneseFoodUtil;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.StructureManager;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Random;
+public class OysterFeature extends Feature<NoneFeatureConfiguration> {
+    private static final Direction[] HORIZONTALS = {Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 
-public class OysterFeature extends Feature<NoFeatureConfig> {
-    public OysterFeature(Codec<NoFeatureConfig> deserializer) {
-        super(deserializer);
+    public OysterFeature(Codec<NoneFeatureConfiguration> codec) {
+        super(codec);
     }
 
     @Override
-    @ParametersAreNonnullByDefault
-    public boolean func_230362_a_(ISeedReader iSeedReader, StructureManager structureManager, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, NoFeatureConfig noFeatureConfig) {
-        if (iSeedReader.getBlockState(blockPos).getBlock() == Blocks.WATER && iSeedReader.getBlockState(blockPos.down()).getBlock() != Blocks.WATER) {
-            iSeedReader.setBlockState(blockPos, JPBlocks.OYSTER_SHELL.get().getDefaultState().rotate(iSeedReader.getWorld(), blockPos, JapaneseFoodUtil.rotations.get(random.nextInt(4))), 1);
+    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+        BlockPos blockPos = context.origin();
+        var level = context.level();
+        var random = context.random();
+
+        if (level.getBlockState(blockPos).getBlock() == Blocks.WATER
+                && level.getBlockState(blockPos.below()).getBlock() != Blocks.WATER) {
+            Direction dir = HORIZONTALS[random.nextInt(4)];
+            level.setBlock(blockPos,
+                    JPBlocks.OYSTER_SHELL.get().defaultBlockState()
+                            .setValue(HorizontalDirectionalBlock.FACING, dir),
+                    1);
             return true;
         }
         return false;

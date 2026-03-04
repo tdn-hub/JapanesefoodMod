@@ -1,60 +1,62 @@
 package jp.tdn.japanese_food_mod.entities;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.entity.passive.WaterMobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
-public class ShellfishEntity extends WaterMobEntity {
+public class ShellfishEntity extends WaterAnimal {
     private static Item interactItem;
-    public ShellfishEntity(EntityType<? extends ShellfishEntity> type, World worldIn, Item interact){
+    public ShellfishEntity(EntityType<? extends ShellfishEntity> type, Level worldIn, Item interact){
         super(type, worldIn);
         interactItem = interact;
     }
 
     @Override
-    public int getMaxSpawnedInChunk() {
+    public int getMaxSpawnClusterSize() {
         return 8;
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new RandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(0, new RandomStrollGoal(this, 1.0D));
     }
 
-    public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 5.0D).func_233815_a_(Attributes.field_233821_d_, 0.15D);
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 5.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D);
     }
 
     @Override
     @Nonnull
-    public ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack handStack = player.getHeldItem(hand);
-        if(handStack.isEmpty()){
-            player.setHeldItem(hand, new ItemStack(interactItem));
-        }else if(!player.inventory.addItemStackToInventory(new ItemStack(interactItem))){
-            player.dropItem(new ItemStack(interactItem), false);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack handStack = player.getItemInHand(hand);
+        if (handStack.isEmpty()) {
+            player.setItemInHand(hand, new ItemStack(interactItem));
+        } else if (!player.getInventory().add(new ItemStack(interactItem))) {
+            player.drop(new ItemStack(interactItem), false);
         }
-        this.remove();
-        return ActionResultType.func_233537_a_(this.world.isRemote);
+        this.discard();
+        return InteractionResult.sidedSuccess(this.level().isClientSide);
     }
 
-    public static boolean spawnHandler(EntityType<? extends ShellfishEntity> entityIn, IWorld worldIn, SpawnReason reason, BlockPos pos, Random random){
+    public static boolean checkSpawnRules(EntityType<? extends ShellfishEntity> entityIn, ServerLevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return worldIn.getBlockState(pos).getBlock() == Blocks.WATER && pos.getY() < 53;
     }
 }

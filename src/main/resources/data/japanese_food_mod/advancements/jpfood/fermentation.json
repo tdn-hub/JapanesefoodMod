@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "japanese_food_mod:wooden_bucket"
+      "id": "japanese_food_mod:wooden_bucket"
     },
     "title": {
       "translate": "advancements.japanese_food_mod.fermentation.title"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "japanese_food_mod:unrefined_soy_sauce",
+            "items": "japanese_food_mod:unrefined_soy_sauce",
             "count": {
               "min": 1
             }
@@ -34,7 +34,7 @@
       "conditions": {
         "items": [
           {
-            "item": "japanese_food_mod:miso",
+            "items": "japanese_food_mod:miso",
             "count": {
               "min": 1
             }

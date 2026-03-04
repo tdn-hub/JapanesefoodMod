@@ -38,7 +38,7 @@
           ]
         },
         {
-          "type": "item",
+          "type": "minecraft:item",
           "name": "japanese_food_mod:soy_hay",
           "conditions": [
             {

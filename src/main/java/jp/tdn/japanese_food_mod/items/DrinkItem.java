@@ -1,8 +1,8 @@
-package jp.tdn.japanese_food_mod.items;
+﻿package jp.tdn.japanese_food_mod.items;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 
 import javax.annotation.Nonnull;
 
@@ -17,7 +17,7 @@ public class DrinkItem extends FoodItem {
 
     @Override
     @Nonnull
-    public UseAction getUseAction(ItemStack p_77661_1_) {
-        return UseAction.DRINK;
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.DRINK;
     }
 }

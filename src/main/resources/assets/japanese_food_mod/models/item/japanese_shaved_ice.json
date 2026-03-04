@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/japanese_shaved_ice"
+    "layer0": "japanese_food_mod:item/japanese_shaved_ice"
   }
 }

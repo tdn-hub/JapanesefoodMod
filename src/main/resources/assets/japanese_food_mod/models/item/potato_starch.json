@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/potato_starch"
+    "layer0": "japanese_food_mod:item/potato_starch"
   }
 }

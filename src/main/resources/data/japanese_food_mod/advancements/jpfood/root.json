@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "japanese_food_mod:rice"
+      "id": "japanese_food_mod:rice"
     },
     "title": {
       "translate": "advancements.japanese_food_mod.root.title"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "japanese_food_mod:rice",
+            "items": "japanese_food_mod:rice",
             "count": {
               "min": 1
             }

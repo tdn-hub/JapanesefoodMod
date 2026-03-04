@@ -1,57 +1,55 @@
 package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import jp.tdn.japanese_food_mod.blocks.SoyHayBlock;
-import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import jp.tdn.japanese_food_mod.init.JPBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
 
-public class SoyHayTileEntity extends TileEntity implements ITickableTileEntity {
+public class SoyHayTileEntity extends BlockEntity {
     public static final String FERMENT_LEFT_TIME_TAG = "fermentLeftTime";
     private short fermentLeftTime = 6000;
 
-    public SoyHayTileEntity(){
-        super(JPTileEntities.SOY_HAY);
+    public SoyHayTileEntity(BlockPos pos, BlockState state){
+        super(JPBlockEntities.SOY_HAY.get(), pos, state);
     }
 
     public short getFermentLeftTime(){
         return this.fermentLeftTime;
     }
 
-    @Override
-    public void tick() {
-        if(world == null || world.isRemote)return;
+    public static void tick(Level level, BlockPos pos, BlockState state, SoyHayTileEntity te) {
+        if(level == null || level.isClientSide) return;
 
-        if(getFermentLeftTime() > 0){
-            --fermentLeftTime;
+        if(te.getFermentLeftTime() > 0){
+            --te.fermentLeftTime;
         }else{
-            world.setBlockState(pos, world.getBlockState(pos).with(SoyHayBlock.COMPLETION, true));
+            level.setBlockAndUpdate(pos, level.getBlockState(pos).setValue(SoyHayBlock.COMPLETION, true));
         }
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
-        super.func_230337_a_(state, compound);
+    public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
         this.fermentLeftTime = compound.getShort("fermentLeftTime");
     }
 
     @Override
     @Nonnull
-    public CompoundNBT write(CompoundNBT compound) {
+    public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
         compound.putShort(FERMENT_LEFT_TIME_TAG, fermentLeftTime);
-        return super.write(compound);
+        super.saveAdditional(compound, registries);
     }
 
     @Nonnull
-    public CompoundNBT getUpdateTag(){
-        return this.write(new CompoundNBT());
-    }
-
-    @Override
-    public void remove() {
-        super.remove();
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries){
+        CompoundTag tag = new CompoundTag();
+        this.saveAdditional(tag, registries);
+        return tag;
     }
 }

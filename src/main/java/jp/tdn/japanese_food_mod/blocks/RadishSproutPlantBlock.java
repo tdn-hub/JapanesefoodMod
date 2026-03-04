@@ -1,33 +1,41 @@
 package jp.tdn.japanese_food_mod.blocks;
 
 import jp.tdn.japanese_food_mod.init.JPItems;
-import net.minecraft.block.CropsBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.IItemProvider;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import javax.annotation.Nonnull;
 
-public class RadishSproutPlantBlock extends CropsBlock{
+public class RadishSproutPlantBlock extends CropBlock {
+    public static final MapCodec<RadishSproutPlantBlock> CODEC = simpleCodec(p -> new RadishSproutPlantBlock());
+
+    @Override
+    public MapCodec<? extends CropBlock> codec() {
+        return CODEC;
+    }
+
     public RadishSproutPlantBlock(){
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0f).sound(SoundType.CROP));
+        super(BlockBehaviour.Properties.of().noCollission().randomTicks().strength(0f).sound(SoundType.CROP));
     }
 
     @Override
     @Nonnull
-    protected IItemProvider getSeedsItem(){
+    protected ItemLike getBaseSeedId(){
         return JPItems.RADISH_SPROUT_SEED.get();
     }
 
 //    @Override
-//    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-//        if(!world.isRemote){
+//    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+//        if(!world.isClientSide){
 //            if(this.isMaxAge(state)){
-//                world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(JPItems.RADISH_SPROUT, 1)));
-//                world.setBlockState(pos, this.withAge(0));
-//                return ActionResultType.SUCCESS;
+//                world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(JPItems.RADISH_SPROUT, 1)));
+//                world.setBlock(pos, this.withAge(0), 3);
+//                return InteractionResult.SUCCESS;
 //            }
 //        }
-//        return ActionResultType.FAIL;
+//        return InteractionResult.FAIL;
 //    }
 }

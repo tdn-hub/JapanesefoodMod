@@ -1,42 +1,36 @@
-package jp.tdn.japanese_food_mod.blocks.tileentity;
+﻿package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import jp.tdn.japanese_food_mod.blocks.FurnaceCauldronBlock;
 import jp.tdn.japanese_food_mod.container.FurnaceCauldronContainer;
+import jp.tdn.japanese_food_mod.init.JPBlockEntities;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPItems;
-import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import jp.tdn.japanese_food_mod.recipes.FurnaceCauldronRecipe;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 
 import static jp.tdn.japanese_food_mod.init.JPItems.SALT;
 
-public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class FurnaceCauldronTileEntity extends BlockEntity implements MenuProvider {
     public static final int INPUT_SLOT = 0;
     public static final int OUTPUT_SLOT = 1;
     public static final int[] RETURN_SLOT = {2, 3, 4};
@@ -66,11 +60,9 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
         @Override
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
-            FurnaceCauldronTileEntity.this.markDirty();
+            FurnaceCauldronTileEntity.this.setChanged();
         }
     };
-
-    private final LazyOptional<ItemStackHandler> inventoryCapabilityExternal = LazyOptional.of(() -> inventory);
 
     public int heatingTimeLeft = -1;
     public int maxHeatingTime = -1;
@@ -79,8 +71,8 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
     public int needWater = 100;
     private boolean lastActive = false;
 
-    public FurnaceCauldronTileEntity(){
-        super(JPTileEntities.FURNACE_CAULDRON);
+    public FurnaceCauldronTileEntity(BlockPos pos, BlockState state){
+        super(JPBlockEntities.FURNACE_CAULDRON.get(), pos, state);
     }
 
     private boolean isInput(ItemStack stack){
@@ -98,79 +90,77 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
         return stack.getItem() == Items.GLASS_BOTTLE || stack.getItem() == JPItems.CUP.get() || stack.getItem() == Items.BUCKET || stack.getItem() == JPItems.BITTERN.get();
     }
 
-    private Optional<FurnaceCauldronRecipe> getRecipe(final ItemStack input){
-        return getRecipe(new Inventory(input));
+    private Optional<RecipeHolder<FurnaceCauldronRecipe>> getRecipe(final ItemStack input){
+        return getRecipe(new SingleRecipeInput(input));
     }
 
-    private Optional<FurnaceCauldronRecipe> getRecipe(final IInventory inventory){
-        return Objects.requireNonNull(world).getRecipeManager().getRecipe(FurnaceCauldronRecipe.RECIPE_TYPE, inventory, world);
+    private Optional<RecipeHolder<FurnaceCauldronRecipe>> getRecipe(final SingleRecipeInput recipeInput){
+        return Objects.requireNonNull(level).getRecipeManager().getRecipeFor(FurnaceCauldronRecipe.RECIPE_TYPE, recipeInput, level);
     }
 
+    @SuppressWarnings("unused")
     private Optional<ItemStack> getResult(final ItemStack input){
-        final Inventory dummyInventory = new Inventory(input);
-        return getRecipe(dummyInventory).map(recipe -> recipe.getCraftingResult(dummyInventory));
+        final SingleRecipeInput dummyInput = new SingleRecipeInput(input);
+        return getRecipe(dummyInput).map(recipe -> recipe.value().getResultItem(level.registryAccess()));
     }
 
-    @Override
-    public void tick() {
-        if(world == null || world.isRemote) {
+    public static void tick(Level level, BlockPos pos, BlockState state, FurnaceCauldronTileEntity te) {
+        if(level == null || level.isClientSide) {
             return;
         }
         boolean isActive = false;
 
-        final ItemStack input = inventory.getStackInSlot(INPUT_SLOT);
-        if(!input.isEmpty() && canAddWater()){
-            addWater(input);
-            //JapaneseFoodMod.LOGGER.info(waterRemaining);
-            if (input.hasContainerItem()) {
-                insertOrDropContainerItem(input, INPUT_SLOT);
+        final ItemStack input = te.inventory.getStackInSlot(INPUT_SLOT);
+        if(!input.isEmpty() && te.canAddWater()){
+            te.addWater(input);
+            if (input.hasCraftingRemainingItem()) {
+                te.insertOrDropContainerItem(input, INPUT_SLOT);
                 input.shrink(1);
-                inventory.setStackInSlot(INPUT_SLOT, input);
+                te.inventory.setStackInSlot(INPUT_SLOT, input);
             }
         }
 
-        if(waterRemaining >= needWater){
+        if(te.waterRemaining >= te.needWater){
             isActive = true;
-            if(heatingTimeLeft == -1){
-                heatingTimeLeft = maxHeatingTime = getHeatingTime(input);
+            if(te.heatingTimeLeft == -1){
+                te.heatingTimeLeft = te.maxHeatingTime = te.getHeatingTime(input);
             }else{
-                --heatingTimeLeft;
-                if(heatingTimeLeft <= 0){
-                    waterRemaining -= needWater;
-                    inventory.insertItem(OUTPUT_SLOT, new ItemStack(SALT.get()), false);
-                    insertOrDropItem(new ItemStack(JPItems.BITTERN.get()));
-                    heatingTimeLeft = -1;
+                --te.heatingTimeLeft;
+                if(te.heatingTimeLeft <= 0){
+                    te.waterRemaining -= te.needWater;
+                    te.inventory.insertItem(OUTPUT_SLOT, new ItemStack(SALT.get()), false);
+                    te.insertOrDropItem(new ItemStack(JPItems.BITTERN.get()));
+                    te.heatingTimeLeft = -1;
                 }
             }
         }else{
-            heatingTimeLeft = maxHeatingTime = -1;
+            te.heatingTimeLeft = te.maxHeatingTime = -1;
         }
 
-        if(lastActive != isActive){
-            this.markDirty();
-            lastActive = isActive;
+        if(te.lastActive != isActive){
+            te.setChanged();
+            te.lastActive = isActive;
         }
 
-        FurnaceCauldronBlock block = (FurnaceCauldronBlock) world.getBlockState(pos).getBlock();
-        block.setWaterLevel(world, pos, world.getBlockState(pos), waterRemaining, maxWater);
+        FurnaceCauldronBlock block = (FurnaceCauldronBlock) level.getBlockState(pos).getBlock();
+        block.setWaterLevel(level, pos, level.getBlockState(pos), te.waterRemaining, te.maxWater);
     }
 
     private void insertOrDropItem(final ItemStack stack){
         int index;
         boolean canInsertItem = false;
         for(index = 0; index < RETURN_SLOT.length && !(canInsertItem = inventory.insertItem(RETURN_SLOT[index], stack, true).isEmpty()); ++index){
-            //JapaneseFoodMod.LOGGER.info(RETURN_SLOT[index]);
         }
         if(canInsertItem){
             inventory.insertItem(RETURN_SLOT[index], stack, false);
         }else{
-            InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+            Containers.dropItemStack(level, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), stack);
         }
     }
 
     private void insertOrDropContainerItem(final ItemStack stack, final int slot){
         int index;
-        final ItemStack containerItem = stack.getContainerItem();
+        final ItemStack containerItem = stack.getCraftingRemainingItem();
         boolean canInsertContainerItemIntoReturnSlot = false;
         for(index = 0; index < RETURN_SLOT.length && !(canInsertContainerItemIntoReturnSlot = inventory.insertItem(RETURN_SLOT[index], containerItem, true).isEmpty()); ++index);
 
@@ -181,13 +171,13 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
             if (canInsertContainerItemIntoSlot) {
                 inventory.insertItem(slot, containerItem, false);
             } else {
-                InventoryHelper.spawnItemStack(Objects.requireNonNull(world), pos.getX(), pos.getY(), pos.getZ(), containerItem);
+                Containers.dropItemStack(Objects.requireNonNull(level), worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), containerItem);
             }
         }
     }
 
     private int getHeatingTime(ItemStack input){
-        return getRecipe(input).map(FurnaceCauldronRecipe::getCookTime).orElse(1000);
+        return getRecipe(input).map(recipe -> recipe.value().getCookTime()).orElse(1000);
     }
 
     public boolean canAddWater(){
@@ -212,55 +202,40 @@ public class FurnaceCauldronTileEntity extends TileEntity implements ITickableTi
         return maxWater;
     }
 
-    @Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(!removed && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
-            return inventoryCapabilityExternal.cast();
-        }
-
-        return super.getCapability(cap, side);
-    }
-
-    @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
-        super.func_230337_a_(state, compound);
-        this.inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
+    public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
+        this.inventory.deserializeNBT(registries, compound.getCompound(INVENTORY_TAG));
         this.heatingTimeLeft = compound.getInt(HEATING_TIME_LEFT_TAG);
         this.maxHeatingTime = compound.getInt(HEATING_MAX_TIME_TAG);
         this.waterRemaining = compound.getInt(WATER_REMAINING_TAG);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
-        compound.put(INVENTORY_TAG, this.inventory.serializeNBT());
+    public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.saveAdditional(compound, registries);
+        compound.put(INVENTORY_TAG, this.inventory.serializeNBT(registries));
         compound.putInt(HEATING_TIME_LEFT_TAG, this.heatingTimeLeft);
         compound.putInt(HEATING_MAX_TIME_TAG, this.maxHeatingTime);
         compound.putInt(WATER_REMAINING_TAG, this.waterRemaining);
-        return compound;
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
-    }
-
-    @Override
-    public void remove() {
-        super.remove();
-        inventoryCapabilityExternal.invalidate();
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = new CompoundTag();
+        this.saveAdditional(tag, registries);
+        return tag;
     }
 
     @Nonnull
     @Override
-    public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(JPBlocks.FURNACE_CAULDRON.get().getTranslationKey());
+    public Component getDisplayName() {
+        return Component.translatable(JPBlocks.FURNACE_CAULDRON.get().getDescriptionId());
     }
 
     @Nonnull
     @Override
-    public Container createMenu(int windowId, @Nonnull PlayerInventory inventory, @Nonnull PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int windowId, @Nonnull Inventory inventory, @Nonnull Player player) {
         return new FurnaceCauldronContainer(windowId, inventory, this);
     }
 }

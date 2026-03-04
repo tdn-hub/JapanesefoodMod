@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/japanese_horse_mackerel"
+    "layer0": "japanese_food_mod:item/japanese_horse_mackerel"
   }
 }

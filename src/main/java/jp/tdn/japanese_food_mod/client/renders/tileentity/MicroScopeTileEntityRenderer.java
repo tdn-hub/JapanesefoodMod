@@ -1,36 +1,36 @@
-package jp.tdn.japanese_food_mod.client.renders.tileentity;
+﻿package jp.tdn.japanese_food_mod.client.renders.tileentity;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import jp.tdn.japanese_food_mod.blocks.MicroScopeBlock;
 import jp.tdn.japanese_food_mod.blocks.tileentity.MicroScopeTileEntity;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 
-public class MicroScopeTileEntityRenderer extends TileEntityRenderer<MicroScopeTileEntity> {
-    public MicroScopeTileEntityRenderer(TileEntityRendererDispatcher dispatcher){
-        super(dispatcher);
+public class MicroScopeTileEntityRenderer implements BlockEntityRenderer<MicroScopeTileEntity> {
+    public MicroScopeTileEntityRenderer(BlockEntityRendererProvider.Context context) {
     }
 
- 
-    public void render(MicroScopeTileEntity tileEntity, float p_225616_2_, MatrixStack matrix, IRenderTypeBuffer p_225616_4_, int p_225616_5_, int p_225616_6_) {
-        Direction direction = tileEntity.getBlockState().get(MicroScopeBlock.DIRECTION);
+    @Override
+    public void render(MicroScopeTileEntity tileEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        net.minecraft.core.Direction direction = tileEntity.getBlockState().getValue(MicroScopeBlock.DIRECTION);
         ItemStack item = tileEntity.getInventory();
 
-        if(!item.isEmpty()){
-            matrix.push();
-            matrix.translate(0.5f, 0.5f, 0.5f);
-            matrix.rotate(Vector3f.YP.rotationDegrees( -direction.getHorizontalAngle()));
-            matrix.rotate(Vector3f.XP.rotationDegrees(90.0F));
-            matrix.translate(0f, 0f, 0.1f);
-            matrix.scale(0.3f, 0.3f, 0.3f);
-            Minecraft.getInstance().getItemRenderer().renderItem(item, ItemCameraTransforms.TransformType.FIXED, p_225616_5_, p_225616_6_, matrix, p_225616_4_);
-            matrix.pop();
+        if (!item.isEmpty()) {
+            poseStack.pushPose();
+            poseStack.translate(0.5f, 0.5f, 0.5f);
+            poseStack.mulPose(Axis.YP.rotationDegrees(-direction.toYRot()));
+            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+            poseStack.translate(0f, 0f, 0.1f);
+            poseStack.scale(0.3f, 0.3f, 0.3f);
+            ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+            itemRenderer.renderStatic(item, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, tileEntity.getLevel(), 0);
+            poseStack.popPose();
         }
     }
 }

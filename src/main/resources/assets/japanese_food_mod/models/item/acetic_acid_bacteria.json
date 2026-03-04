@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/acetic_acid_bacteria"
+    "layer0": "japanese_food_mod:item/acetic_acid_bacteria"
   }
 }

@@ -1,42 +1,35 @@
-package jp.tdn.japanese_food_mod.blocks.tileentity;
+﻿package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import com.google.common.collect.Lists;
 import jp.tdn.japanese_food_mod.blocks.WoodenBucketBlock;
 import jp.tdn.japanese_food_mod.container.WoodenBucketContainer;
+import jp.tdn.japanese_food_mod.init.JPBlockEntities;
 import jp.tdn.japanese_food_mod.init.JPBlocks;
 import jp.tdn.japanese_food_mod.init.JPItems;
-import jp.tdn.japanese_food_mod.init.JPTileEntities;
 import jp.tdn.japanese_food_mod.recipes.WoodenBucketRecipe;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class WoodenBucketTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class WoodenBucketTileEntity extends BlockEntity implements MenuProvider {
     public static final int[] INPUT_SLOT = {0,1,2,3,4,5};
     public static final int OUTPUT_SLOT = 6;
     public static final int[] RETURN_SLOT = {7, 8, 9};
@@ -49,7 +42,6 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             switch (slot){
-                // case INPUT_SLOT:
                 case 0:
                 case 1:
                 case 2:
@@ -71,18 +63,16 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
         @Override
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
-            WoodenBucketTileEntity.this.markDirty();
+            WoodenBucketTileEntity.this.setChanged();
         }
     };
-
-    private final LazyOptional<ItemStackHandler> inventoryCapabilityExternal = LazyOptional.of(() -> this.inventory);
 
     public short fermentationTimeLeft = -1;
     public short maxFermentationTime = -1;
     private boolean lastActive = false;
 
-    public WoodenBucketTileEntity(){
-        super(JPTileEntities.WOODEN_BUCKET);
+    public WoodenBucketTileEntity(BlockPos pos, BlockState state){
+        super(JPBlockEntities.WOODEN_BUCKET.get(), pos, state);
     }
 
     private boolean isEmpty(final ItemStack[] stack){
@@ -107,86 +97,95 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
             input[index] = inventory.getStackInSlot(INPUT_SLOT[index]);
         }
         result = getResult(input);
-        return result.isPresent() && ItemStack.areItemsEqual(result.get(), stack);
+        return result.isPresent() && ItemStack.isSameItem(result.get(), stack);
     }
 
     private boolean isReturnOutput(final ItemStack stack){
         return stack.getItem() == Items.GLASS_BOTTLE || stack.getItem() == JPItems.CUP.get();
     }
 
-    private Optional<WoodenBucketRecipe> getRecipe(final ItemStack input){
-        return getRecipe(new Inventory(input));
+    @SuppressWarnings("unused")
+    private Optional<RecipeHolder<WoodenBucketRecipe>> getRecipe(final ItemStack input){
+        return getRecipe(createRecipeInput(input));
     }
 
-    private Optional<WoodenBucketRecipe> getRecipe(final ItemStack[] input){
-        return getRecipe(new Inventory(input));
+    private Optional<RecipeHolder<WoodenBucketRecipe>> getRecipe(final ItemStack[] input){
+        return getRecipe(createRecipeInput(input));
     }
 
-    private Optional<WoodenBucketRecipe> getRecipe(final IInventory inventory){
-        return Objects.requireNonNull(world).getRecipeManager().getRecipe(WoodenBucketRecipe.RECIPE_TYPE, inventory, world);
+    private Optional<RecipeHolder<WoodenBucketRecipe>> getRecipe(final RecipeInput recipeInput){
+        return Objects.requireNonNull(level).getRecipeManager().getRecipeFor(WoodenBucketRecipe.RECIPE_TYPE, recipeInput, level);
     }
 
     private Optional<ItemStack> getResult(final ItemStack[] input){
-        final Inventory dummyInventory = new Inventory(input);
-        return getRecipe(dummyInventory).map(recipe -> recipe.getCraftingResult(dummyInventory));
+        final RecipeInput recipeInput = createRecipeInput(input);
+        return getRecipe(recipeInput).map(recipe -> recipe.value().getResultItem(level.registryAccess()));
     }
 
-    @Override
-    public void tick() {
-        if(world == null || world.isRemote) {
+    private static RecipeInput createRecipeInput(ItemStack... items) {
+        return new RecipeInput() {
+            @Override
+            public ItemStack getItem(int index) { return items[index]; }
+            @Override
+            public int size() { return items.length; }
+        };
+    }
+
+    public static void tick(Level level, BlockPos pos, BlockState state, WoodenBucketTileEntity te) {
+        if(level == null || level.isClientSide) {
             return;
         }
         boolean isActive = false;
 
         final List<ItemStack> inputs = Lists.newArrayList();
         for(int index = 0; index < INPUT_SLOT.length; ++index){
-            ItemStack stack = inventory.getStackInSlot(index);
+            ItemStack stack = te.inventory.getStackInSlot(index);
             if(!stack.isEmpty()){
                 inputs.add(stack);
             }
         }
-        final ItemStack result = getResult(inputs.toArray(new ItemStack[0])).orElse(ItemStack.EMPTY);
+        final ItemStack result = te.getResult(inputs.toArray(new ItemStack[0])).orElse(ItemStack.EMPTY);
 
-        if(!result.isEmpty() && isInput(inputs.toArray(new ItemStack[0]))){
-            final boolean canInsertResultIntoOutPut = inventory.insertItem(OUTPUT_SLOT, result, true).isEmpty();
+        if(!result.isEmpty() && te.isInput(inputs.toArray(new ItemStack[0]))){
+            final boolean canInsertResultIntoOutPut = te.inventory.insertItem(OUTPUT_SLOT, result, true).isEmpty();
             if(canInsertResultIntoOutPut){
                 isActive = true;
-                if(fermentationTimeLeft == -1){
-                    fermentationTimeLeft = maxFermentationTime = getFermentationTime(inputs.toArray(new ItemStack[0]));
+                if(te.fermentationTimeLeft == -1){
+                    te.fermentationTimeLeft = te.maxFermentationTime = te.getFermentationTime(inputs.toArray(new ItemStack[0]));
                 }else{
-                    --fermentationTimeLeft;
-                    if(fermentationTimeLeft == 0){
-                        inventory.insertItem(OUTPUT_SLOT, result, false);
+                    --te.fermentationTimeLeft;
+                    if(te.fermentationTimeLeft == 0){
+                        te.inventory.insertItem(OUTPUT_SLOT, result, false);
                         int i = 0;
                         for(ItemStack input: inputs) {
                             if(i < INPUT_SLOT.length) {
-                                if (input.hasContainerItem()) {
-                                    insertOrDropContainerItem(input, INPUT_SLOT[i]);
+                                if (input.hasCraftingRemainingItem()) {
+                                    te.insertOrDropContainerItem(input, INPUT_SLOT[i]);
                                 }
                                 input.shrink(1);
-                                inventory.setStackInSlot(INPUT_SLOT[i], input);
+                                te.inventory.setStackInSlot(INPUT_SLOT[i], input);
                                 ++i;
                             }
                         }
-                        fermentationTimeLeft = -1;
+                        te.fermentationTimeLeft = -1;
                     }
                 }
             }
         }else{
-            fermentationTimeLeft = maxFermentationTime = -1;
+            te.fermentationTimeLeft = te.maxFermentationTime = -1;
         }
 
-        if(lastActive != isActive){
-            markDirty();
-            final BlockState newState = world.getBlockState(pos).with(WoodenBucketBlock.FER, isActive);
-            world.setBlockState(pos, newState);
-            lastActive = isActive;
+        if(te.lastActive != isActive){
+            te.setChanged();
+            final BlockState newState = level.getBlockState(pos).setValue(WoodenBucketBlock.FER, isActive);
+            level.setBlock(pos, newState, 3);
+            te.lastActive = isActive;
         }
     }
 
     private void insertOrDropContainerItem(final ItemStack stack, final int slot){
         int index;
-        final ItemStack containerItem = stack.getContainerItem();
+        final ItemStack containerItem = stack.getCraftingRemainingItem();
         boolean canInsertContainerItemIntoReturnSlot = false;
         for(index = 0; index < RETURN_SLOT.length && !(canInsertContainerItemIntoReturnSlot = inventory.insertItem(RETURN_SLOT[index], containerItem, true).isEmpty()); ++index);
 
@@ -197,64 +196,49 @@ public class WoodenBucketTileEntity extends TileEntity implements ITickableTileE
             if (canInsertContainerItemIntoSlot) {
                 inventory.insertItem(slot, containerItem, false);
             } else {
-                InventoryHelper.spawnItemStack(Objects.requireNonNull(world), pos.getX(), pos.getY(), pos.getZ(), containerItem);
+                net.minecraft.world.Containers.dropItemStack(Objects.requireNonNull(level), worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), containerItem);
             }
         }
     }
 
     private short getFermentationTime(final ItemStack[] input){
-        return getRecipe(input).map(WoodenBucketRecipe::getCookTime).orElse(200).shortValue();
-    }
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
-            return inventoryCapabilityExternal.cast();
-        }
-
-        return super.getCapability(cap, side);
+        return getRecipe(input).map(recipe -> recipe.value().getCookTime()).orElse(200).shortValue();
     }
 
     @Override
-    public void func_230337_a_(BlockState state,CompoundNBT compound) {
-        super.func_230337_a_(state, compound);
-        this.inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
+    public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
+        this.inventory.deserializeNBT(registries, compound.getCompound(INVENTORY_TAG));
         this.fermentationTimeLeft = compound.getShort(FERMENTATION_TIME_LEFT);
         this.maxFermentationTime = compound.getShort(MAX_FERMENTATION_TIME);
     }
 
     @Override
     @Nonnull
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
-        compound.put(INVENTORY_TAG, this.inventory.serializeNBT());
+    public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.saveAdditional(compound, registries);
+        compound.put(INVENTORY_TAG, this.inventory.serializeNBT(registries));
         compound.putShort(FERMENTATION_TIME_LEFT, this.fermentationTimeLeft);
         compound.putShort(MAX_FERMENTATION_TIME, this.maxFermentationTime);
-        return compound;
     }
 
     @Override
     @Nonnull
-    public CompoundNBT getUpdateTag(){
-        return this.write(new CompoundNBT());
-    }
-
-    @Override
-    public void remove() {
-        super.remove();
-        inventoryCapabilityExternal.invalidate();
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries){
+        CompoundTag tag = new CompoundTag();
+        this.saveAdditional(tag, registries);
+        return tag;
     }
 
     @Nonnull
     @Override
-    public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(JPBlocks.WOODEN_BUCKET.get().getTranslationKey());
+    public Component getDisplayName() {
+        return Component.translatable(JPBlocks.WOODEN_BUCKET.get().getDescriptionId());
     }
 
     @Nonnull
     @Override
-    public Container createMenu(int windowId, @Nonnull PlayerInventory inventory, @Nonnull PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int windowId, @Nonnull Inventory inventory, @Nonnull Player player) {
         return new WoodenBucketContainer(windowId, inventory, this);
     }
 }

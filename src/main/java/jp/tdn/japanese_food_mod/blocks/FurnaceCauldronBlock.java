@@ -1,93 +1,87 @@
 package jp.tdn.japanese_food_mod.blocks;
 
 import jp.tdn.japanese_food_mod.blocks.tileentity.FurnaceCauldronTileEntity;
+import jp.tdn.japanese_food_mod.init.JPBlockEntities;
 import jp.tdn.japanese_food_mod.init.JPItemTags;
-import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class FurnaceCauldronBlock extends JPHorizontalBlock {
-    protected static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 24.0D, 16.0D));
-    protected static final VoxelShape COLLISION = VoxelShapes.or(Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 24.0D, 16.0D));
-    public static final IntegerProperty WATER = BlockStateProperties.LEVEL_0_3;
+public class FurnaceCauldronBlock extends JPHorizontalBlock implements EntityBlock {
+    protected static final VoxelShape SHAPE = Shapes.or(Block.box(0.0D, 0.0D, 0.0D, 16.0D, 24.0D, 16.0D));
+    protected static final VoxelShape COLLISION = Shapes.or(Block.box(0.0D, 0.0D, 0.0D, 16.0D, 24.0D, 16.0D));
+    public static final IntegerProperty WATER = IntegerProperty.create("level", 0, 3);
 
     public FurnaceCauldronBlock(){
-        super(Properties.create(Material.IRON, MaterialColor.STONE).hardnessAndResistance(2.0f).notSolid());
-        setDefaultState(this.getDefaultState().with(DIRECTION, Direction.NORTH).with(WATER, 0));
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2.0f).noOcclusion());
+        registerDefaultState(this.defaultBlockState()
+                .setValue(DIRECTION, net.minecraft.core.Direction.NORTH)
+                .setValue(WATER, 0));
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return JPTileEntities.FURNACE_CAULDRON.create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return JPBlockEntities.FURNACE_CAULDRON.get().create(pos, state);
     }
 
     @Override
-    public VoxelShape getRenderShape(BlockState p_196247_1_, IBlockReader p_196247_2_, BlockPos p_196247_3_) {
+    public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState p_220071_1_, IBlockReader p_220071_2_, BlockPos p_220071_3_, ISelectionContext p_220071_4_) {
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return COLLISION;
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult rayTraceResult) {
-        if(!world.isRemote()){
-            ItemStack heldItem = playerEntity.getHeldItem(hand);
-            if(JPItemTags.WATER.func_230235_a_(heldItem.getItem())){
-                TileEntity blockEntity = world.getTileEntity(pos);
-                if(blockEntity instanceof FurnaceCauldronTileEntity){
-                    if(((FurnaceCauldronTileEntity) blockEntity).canAddWater()) {
-                        ((FurnaceCauldronTileEntity) blockEntity).addWater(heldItem);
-                        if(!playerEntity.abilities.isCreativeMode){
-                            playerEntity.setHeldItem(hand, new ItemStack(heldItem.getContainerItem().getItem()));
+    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player playerEntity, BlockHitResult rayTraceResult) {
+        if(!world.isClientSide()){
+            ItemStack heldItem = playerEntity.getMainHandItem();
+            if(heldItem.is(JPItemTags.WATER)){
+                BlockEntity blockEntity = world.getBlockEntity(pos);
+                if(blockEntity instanceof FurnaceCauldronTileEntity furnaceBlockEntity){
+                    if(furnaceBlockEntity.canAddWater()) {
+                        furnaceBlockEntity.addWater(heldItem);
+                        if(!playerEntity.getAbilities().instabuild){
+                            playerEntity.setItemInHand(InteractionHand.MAIN_HAND, heldItem.getCraftingRemainingItem());
                         }
-                        world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                        world.playSound((Player)null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
-                    setWaterLevel(world, pos, state, ((FurnaceCauldronTileEntity) blockEntity).getWaterRemaining(), ((FurnaceCauldronTileEntity) blockEntity).getMaxWater());
+                    setWaterLevel(world, pos, state, furnaceBlockEntity.getWaterRemaining(), furnaceBlockEntity.getMaxWater());
                 }
             }else{
-                final TileEntity tileEntity = world.getTileEntity(pos);
-                if (tileEntity instanceof FurnaceCauldronTileEntity)
-                    NetworkHooks.openGui((ServerPlayerEntity) playerEntity, (FurnaceCauldronTileEntity) tileEntity, pos);
+                final BlockEntity tileEntity = world.getBlockEntity(pos);
+                if (tileEntity instanceof FurnaceCauldronTileEntity furnaceBlockEntity)
+                    ((net.minecraft.server.level.ServerPlayer) playerEntity).openMenu(furnaceBlockEntity, pos);
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    public void setWaterLevel(World worldIn, BlockPos pos, BlockState state, int water, int max){
+    public void setWaterLevel(Level worldIn, BlockPos pos, BlockState state, int water, int max){
         float per = ((float)water / (float)max);
         int level = 0;
         if(per == 0f){
@@ -99,39 +93,42 @@ public class FurnaceCauldronBlock extends JPHorizontalBlock {
         }else if(per >= 0.95f && per <= 1.0f){
             level = 3;
         }
-        worldIn.setBlockState(pos, state.with(WATER, level));
+        worldIn.setBlock(pos, state.setValue(WATER, level), 3);
     }
 
     @Override
-    public void onReplaced(BlockState oldState, @Nonnull World worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState oldState, @Nonnull Level worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
         if (oldState.getBlock() != newState.getBlock()) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof FurnaceCauldronTileEntity) {
-                final ItemStackHandler inventory = ((FurnaceCauldronTileEntity) tileEntity).inventory;
+            BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+            if (tileEntity instanceof FurnaceCauldronTileEntity furnaceBlockEntity) {
+                final net.neoforged.neoforge.items.ItemStackHandler inventory = furnaceBlockEntity.inventory;
                 for(int index = 0; index < inventory.getSlots(); ++index){
-                    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), inventory.getStackInSlot(index));
+                    Block.popResource(worldIn, pos, inventory.getStackInSlot(index));
                 }
             }
-            super.onReplaced(oldState, worldIn, pos, newState, isMoving);
+            super.onRemove(oldState, worldIn, pos, newState, isMoving);
         }
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(DIRECTION, context.getPlacementHorizontalFacing().getOpposite());
+    public BlockState getStateForPlacement(net.minecraft.world.item.context.BlockPlaceContext context) {
+        return this.defaultBlockState()
+                .setValue(DIRECTION, context.getHorizontalDirection().getOpposite())
+                .setValue(WATER, 0);
     }
 
     @Override
-    public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-        final TileEntity tileEntity = worldIn.getTileEntity(pos);
-        if(tileEntity instanceof FurnaceCauldronTileEntity) return ItemHandlerHelper.calcRedstoneFromInventory(((FurnaceCauldronTileEntity) tileEntity).inventory);
-        return super.getComparatorInputOverride(blockState, worldIn, pos);
+    public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+        if(tileEntity instanceof FurnaceCauldronTileEntity furnaceBlockEntity)
+            return net.neoforged.neoforge.items.ItemHandlerHelper.calcRedstoneFromInventory(furnaceBlockEntity.inventory);
+        return super.getAnalogOutputSignal(blockState, worldIn, pos);
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(WATER);
     }
 }

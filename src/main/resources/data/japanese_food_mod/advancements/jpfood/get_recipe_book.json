@@ -1,8 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "patchouli:guide_book",
-      "nbt": "{\"patchouli:book\":\"japanese_food_mod:jpfood_recipes\"}"
+      "id": "japanese_food_mod:rice_seedling"
     },
     "title": {
       "translate": "advancements.japanese_food_mod.get_recipe_book.title"
@@ -17,13 +16,12 @@
   },
   "parent": "japanese_food_mod:jpfood/root",
   "criteria": {
-    "get_yeast_cell": {
+    "get_rice_seedling": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "patchouli:guide_book",
-            "nbt": "{\"patchouli:book\":\"japanese_food_mod:jpfood_recipes\"}",
+            "items": "japanese_food_mod:rice_seedling",
             "count": {
               "min": 1
             }

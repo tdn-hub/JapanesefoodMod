@@ -1,0 +1,27 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+
+[[mods]]
+modId = "japanese_food_mod"
+version = "${file.jarVersion}"
+displayName = "Japanese Food Mod"
+authors = "TDN"
+credits = "qsefthuopq, FlutterDream, LemonJamTart"
+logoFile = "logo.png"
+description = '''
+    Add recipes and items for Japanese food.'''
+
+[[dependencies.japanese_food_mod]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[21.1,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.japanese_food_mod]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "[1.21.1,1.22)"
+    ordering = "NONE"
+    side = "BOTH"

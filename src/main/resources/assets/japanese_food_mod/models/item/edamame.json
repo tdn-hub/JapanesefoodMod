@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/edamame"
+    "layer0": "japanese_food_mod:item/edamame"
   }
 }

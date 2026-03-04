@@ -1,120 +1,62 @@
 package jp.tdn.japanese_food_mod.client.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.tileentity.MicroScopeTileEntity;
 import jp.tdn.japanese_food_mod.container.MicroScopeContainer;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 
-public class MicroScopeScreen extends ContainerScreen<MicroScopeContainer> {
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(JapaneseFoodMod.MOD_ID, "textures/gui/container/microscope.png");
+public class MicroScopeScreen extends AbstractContainerScreen<MicroScopeContainer> {
+    private static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/gui/container/microscope.png");
 
-    public MicroScopeScreen(final MicroScopeContainer container, final PlayerInventory inventory, final ITextComponent title){
+    public MicroScopeScreen(final MicroScopeContainer container, final Inventory inventory, final Component title){
         super(container, inventory, title);
-        this.ySize = 191;
+        this.imageHeight = 191;
     }
 
     @Override
-    public void func_230430_a_(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        this.func_230446_a_(matrixStack);
-        super.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
-        this.func_230459_a_(matrixStack, mouseX, mouseY);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(graphics, mouseX, mouseY, partialTick);
+        super.render(graphics, mouseX, mouseY, partialTick);
+        this.renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override
-    protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY) {
-        this.field_230712_o_.func_238422_b_(matrixStack, this.field_230704_d_, (float)(this.xSize / 2), 6.0f, 4210752);
-        this.field_230712_o_.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 8.0F, (float) (this.ySize - 96 + 4), 4210752);
-
+    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.drawCenteredString(this.font, this.title, this.imageWidth / 2, 6, 4210752);
+        graphics.drawString(this.font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 4, 4210752, false);
     }
 
     @Override
-    protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+        int startX = this.leftPos;
+        int startY = this.topPos;
 
-        this.field_230706_i_.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
+        graphics.blit(BACKGROUND_TEXTURE, startX, startY, 0, 0, this.imageWidth, this.imageHeight);
 
-        int startX = this.guiLeft;
-        int startY = this.guiTop;
-
-        this.func_238474_b_(matrixStack , startX, startY, 0, 0, this.xSize, this.ySize);
-
-        final MicroScopeTileEntity tileEntity = container.tileEntity;
+        final MicroScopeTileEntity tileEntity = menu.tileEntity;
         if(tileEntity.identifiedTimeLeft > 0){
             int arrowHeight = getIdentifiedTimeScaled();
-            this.func_238474_b_(
-                    matrixStack,
+            graphics.blit(
+                    BACKGROUND_TEXTURE,
                     startX + 87, startY + 44,
                     176, 0,
                     27, 28 - arrowHeight
                     );
         }else{
-            this.func_238474_b_(
-                    matrixStack,
+            graphics.blit(
+                    BACKGROUND_TEXTURE,
                     startX + 87, startY + 44,
                     176, 0,
                     27, 28);
         }
     }
 
-//    @Override
-//    public void render(int mouseX, int mouseY, float partialTicks) {
-//        this.renderBackground();
-//        super.render(mouseX, mouseY, partialTicks);
-//        this.renderHoveredToolTip(mouseX, mouseY);
-//
-//        int relMouseX = mouseX - this.guiLeft;
-//        int relMouseY = mouseY - this.guiTop;
-//        final MicroScopeTileEntity tileEntity = this.container.tileEntity;
-//        boolean arrowHovered = relMouseX > 87 && relMouseX < 114 && relMouseY > 44 && relMouseY < 71;
-//        if(arrowHovered && tileEntity.maxIdentifiedTime > 0){
-//            String tooltip = new TranslationTextComponent(
-//                    "gui." + JapaneseFoodMod.MOD_ID + ".identifiedTimeProgress",
-//                    (short)(((float)(tileEntity.maxIdentifiedTime - tileEntity.identifiedTimeLeft) / tileEntity.maxIdentifiedTime) * 100),
-//                    "%"
-//            ).getFormattedText();
-//            this.renderTooltip(tooltip, mouseX, mouseY);
-//        }
-//    }
-//
-//    @Override
-//    protected void drawGuiContainerForegroundLayer(int mouseX_, int mouseY) {
-//        super.drawGuiContainerForegroundLayer(mouseX_, mouseY);
-//        String s = this.title.getFormattedText();
-//        this.font.drawString(s, (float)(this.xSize / 1.5 - this.font.getStringWidth(s) / 2), 6.0F, 0x404040);
-//        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 92 + 2), 0x404040);
-//    }
-//
-//    @Override
-//    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-//        GlStateManager.color4f(1.0f, 1.0f, 1.0f, 1.0f);
-//        getMinecraft().getTextureManager().bindTexture(BACKGROUND_TEXTURE);
-//        int startX = this.guiLeft;
-//        int startY = this.guiTop;
-//
-//        this.blit(startX, startY, 0, 0, this.xSize, this.ySize);
-//
-//        final MicroScopeTileEntity tileEntity = container.tileEntity;
-//        if(tileEntity.identifiedTimeLeft > 0){
-//            int arrowHeight = getIdentifiedTimeScaled();
-//            this.blit(
-//                    startX + 87, startY + 44,
-//                    176, 0,
-//                    27, 28 - arrowHeight
-//                    );
-//        }else{
-//            this.blit(startX + 87, startY + 44,
-//                    176, 0,
-//                    27, 28);
-//        }
-//    }
-
     private int getIdentifiedTimeScaled(){
-        final MicroScopeTileEntity tileEntity = this.container.tileEntity;
+        final MicroScopeTileEntity tileEntity = this.menu.tileEntity;
         final short identifiedTimeLeft = tileEntity.identifiedTimeLeft;
         final short maxIdentifiedTime = tileEntity.maxIdentifiedTime;
         if(identifiedTimeLeft <= 0 || maxIdentifiedTime <= 0) return 0;

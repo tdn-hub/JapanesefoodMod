@@ -1,59 +1,60 @@
-package jp.tdn.japanese_food_mod.entities;
+﻿package jp.tdn.japanese_food_mod.entities;
 
 import jp.tdn.japanese_food_mod.init.JPEntities;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.FindWaterGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.entity.passive.WaterMobEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.level.Level;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
 
-import java.util.Random;
-
-public class CrabEntity extends WaterMobEntity {
-    public CrabEntity(EntityType<? extends WaterMobEntity> type, World worldIn){
-        super(JPEntities.CRAB, worldIn);
+public class CrabEntity extends WaterAnimal {
+    public CrabEntity(EntityType<? extends WaterAnimal> type, Level worldIn){
+        super(JPEntities.CRAB.get(), worldIn);
     }
 
-    protected void updateAir(int p_209207_1_) {
+    @Override
+    protected void handleAirSupply(int airSupply) {
 //        if (this.isAlive() && !this.isInWaterOrBubbleColumn()) {
-//            this.setAir(p_209207_1_ - 1);
-//            if (this.getAir() == -20) {
-//                this.setAir(0);
-//                this.attackEntityFrom(DamageSource.DROWN, 2.0F);
+//            this.setAirSupply(airSupply - 1);
+//            if (this.getAirSupply() == -20) {
+//                this.setAirSupply(0);
+//                this.hurt(this.level().damageSources().drown(), 2.0F);
 //            }
 //        } else {
-//            this.setAir(20000);
+//            this.setAirSupply(20000);
 //        }
     }
 
     @Override
-    public int getMaxSpawnedInChunk() {
+    public int getMaxSpawnClusterSize() {
         return 32;
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 1.0d));
-        this.goalSelector.addGoal(2, new FindWaterGoal(this));
+        this.goalSelector.addGoal(0, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 1.0d));
+        this.goalSelector.addGoal(2, new net.minecraft.world.entity.ai.goal.TryFindWaterGoal(this));
         this.goalSelector.addGoal(3, new PanicGoal(this, 1.5d));
     }
 
-    public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 5.0D).func_233815_a_(Attributes.field_233821_d_, 0.3D);
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 5.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D);
     }
 
-    public static boolean spawnHandler(EntityType<? extends CrabEntity> entityIn, IWorld worldIn, SpawnReason reason, BlockPos pos, Random random){
-        return worldIn.getBlockState(pos.down()).getBlock() != Blocks.WATER && worldIn.getFluidState(pos).isTagged(FluidTags.WATER);
+    public static boolean checkSpawnRules(EntityType<? extends CrabEntity> entityIn, ServerLevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return worldIn.getBlockState(pos.below()).getBlock() != Blocks.WATER && worldIn.getFluidState(pos).is(FluidTags.WATER);
     }
 }

@@ -1,39 +1,41 @@
 package jp.tdn.japanese_food_mod.entities;
 
 import jp.tdn.japanese_food_mod.init.JPEntities;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-public class AnglerfishEntity extends AbstractFishEntity {
+public class AnglerfishEntity extends AbstractFish {
 
-    public AnglerfishEntity(EntityType<? extends AbstractFishEntity> type, World worldIn){
-        super(JPEntities.ANGLERFISH, worldIn);
+    public AnglerfishEntity(EntityType<? extends AbstractFish> type, Level worldIn){
+        super(JPEntities.ANGLERFISH.get(), worldIn);
     }
 
     @Override
-    protected ItemStack getFishBucket() {
-        return null;
+    public ItemStack getBucketItemStack() {
+        return ItemStack.EMPTY;
     }
 
     @Override
     protected SoundEvent getFlopSound() {
-        return SoundEvents.ENTITY_COD_FLOP;
+        return SoundEvents.COD_FLOP;
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, PlayerEntity.class, true));
+        //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, true));
     }
 
-    public static AttributeModifierMap.MutableAttribute getAttributeMap() {
-        return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 6.0D).func_233815_a_(Attributes.field_233821_d_, 0.3D);
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 6.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D);
     }
 }

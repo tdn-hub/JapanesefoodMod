@@ -1,44 +1,55 @@
-package jp.tdn.japanese_food_mod.recipes;
+﻿package jp.tdn.japanese_food_mod.recipes;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.init.JPItems;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class PresserRecipe implements IRecipe<IInventory> {
+public class PresserRecipe implements Recipe<SingleRecipeInput> {
     public static final Serializer SERIALIZER = new Serializer();
-    public static final IRecipeType<PresserRecipe> RECIPE_TYPE = new IRecipeType<PresserRecipe>() {
-    };
+    public static final RecipeType<PresserRecipe> RECIPE_TYPE = RecipeType.simple(ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "pressing"));
+
     protected final ResourceLocation id;
     protected Ingredient ingredient;
     protected int result;
     protected int cookTime;
 
-    public PresserRecipe(ResourceLocation idIn){
+    public PresserRecipe(ResourceLocation idIn, Ingredient ingredient, int result, int cookTime){
         this.id = idIn;
+        this.ingredient = ingredient;
+        this.result = result;
+        this.cookTime = cookTime;
     }
 
-    public boolean matches(IInventory inventory, @Nonnull World worldIn){
-        return this.ingredient.test(inventory.getStackInSlot(0));
+    @Override
+    public boolean matches(@Nonnull SingleRecipeInput input, @Nonnull Level level){
+        return this.ingredient.test(input.item());
     }
 
     @Override
     @Nonnull
-    public ItemStack getCraftingResult(@Nonnull IInventory inventory) {
+    public ItemStack assemble(@Nonnull SingleRecipeInput input, @Nonnull HolderLookup.Provider registries) {
+        return new ItemStack(JPItems.COOKING_OIL.get());
+    }
+
+    @Override
+    @Nonnull
+    public ItemStack getResultItem(@Nonnull HolderLookup.Provider registries) {
         return new ItemStack(JPItems.COOKING_OIL.get());
     }
 
@@ -46,72 +57,66 @@ public class PresserRecipe implements IRecipe<IInventory> {
         return result;
     }
 
-    public boolean canFit(int width, int height){
+    @Override
+    public boolean canCraftInDimensions(int width, int height){
         return true;
     }
 
     @Nonnull
+    @Override
     public NonNullList<Ingredient> getIngredients(){
         NonNullList<Ingredient> nonNullList = NonNullList.create();
         nonNullList.add(this.ingredient);
         return nonNullList;
     }
 
-    @Nonnull
-    public ItemStack getRecipeOutput(){
-        return new ItemStack(JPItems.COOKING_OIL.get());
-    }
-
     public int getCookTime(){
         return cookTime;
     }
 
-    @Nonnull
-    public ResourceLocation getId(){
-        return id;
-    }
-
     @Override
     @Nonnull
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return SERIALIZER;
     }
 
     @Nonnull
-    public IRecipeType<?> getType(){
+    @Override
+    public RecipeType<?> getType(){
         return RECIPE_TYPE;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<PresserRecipe>{
-        Serializer(){
-            this.setRegistryName(new ResourceLocation(JapaneseFoodMod.MOD_ID, "pressing"));
+    public static class Serializer implements RecipeSerializer<PresserRecipe> {
+
+        @Override
+        @Nonnull
+        public MapCodec<PresserRecipe> codec() {
+            return RecordCodecBuilder.mapCodec(instance -> instance.group(
+                    ResourceLocation.CODEC.fieldOf("id").forGetter(r -> r.id),
+                    Ingredient.CODEC.fieldOf("ingredient").forGetter(r -> r.ingredient),
+                    Codec.INT.fieldOf("result").forGetter(r -> r.result),
+                    Codec.INT.fieldOf("process_time").orElse(50).forGetter(r -> r.cookTime)
+            ).apply(instance, PresserRecipe::new));
         }
 
         @Override
         @Nonnull
-        public PresserRecipe read(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
-            PresserRecipe recipe = new PresserRecipe(recipeId);
-            recipe.result = JSONUtils.getInt(json, "result");
-            recipe.cookTime = JSONUtils.getInt(json, "process_time", 50);
-            recipe.ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "ingredient"));
-            return recipe;
-        }
-
-        @Nullable
-        @Override
-        public PresserRecipe read(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
-            PresserRecipe recipe = new PresserRecipe(recipeId);
-            recipe.cookTime = buffer.readVarInt();
-            recipe.result = buffer.readVarInt();
-            recipe.ingredient = Ingredient.read(buffer);
-            return recipe;
-        }
-
-        @Override
-        public void write(PacketBuffer buffer, PresserRecipe recipe) {
-            buffer.writeVarInt(recipe.cookTime);
-            buffer.writeVarInt(recipe.result);
-            recipe.ingredient.write(buffer);
+        public StreamCodec<RegistryFriendlyByteBuf, PresserRecipe> streamCodec() {
+            return StreamCodec.of(
+                    (buf, recipe) -> {
+                        buf.writeResourceLocation(recipe.id);
+                        buf.writeVarInt(recipe.cookTime);
+                        buf.writeVarInt(recipe.result);
+                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.ingredient);
+                    },
+                    buf -> {
+                        ResourceLocation id = buf.readResourceLocation();
+                        int cookTime = buf.readVarInt();
+                        int result = buf.readVarInt();
+                        Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
+                        return new PresserRecipe(id, ingredient, result, cookTime);
+                    }
+            );
         }
     }
 }

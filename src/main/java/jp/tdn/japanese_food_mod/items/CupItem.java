@@ -1,20 +1,25 @@
 package jp.tdn.japanese_food_mod.items;
 
 import jp.tdn.japanese_food_mod.init.JPItems;
-import net.minecraft.entity.AreaEffectCloudEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 
 import java.util.List;
 
@@ -23,64 +28,62 @@ public class CupItem extends SimpleItem {
         super();
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity player, Hand hand) {
-        List<AreaEffectCloudEntity> AECEntityList = worldIn.getEntitiesWithinAABB(AreaEffectCloudEntity.class, player.getBoundingBox().grow(2.0D), (p_210311_0_) -> {
-            return p_210311_0_ != null && p_210311_0_.isAlive() && p_210311_0_.getOwner() instanceof EnderDragonEntity;
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        List<AreaEffectCloud> aecEntityList = level.getEntitiesOfClass(AreaEffectCloud.class, player.getBoundingBox().inflate(2.0D), (entity) -> {
+            return entity != null && entity.isAlive() && entity.getOwner() instanceof EnderDragon;
         });
-        ItemStack inHand = player.getHeldItem(hand);
-        if (!AECEntityList.isEmpty()) {
-            AreaEffectCloudEntity AECEntity = (AreaEffectCloudEntity)AECEntityList.get(0);
-            AECEntity.setRadius(AECEntity.getRadius() - 0.5F);
-            worldIn.playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-            return new ActionResult(ActionResultType.SUCCESS, this.turnBottleIntoItem(inHand, player, new ItemStack(Items.DRAGON_BREATH)));
+        ItemStack inHand = player.getItemInHand(hand);
+        if (!aecEntityList.isEmpty()) {
+            AreaEffectCloud aecEntity = aecEntityList.get(0);
+            aecEntity.setRadius(aecEntity.getRadius() - 0.5F);
+            level.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
+            return InteractionResultHolder.success(this.turnBottleIntoItem(inHand, player, new ItemStack(Items.DRAGON_BREATH)));
         } else {
-            RayTraceResult rayTrace = rayTrace(worldIn, player, RayTraceContext.FluidMode.SOURCE_ONLY);
-            if (rayTrace.getType() == RayTraceResult.Type.MISS) {
-                return new ActionResult(ActionResultType.PASS, inHand);
+            HitResult rayTrace = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
+            if (rayTrace.getType() == HitResult.Type.MISS) {
+                return InteractionResultHolder.pass(inHand);
             } else {
-                if (rayTrace.getType() == RayTraceResult.Type.BLOCK) {
-                    BlockPos pos = ((BlockRayTraceResult)rayTrace).getPos();
-                    if (!worldIn.isBlockModifiable(player, pos)) {
-                        return new ActionResult(ActionResultType.PASS, inHand);
+                if (rayTrace.getType() == HitResult.Type.BLOCK) {
+                    BlockPos pos = ((BlockHitResult)rayTrace).getBlockPos();
+                    if (!level.mayInteract(player, pos)) {
+                        return InteractionResultHolder.pass(inHand);
                     }
 
-                    if (worldIn.getFluidState(pos).isTagged(FluidTags.WATER)) {
-                        worldIn.playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-                        return new ActionResult(ActionResultType.SUCCESS, this.turnBottleIntoItem(inHand, player, new ItemStack(JPItems.CUP_WITH_WATER.get())));
+                    if (level.getFluidState(pos).is(FluidTags.WATER)) {
+                        level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                        return InteractionResultHolder.success(this.turnBottleIntoItem(inHand, player, new ItemStack(JPItems.CUP_WITH_WATER.get())));
                     }
                 }
 
-                return new ActionResult(ActionResultType.PASS, inHand);
+                return InteractionResultHolder.pass(inHand);
             }
         }
     }
 
     @Override
-    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand) {
-//        ItemStack inHand = player.getHeldItem(hand);
-//        JapaneseFoodMod.LOGGER.info(stack);
-//        JapaneseFoodMod.LOGGER.info(entity.getEntityString());
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         if(stack.getItem() == JPItems.CUP.get()){
-            if(entity.getEntityString().equals("minecraft:cow")){
+            if(entity.getType() == EntityType.COW){
                 turnBottleIntoItem(stack, player, new ItemStack(JPItems.CUP_WITH_MILK.get()));
-                player.getEntityWorld().playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_COW_MILK, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-                return ActionResultType.SUCCESS;
+                player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.COW_MILK, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResultType.PASS;
+        return InteractionResult.PASS;
     }
 
-    protected ItemStack turnBottleIntoItem(ItemStack p_185061_1_, PlayerEntity p_185061_2_, ItemStack p_185061_3_) {
-        p_185061_1_.shrink(1);
-        p_185061_2_.addStat(Stats.ITEM_USED.get(this));
-        if (p_185061_1_.isEmpty()) {
-            return p_185061_3_;
+    protected ItemStack turnBottleIntoItem(ItemStack bottleStack, Player player, ItemStack filledStack) {
+        bottleStack.shrink(1);
+        player.awardStat(Stats.ITEM_USED.get(this));
+        if (bottleStack.isEmpty()) {
+            return filledStack;
         } else {
-            if (!p_185061_2_.inventory.addItemStackToInventory(p_185061_3_)) {
-                p_185061_2_.dropItem(p_185061_3_, false);
+            if (!player.getInventory().add(filledStack)) {
+                player.drop(filledStack, false);
             }
 
-            return p_185061_1_;
+            return bottleStack;
         }
     }
 }

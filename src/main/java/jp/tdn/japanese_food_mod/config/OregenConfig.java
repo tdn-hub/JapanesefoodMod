@@ -1,11 +1,12 @@
 package jp.tdn.japanese_food_mod.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class OregenConfig {
-    public static ForgeConfigSpec.IntValue rock_salt_chance;
-    public static ForgeConfigSpec.BooleanValue generate_overworld;
-    public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client){
+    public static ModConfigSpec.IntValue rock_salt_chance;
+    public static ModConfigSpec.BooleanValue generate_overworld;
+
+    public static void init(ModConfigSpec.Builder server, ModConfigSpec.Builder client) {
         server.push("ore");
         server.comment("Oregen Config");
         generate_overworld = server.comment("Decide if you want JapaneseFood Mod ores to spawn in the overworld")

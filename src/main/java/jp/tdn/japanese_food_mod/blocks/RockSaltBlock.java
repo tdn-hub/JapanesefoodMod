@@ -1,12 +1,10 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class RockSaltBlock extends Block {
-    public RockSaltBlock(Properties properties){
+    public RockSaltBlock(BlockBehaviour.Properties properties){
         super(properties);
     }
 }

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#neoforge:stone",
+    "#neoforge:cobblestone",
+    "#japanese_food_mod:heavy/ore_blocks"
+  ]
+}

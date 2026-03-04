@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/vinegared_rice"
+    "layer0": "japanese_food_mod:item/vinegared_rice"
   }
 }

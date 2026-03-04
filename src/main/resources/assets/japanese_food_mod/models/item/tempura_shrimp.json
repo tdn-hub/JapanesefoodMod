@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/tempura_shrimp"
+    "layer0": "japanese_food_mod:item/tempura_shrimp"
   }
 }

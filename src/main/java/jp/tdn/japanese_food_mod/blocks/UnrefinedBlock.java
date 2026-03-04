@@ -1,39 +1,37 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.MapColor;
 
 public class UnrefinedBlock extends Block {
     public static BooleanProperty SAUCE = BooleanProperty.create("sauce");
 
+    private static final TagKey<Block> HEAVY_TAG = TagKey.create(
+            net.minecraft.core.registries.Registries.BLOCK,
+            ResourceLocation.fromNamespaceAndPath("japanese_food_mod", "heavy")
+    );
+
     public UnrefinedBlock(){
-        super(Properties.create(Material.SAND, MaterialColor.BROWN).hardnessAndResistance(1.0f).doesNotBlockMovement().tickRandomly());
-        this.setDefaultState(this.getDefaultState().with(SAUCE, true));
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(1.0f).noCollission().randomTicks());
+        this.registerDefaultState(this.defaultBlockState().setValue(SAUCE, true));
+    }
+
+    public boolean hasUpSideBlock(Level world, BlockPos pos){
+        BlockPos upSide = pos.above();
+        return world.getBlockState(upSide).is(HEAVY_TAG);
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    public boolean hasUpSideBlock(World world, BlockPos pos){
-        BlockPos upSide = pos.up();
-        Block up = world.getBlockState(upSide).getBlock();
-
-        return BlockTags.getCollection().getOrCreate(new ResourceLocation("japanese_food_mod", "heavy")).func_230235_a_(up);
-    }
-
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(SAUCE);
     }
 }

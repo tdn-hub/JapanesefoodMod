@@ -1,51 +1,51 @@
 package jp.tdn.japanese_food_mod.client.models;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.LivingEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.world.entity.LivingEntity;
 
 public class AsariClamEntityModel<T extends LivingEntity> extends EntityModel<T> {
-    private final ModelRenderer body;
-    private final ModelRenderer bone;
-    private final ModelRenderer bone2;
+    private final ModelPart body;
 
-    public AsariClamEntityModel() {
-        textureWidth = 32;
-        textureHeight = 32;
+    public AsariClamEntityModel(ModelPart root) {
+        this.body = root.getChild("body");
+    }
 
-        body = new ModelRenderer(this);
-        body.setRotationPoint(0.0F, 24.0F, 0.0F);
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition root = mesh.getRoot();
 
+        PartDefinition body = root.addOrReplaceChild("body",
+                CubeListBuilder.create(),
+                PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        bone = new ModelRenderer(this);
-        bone.setRotationPoint(0.0F, 0.0F, 0.0F);
-        body.addChild(bone);
-        bone.setTextureOffset(0, 19).addBox(-1.7F, -1.0F, -1.0F, 3.0F, 1.0F, 3.0F, 0.0F, false);
-        bone.setTextureOffset(0, 5).addBox(-1.7F, -3.0F, -1.0F, 3.0F, 1.0F, 3.0F, 0.0F, false);
-        bone.setTextureOffset(0, 9).addBox(-0.7F, -2.0F, 2.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-        bone.setTextureOffset(0, 13).addBox(-0.7F, -1.0F, 2.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+        body.addOrReplaceChild("bone",
+                CubeListBuilder.create()
+                        .texOffs(0, 19).addBox(-1.7F, -1.0F, -1.0F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                        .texOffs(0, 5).addBox(-1.7F, -3.0F, -1.0F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                        .texOffs(0, 9).addBox(-0.7F, -2.0F, 2.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                        .texOffs(0, 13).addBox(-0.7F, -1.0F, 2.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        bone2 = new ModelRenderer(this);
-        bone2.setRotationPoint(0.0F, -1.0F, 3.0F);
-        body.addChild(bone2);
-        bone2.setTextureOffset(0, 0).addBox(-2.7F, -1.0F, -5.0F, 5.0F, 1.0F, 4.0F, 0.0F, false);
+        body.addOrReplaceChild("bone2",
+                CubeListBuilder.create()
+                        .texOffs(0, 0).addBox(-2.7F, -1.0F, -5.0F, 5.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -1.0F, 3.0F));
+
+        return LayerDefinition.create(mesh, 32, 32);
     }
 
     @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
-        //previously the render function, render code was moved to a method below
+    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        // no animation
     }
 
     @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-        body.render(matrixStack, buffer, packedLight, packedOverlay);
-    }
-
-    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+        body.render(poseStack, buffer, packedLight, packedOverlay, color);
     }
 }

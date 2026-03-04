@@ -1,21 +1,20 @@
 package jp.tdn.japanese_food_mod.items;
 
-import jp.tdn.japanese_food_mod.init.JPItems;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class CookWareItem extends Item {
     public CookWareItem(){
-        super(new Item.Properties().maxStackSize(1).group(JPItems.ItemGroup_Japanese));
+        super(new Item.Properties().stacksTo(1));
     }
 
     @Override
-    public ItemStack getContainerItem(ItemStack item){
+    public ItemStack getCraftingRemainingItem(ItemStack item){
         return new ItemStack(this);
     }
 
     @Override
-    public boolean hasContainerItem(){
+    public boolean hasCraftingRemainingItem(ItemStack item){
         return true;
     }
 }

@@ -1,50 +1,49 @@
 package jp.tdn.japanese_food_mod.blocks;
 
 import jp.tdn.japanese_food_mod.blocks.tileentity.UnrefinedSakeTileEntity;
+import jp.tdn.japanese_food_mod.init.JPBlockEntities;
 import jp.tdn.japanese_food_mod.init.JPItems;
-import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-public class UnrefinedSakeBlock extends UnrefinedBlock {
+public class UnrefinedSakeBlock extends UnrefinedBlock implements EntityBlock {
     public UnrefinedSakeBlock(){
         super();
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return JPTileEntities.UNREFINED_SAKE.create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return JPBlockEntities.UNREFINED_SAKE.get().create(pos, state);
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockRayTraceResult rayTraceResult) {
-        if(!world.isRemote){
-            if(state.get(SAUCE) && hasUpSideBlock(world, pos)){
+    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player entity, BlockHitResult rayTraceResult) {
+        if(!world.isClientSide){
+            if(state.getValue(SAUCE) && hasUpSideBlock(world, pos)){
                 ItemStack insert = new ItemStack(JPItems.SAKE.get());
-                TileEntity tileEntity = world.getTileEntity(pos);
-                if(tileEntity instanceof UnrefinedSakeTileEntity){
-                    if(((UnrefinedSakeTileEntity) tileEntity).getSauceRemaining() > 0) {
-                        entity.inventory.addItemStackToInventory(insert);
-                        ((UnrefinedSakeTileEntity) tileEntity).useSauce();
+                BlockEntity tileEntity = world.getBlockEntity(pos);
+                if(tileEntity instanceof UnrefinedSakeTileEntity unrefinedSakeBlockEntity){
+                    if(unrefinedSakeBlockEntity.getSauceRemaining() > 0) {
+                        entity.getInventory().add(insert);
+                        unrefinedSakeBlockEntity.useSauce();
 
-                        if (((UnrefinedSakeTileEntity) tileEntity).getSauceRemaining() <= 0) {
-                            world.setBlockState(pos, state.with(SAUCE, false));
+                        if (unrefinedSakeBlockEntity.getSauceRemaining() <= 0) {
+                            world.setBlock(pos, state.setValue(SAUCE, false), 3);
                         }
                     }
                 }
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 }

@@ -1,29 +1,28 @@
-package jp.tdn.japanese_food_mod.recipes;
+﻿package jp.tdn.japanese_food_mod.recipes;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class MicroScopeRecipe implements IRecipe<IInventory> {
+public class MicroScopeRecipe implements Recipe<SingleRecipeInput> {
     public static final Serializer SERIALIZER = new Serializer();
-    public static final IRecipeType<MicroScopeRecipe> RECIPE_TYPE = new IRecipeType<MicroScopeRecipe>() {
-    };
+    public static final RecipeType<MicroScopeRecipe> RECIPE_TYPE = RecipeType.simple(ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "identifying"));
+
     protected final ResourceLocation id;
     protected Ingredient ingredient;
     protected ItemStack result;
@@ -41,18 +40,18 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public boolean matches(IInventory inventory, @Nonnull World worldIn){
-        return this.ingredient.test(inventory.getStackInSlot(0));
+    public boolean matches(@Nonnull SingleRecipeInput input, @Nonnull Level level){
+        return this.ingredient.test(input.item());
     }
 
     @Nonnull
     @Override
-    public ItemStack getCraftingResult(@Nonnull IInventory inventory) {
+    public ItemStack assemble(@Nonnull SingleRecipeInput input, @Nonnull HolderLookup.Provider registries) {
         return this.result.copy();
     }
 
     @Override
-    public boolean canFit(int width, int height){
+    public boolean canCraftInDimensions(int width, int height){
         return true;
     }
 
@@ -74,7 +73,7 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
 
     @Nonnull
     @Override
-    public ItemStack getRecipeOutput(){
+    public ItemStack getResultItem(@Nonnull HolderLookup.Provider registries){
         return this.result;
     }
 
@@ -84,60 +83,53 @@ public class MicroScopeRecipe implements IRecipe<IInventory> {
 
     @Nonnull
     @Override
-    public ResourceLocation getId(){
-        return this.id;
-    }
-
-    @Nonnull
-    @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return SERIALIZER;
     }
 
     @Nonnull
     @Override
-    public IRecipeType<?> getType(){
+    public RecipeType<?> getType(){
         return RECIPE_TYPE;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<MicroScopeRecipe>{
-        public Serializer(){
-            this.setRegistryName(new ResourceLocation(JapaneseFoodMod.MOD_ID, "identifying"));
+    public static class Serializer implements RecipeSerializer<MicroScopeRecipe> {
+
+        @Nonnull
+        @Override
+        public MapCodec<MicroScopeRecipe> codec() {
+            return RecordCodecBuilder.mapCodec(instance -> instance.group(
+                    ResourceLocation.CODEC.fieldOf("id").forGetter(r -> r.id),
+                    Ingredient.CODEC.fieldOf("ingredient").forGetter(r -> r.ingredient),
+                    ItemStack.CODEC.fieldOf("result").forGetter(r -> r.result),
+                    Codec.FLOAT.fieldOf("xp").orElse(0.0f).forGetter(r -> r.experience),
+                    Codec.FLOAT.fieldOf("probability").forGetter(r -> r.probability),
+                    Codec.INT.fieldOf("process_time").orElse(50).forGetter(r -> r.cookTime)
+            ).apply(instance, MicroScopeRecipe::new));
         }
 
         @Nonnull
         @Override
-        public MicroScopeRecipe read(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
-            final JsonElement inputElement = JSONUtils.isJsonArray(json, "ingredient") ? JSONUtils.getJsonArray(json, "ingredient") : JSONUtils.getJsonObject(json, "ingredient");
-            ItemStack result = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "result"), true);
-            Ingredient ingredient = CraftingHelper.getIngredient(inputElement);
-            int cookTime = JSONUtils.getInt(json, "process_time", 50);
-            float experience = JSONUtils.getFloat(json, "xp", 0.0f);
-            float probability = JSONUtils.getFloat(json, "probability");
-            //JapaneseFoodMod.LOGGER.info(recipe.ingredient);
-
-            return new MicroScopeRecipe(recipeId, ingredient, result, experience, probability, cookTime);
-        }
-
-        @Nullable
-        @Override
-        public MicroScopeRecipe read(@Nonnull ResourceLocation recipeId, @Nonnull PacketBuffer buffer) {
-            Ingredient ingredient = Ingredient.read(buffer);
-            ItemStack result = buffer.readItemStack();
-            int cookTime = buffer.readVarInt();
-            float experience = buffer.readFloat();
-            float probability = buffer.readFloat();
-
-            return new MicroScopeRecipe(recipeId, ingredient, result, experience, probability, cookTime);
-        }
-
-        @Override
-        public void write(@Nonnull PacketBuffer buffer, MicroScopeRecipe recipe) {
-            recipe.ingredient.write(buffer);
-            buffer.writeItemStack(recipe.result);
-            buffer.writeVarInt(recipe.cookTime);
-            buffer.writeFloat(recipe.experience);
-            buffer.writeFloat(recipe.probability);
+        public StreamCodec<RegistryFriendlyByteBuf, MicroScopeRecipe> streamCodec() {
+            return StreamCodec.of(
+                    (buf, recipe) -> {
+                        buf.writeResourceLocation(recipe.id);
+                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.ingredient);
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.result);
+                        buf.writeVarInt(recipe.cookTime);
+                        buf.writeFloat(recipe.experience);
+                        buf.writeFloat(recipe.probability);
+                    },
+                    buf -> {
+                        ResourceLocation id = buf.readResourceLocation();
+                        Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
+                        ItemStack result = ItemStack.STREAM_CODEC.decode(buf);
+                        int cookTime = buf.readVarInt();
+                        float experience = buf.readFloat();
+                        float probability = buf.readFloat();
+                        return new MicroScopeRecipe(id, ingredient, result, experience, probability, cookTime);
+                    }
+            );
         }
     }
 }

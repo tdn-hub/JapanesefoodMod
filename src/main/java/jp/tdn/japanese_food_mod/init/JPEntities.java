@@ -1,84 +1,85 @@
-package jp.tdn.japanese_food_mod.init;
+﻿package jp.tdn.japanese_food_mod.init;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.entities.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
-@Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class JPEntities {
-    public static EntityType<EelEntity> EEL = createEntity(EelEntity::new, EntityClassification.WATER_CREATURE, "eel", 0.5f, 0.5f);
-    public static EntityType<CrabEntity> CRAB = createEntity(CrabEntity::new, EntityClassification.WATER_CREATURE, "crab", 0.5f, 0.3f);
-    public static EntityType<TunaEntity> TUNA = createEntity(TunaEntity::new, EntityClassification.WATER_CREATURE, "tuna", 1.0f, 1.0f);
-    public static EntityType<ClamEntity> CLAM = createEntity(ClamEntity::new, EntityClassification.WATER_CREATURE, "clam", 0.5f, 0.5f);
-    public static EntityType<AsariClamEntity> ASARI_CLAM = createEntity(AsariClamEntity::new, EntityClassification.WATER_CREATURE, "asari_clam", 0.45f, 0.45f);
-    public static EntityType<TurbanShellEntity> TURBAN_SHELL = createEntity(TurbanShellEntity::new, EntityClassification.WATER_CREATURE, "turban_shell", 0.5f, 0.5f);
-    public static EntityType<AnglerfishEntity> ANGLERFISH = createEntity(AnglerfishEntity::new, EntityClassification.WATER_CREATURE, "anglerfish", 0.75f, 0.4f);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, JapaneseFoodMod.MOD_ID);
 
-    private static <T extends Entity> EntityType<T> createEntity(EntityType.IFactory<T> factory, EntityClassification entityClassification, String name, float width, float height) {
-        ResourceLocation location = new ResourceLocation(JapaneseFoodMod.MOD_ID + ":" + name);
+    public static final DeferredHolder<EntityType<?>, EntityType<EelEntity>> EEL = ENTITIES.register("eel",
+            () -> EntityType.Builder.<EelEntity>of(EelEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.5f, 0.5f)
+                    .build("japanese_food_mod:eel"));
 
-        EntityType<T> entity = EntityType.Builder.create(factory, entityClassification).size(width, height).build(location.toString());
-        entity.setRegistryName(location);
-        return entity;
+    public static final DeferredHolder<EntityType<?>, EntityType<CrabEntity>> CRAB = ENTITIES.register("crab",
+            () -> EntityType.Builder.<CrabEntity>of(CrabEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.5f, 0.3f)
+                    .build("japanese_food_mod:crab"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<TunaEntity>> TUNA = ENTITIES.register("tuna",
+            () -> EntityType.Builder.<TunaEntity>of(TunaEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(1.0f, 1.0f)
+                    .build("japanese_food_mod:tuna"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ClamEntity>> CLAM = ENTITIES.register("clam",
+            () -> EntityType.Builder.<ClamEntity>of(ClamEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.5f, 0.5f)
+                    .build("japanese_food_mod:clam"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AsariClamEntity>> ASARI_CLAM = ENTITIES.register("asari_clam",
+            () -> EntityType.Builder.<AsariClamEntity>of(AsariClamEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.45f, 0.45f)
+                    .build("japanese_food_mod:asari_clam"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<TurbanShellEntity>> TURBAN_SHELL = ENTITIES.register("turban_shell",
+            () -> EntityType.Builder.<TurbanShellEntity>of(TurbanShellEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.5f, 0.5f)
+                    .build("japanese_food_mod:turban_shell"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AnglerfishEntity>> ANGLERFISH = ENTITIES.register("anglerfish",
+            () -> EntityType.Builder.<AnglerfishEntity>of(AnglerfishEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.75f, 0.4f)
+                    .build("japanese_food_mod:anglerfish"));
+
+    @SubscribeEvent
+    public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
+        event.put(EEL.get(), EelEntity.createAttributes().build());
+        event.put(CRAB.get(), CrabEntity.createAttributes().build());
+        event.put(TUNA.get(), TunaEntity.createAttributes().build());
+        event.put(CLAM.get(), ClamEntity.createAttributes().build());
+        event.put(ASARI_CLAM.get(), AsariClamEntity.createAttributes().build());
+        event.put(TURBAN_SHELL.get(), TurbanShellEntity.createAttributes().build());
+        event.put(ANGLERFISH.get(), AnglerfishEntity.createAttributes().build());
     }
 
     @SubscribeEvent
-    public static void registerEntities(final RegistryEvent.Register<EntityType<?>> event){
-        event.getRegistry().registerAll(
-                EEL,
-                CRAB,
-                TUNA,
-                CLAM,
-                ASARI_CLAM,
-                TURBAN_SHELL,
-                ANGLERFISH
-        );
-
-        GlobalEntityTypeAttributes.put(EEL, EelEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(CRAB, CrabEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(TUNA, TunaEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(CLAM, ClamEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(ASARI_CLAM, AsariClamEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(TURBAN_SHELL, TurbanShellEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(ANGLERFISH, AnglerfishEntity.getAttributeMap().func_233813_a_());
-
-        EntitySpawnPlacementRegistry.register(EEL, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, EelEntity::func_223363_b);
-        EntitySpawnPlacementRegistry.register(CRAB, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.OCEAN_FLOOR_WG, CrabEntity::spawnHandler);
-        EntitySpawnPlacementRegistry.register(TUNA, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, TunaEntity::func_223363_b);
-        EntitySpawnPlacementRegistry.register(CLAM, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.OCEAN_FLOOR_WG, ClamEntity::spawnHandler);
-        EntitySpawnPlacementRegistry.register(ASARI_CLAM, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.OCEAN_FLOOR_WG, AsariClamEntity::spawnHandler);
-        EntitySpawnPlacementRegistry.register(TURBAN_SHELL, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.OCEAN_FLOOR_WG, TurbanShellEntity::spawnHandler);
-        EntitySpawnPlacementRegistry.register(ANGLERFISH, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.OCEAN_FLOOR_WG, AnglerfishEntity::func_223363_b);
-    }
-
-    public static void registerEntityWorldSpawns(){
-        registerEntityWorldSpawn(EEL, 10, 1, 5, Biomes.RIVER, Biomes.OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN);
-        registerEntityWorldSpawn(CRAB, 25, 1, 10, Biomes.OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.COLD_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_OCEAN, Biomes.DEEP_FROZEN_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.BEACH);
-        registerEntityWorldSpawn(TUNA, 2, 1, 5, Biomes.OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.DEEP_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN);
-        registerEntityWorldSpawn(CLAM, 40, 1, 3, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.OCEAN,Biomes.BEACH);
-        registerEntityWorldSpawn(ASARI_CLAM, 40, 1, 5, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN, Biomes.OCEAN, Biomes.BEACH);
-        registerEntityWorldSpawn(TURBAN_SHELL, 5, 1, 2, Biomes.OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.WARM_OCEAN);
-        registerEntityWorldSpawn(ANGLERFISH, 1, 1, 2, Biomes.DEEP_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN);
-    }
-
-    public static void registerEntityWorldSpawn(EntityType<?> entity, int weight, int min, int max, Biome... biomes){
-        for(Biome biome : biomes){
-            Biome inBiome = ForgeRegistries.BIOMES.getValue(biome.getRegistryName());
-            if(inBiome != null){
-               inBiome.getSpawns(entity.getClassification()).add(new Biome.SpawnListEntry(entity, weight, min, max));
-            }
-        }
+    public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
+        event.register(EEL.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING,
+                WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(CRAB.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.OCEAN_FLOOR_WG,
+                CrabEntity::checkSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(TUNA.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING,
+                WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(CLAM.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.OCEAN_FLOOR_WG,
+                ClamEntity::checkSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(ASARI_CLAM.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.OCEAN_FLOOR_WG,
+                AsariClamEntity::checkSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(TURBAN_SHELL.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.OCEAN_FLOOR_WG,
+                TurbanShellEntity::checkSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(ANGLERFISH.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.OCEAN_FLOOR_WG,
+                WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 }

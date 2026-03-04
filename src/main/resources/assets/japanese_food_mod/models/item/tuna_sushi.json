@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/tuna_sushi"
+    "layer0": "japanese_food_mod:item/tuna_sushi"
   }
 }

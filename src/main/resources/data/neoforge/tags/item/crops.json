@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#neoforge:crops/rice",
+    "#neoforge:crops/soy_beans",
+    "#neoforge:crops/leek",
+    "#neoforge:crops/radish_sprout"
+  ]
+}

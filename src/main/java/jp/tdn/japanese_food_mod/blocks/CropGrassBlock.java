@@ -1,25 +1,19 @@
 package jp.tdn.japanese_food_mod.blocks;
 
-import net.minecraft.block.BushBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraftforge.common.PlantType;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class CropGrassBlock extends BushBlock {
+    public static final MapCodec<CropGrassBlock> CODEC = simpleCodec(p -> new CropGrassBlock());
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return CODEC;
+    }
+
     public CropGrassBlock(){
-        super(Properties.create(Material.PLANTS, MaterialColor.GREEN).doesNotBlockMovement().hardnessAndResistance(0f).sound(SoundType.CROP));
-    }
-
-    @Override
-    public OffsetType getOffsetType() {
-        return OffsetType.XZ;
-    }
-
-    @Override
-    public PlantType getPlantType(IBlockReader world, BlockPos pos) {
-        return PlantType.PLAINS;
+        super(BlockBehaviour.Properties.of().noCollission().strength(0f).sound(SoundType.CROP).offsetType(BlockBehaviour.OffsetType.XZ));
     }
 }

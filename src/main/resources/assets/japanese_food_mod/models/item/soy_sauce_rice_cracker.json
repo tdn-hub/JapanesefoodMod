@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "japanese_food_mod:items/soy_sauce_rice_cracker"
+    "layer0": "japanese_food_mod:item/soy_sauce_rice_cracker"
   }
 }

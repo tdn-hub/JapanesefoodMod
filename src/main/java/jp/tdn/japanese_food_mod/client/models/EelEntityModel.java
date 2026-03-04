@@ -1,82 +1,91 @@
 package jp.tdn.japanese_food_mod.client.models;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.MathHelper;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 
 public class EelEntityModel<T extends LivingEntity> extends EntityModel<T> {
-    private final ModelRenderer tail;
-    private final ModelRenderer body;
-    private final ModelRenderer head;
-    private final ModelRenderer body2;
-    private final ModelRenderer hire;
-    private final ModelRenderer hire2;
+    private final ModelPart tail;
+    private final ModelPart body;
+    private final ModelPart head;
+    private final ModelPart body2;
+    private final ModelPart hire;
+    private final ModelPart hire2;
 
-    public EelEntityModel() {
-        textureWidth = 32;
-        textureHeight = 32;
+    public EelEntityModel(ModelPart root) {
+        this.tail = root.getChild("tail");
+        this.body = root.getChild("body");
+        this.head = root.getChild("head");
+        this.body2 = root.getChild("body2");
+        this.hire = root.getChild("hire");
+        this.hire2 = root.getChild("hire2");
+    }
 
-        tail = new ModelRenderer(this);
-        tail.setRotationPoint(0.0F, 23.0F, 12.0F);
-        tail.setTextureOffset(17, 11).addBox(-0.5F, -1.5F, 0.0F, 1.0F, 2.0F, 3.0F, 0.0F, false);
-        tail.setTextureOffset(19, 6).addBox(-0.5F, -1.5F, 3.0F, 1.0F, 2.0F, 3.0F, 0.0F, false);
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition root = mesh.getRoot();
 
-        body = new ModelRenderer(this);
-        body.setRotationPoint(0.0F, 24.0F, 0.0F);
-        body.setTextureOffset(0, 10).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 3.0F, 3.0F, 0.0F, false);
-        body.setTextureOffset(0, 10).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 3.0F, 0.0F, false);
-        body.setTextureOffset(0, 10).addBox(-1.0F, -3.0F, 2.0F, 2.0F, 3.0F, 3.0F, 0.0F, false);
+        root.addOrReplaceChild("tail",
+                CubeListBuilder.create()
+                        .texOffs(17, 11).addBox(-0.5F, -1.5F, 0.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
+                        .texOffs(19, 6).addBox(-0.5F, -1.5F, 3.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 23.0F, 12.0F));
 
-        head = new ModelRenderer(this);
-        head.setRotationPoint(0.0F, 24.0F, 0.0F);
-        head.setTextureOffset(0, 10).addBox(-1.0F, -3.0F, -7.0F, 2.0F, 3.0F, 3.0F, 0.0F, false);
-        head.setTextureOffset(0, 2).addBox(-1.0F, -2.5F, -9.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-        head.setTextureOffset(0, 0).addBox(-1.0F, -2.5F, -10.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
+        root.addOrReplaceChild("body",
+                CubeListBuilder.create()
+                        .texOffs(0, 10).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                        .texOffs(0, 10).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                        .texOffs(0, 10).addBox(-1.0F, -3.0F, 2.0F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        body2 = new ModelRenderer(this);
-        body2.setRotationPoint(0.0F, 23.0F, 5.0F);
-        body2.setTextureOffset(8, 0).addBox(-1.0F, -1.5F, 0.0F, 2.0F, 2.0F, 3.0F, 0.0F, false);
-        body2.setTextureOffset(7, 5).addBox(-1.0F, -1.5F, 3.0F, 2.0F, 2.0F, 4.0F, 0.0F, false);
+        root.addOrReplaceChild("head",
+                CubeListBuilder.create()
+                        .texOffs(0, 10).addBox(-1.0F, -3.0F, -7.0F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                        .texOffs(0, 2).addBox(-1.0F, -2.5F, -9.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                        .texOffs(0, 0).addBox(-1.0F, -2.5F, -10.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        hire = new ModelRenderer(this);
-        hire.setRotationPoint(1.0F, 23.0F, -7.0F);
-        setRotationAngle(hire, 0.0F, 0.2618F, 0.0F);
-        hire.setTextureOffset(0, 3).addBox(0.0F, -0.5F, 0.0F, 0.0F, 1.0F, 4.0F, 0.0F, false);
+        root.addOrReplaceChild("body2",
+                CubeListBuilder.create()
+                        .texOffs(8, 0).addBox(-1.0F, -1.5F, 0.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
+                        .texOffs(7, 5).addBox(-1.0F, -1.5F, 3.0F, 2.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 23.0F, 5.0F));
 
-        hire2 = new ModelRenderer(this);
-        hire2.setRotationPoint(-1.0F, 23.0F, -7.0F);
-        setRotationAngle(hire2, 0.0F, -0.2618F, 0.0F);
-        hire2.setTextureOffset(0, 3).addBox(0.0F, -0.5F, 0.0F, 0.0F, 1.0F, 4.0F, 0.0F, true);
+        root.addOrReplaceChild("hire",
+                CubeListBuilder.create()
+                        .texOffs(0, 3).addBox(0.0F, -0.5F, 0.0F, 0.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.offsetAndRotation(1.0F, 23.0F, -7.0F, 0.0F, 0.2618F, 0.0F));
+
+        root.addOrReplaceChild("hire2",
+                CubeListBuilder.create()
+                        .texOffs(0, 3).mirror().addBox(0.0F, -0.5F, 0.0F, 0.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false),
+                PartPose.offsetAndRotation(-1.0F, 23.0F, -7.0F, 0.0F, -0.2618F, 0.0F));
+
+        return LayerDefinition.create(mesh, 32, 32);
     }
 
     @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         float move = 1.0f;
-        if(!entity.isInWater()){
+        if (!entity.isInWater()) {
             move = 1.5f;
         }
-
-        tail.rotateAngleY = MathHelper.sin(move * 0.1f * ageInTicks) * 0.2f;
-        body2.rotateAngleY = -(MathHelper.sin(move * 0.1f * ageInTicks) * 0.2f);
+        tail.yRot = Mth.sin(move * 0.1f * ageInTicks) * 0.2f;
+        body2.yRot = -(Mth.sin(move * 0.1f * ageInTicks) * 0.2f);
     }
 
     @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-        tail.render(matrixStack, buffer, packedLight, packedOverlay);
-        body.render(matrixStack, buffer, packedLight, packedOverlay);
-        head.render(matrixStack, buffer, packedLight, packedOverlay);
-        body2.render(matrixStack, buffer, packedLight, packedOverlay);
-        hire.render(matrixStack, buffer, packedLight, packedOverlay);
-        hire2.render(matrixStack, buffer, packedLight, packedOverlay);
-    }
-
-    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+        tail.render(poseStack, buffer, packedLight, packedOverlay, color);
+        body.render(poseStack, buffer, packedLight, packedOverlay, color);
+        head.render(poseStack, buffer, packedLight, packedOverlay, color);
+        body2.render(poseStack, buffer, packedLight, packedOverlay, color);
+        hire.render(poseStack, buffer, packedLight, packedOverlay, color);
+        hire2.render(poseStack, buffer, packedLight, packedOverlay, color);
     }
 }
-

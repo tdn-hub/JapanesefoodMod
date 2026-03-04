@@ -1,95 +1,100 @@
 package jp.tdn.japanese_food_mod.blocks;
 
+import com.mojang.serialization.MapCodec;
 import jp.tdn.japanese_food_mod.blocks.tileentity.OysterShellTileEntity;
+import jp.tdn.japanese_food_mod.init.JPBlockEntities;
 import jp.tdn.japanese_food_mod.init.JPItems;
-import jp.tdn.japanese_food_mod.init.JPTileEntities;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.LiquidBlockContainer;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
 
-public class OysterShellBlock extends HorizontalBlock implements ILiquidContainer {
+public class OysterShellBlock extends HorizontalDirectionalBlock implements EntityBlock, LiquidBlockContainer {
+    public static final MapCodec<OysterShellBlock> CODEC = simpleCodec(p -> new OysterShellBlock());
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
+    }
+
     public static IntegerProperty NORI = IntegerProperty.create("nori", 0, 2);
     public static DirectionProperty DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
-    private static VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 10.0D, 3.0D, 10.0D));
+    private static VoxelShape SHAPE = Shapes.or(Block.box(4.0D, 0.0D, 4.0D, 10.0D, 3.0D, 10.0D));
 
     public OysterShellBlock(){
-        super(Properties.create(Material.ROCK, MaterialColor.CLAY).doesNotBlockMovement().hardnessAndResistance(2.5f).tickRandomly());
-        this.setDefaultState(this.getStateContainer().getBaseState().with(NORI, 0));
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).noCollission().strength(2.5f).randomTicks());
+        this.registerDefaultState(this.stateDefinition.any().setValue(NORI, 0));
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return JPTileEntities.OYSTER_SHELL.create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return JPBlockEntities.OYSTER_SHELL.get().create(pos, state);
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) {
-        return world.hasWater(pos);
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+        return world.isWaterAt(pos);
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace) {
-        if(!worldIn.isRemote()){
-            int level = 0;
-            TileEntity entity = worldIn.getTileEntity(pos);
-            if(entity instanceof OysterShellTileEntity){
-                if(!((OysterShellTileEntity) entity).isEmpty()){
-                    ((OysterShellTileEntity) entity).useNori();
-                    player.inventory.addItemStackToInventory(new ItemStack(JPItems.NORI.get()));
-
-                    setNoriLevel(worldIn, pos, state, getLevel(((OysterShellTileEntity) entity).getnoriRemaining()));
+    public InteractionResult useWithoutItem(BlockState state, Level worldIn, BlockPos pos, Player player, BlockHitResult rayTrace) {
+        if(!worldIn.isClientSide()){
+            BlockEntity entity = worldIn.getBlockEntity(pos);
+            if(entity instanceof OysterShellTileEntity oysterShellBlockEntity){
+                if(!oysterShellBlockEntity.isEmpty()){
+                    oysterShellBlockEntity.useNori();
+                    player.getInventory().add(new ItemStack(JPItems.NORI.get()));
+                    setNoriLevel(worldIn, pos, state, getLevel(oysterShellBlockEntity.getnoriRemaining()));
                 }
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        super.tick(state, worldIn, pos, rand);
-        TileEntity entity = worldIn.getTileEntity(pos);
-        if(entity instanceof OysterShellTileEntity){
-            setNoriLevel(worldIn, pos, state, getLevel(((OysterShellTileEntity) entity).getnoriRemaining()));
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource rand) {
+        super.randomTick(state, worldIn, pos, rand);
+        BlockEntity entity = worldIn.getBlockEntity(pos);
+        if(entity instanceof OysterShellTileEntity oysterShellBlockEntity){
+            setNoriLevel(worldIn, pos, state, getLevel(oysterShellBlockEntity.getnoriRemaining()));
         }
     }
 
@@ -105,48 +110,51 @@ public class OysterShellBlock extends HorizontalBlock implements ILiquidContaine
         return rec;
     }
 
-    public void setNoriLevel(World world, BlockPos pos, BlockState state, int level){
-        world.setBlockState(pos, state.with(NORI, level));
+    public void setNoriLevel(Level world, BlockPos pos, BlockState state, int level){
+        world.setBlock(pos, state.setValue(NORI, level), 3);
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(DIRECTION, context.getPlacementHorizontalFacing().getOpposite());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(DIRECTION, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
     @Nonnull
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(DIRECTION, rot.rotate(state.get(DIRECTION)));
+        return state.setValue(DIRECTION, rot.rotate(state.getValue(DIRECTION)));
     }
 
     @Override
     @Nonnull
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(DIRECTION)));
+        return this.rotate(state, mirrorIn.getRotation(state.getValue(DIRECTION)));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(NORI, DIRECTION);
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
-    public FluidState getFluidState(BlockState p_204507_1_) {
-        return Fluids.WATER.getStillFluidState(false);
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return Fluids.WATER.getSource(false);
     }
 
-    public boolean canContainFluid(IBlockReader p_204510_1_, BlockPos p_204510_2_, BlockState p_204510_3_, Fluid p_204510_4_) {
+    @Override
+    public boolean canPlaceLiquid(@Nullable Player player, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
         return false;
     }
 
-    public boolean receiveFluid(IWorld p_204509_1_, BlockPos p_204509_2_, BlockState p_204509_3_, FluidState p_204509_4_) {
+    @Override
+    public boolean placeLiquid(LevelAccessor world, BlockPos pos, BlockState state, FluidState fluidState) {
         return false;
     }
 }

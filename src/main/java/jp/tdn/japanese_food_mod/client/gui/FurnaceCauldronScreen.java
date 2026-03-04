@@ -1,57 +1,48 @@
 package jp.tdn.japanese_food_mod.client.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.blocks.tileentity.FurnaceCauldronTileEntity;
 import jp.tdn.japanese_food_mod.container.FurnaceCauldronContainer;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 
-public class FurnaceCauldronScreen extends ContainerScreen<FurnaceCauldronContainer> {
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(JapaneseFoodMod.MOD_ID, "textures/gui/container/furnace_cauldron.png");
-    private int textureXSize;
-    private int textureYSize;
+public class FurnaceCauldronScreen extends AbstractContainerScreen<FurnaceCauldronContainer> {
+    private static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/gui/container/furnace_cauldron.png");
 
-    public FurnaceCauldronScreen(final FurnaceCauldronContainer container, final PlayerInventory inventory, final ITextComponent title){
+    public FurnaceCauldronScreen(final FurnaceCauldronContainer container, final Inventory inventory, final Component title){
         super(container, inventory, title);
-        this.xSize = 175;
-        this.ySize = 172;
-        this.textureXSize = 256;
-        this.textureYSize = 256;
+        this.imageWidth = 175;
+        this.imageHeight = 172;
     }
 
     @Override
-    public void func_230430_a_(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        this.func_230446_a_(matrixStack);
-        super.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
-        this.func_230459_a_(matrixStack, mouseX, mouseY);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(graphics, mouseX, mouseY, partialTick);
+        super.render(graphics, mouseX, mouseY, partialTick);
+        this.renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override
-    protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY) {
-        this.field_230712_o_.func_238422_b_(matrixStack, this.field_230704_d_, (float)(this.xSize / 2) - (float)(this.field_230704_d_.getString().length() / 2) * 5, 6.0f, 4210752);
-        this.field_230712_o_.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 8.0F, (float) (this.ySize - 96 + 6), 4210752);
-
+    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.drawString(this.font, this.title, (this.imageWidth / 2) - (this.font.width(this.title) / 2), 6, 4210752, false);
+        graphics.drawString(this.font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 6, 4210752, false);
     }
 
     @Override
-    protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+        int startX = this.leftPos;
+        int startY = this.topPos;
 
-        this.field_230706_i_.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
+        graphics.blit(BACKGROUND_TEXTURE, startX, startY, 0, 0, this.imageWidth, this.imageHeight);
 
-        int startX = this.guiLeft;
-        int startY = this.guiTop;
-
-        this.func_238474_b_(matrixStack , startX, startY, 0, 0, this.xSize, this.ySize);
-        final FurnaceCauldronTileEntity tileEntity = container.tileEntity;
+        final FurnaceCauldronTileEntity tileEntity = menu.tileEntity;
         if(tileEntity.heatingTimeLeft > 0){
             int arrowWidth = getIdentifiedTimeScaled();
-            this.func_238474_b_(
-                    matrixStack,
+            graphics.blit(
+                    BACKGROUND_TEXTURE,
                     startX + 79, startY + 34,
                     176, 0,
                     arrowWidth, 16
@@ -60,9 +51,8 @@ public class FurnaceCauldronScreen extends ContainerScreen<FurnaceCauldronContai
 
         if(tileEntity.waterRemaining > 0){
             int waterRemaining = getWaterRemainingScaled();
-            //JapaneseFoodMod.LOGGER.info(waterRemaining);
-            this.func_238474_b_(
-                    matrixStack,
+            graphics.blit(
+                    BACKGROUND_TEXTURE,
                     startX + 14, startY + 32 + (36 - waterRemaining),
                     176, 17,
                     48, waterRemaining
@@ -71,7 +61,7 @@ public class FurnaceCauldronScreen extends ContainerScreen<FurnaceCauldronContai
     }
 
     private int getIdentifiedTimeScaled(){
-        final FurnaceCauldronTileEntity tileEntity = this.container.tileEntity;
+        final FurnaceCauldronTileEntity tileEntity = this.menu.tileEntity;
         final int heatingTimeLeft = tileEntity.heatingTimeLeft;
         final int maxHeatingTime = tileEntity.maxHeatingTime;
         if(heatingTimeLeft <= 0 || maxHeatingTime <= 0) return 0;
@@ -79,7 +69,7 @@ public class FurnaceCauldronScreen extends ContainerScreen<FurnaceCauldronContai
     }
 
     private int getWaterRemainingScaled(){
-        final FurnaceCauldronTileEntity tileEntity = this.container.tileEntity;
+        final FurnaceCauldronTileEntity tileEntity = this.menu.tileEntity;
         final int waterRemaining = tileEntity.waterRemaining;
         if(waterRemaining <= 0) return 0;
         return Math.round((float)waterRemaining / tileEntity.maxWater * 36);

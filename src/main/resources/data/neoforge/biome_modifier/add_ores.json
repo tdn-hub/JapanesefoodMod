@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "japanese_food_mod:rock_salt_ore",
+    "japanese_food_mod:trona_ore"
+  ],
+  "step": "underground_ores"
+}

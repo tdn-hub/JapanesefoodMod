@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "japanese_food_mod:soy_sauce"
+      "id": "japanese_food_mod:soy_sauce"
     },
     "title": {
       "translate": "advancements.japanese_food_mod.soy_sauce.title"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "japanese_food_mod:soy_sauce",
+            "items": "japanese_food_mod:soy_sauce",
             "count": {
               "min": 1
             }

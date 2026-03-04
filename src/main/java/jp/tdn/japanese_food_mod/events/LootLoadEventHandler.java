@@ -1,71 +1,101 @@
 package jp.tdn.japanese_food_mod.events;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.config.FishingConfig;
-import net.minecraft.loot.LootEntry;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.TableLootEntry;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import org.codehaus.plexus.util.PropertyUtils;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.common.loot.LootModifier;
+import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Field;
-import java.util.List;
+/**
+ * グローバルルートモディファイア実装。
+ *
+ * 旧 LootTableLoadEvent で行っていた以下の処理を再現する:
+ *  - minecraft:blocks/seagrass に japanese_food_mod のプールを追加
+ *  - minecraft:entities/squid     に japanese_food_mod のプールを追加
+ *  - minecraft:entities/pig       に japanese_food_mod のプールを追加
+ *  - (config有効時) minecraft:gameplay/fishing に japanese_food_mod の釣りプールを追加
+ *
+ * 登録は loot_modifiers/global_loot_modifiers.json と
+ * loot_modifiers/<modifier_name>.json で行う。
+ */
+public class LootLoadEventHandler extends LootModifier {
 
-@Mod.EventBusSubscriber(modid = JapaneseFoodMod.MOD_ID)
-public class LootLoadEventHandler {
-    //private static ResourceLocation grass = new ResourceLocation("minecraft", "blocks/grass");
-    private static ResourceLocation sea_grass = new ResourceLocation("minecraft", "blocks/seagrass");
-    private static ResourceLocation squid = new ResourceLocation("minecraft", "entities/squid");
-    private static ResourceLocation pig = new ResourceLocation("minecraft", "entities/pig");
-    //private static ResourceLocation bamboo = new ResourceLocation("minecraft", "blocks/bamboo_sapling");
-    private static ResourceLocation fish = new ResourceLocation("minecraft", "gameplay/fishing");
+    // --- Codec ---
+    public static final MapCodec<LootLoadEventHandler> CODEC =
+            RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst, LootLoadEventHandler::new));
 
-    @SubscribeEvent
-    public static void onLootLoad(LootTableLoadEvent event){
-//        if(event.getName().equals(grass)){
-//            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "blocks/grass"))).build());
-//        }
+    /**
+     * 参照するサブルートテーブルの ResourceLocation。
+     * Data-driven な modifier JSON からではなく、Java 側で直接決める。
+     */
+    private static final ResourceLocation RL_SEAGRASS_INJECT =
+            ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "blocks/seagrass");
+    private static final ResourceLocation RL_SQUID_INJECT =
+            ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "entities/squid");
+    private static final ResourceLocation RL_PIG_INJECT =
+            ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "entities/pig");
+    private static final ResourceLocation RL_FISHING_INJECT =
+            ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "gameplay/fishing/fish");
 
-        //JapaneseFoodMod.LOGGER.info(event.getName());
-        if(event.getName().equals(sea_grass)){
-            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "blocks/seagrass"))).build());
-        }
+    // ターゲット loot table の ResourceLocation
+    private static final ResourceLocation RL_SEAGRASS  = ResourceLocation.fromNamespaceAndPath("minecraft", "blocks/seagrass");
+    private static final ResourceLocation RL_SQUID     = ResourceLocation.fromNamespaceAndPath("minecraft", "entities/squid");
+    private static final ResourceLocation RL_PIG       = ResourceLocation.fromNamespaceAndPath("minecraft", "entities/pig");
+    private static final ResourceLocation RL_FISHING   = ResourceLocation.fromNamespaceAndPath("minecraft", "gameplay/fishing");
 
-        if(event.getName().equals(squid)){
-            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "entities/squid"))).build());
-        }
-
-        if(event.getName().equals(pig)){
-            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "entities/pig"))).build());
-        }
-
-        if(FishingConfig.fishing_overworld.get() && event.getName().equals(fish)){
-            //event.getTable().removePool("main");
-            LootPool pool = event.getTable().getPool("main");
-            addEntry(pool, getInjectEntry(new ResourceLocation(JapaneseFoodMod.MOD_ID, "gameplay/fishing/fish"), 85, -1));
-            //event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JapaneseFoodMod.MOD_ID, "gameplay/fishing"))).build());
-        }
+    protected LootLoadEventHandler(LootItemCondition[] conditionsIn) {
+        super(conditionsIn);
     }
 
-    private static LootEntry getInjectEntry(ResourceLocation location, int weight, int quality) {
-        return TableLootEntry.builder(location).weight(weight).quality(quality).build();
+    @Override
+    public MapCodec<? extends IGlobalLootModifier> codec() {
+        return CODEC;
     }
 
-    private static void addEntry(LootPool pool, LootEntry entry) {
-        try {
-            List<LootEntry> targets = ObfuscationReflectionHelper.getPrivateValue(LootPool.class, pool, "field_186453_a");
-            if(targets != null) {
-                if (targets.stream().anyMatch(e -> e == entry)) {
-                    throw new RuntimeException("Attempted to add a duplicate entry to pool: " + entry);
-                }
-                targets.add(entry);
-            }
-        } catch (Exception e){
-            JapaneseFoodMod.LOGGER.info("No such field.");
+    @Override
+    protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
+        // LootTableIdCondition で対象テーブルを絞り込む
+        ResourceLocation tableId = context.getQueriedLootTableId();
+
+        if (tableId.equals(RL_SEAGRASS)) {
+            appendFromTable(generatedLoot, context, RL_SEAGRASS_INJECT);
+        } else if (tableId.equals(RL_SQUID)) {
+            appendFromTable(generatedLoot, context, RL_SQUID_INJECT);
+        } else if (tableId.equals(RL_PIG)) {
+            appendFromTable(generatedLoot, context, RL_PIG_INJECT);
+        } else if (tableId.equals(RL_FISHING) && FishingConfig.fishing_overworld.get()) {
+            appendFromTable(generatedLoot, context, RL_FISHING_INJECT);
         }
+
+        return generatedLoot;
+    }
+
+    /**
+     * 別の loot table を解決してアイテムを generatedLoot へ追加する。
+     *
+     * context をそのまま渡すと queriedLootTableId が元のテーブルのままになり、
+     * グローバルルートモディファイアが再び同じ条件で発火して無限再帰になる。
+     * getRandomItems(LootParams) を使うと新しい LootContext が生成され、
+     * queriedLootTableId が注入テーブルの ID になるため再帰が止まる。
+     */
+    private static void appendFromTable(ObjectArrayList<ItemStack> loot,
+                                        LootContext context,
+                                        ResourceLocation tableId) {
+        ResourceKey<LootTable> key = ResourceKey.create(Registries.LOOT_TABLE, tableId);
+        LootTable lootTable = context.getLevel().getServer()
+                .reloadableRegistries()
+                .getLootTable(key);
+        // getRandomItemsRaw はグローバルルートモディファイアを再適用しないため無限再帰にならない
+        lootTable.getRandomItemsRaw(context, loot::add);
     }
 }
