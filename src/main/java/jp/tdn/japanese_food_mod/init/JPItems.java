@@ -236,19 +236,19 @@ public class JPItems {
 
     // Spawn Eggs
     public static final DeferredHolder<Item, Item> EEL_ENTITY_EGG = register(() ->
-            new DeferredSpawnEggItem(JPEntities.EEL, 0x00c3ff, 0x694b3a, new Item.Properties()), "eel_spawn_egg");
+            new DeferredSpawnEggItem(JPEntities.EEL, 0x2A2015, 0x6B5A3A, new Item.Properties()), "eel_spawn_egg");
     public static final DeferredHolder<Item, Item> CRAB_ENTITY_EGG = register(() ->
-            new DeferredSpawnEggItem(JPEntities.CRAB, 0x00c3ff, 0xba2d20, new Item.Properties()), "crab_spawn_egg");
+            new DeferredSpawnEggItem(JPEntities.CRAB, 0xC02010, 0xFFE0C0, new Item.Properties()), "crab_spawn_egg");
     public static final DeferredHolder<Item, Item> TUNA_ENTITY_EGG = register(() ->
-            new DeferredSpawnEggItem(JPEntities.TUNA, 0x00c3ff, 0x0000ff, new Item.Properties()), "tuna_spawn_egg");
+            new DeferredSpawnEggItem(JPEntities.TUNA, 0x203060, 0xD4C040, new Item.Properties()), "tuna_spawn_egg");
     public static final DeferredHolder<Item, Item> CLAM_ENTITY_EGG = register(() ->
-            new DeferredSpawnEggItem(JPEntities.CLAM, 0x00c3ff, 0x996136, new Item.Properties()), "clam_spawn_egg");
+            new DeferredSpawnEggItem(JPEntities.CLAM, 0x5A3A20, 0x9A7050, new Item.Properties()), "clam_spawn_egg");
     public static final DeferredHolder<Item, Item> ASARI_CLAM_ENTITY_EGG = register(() ->
-            new DeferredSpawnEggItem(JPEntities.ASARI_CLAM, 0x00c3ff, 0x827a51, new Item.Properties()), "asari_clam_spawn_egg");
+            new DeferredSpawnEggItem(JPEntities.ASARI_CLAM, 0x807050, 0xB09070, new Item.Properties()), "asari_clam_spawn_egg");
     public static final DeferredHolder<Item, Item> TURBAN_SHELL_ENTITY_EGG = register(() ->
-            new DeferredSpawnEggItem(JPEntities.TURBAN_SHELL, 0x00c3ff, 0xfca503, new Item.Properties()), "turban_shell_spawn_egg");
+            new DeferredSpawnEggItem(JPEntities.TURBAN_SHELL, 0x5A4030, 0xFCA000, new Item.Properties()), "turban_shell_spawn_egg");
     public static final DeferredHolder<Item, Item> ANGLERFISH_ENTITY_EGG = register(() ->
-            new DeferredSpawnEggItem(JPEntities.ANGLERFISH, 0x00c3ff, 0xfca000, new Item.Properties()), "anglerfish_spawn_egg");
+            new DeferredSpawnEggItem(JPEntities.ANGLERFISH, 0x201808, 0xFFF0C0, new Item.Properties()), "anglerfish_spawn_egg");
 
     public static DeferredHolder<Item, Item> register(@Nonnull Supplier<Item> item, @Nonnull String name) {
         return ITEMS.register(name, item);

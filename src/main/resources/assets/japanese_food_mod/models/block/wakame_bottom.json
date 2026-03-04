@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_seagrass",
   "textures": {
-    "texture": "japanese_food_mod:blocks/wakame_bottom"
+    "texture": "japanese_food_mod:block/wakame_bottom"
   }
 }

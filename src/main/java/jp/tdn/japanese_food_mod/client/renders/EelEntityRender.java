@@ -12,7 +12,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class EelEntityRender extends MobRenderer<EelEntity, EelEntityModel<EelEntity>> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entities/eel.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entity/eel.png");
 
     public EelEntityRender(EntityRendererProvider.Context context) {
         super(context, new EelEntityModel<>(context.bakeLayer(JPModelLayers.EEL)), 0f);

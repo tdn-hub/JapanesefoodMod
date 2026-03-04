@@ -12,7 +12,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class CrabEntityRender extends MobRenderer<CrabEntity, CrabEntityModel<CrabEntity>> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entities/crab.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entity/crab.png");
 
     public CrabEntityRender(EntityRendererProvider.Context context) {
         super(context, new CrabEntityModel<>(context.bakeLayer(JPModelLayers.CRAB)), 0f);

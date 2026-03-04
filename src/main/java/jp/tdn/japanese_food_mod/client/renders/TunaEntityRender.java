@@ -12,7 +12,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TunaEntityRender extends MobRenderer<TunaEntity, TunaEntityModel<TunaEntity>> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entities/tuna.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entity/tuna.png");
 
     public TunaEntityRender(EntityRendererProvider.Context context) {
         super(context, new TunaEntityModel<>(context.bakeLayer(JPModelLayers.TUNA)), 0f);

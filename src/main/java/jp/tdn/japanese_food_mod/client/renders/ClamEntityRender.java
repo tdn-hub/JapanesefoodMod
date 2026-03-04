@@ -12,7 +12,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ClamEntityRender extends MobRenderer<ClamEntity, ClamEntityModel<ClamEntity>> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entities/clam.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entity/clam.png");
 
     public ClamEntityRender(EntityRendererProvider.Context context) {
         super(context, new ClamEntityModel<>(context.bakeLayer(JPModelLayers.CLAM)), 0f);

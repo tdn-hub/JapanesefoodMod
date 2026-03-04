@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "japanese_food_mod:blocks/oyster",
-		"particle": "japanese_food_mod:blocks/oyster"
+		"0": "japanese_food_mod:block/oyster",
+		"particle": "japanese_food_mod:block/oyster"
 	},
 	"elements": [
 		{

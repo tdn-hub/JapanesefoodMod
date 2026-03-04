@@ -12,7 +12,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class AsariClamEntityRender extends MobRenderer<AsariClamEntity, AsariClamEntityModel<AsariClamEntity>> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entities/asari_clam.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entity/asari_clam.png");
 
     public AsariClamEntityRender(EntityRendererProvider.Context context) {
         super(context, new AsariClamEntityModel<>(context.bakeLayer(JPModelLayers.ASARI_CLAM)), 0f);

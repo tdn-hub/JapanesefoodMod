@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
   "textures": {
-    "cross": "japanese_food_mod:blocks/radish_sprout_plant_age_0"
+    "cross": "japanese_food_mod:block/radish_sprout_plant_age_0"
   }
 }

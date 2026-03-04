@@ -12,7 +12,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class AnglerfishEntityRender extends MobRenderer<AnglerfishEntity, AnglerfishEntityModel<AnglerfishEntity>> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entities/anglerfish.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(JapaneseFoodMod.MOD_ID, "textures/entity/anglerfish.png");
 
     public AnglerfishEntityRender(EntityRendererProvider.Context context) {
         super(context, new AnglerfishEntityModel<>(context.bakeLayer(JPModelLayers.ANGLERFISH)), 0f);

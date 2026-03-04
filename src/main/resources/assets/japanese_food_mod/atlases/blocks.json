@@ -2,13 +2,13 @@
   "sources": [
     {
       "type": "directory",
-      "source": "blocks",
-      "prefix": "blocks/"
+      "source": "block",
+      "prefix": "block/"
     },
     {
       "type": "directory",
-      "source": "items",
-      "prefix": "items/"
+      "source": "item",
+      "prefix": "item/"
     }
   ]
 }
