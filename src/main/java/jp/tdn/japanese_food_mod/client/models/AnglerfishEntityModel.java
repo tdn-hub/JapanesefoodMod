@@ -12,10 +12,18 @@ import net.minecraft.world.entity.LivingEntity;
 public class AnglerfishEntityModel<T extends LivingEntity> extends EntityModel<T> {
     private final ModelPart bone;
     private final ModelPart tail;
+    private final ModelPart mouse;
+    private final ModelPart side_hire;
+    private final ModelPart side_hire2;
+    private final ModelPart illicium;
 
     public AnglerfishEntityModel(ModelPart root) {
         this.bone = root.getChild("bone");
         this.tail = this.bone.getChild("tail");
+        this.mouse = this.bone.getChild("mouse");
+        this.side_hire = this.bone.getChild("side_hire");
+        this.side_hire2 = this.bone.getChild("side_hire2");
+        this.illicium = this.bone.getChild("body").getChild("illicium");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -42,6 +50,18 @@ public class AnglerfishEntityModel<T extends LivingEntity> extends EntityModel<T
                 CubeListBuilder.create()
                         .texOffs(0, 0).mirror().addBox(-1.0F, -1.35F, -2.75F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false),
                 PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0873F));
+
+        // Illicium (anglerfish lure antenna) - tilted forward
+        PartDefinition illicium = body.addOrReplaceChild("illicium",
+                CubeListBuilder.create()
+                        .texOffs(0, 14).addBox(-0.5F, -3.0F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)),
+                PartPose.offsetAndRotation(0.0F, -1.0F, -3.0F, -0.5236F, 0.0F, 0.0F));
+
+        // Esca (bioluminescent lure at tip)
+        illicium.addOrReplaceChild("esca",
+                CubeListBuilder.create()
+                        .texOffs(0, 0).addBox(-0.5F, -1.0F, -0.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -3.0F, 0.0F));
 
         PartDefinition tail = bone.addOrReplaceChild("tail",
                 CubeListBuilder.create()
@@ -106,10 +126,40 @@ public class AnglerfishEntityModel<T extends LivingEntity> extends EntityModel<T
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        float move = 1.0f;
-        if (!entity.isInWater()) {
-            move = 1.5f;
+        float speed = entity.isInWater() ? 0.25f : 0.5f;
+        float t = ageInTicks * speed;
+
+        if (entity.isInWater()) {
+            // Tail - horizontal sweep for swimming
+            tail.yRot = Mth.sin(t) * 0.3f;
+            tail.xRot = Mth.sin(t * 0.5f) * 0.08f;
+
+            // Pectoral fins - alternating flutter
+            side_hire.yRot = -0.6109F + Mth.sin(t * 1.5f) * 0.2f;
+            side_hire2.yRot = 0.6109F - Mth.sin(t * 1.5f + 1.0f) * 0.2f;
+
+            // Mouth - periodic breathing/gulping
+            float mouthOpen = Math.max(0, Mth.sin(ageInTicks * 0.08f));
+            mouse.xRot = mouthOpen * 0.12f;
+
+            // Illicium - gentle sway to attract prey
+            illicium.xRot = -0.5236F + Mth.sin(ageInTicks * 0.12f) * 0.15f;
+            illicium.zRot = Mth.sin(ageInTicks * 0.17f) * 0.12f;
+
+            // Gentle body bob
+            bone.yRot = Mth.sin(t * 0.3f) * 0.04f;
+            bone.zRot = 0.0f;
+        } else {
+            // On land: flopping
+            tail.yRot = 0;
+            tail.xRot = Mth.sin(ageInTicks * 0.4f) * 0.3f;
+            bone.zRot = Mth.sin(ageInTicks * 0.5f) * 0.4f;
+            bone.yRot = 0;
+            side_hire.yRot = -0.6109F;
+            side_hire2.yRot = 0.6109F;
+            mouse.xRot = 0;
+            illicium.xRot = -0.5236F;
+            illicium.zRot = 0;
         }
-        tail.xRot = (Mth.sin(ageInTicks * 0.2f) * move * 0.3f) * 0.3f;
     }
 }

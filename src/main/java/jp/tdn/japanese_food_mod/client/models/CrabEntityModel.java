@@ -130,15 +130,31 @@ public class CrabEntityModel<T extends LivingEntity> extends EntityModel<T> {
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        leg.yRot = Mth.sin(limbSwing * 1.5f) * 1.4f * limbSwingAmount;
-        leg2.yRot = Mth.sin(limbSwing * 1.4f) * 1.4f * limbSwingAmount;
-        leg3.yRot = Mth.sin(limbSwing * 1.35f) * 1.4f * limbSwingAmount;
-        leg4.yRot = Mth.sin(limbSwing * 1.3f) * 1.4f * limbSwingAmount;
-        leg5.yRot = Mth.sin(limbSwing * 1.2f) * 1.4f * limbSwingAmount;
-        leg6.yRot = Mth.sin(limbSwing * 1.15f) * 1.4f * limbSwingAmount;
+        // Alternating tripod gait (realistic crab locomotion)
+        // Tripod A: right-back(leg), left-middle(leg4), right-front(leg6)
+        // Tripod B: left-back(leg2), right-middle(leg3), left-front(leg5)
+        float legSwing = limbSwing * 2.5f;
+        float legAmp = 0.6f * limbSwingAmount;
 
-        arm.xRot = Mth.sin(ageInTicks * 0.3f) * 0.3f;
-        arm2.xRot = -Mth.sin(ageInTicks * 0.2f) * 0.3f;
+        // Tripod A
+        leg.yRot = Mth.cos(legSwing) * legAmp;
+        leg4.yRot = Mth.cos(legSwing) * legAmp;
+        leg6.yRot = Mth.cos(legSwing) * legAmp;
+
+        // Tripod B (opposite phase)
+        leg2.yRot = -Mth.cos(legSwing) * legAmp;
+        leg3.yRot = -Mth.cos(legSwing) * legAmp;
+        leg5.yRot = -Mth.cos(legSwing) * legAmp;
+
+        // Claw animation - idle sway + occasional snapping
+        float clawIdle = Mth.sin(ageInTicks * 0.15f) * 0.15f;
+        boolean snapping = Mth.sin(ageInTicks * 0.03f) > 0.7f;
+        float snapAngle = snapping ? Mth.sin(ageInTicks * 3.0f) * 0.4f : 0;
+        arm.xRot = clawIdle + snapAngle;
+        arm2.xRot = -clawIdle;
+
+        // Subtle body sway while walking
+        body.zRot = Mth.sin(limbSwing * 1.0f) * 0.04f * limbSwingAmount;
     }
 
     @Override

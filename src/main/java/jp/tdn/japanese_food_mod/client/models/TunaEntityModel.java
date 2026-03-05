@@ -11,12 +11,19 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class TunaEntityModel<T extends LivingEntity> extends EntityModel<T> {
     private final ModelPart bone;
+    private final ModelPart tail;
     private final ModelPart back_tail;
+    private final ModelPart head;
+    private final ModelPart hire3;
+    private final ModelPart hire4;
 
     public TunaEntityModel(ModelPart root) {
         this.bone = root.getChild("bone");
-        ModelPart tail = bone.getChild("tail");
+        this.head = bone.getChild("head");
+        this.tail = bone.getChild("tail");
         this.back_tail = tail.getChild("back_tail");
+        this.hire3 = bone.getChild("hire3");
+        this.hire4 = bone.getChild("hire4");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -217,10 +224,33 @@ public class TunaEntityModel<T extends LivingEntity> extends EntityModel<T> {
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        float move = 1.0f;
-        if (!entity.isInWater()) {
-            move = 1.5f;
+        float speed = entity.isInWater() ? 0.4f : 0.8f;
+        float t = ageInTicks * speed;
+
+        if (entity.isInWater()) {
+            // Natural swimming: tail sweeps with body flex
+            tail.yRot = Mth.sin(t) * 0.12f;
+            back_tail.yRot = Mth.sin(t) * 0.5f;
+
+            // Head counter-movement (slight opposite sway for realism)
+            head.yRot = -Mth.sin(t + 0.5f) * 0.04f;
+
+            // Pectoral fins: gentle flapping while swimming
+            hire3.xRot = Mth.sin(t * 0.7f) * 0.2f;
+            hire4.xRot = Mth.sin(t * 0.7f) * 0.2f;
+
+            // Subtle whole-body yaw (very slight)
+            bone.yRot = Mth.sin(t + 1.0f) * 0.03f;
+            bone.zRot = 0.0f;
+        } else {
+            // On land: frantic flopping
+            back_tail.yRot = Mth.sin(ageInTicks * 0.8f) * 0.7f;
+            tail.yRot = Mth.sin(ageInTicks * 0.6f) * 0.3f;
+            bone.zRot = Mth.sin(ageInTicks * 0.5f) * 0.3f;
+            bone.yRot = 0.0f;
+            head.yRot = 0.0f;
+            hire3.xRot = 0.0f;
+            hire4.xRot = 0.0f;
         }
-        back_tail.yRot = Mth.sin(move * 0.4f * ageInTicks) * 0.4f;
     }
 }

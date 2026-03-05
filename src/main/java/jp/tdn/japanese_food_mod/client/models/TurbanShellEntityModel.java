@@ -6,6 +6,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 
 public class TurbanShellEntityModel<T extends LivingEntity> extends EntityModel<T> {
@@ -51,7 +52,12 @@ public class TurbanShellEntityModel<T extends LivingEntity> extends EntityModel<
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        // no animation
+        // Rocking/wobbling motion while moving
+        bone.zRot = Mth.sin(limbSwing * 1.5f) * 0.1f * limbSwingAmount;
+        bone.xRot = Mth.cos(limbSwing * 1.2f) * 0.06f * limbSwingAmount;
+
+        // Very subtle idle sway (like water current)
+        bone.zRot += Mth.sin(ageInTicks * 0.05f) * 0.02f;
     }
 
     @Override
