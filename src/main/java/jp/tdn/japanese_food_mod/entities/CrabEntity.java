@@ -1,4 +1,4 @@
-﻿package jp.tdn.japanese_food_mod.entities;
+package jp.tdn.japanese_food_mod.entities;
 
 import jp.tdn.japanese_food_mod.init.JPEntities;
 import net.minecraft.core.BlockPos;

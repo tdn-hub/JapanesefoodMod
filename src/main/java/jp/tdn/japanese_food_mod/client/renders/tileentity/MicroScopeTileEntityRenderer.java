@@ -1,4 +1,4 @@
-﻿package jp.tdn.japanese_food_mod.client.renders.tileentity;
+package jp.tdn.japanese_food_mod.client.renders.tileentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;

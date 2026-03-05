@@ -1,4 +1,4 @@
-﻿package jp.tdn.japanese_food_mod.init;
+package jp.tdn.japanese_food_mod.init;
 
 import jp.tdn.japanese_food_mod.JapaneseFoodMod;
 import jp.tdn.japanese_food_mod.entities.*;

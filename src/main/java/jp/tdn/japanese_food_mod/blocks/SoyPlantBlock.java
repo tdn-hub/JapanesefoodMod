@@ -1,4 +1,4 @@
-﻿package jp.tdn.japanese_food_mod.blocks;
+package jp.tdn.japanese_food_mod.blocks;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.block.CropBlock;

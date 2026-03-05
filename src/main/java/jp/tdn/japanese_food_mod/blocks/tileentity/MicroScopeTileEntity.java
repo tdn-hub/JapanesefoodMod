@@ -1,4 +1,4 @@
-﻿package jp.tdn.japanese_food_mod.blocks.tileentity;
+package jp.tdn.japanese_food_mod.blocks.tileentity;
 
 import java.util.concurrent.ThreadLocalRandom;
 import jp.tdn.japanese_food_mod.container.MicroScopeContainer;

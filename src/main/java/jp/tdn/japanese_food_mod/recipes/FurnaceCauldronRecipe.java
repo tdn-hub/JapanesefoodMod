@@ -1,4 +1,4 @@
-﻿package jp.tdn.japanese_food_mod.recipes;
+package jp.tdn.japanese_food_mod.recipes;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

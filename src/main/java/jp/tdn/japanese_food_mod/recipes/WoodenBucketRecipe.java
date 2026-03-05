@@ -1,4 +1,4 @@
-﻿package jp.tdn.japanese_food_mod.recipes;
+package jp.tdn.japanese_food_mod.recipes;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;

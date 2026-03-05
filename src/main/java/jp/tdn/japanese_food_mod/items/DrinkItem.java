@@ -1,4 +1,4 @@
-﻿package jp.tdn.japanese_food_mod.items;
+package jp.tdn.japanese_food_mod.items;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
