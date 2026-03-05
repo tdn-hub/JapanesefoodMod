@@ -50,7 +50,7 @@ public class JPEntities {
                     .build("japanese_food_mod:turban_shell"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<AnglerfishEntity>> ANGLERFISH = ENTITIES.register("anglerfish",
-            () -> EntityType.Builder.<AnglerfishEntity>of(AnglerfishEntity::new, MobCategory.WATER_CREATURE)
+            () -> EntityType.Builder.<AnglerfishEntity>of(AnglerfishEntity::new, MobCategory.MONSTER)
                     .sized(0.75f, 0.4f)
                     .build("japanese_food_mod:anglerfish"));
 
@@ -80,6 +80,6 @@ public class JPEntities {
         event.register(TURBAN_SHELL.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.OCEAN_FLOOR_WG,
                 TurbanShellEntity::checkSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(ANGLERFISH.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.OCEAN_FLOOR_WG,
-                WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                AnglerfishEntity::checkAnglerfishSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 }
