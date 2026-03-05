@@ -233,6 +233,8 @@ public class JPItems {
             JPBlocks.OYSTER_SHELL.get(), new Item.Properties()), "oyster_shell");
     public static final DeferredHolder<Item, Item> SOY_HAY = register(() -> new BlockItem(
             JPBlocks.SOY_HAY.get(), new Item.Properties()), "soy_hay");
+    public static final DeferredHolder<Item, Item> MORTAR = register(() -> new BlockItem(
+            JPBlocks.MORTAR.get(), new Item.Properties()), "mortar");
 
     // Spawn Eggs
     public static final DeferredHolder<Item, Item> EEL_ENTITY_EGG = register(() ->

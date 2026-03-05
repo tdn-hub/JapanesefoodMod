@@ -46,4 +46,8 @@ public class JPBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SoyHayTileEntity>> SOY_HAY =
             BLOCK_ENTITIES.register("soy_hay", () ->
                     BlockEntityType.Builder.of(SoyHayTileEntity::new, JPBlocks.SOY_HAY.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MortarTileEntity>> MORTAR =
+            BLOCK_ENTITIES.register("mortar", () ->
+                    BlockEntityType.Builder.of(MortarTileEntity::new, JPBlocks.MORTAR.get()).build(null));
 }

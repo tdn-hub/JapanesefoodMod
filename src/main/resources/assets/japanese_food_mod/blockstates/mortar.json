@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north,pounding=0": {"model": "japanese_food_mod:block/mortar"},
+    "facing=south,pounding=0": {"model": "japanese_food_mod:block/mortar", "y": 180},
+    "facing=west,pounding=0":  {"model": "japanese_food_mod:block/mortar", "y": 270},
+    "facing=east,pounding=0":  {"model": "japanese_food_mod:block/mortar", "y": 90},
+    "facing=north,pounding=1": {"model": "japanese_food_mod:block/mortar_1"},
+    "facing=south,pounding=1": {"model": "japanese_food_mod:block/mortar_1", "y": 180},
+    "facing=west,pounding=1":  {"model": "japanese_food_mod:block/mortar_1", "y": 270},
+    "facing=east,pounding=1":  {"model": "japanese_food_mod:block/mortar_1", "y": 90},
+    "facing=north,pounding=2": {"model": "japanese_food_mod:block/mortar_2"},
+    "facing=south,pounding=2": {"model": "japanese_food_mod:block/mortar_2", "y": 180},
+    "facing=west,pounding=2":  {"model": "japanese_food_mod:block/mortar_2", "y": 270},
+    "facing=east,pounding=2":  {"model": "japanese_food_mod:block/mortar_2", "y": 90},
+    "facing=north,pounding=3": {"model": "japanese_food_mod:block/mortar_3"},
+    "facing=south,pounding=3": {"model": "japanese_food_mod:block/mortar_3", "y": 180},
+    "facing=west,pounding=3":  {"model": "japanese_food_mod:block/mortar_3", "y": 270},
+    "facing=east,pounding=3":  {"model": "japanese_food_mod:block/mortar_3", "y": 90}
+  }
+}

@@ -57,6 +57,7 @@ public class JPBlocks {
     ), "trona_ore");
 
     public static final DeferredHolder<Block, Block> FURNACE_CAULDRON = register(FurnaceCauldronBlock::new, "furnace_cauldron");
+    public static final DeferredHolder<Block, Block> MORTAR = register(MortarBlock::new, "mortar");
     public static final DeferredHolder<Block, Block> SOY_HAY = register(SoyHayBlock::new, "soy_hay");
 
     public static final DeferredHolder<Block, Block> AZUKI_PLANT = register(() -> new SoyPlantBlock(
