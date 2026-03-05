@@ -47,6 +47,7 @@ dependencies {
 }
 
 jar {
+    archiveFileName = "japanese_food_mod_${mc_version}_${mod_version}.jar"
     manifest {
         attributes([
             "Specification-Title"     : "japanese_food_mod",
